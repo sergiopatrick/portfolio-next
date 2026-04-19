@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" class="diagram diagram-ecosystem" role="img" aria-labelledby="dia-eco-title dia-eco-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-eco-title">Ecossistema Sanar conectado por embeddings</title>
+  <desc id="dia-eco-desc">Quatro propriedades de conteúdo (CID-10, Exames, Ferramentas médicas e Blog) alimentam um engine de embeddings que mede similaridade semântica entre todas as páginas e roteia o usuário para o catálogo de cursos em SanarPós, que é a camada de conversão comercial.</desc>
+
+  <defs>
+    <marker id="eco-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+    <marker id="eco-arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head--faint"/>
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">ECOSSISTEMA SANAR  ·  5 PROPRIEDADES  ·  1 ENGINE DE EMBEDDINGS</text>
+
+  <!-- Row 1: 4 content properties -->
+  <g class="diagram__row">
+    <!-- CID-10 -->
+    <g transform="translate(40, 70)">
+      <rect class="diagram__node" x="0" y="0" width="200" height="88" rx="6"/>
+      <text class="diagram__node-tag"    x="16" y="22">PROPRIEDADE</text>
+      <text class="diagram__node-title"  x="16" y="48">CID-10</text>
+      <text class="diagram__node-metric" x="16" y="68">~12k códigos  ·  /cid10/</text>
+      <text class="diagram__node-note"   x="16" y="82">referência normativa</text>
+    </g>
+    <!-- Exames -->
+    <g transform="translate(260, 70)">
+      <rect class="diagram__node" x="0" y="0" width="200" height="88" rx="6"/>
+      <text class="diagram__node-tag"    x="16" y="22">PROPRIEDADE</text>
+      <text class="diagram__node-title"  x="16" y="48">Exames</text>
+      <text class="diagram__node-metric" x="16" y="68">114 páginas A-Z  ·  /exames/</text>
+      <text class="diagram__node-note"   x="16" y="82">+295% keywords (case 6)</text>
+    </g>
+    <!-- Ferramentas -->
+    <g transform="translate(480, 70)">
+      <rect class="diagram__node" x="0" y="0" width="200" height="88" rx="6"/>
+      <text class="diagram__node-tag"    x="16" y="22">PROPRIEDADE</text>
+      <text class="diagram__node-title"  x="16" y="48">Ferramentas</text>
+      <text class="diagram__node-metric" x="16" y="68">calculadoras médicas</text>
+      <text class="diagram__node-note"   x="16" y="82">Web Components (case 2)</text>
+    </g>
+    <!-- Blog -->
+    <g transform="translate(700, 70)">
+      <rect class="diagram__node" x="0" y="0" width="220" height="88" rx="6"/>
+      <text class="diagram__node-tag"    x="16" y="22">PROPRIEDADE</text>
+      <text class="diagram__node-title"  x="16" y="48">Blog Sanar</text>
+      <text class="diagram__node-metric" x="16" y="68">~2,5k artigos  ·  sanarmed.com</text>
+      <text class="diagram__node-note"   x="16" y="82">pipeline IA + revisão (case 1)</text>
+    </g>
+  </g>
+
+  <!-- Edges: row 1 → engine -->
+  <g class="diagram__edges">
+    <line class="diagram__edge" x1="140" y1="158" x2="240" y2="230" marker-end="url(#eco-arrow-faint)"/>
+    <line class="diagram__edge" x1="360" y1="158" x2="400" y2="230" marker-end="url(#eco-arrow-faint)"/>
+    <line class="diagram__edge" x1="580" y1="158" x2="560" y2="230" marker-end="url(#eco-arrow-faint)"/>
+    <line class="diagram__edge" x1="810" y1="158" x2="720" y2="230" marker-end="url(#eco-arrow-faint)"/>
+  </g>
+
+  <!-- Labels on edges -->
+  <text class="diagram__edge-label" x="480" y="205" text-anchor="middle">ingest  ·  embeddings  ·  indexação</text>
+
+  <!-- Engine -->
+  <g transform="translate(140, 240)">
+    <rect class="diagram__engine" x="0" y="0" width="680" height="120" rx="8"/>
+    <text class="diagram__engine-tag"   x="340" y="30" text-anchor="middle">ENGINE</text>
+    <text class="diagram__engine-title" x="340" y="62" text-anchor="middle">Embeddings + similaridade semântica</text>
+    <text class="diagram__engine-meta"  x="340" y="86" text-anchor="middle">modelo multilingual 1024d  ·  pgvector  ·  top-K cosine sim  ·  diversificação por tipo</text>
+    <text class="diagram__engine-meta"  x="340" y="106" text-anchor="middle">NER injeta backlinks contextuais (termo médico → página canônica)</text>
+  </g>
+
+  <!-- Arrow engine → SanarPós -->
+  <line class="diagram__funnel-edge" x1="480" y1="360" x2="480" y2="430" marker-end="url(#eco-arrow)"/>
+  <text class="diagram__funnel-label" x="495" y="400">funil de conversão  ·  bloco Relacionados + backlinks contextuais</text>
+
+  <!-- SanarPós (highlighted) -->
+  <g transform="translate(280, 440)">
+    <rect class="diagram__funnel-node" x="0" y="0" width="400" height="96" rx="8"/>
+    <text class="diagram__funnel-tag"    x="200" y="28" text-anchor="middle">CAMADA COMERCIAL  ·  CONVERSÃO $</text>
+    <text class="diagram__funnel-title"  x="200" y="60" text-anchor="middle">SanarPós — Vitrine de cursos</text>
+    <text class="diagram__funnel-meta"   x="200" y="80" text-anchor="middle">20+ especialidades  ·  Matricule-se  ·  pos.sanar.com.br</text>
+  </g>
+</svg>

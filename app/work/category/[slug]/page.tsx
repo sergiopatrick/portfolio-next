@@ -1,0 +1,107 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import {
+  caseCategories,
+  categorySlug,
+  casesByCategorySlug,
+} from '@/content/cases';
+import { CardCase } from '@/components/ui/CardCase';
+import { JsonLd } from '@/components/ui/JsonLd';
+import { buildMetadata, breadcrumbSchema } from '@/lib/seo';
+import { absoluteUrl } from '@/lib/site';
+
+type Params = { slug: string };
+
+export function generateStaticParams(): Params[] {
+  return caseCategories.map((name) => ({ slug: categorySlug(name) }));
+}
+
+function categoryNameFromSlug(slug: string): string | null {
+  const found = caseCategories.find((c) => categorySlug(c) === slug);
+  return found ?? null;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const name = categoryNameFromSlug(slug);
+  if (!name) return buildMetadata({ title: 'Categoria', description: '', path: '/work/' });
+  return buildMetadata({
+    title: `Cases em ${name} — Sérgio Patrick`,
+    description: `Cases categorizados como ${name}. Problemas e soluções reais com código e métricas.`,
+    path: `/work/category/${slug}/`,
+  });
+}
+
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  const name = categoryNameFromSlug(slug);
+  if (!name) notFound();
+
+  const items = casesByCategorySlug(slug);
+
+  const crumbs = [
+    { label: 'Home', url: absoluteUrl('/') },
+    { label: 'Work', url: absoluteUrl('/work/') },
+    { label: name, url: absoluteUrl(`/work/category/${slug}/`) },
+  ];
+
+  return (
+    <>
+      <JsonLd schema={breadcrumbSchema(crumbs)} />
+
+      <section className="archive-head">
+        <div className="container">
+          <nav className="case-hero__breadcrumbs" aria-label="Breadcrumbs">
+            <Link href="/">Home</Link>
+            <Link href="/work/">Work</Link>
+            <span>{name}</span>
+          </nav>
+          <p className="section__kicker">Categoria</p>
+          <h1 className="archive-head__title">Cases em {name}</h1>
+          <p className="archive-head__sub">
+            Cases categorizados como <strong>{name}</strong> — mesma disciplina
+            técnica, problemas diferentes.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          {items.length > 0 ? (
+            <div className="selected-work__grid">
+              {items.map(({ slug: cs, data }) => (
+                <CardCase key={cs} slug={cs} data={data} as="h2" />
+              ))}
+            </div>
+          ) : (
+            <p className="text-muted">Nenhum case nesta categoria.</p>
+          )}
+
+          <div
+            style={{
+              marginTop: 'var(--s-9)',
+              paddingTop: 'var(--s-7)',
+              borderTop: '1px solid var(--color-border)',
+            }}
+          >
+            <Link href="/work/" className="btn btn--link">
+              Ver todos os cases{' '}
+              <span className="btn__arrow" aria-hidden="true">
+                →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
