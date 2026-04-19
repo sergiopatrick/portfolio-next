@@ -561,6 +561,8 @@ a:hover { color: var(--color-accent); }
 	gap: 0;
 	border-top: 1px solid var(--color-border);
 	border-left: 1px solid var(--color-border);
+	width: 100%;
+	max-width: 100%;
 }
 @media (max-width: 960px) { .brands__grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .brands__grid { grid-template-columns: repeat(2, 1fr); } }
@@ -574,6 +576,12 @@ a:hover { color: var(--color-accent); }
 	border-bottom: 1px solid var(--color-border);
 	background: var(--color-bg);
 	margin: 0;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+@media (max-width: 560px) {
+	.brand { height: 72px; padding: var(--s-2) var(--s-3); }
 }
 .brand__link {
 	display: grid;
@@ -604,6 +612,18 @@ a:hover { color: var(--color-accent); }
 	color: inherit;
 	white-space: nowrap;
 	text-align: center;
+	line-height: 1.2;
+	max-width: 100%;
+}
+@media (max-width: 560px) {
+	.brand__wordmark {
+		font-size: 11px;
+		letter-spacing: 0.02em;
+		white-space: normal;
+		word-break: normal;
+		overflow-wrap: anywhere;
+		hyphens: auto;
+	}
 }
 
 /* ---------- Cards / Selected work ---------- */
