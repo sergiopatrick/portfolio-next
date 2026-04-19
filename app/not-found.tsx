@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <section className="error-404">
       <div className="container">
-        <p className="error-404__code">404 — página não encontrada</p>
+        <p className="error-404__code">404, página não encontrada</p>
         <h1 className="error-404__title">
           Rota inexistente, mas o portfolio continua no ar.
         </h1>

@@ -73,7 +73,7 @@ export function SiteFooter() {
 
         <div className="site-footer__bar">
           <span>© {year} Sérgio Patrick</span>
-          <span>Salvador, BA — Brasil</span>
+          <span>Salvador, BA, Brasil</span>
         </div>
       </div>
     </footer>

@@ -5,7 +5,7 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { buildMetadata, aboutPageSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Sobre — Sérgio Patrick, Front-end developer com SEO técnico',
+  title: 'Sobre, Sérgio Patrick, Front-end developer com SEO técnico',
   description:
     "Front-end developer com 9 anos em empresas globais. Trajetória VTEX, L'Oreal, Unilever, Cora, Inter, QConcursos, Gupy. Base em Salvador (BA), PT-BR nativo, inglês fluente.",
   path: '/about/',
@@ -39,8 +39,8 @@ export default function AboutPage() {
               afterthought.
             </p>
             <p>
-              Cada entrega vira sistema reutilizável — PRD, mega prompt, template,
-              componente — e não um artefato solto. Isso é o que diferencia um
+              Cada entrega vira sistema reutilizável, PRD, mega prompt, template,
+              componente, e não um artefato solto. Isso é o que diferencia um
               projeto que escala de um projeto que morre na próxima sprint.
             </p>
           </div>
@@ -70,17 +70,17 @@ export default function AboutPage() {
           <h2 className="about-block__title">Formação e certificações</h2>
           <div className="prose">
             <p>
-              <strong>FGV</strong> — Análise e Desenvolvimento de Sistemas
-              (2024—2027).
+              <strong>FGV</strong>, Análise e Desenvolvimento de Sistemas
+              (2024-2027).
             </p>
             <p>
-              <strong>Tera</strong> — UI/UX (2023), Product Analytics (2024).
+              <strong>Tera</strong>, UI/UX (2023), Product Analytics (2024).
             </p>
             <p>
-              <strong>UFBA</strong> — Ciência &amp; Tecnologia (2020—2023).
+              <strong>UFBA</strong>, Ciência &amp; Tecnologia (2020-2023).
             </p>
             <p>
-              <strong>CXL</strong> — Growth Marketing Specialist (2022).
+              <strong>CXL</strong>, Growth Marketing Specialist (2022).
             </p>
             <p>
               Certificações: SEO Experiments, WordPress, Technical SEO, SEO Manager.

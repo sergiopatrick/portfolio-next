@@ -78,7 +78,7 @@
   <g transform="translate(280, 440)">
     <rect class="diagram__funnel-node" x="0" y="0" width="400" height="96" rx="8"/>
     <text class="diagram__funnel-tag"    x="200" y="28" text-anchor="middle">CAMADA COMERCIAL  ·  CONVERSÃO $</text>
-    <text class="diagram__funnel-title"  x="200" y="60" text-anchor="middle">SanarPós — Vitrine de cursos</text>
+    <text class="diagram__funnel-title"  x="200" y="60" text-anchor="middle">SanarPós - Vitrine de cursos</text>
     <text class="diagram__funnel-meta"   x="200" y="80" text-anchor="middle">20+ especialidades  ·  Matricule-se  ·  pos.sanar.com.br</text>
   </g>
 </svg>

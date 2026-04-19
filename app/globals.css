@@ -1,5 +1,5 @@
 /* =============================================================
-   SP Portfolio — main.css
+   SP Portfolio - main.css
    Vanilla CSS with custom properties. No framework, no build.
    Order: reset → tokens → fonts → base → layout → components → utils
    ============================================================= */
@@ -47,7 +47,7 @@ button { background: none; border: 0; padding: 0; cursor: pointer; }
 	--code-number:      #d97706;
 	--code-function:    #7c3aed;
 
-	/* System font stacks — zero dependencies, ships everywhere.
+	/* System font stacks - zero dependencies, ships everywhere.
 	   Display/body: native OS UI font. Mono: native OS mono. */
 	--font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 	--font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -179,6 +179,77 @@ a:hover { color: var(--color-accent); }
 @media (max-width: 768px) {
 	.section    { padding-block: var(--s-8); }
 	.section--lg { padding-block: var(--s-9); }
+}
+
+/* Section dividers (opt-in via .section--divider, plus implicit dividers on
+   the two sections that always close out the home scroll). */
+.section--divider,
+.about-preview,
+.contact-cta { border-top: 1px solid var(--color-border); }
+
+/* Case-page image lightbox: prints become clickable and open in a modal. */
+.case-article .prose img.is-zoomable,
+.case-article figure img.is-zoomable {
+	cursor: zoom-in;
+	transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+.case-article .prose img.is-zoomable:hover,
+.case-article .prose img.is-zoomable:focus-visible,
+.case-article figure img.is-zoomable:hover,
+.case-article figure img.is-zoomable:focus-visible {
+	transform: scale(1.01);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+	outline: 2px solid var(--color-ink-3);
+	outline-offset: 4px;
+}
+
+.case-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.92);
+	display: grid;
+	place-items: center;
+	padding: clamp(12px, 3vw, 48px);
+	cursor: zoom-out;
+	animation: sp-lightbox-fade 180ms ease-out;
+}
+@keyframes sp-lightbox-fade {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+.case-lightbox__img {
+	max-width: min(100%, 1400px);
+	max-height: 92vh;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	cursor: default;
+	border-radius: var(--radius-md);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+.case-lightbox__close {
+	position: fixed;
+	top: 16px;
+	right: 20px;
+	width: 44px;
+	height: 44px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	font-size: 28px;
+	line-height: 1;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	transition: background 160ms ease-out, border-color 160ms ease-out;
+}
+.case-lightbox__close:hover,
+.case-lightbox__close:focus-visible {
+	background: rgba(255, 255, 255, 0.14);
+	border-color: rgba(255, 255, 255, 0.5);
+	outline: 0;
 }
 
 .section__kicker {
@@ -331,7 +402,7 @@ a:hover { color: var(--color-accent); }
 }
 .btn--link:hover { color: var(--color-accent); border-color: var(--color-accent); }
 
-/* WhatsApp button — uses the recognizable brand green as intentional accent. */
+/* WhatsApp button - uses the recognizable brand green as intentional accent. */
 .btn--whatsapp {
 	background: #25d366;
 	color: #fff;
@@ -1132,7 +1203,7 @@ a:hover { color: var(--color-accent); }
 	color: var(--color-muted);
 }
 
-/* Inline SVG diagrams (e.g. ecosystem map) — adapts to light/dark via tokens. */
+/* Inline SVG diagrams (e.g. ecosystem map) - adapts to light/dark via tokens. */
 .diagram-wrap {
 	margin-top: var(--s-6);
 	margin-bottom: var(--s-6);
@@ -1262,7 +1333,7 @@ a:hover { color: var(--color-accent); }
 	.diagram-wrap { padding: var(--s-3); }
 }
 
-/* Link list — used to show live URLs published as part of a case. */
+/* Link list - used to show live URLs published as part of a case. */
 .prose .link-list {
 	list-style: none;
 	padding-left: 0;
@@ -1776,11 +1847,14 @@ a:hover { color: var(--color-accent); }
 }
 
 /* ---------- Reveal animation ---------- */
-.reveal {
+/* Only hide the element when JS confirmed it'll run the IntersectionObserver
+   (via <html data-sp-js="1"> set by the bootstrap script in <head>).
+   This keeps content readable if the client bundle fails to load. */
+html[data-sp-js] .reveal {
 	opacity: 0;
 	transition: opacity 400ms ease-out;
 }
-.reveal.is-visible { opacity: 1; }
+html[data-sp-js] .reveal.is-visible { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
 	* {
@@ -1789,7 +1863,7 @@ a:hover { color: var(--color-accent); }
 		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
 	}
-	.reveal { opacity: 1; }
+	html[data-sp-js] .reveal { opacity: 1; }
 }
 
 /* ---------- Utilities ---------- */

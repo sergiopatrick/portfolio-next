@@ -127,7 +127,7 @@ export default async function ServiceDetailPage({
           <h2 className="section__title">Quando este eixo cruza com os outros</h2>
           <p className="service-combined__lead">
             Problema real raramente mora num eixo só. A maioria dos clientes que me
-            procuram precisa de pelo menos dois — e o ganho é composto, não aditivo.
+            procuram precisa de pelo menos dois, e o ganho é composto, não aditivo.
           </p>
 
           <div className="combined-grid">
@@ -210,7 +210,7 @@ export default async function ServiceDetailPage({
           </h2>
           <p className="contact-cta__sub">
             Conta o contexto em 3 linhas. Respondo em 48h com proposta ou com
-            &quot;não sou eu que você precisa&quot; — o que for verdade.
+            &quot;não sou eu que você precisa&quot;, o que for verdade.
           </p>
 
           <div className="contact-cta__actions">

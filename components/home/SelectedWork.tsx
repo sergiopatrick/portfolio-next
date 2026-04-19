@@ -5,7 +5,7 @@ import { CardCase } from '@/components/ui/CardCase';
 export function SelectedWork() {
   const featured = allCasesSortedByFeature().slice(0, 6);
   return (
-    <section className="section" id="selected-work">
+    <section className="section section--divider" id="selected-work">
       <div className="container">
         <div className="selected-work__header">
           <div>

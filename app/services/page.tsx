@@ -6,9 +6,9 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { buildMetadata, servicesHubItemList } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Serviços — 3 eixos de trabalho com código no centro — Sérgio Patrick',
+  title: 'Serviços, 3 eixos de trabalho com código no centro, Sérgio Patrick',
   description:
-    'Três eixos de trabalho — Front-end e performance, SEO técnico e AEO, Automação com LLM. Problemas que resolvo sozinho e combinando os eixos. Para devs, SEOs e PMs que precisam de execução real.',
+    'Três eixos de trabalho, Front-end e performance, SEO técnico e AEO, Automação com LLM. Problemas que resolvo sozinho e combinando os eixos. Para devs, SEOs e PMs que precisam de execução real.',
   path: '/services/',
 });
 
@@ -31,7 +31,7 @@ export default function ServicesHubPage() {
           <p className="page-hero__sub">
             Front-end performático, SEO técnico de quem programa, e automação com
             LLM feita como engenharia. Em quase todo projeto, pelo menos dois desses
-            eixos precisam andar juntos — por isso opero nos três.
+            eixos precisam andar juntos, por isso opero nos três.
           </p>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default function ServicesHubPage() {
                 </a>
               )}{' '}
               ou <a href={`mailto:${siteOptions.email}`}>email</a>. Em 48h te digo
-              qual eixo (ou combinação) faz sentido — ou te aponto pra alguém mais
+              qual eixo (ou combinação) faz sentido, ou te aponto pra alguém mais
               adequado.
             </p>
           </div>

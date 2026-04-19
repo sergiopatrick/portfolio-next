@@ -122,7 +122,7 @@ export function professionalServiceSchema(): object {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     '@id': absoluteUrl('/#service'),
-    name: 'Sérgio Patrick — Front-end, SEO técnico e automação com LLM',
+    name: 'Sérgio Patrick, Front-end, SEO técnico e automação com LLM',
     url: absoluteUrl('/'),
     areaServed: { '@type': 'Country', name: 'Brasil' },
     serviceType: [

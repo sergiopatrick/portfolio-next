@@ -5,7 +5,7 @@ export function ServicesTeaser() {
   const entries = Object.entries(services);
   if (!entries.length) return null;
   return (
-    <section className="section" id="services">
+    <section className="section section--divider" id="services">
       <div className="container">
         <div className="selected-work__header">
           <div>

@@ -11,7 +11,7 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contato — Sérgio Patrick (WhatsApp, email, LinkedIn)',
+  title: 'Contato, Sérgio Patrick (WhatsApp, email, LinkedIn)',
   description:
     'Entre em contato por WhatsApp, email ou formulário. Resposta em 48h em dias úteis. Base em Salvador (BA), atendo remoto para BR e exterior.',
   path: '/contact/',
@@ -30,7 +30,7 @@ export default function ContactPage() {
           <h1 className="page-hero__title">Vamos conversar.</h1>
           <p className="page-hero__sub">
             Respondo todos os emails dentro de 48h. Formulário, LinkedIn ou email
-            direto — escolha o canal que preferir.
+            direto, escolha o canal que preferir.
           </p>
         </div>
       </section>

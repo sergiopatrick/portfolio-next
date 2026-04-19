@@ -6,6 +6,7 @@ import { CaseMeta } from '@/components/case/CaseMeta';
 import { CaseSection } from '@/components/case/CaseSection';
 import { CaseNext } from '@/components/case/CaseNext';
 import { CaseRelated } from '@/components/case/CaseRelated';
+import { CaseImageLightbox } from '@/components/case/CaseImageLightbox';
 import { JsonLd } from '@/components/ui/JsonLd';
 import {
   buildMetadata,
@@ -107,6 +108,7 @@ export default async function CasePage({
 
       <CaseRelated currentSlug={slug} />
       <CaseNext currentSlug={slug} />
+      <CaseImageLightbox />
     </>
   );
 }

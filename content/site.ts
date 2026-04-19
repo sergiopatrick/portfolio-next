@@ -8,7 +8,7 @@ export const siteOptions: SiteOptions = {
   hero_cta_url: '#selected-work',
 
   home_seo_title:
-    'Sérgio Patrick — Front-end developer com profundidade em SEO técnico',
+    'Sérgio Patrick, Front-end developer com profundidade em SEO técnico',
   home_seo_description:
     'Front-end developer com 9 anos em WordPress custom, Core Web Vitals, SEO técnico e automação com LLM. Cases com código real e métricas: Unilever, VTEX, Inter, Cora, Gupy, SanarMed.',
   home_keywords: [
@@ -146,11 +146,11 @@ export const services: Record<string, Service> = {
     direct_answer:
       'Front-end development de quem entende que código bom é código rápido. HTML semântico, CSS vanilla com custom properties, JavaScript sem framework, temas e plugins WordPress custom, Core Web Vitals no verde e design systems que ainda vão rodar daqui a 5 anos sem quebrar em cada update de Node.',
     body_lead:
-      '<p>A maioria dos sites lentos não é lenta por falta de hosting. É lenta porque o código acumula peso — framework sobre framework, plugin sobre plugin, build step que ninguém audita. O meu trabalho é o oposto: vanilla primeiro, framework só quando o problema realmente pede, performance como default e não como tarefa de fim de sprint.</p><p>Cada linha tem custo mensurável em LCP, INP, CLS e conta bancária de hosting. Trato front-end como disciplina de engenharia — tipagem forte onde possível, testes que importam, documentação que não apodrece.</p>',
+      '<p>A maioria dos sites lentos não é lenta por falta de hosting. É lenta porque o código acumula peso, framework sobre framework, plugin sobre plugin, build step que ninguém audita. O meu trabalho é o oposto: vanilla primeiro, framework só quando o problema realmente pede, performance como default e não como tarefa de fim de sprint.</p><p>Cada linha tem custo mensurável em LCP, INP, CLS e conta bancária de hosting. Trato front-end como disciplina de engenharia, tipagem forte onde possível, testes que importam, documentação que não apodrece.</p>',
     problems_standalone: [
       {
         title: 'LCP acima de 2,5s sangrando conversão',
-        body: 'Hero lento, font blocking, JavaScript que trava o main thread. Audit com Lighthouse, WebPageTest e RUM real — depois cirurgia por prioridade.',
+        body: 'Hero lento, font blocking, JavaScript que trava o main thread. Audit com Lighthouse, WebPageTest e RUM real, depois cirurgia por prioridade.',
       },
       {
         title: 'Tema WordPress legado quebrando a cada mudança',
@@ -181,12 +181,12 @@ export const services: Record<string, Service> = {
       {
         axis: 'SEO técnico e AEO',
         axis_slug: 'seo',
-        body: 'Front-end e SEO técnico são a mesma disciplina hoje — Core Web Vitals entra como fator de ranking, HTML semântico entra como sinal pra AI Overviews. Refatorar tema sem pensar em SEO é desperdiçar a janela; auditar SEO sem tocar o front-end é tratar sintoma. Junto, o ROI é composto: template performático + schema correto + arquitetura de conteúdo = autoridade tópica real.',
+        body: 'Front-end e SEO técnico são a mesma disciplina hoje, Core Web Vitals entra como fator de ranking, HTML semântico entra como sinal pra AI Overviews. Refatorar tema sem pensar em SEO é desperdiçar a janela; auditar SEO sem tocar o front-end é tratar sintoma. Junto, o ROI é composto: template performático + schema correto + arquitetura de conteúdo = autoridade tópica real.',
       },
       {
         axis: 'Automação e integrações com LLM',
         axis_slug: 'automation',
-        body: 'Pipeline de IA gera 500 artigos novos por mês. Se o template do WordPress não aguenta renderizar isso sem inflar TTFB, o ganho de produção vira dívida de performance. Front-end performático é pré-requisito pra content velocity de verdade — template enxuto, componentes parametrizáveis e cache HTTP correto.',
+        body: 'Pipeline de IA gera 500 artigos novos por mês. Se o template do WordPress não aguenta renderizar isso sem inflar TTFB, o ganho de produção vira dívida de performance. Front-end performático é pré-requisito pra content velocity de verdade, template enxuto, componentes parametrizáveis e cache HTTP correto.',
       },
     ],
     deliverables: [
@@ -218,7 +218,7 @@ export const services: Record<string, Service> = {
     faqs: [
       {
         q: 'Você só trabalha com WordPress ou aceita outros stacks?',
-        a: 'WordPress é minha especialidade mais profunda, mas trabalho com qualquer stack onde HTML/CSS/JS vanilla resolvem. Tenho cases em Shopify, Gatsby e apps estáticos. Evito frameworks de UI pesados (React/Vue/Svelte) a menos que o problema realmente peça — na maioria dos portfolios e sites de conteúdo, vanilla + Web Components é mais rápido, mais leve e mais durável.',
+        a: 'WordPress é minha especialidade mais profunda, mas trabalho com qualquer stack onde HTML/CSS/JS vanilla resolvem. Tenho cases em Shopify, Gatsby e apps estáticos. Evito frameworks de UI pesados (React/Vue/Svelte) a menos que o problema realmente peça, na maioria dos portfolios e sites de conteúdo, vanilla + Web Components é mais rápido, mais leve e mais durável.',
       },
       {
         q: 'Como você mede performance real? Só Lighthouse?',
@@ -230,7 +230,7 @@ export const services: Record<string, Service> = {
       },
     ],
     seo_title:
-      'Front-end development e performance — WordPress custom, CWV, vanilla',
+      'Front-end development e performance, WordPress custom, CWV, vanilla',
     seo_description:
       'Desenvolvedor front-end com 9 anos em WordPress custom, Core Web Vitals, JavaScript vanilla e design systems escaláveis. Refactor, otimização e builds from scratch.',
     keywords: [
@@ -251,13 +251,13 @@ export const services: Record<string, Service> = {
     excerpt:
       'SEO técnico de quem programa + AEO pra motores generativos. Arquitetura, schema, CWV, indexação e estrutura de resposta que AI extrai.',
     direct_answer:
-      'SEO técnico feito por dev — audit com crawler + código, arquitetura de conteúdo, schema markup sem gambiarra, Core Web Vitals e indexação em escala. E AEO (AI Engine Optimization): estruturar página pra que Google SGE, ChatGPT, Claude e Gemini extraiam respostas diretas com atribuição.',
+      'SEO técnico feito por dev, audit com crawler + código, arquitetura de conteúdo, schema markup sem gambiarra, Core Web Vitals e indexação em escala. E AEO (AI Engine Optimization): estruturar página pra que Google SGE, ChatGPT, Claude e Gemini extraiam respostas diretas com atribuição.',
     body_lead:
-      '<p>SEO mudou. Rankings tradicionais caem porque AI Overviews comem o CTR acima da dobra, e conteúdo que não segue estrutura de pergunta-e-resposta não entra no resultado gerado. Ao mesmo tempo, os fundamentos não mudaram — HTML semântico, Core Web Vitals, arquitetura de conteúdo e linkagem interna continuam sendo o alicerce.</p><p>Meu trabalho combina os dois mundos: arrumar o básico (tecnicamente impecável) e otimizar para o que vem depois (estrutura que LLM entende, embeddings que conectam páginas, schema que fala tanto com bot quanto com modelo generativo).</p>',
+      '<p>SEO mudou. Rankings tradicionais caem porque AI Overviews comem o CTR acima da dobra, e conteúdo que não segue estrutura de pergunta-e-resposta não entra no resultado gerado. Ao mesmo tempo, os fundamentos não mudaram, HTML semântico, Core Web Vitals, arquitetura de conteúdo e linkagem interna continuam sendo o alicerce.</p><p>Meu trabalho combina os dois mundos: arrumar o básico (tecnicamente impecável) e otimizar para o que vem depois (estrutura que LLM entende, embeddings que conectam páginas, schema que fala tanto com bot quanto com modelo generativo).</p>',
     problems_standalone: [
       {
         title: 'Tráfego orgânico estagnado apesar de conteúdo semanal',
-        body: 'Conteúdo sem arquitetura, sem linkagem, sem intent mapeado. Audit completo e roadmap priorizado por ganho × esforço — nem todo problema SEO merece atenção igual.',
+        body: 'Conteúdo sem arquitetura, sem linkagem, sem intent mapeado. Audit completo e roadmap priorizado por ganho × esforço, nem todo problema SEO merece atenção igual.',
       },
       {
         title: 'Core Web Vitals vermelhos segurando rankings',
@@ -269,11 +269,11 @@ export const services: Record<string, Service> = {
       },
       {
         title: 'Schema markup ausente ou mal implementado',
-        body: 'Article, FAQPage, HowTo, Product, MedicalWebPage, BreadcrumbList — cada tipo tem nuance. Schema errado é pior que schema ausente (manual action risk).',
+        body: 'Article, FAQPage, HowTo, Product, MedicalWebPage, BreadcrumbList, cada tipo tem nuance. Schema errado é pior que schema ausente (manual action risk).',
       },
       {
         title: 'Indexação instável no Google Search Console',
-        body: '50% das páginas "descobertas mas não indexadas" — sintoma de thin content, crawl budget mal alocado ou estrutura de site ruim. Diagnóstico vai no log do servidor.',
+        body: '50% das páginas "descobertas mas não indexadas", sintoma de thin content, crawl budget mal alocado ou estrutura de site ruim. Diagnóstico vai no log do servidor.',
       },
       {
         title: 'Migração de domínio/plataforma planejada sem plano',
@@ -297,7 +297,7 @@ export const services: Record<string, Service> = {
       {
         axis: 'Automação e integrações com LLM',
         axis_slug: 'automation',
-        body: 'Produzir conteúdo em escala só faz sentido se cada peça for indexável e extraível por AI. Junto com o pipeline de automação, entrego sistema de briefing semântico, score de fit por tópico, e linkagem interna via embeddings — autoridade tópica que se constrói sozinha depois de configurada.',
+        body: 'Produzir conteúdo em escala só faz sentido se cada peça for indexável e extraível por AI. Junto com o pipeline de automação, entrego sistema de briefing semântico, score de fit por tópico, e linkagem interna via embeddings, autoridade tópica que se constrói sozinha depois de configurada.',
       },
     ],
     deliverables: [
@@ -330,7 +330,7 @@ export const services: Record<string, Service> = {
     faqs: [
       {
         q: 'Em quanto tempo eu vejo resultado de SEO técnico?',
-        a: 'Fix de CWV e schema aparece em semanas (2 a 6). Ganhos de arquitetura e internal linking levam 2 a 4 meses pra maturar no Google. Migração mal feita derruba tráfego na hora — por isso planejo com cuidado. Não prometo "primeiro lugar em 30 dias" porque quem promete, mente.',
+        a: 'Fix de CWV e schema aparece em semanas (2 a 6). Ganhos de arquitetura e internal linking levam 2 a 4 meses pra maturar no Google. Migração mal feita derruba tráfego na hora, por isso planejo com cuidado. Não prometo "primeiro lugar em 30 dias" porque quem promete, mente.',
       },
       {
         q: 'AEO substitui SEO tradicional?',
@@ -338,10 +338,10 @@ export const services: Record<string, Service> = {
       },
       {
         q: 'Você produz conteúdo ou só faz a parte técnica?',
-        a: 'Faço arquitetura e sistema de briefing (o que escrever, estrutura da página, semântica, linkagem). A redação fica com o time editorial do cliente — ou entra no eixo 03 (automação com LLM + revisão humana), se fizer sentido pro volume.',
+        a: 'Faço arquitetura e sistema de briefing (o que escrever, estrutura da página, semântica, linkagem). A redação fica com o time editorial do cliente, ou entra no eixo 03 (automação com LLM + revisão humana), se fizer sentido pro volume.',
       },
     ],
-    seo_title: 'SEO técnico e AEO — Core Web Vitals, schema, AI Overviews',
+    seo_title: 'SEO técnico e AEO, Core Web Vitals, schema, AI Overviews',
     seo_description:
       'SEO técnico feito por dev: audit, arquitetura de conteúdo, schema markup, migração e AEO (otimização para AI Overviews, ChatGPT, Claude, Gemini).',
     keywords: [
@@ -362,16 +362,16 @@ export const services: Record<string, Service> = {
     excerpt:
       'Pipelines editoriais e operacionais com Claude, DeepSeek e outras APIs, com revisão humana no loop. Martech, tracking, UTM governance.',
     direct_answer:
-      'Automação com LLM feita como engenharia — não como playground. Pipelines editoriais integrados ao WordPress (ou qualquer CMS) com Claude e DeepSeek, revisão humana como etapa obrigatória, métricas de ganho de tempo e qualidade. Mais arquitetura martech: tracking schema, UTM governance, integrações HubSpot/GA4/GTM sem conflito entre pixels.',
+      'Automação com LLM feita como engenharia, não como playground. Pipelines editoriais integrados ao WordPress (ou qualquer CMS) com Claude e DeepSeek, revisão humana como etapa obrigatória, métricas de ganho de tempo e qualidade. Mais arquitetura martech: tracking schema, UTM governance, integrações HubSpot/GA4/GTM sem conflito entre pixels.',
     body_lead:
-      '<p>LLM roda direto do ChatGPT UI não é arquitetura — é produtividade individual. Sistema de verdade envolve versionamento de prompts, histórico reprodutível, fila de revisão humana, métricas de fit e custo. E quando cruza com conteúdo público, envolve SEO técnico e front-end também.</p><p>Entrego pipelines onde o operador humano continua sendo a autoridade final (aprovar, rejeitar, editar), mas o LLM retira a parte repetitiva — briefing estruturado, primeira versão, revisão adversarial. Resultado: 6h por artigo vira 35 min, qualidade medida por teste cego, custo rastreado por peça.</p>',
+      '<p>LLM roda direto do ChatGPT UI não é arquitetura, é produtividade individual. Sistema de verdade envolve versionamento de prompts, histórico reprodutível, fila de revisão humana, métricas de fit e custo. E quando cruza com conteúdo público, envolve SEO técnico e front-end também.</p><p>Entrego pipelines onde o operador humano continua sendo a autoridade final (aprovar, rejeitar, editar), mas o LLM retira a parte repetitiva, briefing estruturado, primeira versão, revisão adversarial. Resultado: 6h por artigo vira 35 min, qualidade medida por teste cego, custo rastreado por peça.</p>',
     problems_standalone: [
       {
         title: 'Produção editorial gastando 6h por artigo',
         body: 'Pipeline com briefing estruturado + geração + revisão adversarial + fila de revisão humana. 90% de redução de tempo sem perda de qualidade medida.',
       },
       {
-        title: 'Atribuição fragmentada — lead "veio do nada"',
+        title: 'Atribuição fragmentada, lead "veio do nada"',
         body: 'Arquitetura de tracking ponta a ponta: captura de UTM no entry, persistência via sessionStorage, propagação em links internos, push no dataLayer, consumo no HubSpot/GA4.',
       },
       {
@@ -392,19 +392,19 @@ export const services: Record<string, Service> = {
       },
       {
         title: 'Equipe pequena e demanda grande',
-        body: 'Multiplica capacidade sem contratar — humano supervisiona, LLM executa repetição. Medição obrigatória de ganho de tempo e qualidade pós-implementação.',
+        body: 'Multiplica capacidade sem contratar, humano supervisiona, LLM executa repetição. Medição obrigatória de ganho de tempo e qualidade pós-implementação.',
       },
     ],
     problems_combined: [
       {
         axis: 'Front-end development e performance',
         axis_slug: 'front-end',
-        body: 'Automação publica 500 artigos novos por mês no WordPress — o front-end precisa aguentar. Template performático, componentes parametrizáveis e cache HTTP correto são pré-requisitos. Automação sem front-end pensado vira dívida de performance e Google Search Console vermelho.',
+        body: 'Automação publica 500 artigos novos por mês no WordPress, o front-end precisa aguentar. Template performático, componentes parametrizáveis e cache HTTP correto são pré-requisitos. Automação sem front-end pensado vira dívida de performance e Google Search Console vermelho.',
       },
       {
         axis: 'SEO técnico e AEO',
         axis_slug: 'seo',
-        body: 'LLM sem briefing semântico gera texto plausível mas não ranqueável — a página fica similar a 50 outras no SERP. Pipeline + sistema de briefing + linkagem via embeddings produz conteúdo com fit semântico real, que ranqueia e é extraído por AI Overviews.',
+        body: 'LLM sem briefing semântico gera texto plausível mas não ranqueável, a página fica similar a 50 outras no SERP. Pipeline + sistema de briefing + linkagem via embeddings produz conteúdo com fit semântico real, que ranqueia e é extraído por AI Overviews.',
       },
     ],
     deliverables: [
@@ -439,19 +439,19 @@ export const services: Record<string, Service> = {
     faqs: [
       {
         q: 'Automação com LLM substitui meu time editorial?',
-        a: 'Não. Substitui a parte repetitiva (briefing, primeira versão, normalização) e libera o time editorial pra fazer o que humano faz melhor — julgamento clínico, nuance de marca, revisão adversarial. Em todos os pipelines que entreguei, o revisor humano aprova antes de publicar. LLM sem humano no loop é risco que eu não assumo.',
+        a: 'Não. Substitui a parte repetitiva (briefing, primeira versão, normalização) e libera o time editorial pra fazer o que humano faz melhor, julgamento clínico, nuance de marca, revisão adversarial. Em todos os pipelines que entreguei, o revisor humano aprova antes de publicar. LLM sem humano no loop é risco que eu não assumo.',
       },
       {
-        q: 'Que LLM usar — Claude, GPT-4, DeepSeek?',
+        q: 'Que LLM usar, Claude, GPT-4, DeepSeek?',
         a: 'Depende da task. Claude (Sonnet/Opus) costuma ser melhor em reasoning complexo, redação longa e adesão a instruções. GPT-4 é forte em código e uso geral. DeepSeek ganha em custo-benefício pra tarefas médias. Arquiteturas robustas usam mais de um, com fallback. Escolho com base em avaliação empírica (amostras reais), não hype.',
       },
       {
         q: 'Como garantir qualidade médica/jurídica num pipeline com IA?',
-        a: 'Revisão humana como etapa obrigatória no workflow, não opcional. No case da plataforma de educação médica, a física médica revisora aprova cada artigo antes de publicar — sem aprovação, o post status custom bloqueia publicação. Em domínios regulados, LLM acelera produção mas não substitui accountability profissional.',
+        a: 'Revisão humana como etapa obrigatória no workflow, não opcional. No case da plataforma de educação médica, a física médica revisora aprova cada artigo antes de publicar, sem aprovação, o post status custom bloqueia publicação. Em domínios regulados, LLM acelera produção mas não substitui accountability profissional.',
       },
     ],
     seo_title:
-      'Automação com LLM e integrações martech — pipelines Claude/DeepSeek',
+      'Automação com LLM e integrações martech, pipelines Claude/DeepSeek',
     seo_description:
       'Pipelines editoriais com Claude e DeepSeek APIs, revisão humana no loop, arquitetura martech completa (tracking, UTM governance, integrações HubSpot/GA4).',
     keywords: [
@@ -466,9 +466,9 @@ export const services: Record<string, Service> = {
 };
 
 export const timeline: TimelineRow[] = [
-  { year: '2023—Atual', company: 'Gupy', role: 'Tech and SEO Specialist', note: 'SEO técnico + front-end de performance + automação com LLM.' },
-  { year: '2022—2023', company: 'Greenpark (Londres)', role: 'Technical SEO', note: 'Clientes Unilever, Campari Academy.' },
-  { year: '2020—2022', company: 'grupoQ / QConcursos', role: 'SEO Lead', note: '+105% de sessões orgânicas (+11.7MM).' },
+  { year: '2023-Atual', company: 'Gupy', role: 'Tech and SEO Specialist', note: 'SEO técnico + front-end de performance + automação com LLM.' },
+  { year: '2022-2023', company: 'Greenpark (Londres)', role: 'Technical SEO', note: 'Clientes Unilever, Campari Academy.' },
+  { year: '2020-2022', company: 'grupoQ / QConcursos', role: 'SEO Lead', note: '+105% de sessões orgânicas (+11.7MM).' },
   { year: '2021', company: 'Inter', role: 'SEO Lead, Internationalization', note: 'Rollout internacional.' },
   { year: '2020', company: 'VTEX', role: 'SEO Lead, 2 squads', note: '+25% em clientes enterprise.' },
   { year: '2019', company: 'Valtech', role: 'SEO', note: "Clientes L'Oreal (11 marcas), Bayer, Sanofi US, Zoetis." },

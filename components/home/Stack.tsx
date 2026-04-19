@@ -2,7 +2,7 @@ import { siteOptions } from '@/content/site';
 
 export function Stack() {
   return (
-    <section className="section" id="stack">
+    <section className="section section--divider" id="stack">
       <div className="container">
         <p className="section__kicker">Stack</p>
         <h2 className="section__title">Ferramentas que uso no dia a dia.</h2>

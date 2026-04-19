@@ -31,7 +31,7 @@ export async function generateMetadata({
   const name = categoryNameFromSlug(slug);
   if (!name) return buildMetadata({ title: 'Categoria', description: '', path: '/work/' });
   return buildMetadata({
-    title: `Cases em ${name} — Sérgio Patrick`,
+    title: `Cases em ${name}, Sérgio Patrick`,
     description: `Cases categorizados como ${name}. Problemas e soluções reais com código e métricas.`,
     path: `/work/category/${slug}/`,
   });
@@ -68,7 +68,7 @@ export default async function CategoryPage({
           <p className="section__kicker">Categoria</p>
           <h1 className="archive-head__title">Cases em {name}</h1>
           <p className="archive-head__sub">
-            Cases categorizados como <strong>{name}</strong> — mesma disciplina
+            Cases categorizados como <strong>{name}</strong>, mesma disciplina
             técnica, problemas diferentes.
           </p>
         </div>

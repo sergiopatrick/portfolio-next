@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: siteOptions.home_seo_title,
-    template: `%s — ${SITE_NAME}`,
+    template: `%s, ${SITE_NAME}`,
   },
   description: siteOptions.home_seo_description,
 };
@@ -36,6 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <SiteFooter />
         <ClientBehaviors />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

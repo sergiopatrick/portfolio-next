@@ -19,7 +19,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const origin = req.nextUrl.origin;
   const backPath = referer ? new URL(referer).pathname : '/contact/';
 
-  // Honeypot — real users leave it empty
+  // Honeypot, real users leave it empty
   if ((form.get('sp_website') as string)?.length) {
     return redirectBack(origin, backPath, '1');
   }
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   if (!apiKey || !to || !from) {
     // Dev mode: log and pretend it worked
-    console.log('[contact form] missing Resend config — would have sent:', {
+    console.log('[contact form] missing Resend config, would have sent:', {
       name,
       email,
       message,

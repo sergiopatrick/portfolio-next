@@ -1,4 +1,4 @@
-# Portfolio — Next.js port
+# Portfolio - Next.js port
 
 Next.js 15 (App Router) port of the WordPress theme at `../sp-portfolio`. Same visual and logic; content is authored in TypeScript under [content/](content/) (no WP backend).
 
