@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { allCasesSortedByFeature, caseCategories, categorySlug } from '@/content/cases';
+import { allPostsSortedByDate } from '@/content/posts';
 import { services } from '@/content/site';
 import { absoluteUrl } from '@/lib/site';
 
@@ -13,9 +14,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl('/'), lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: absoluteUrl('/projetos/'), lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: absoluteUrl('/servicos/'), lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: absoluteUrl('/blog/'), lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: absoluteUrl('/sobre/'), lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: absoluteUrl('/contato/'), lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
   ];
+
+  const postRoutes: MetadataRoute.Sitemap = allPostsSortedByDate().map(
+    ({ slug, data }) => ({
+      url: absoluteUrl(`/blog/${slug}/`),
+      lastModified: new Date(data.published_at + 'T00:00:00'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }),
+  );
 
   const serviceRoutes: MetadataRoute.Sitemap = Object.keys(services).map((slug) => ({
     url: absoluteUrl(`/servicos/${slug}/`),
@@ -38,5 +49,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...caseRoutes, ...categoryRoutes];
+  return [
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...caseRoutes,
+    ...categoryRoutes,
+    ...postRoutes,
+  ];
 }

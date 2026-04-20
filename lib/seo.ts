@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { siteOptions, services } from '@/content/site';
 import { cases, allCasesSortedByFeature } from '@/content/cases';
+import { posts, allPostsSortedByDate } from '@/content/posts';
 import { whatsappE164 } from '@/lib/whatsapp';
 import {
   SITE_URL,
@@ -294,6 +295,49 @@ export function servicesHubItemList(): object {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     itemListElement: items,
+  };
+}
+
+export function blogPostSchema(slug: string): object {
+  const p = posts[slug];
+  if (!p) return {};
+  const wordCount = p.body
+    .replace(/<[^>]*>/g, ' ')
+    .trim()
+    .split(/\s+/).length;
+  const permalink = absoluteUrl(`/blog/${slug}/`);
+  const schema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: p.title,
+    description: p.excerpt,
+    datePublished: p.published_at,
+    dateModified: p.published_at,
+    inLanguage: SITE_LANGUAGE,
+    wordCount,
+    author: { '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/') },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': permalink },
+    publisher: { '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/') },
+    articleSection: p.tag,
+  };
+  if (p.keywords?.length) schema.keywords = p.keywords.join(', ');
+  return schema;
+}
+
+export function blogCollectionSchema(): object {
+  const items = allPostsSortedByDate().map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: absoluteUrl(`/blog/${p.slug}/`),
+    name: p.data.title,
+  }));
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    url: absoluteUrl('/blog/'),
+    name: 'Blog',
+    inLanguage: SITE_LANGUAGE,
+    blogPost: items,
   };
 }
 

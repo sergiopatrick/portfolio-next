@@ -4,6 +4,7 @@ import { SvgIcon } from '@/components/ui/SvgIcon';
 const NAV_ITEMS = [
   { label: 'Projetos', href: '/projetos/' },
   { label: 'Serviços', href: '/servicos/' },
+  { label: 'Blog', href: '/blog/' },
   { label: 'Sobre', href: '/sobre/' },
   { label: 'Contato', href: '/contato/' },
 ];

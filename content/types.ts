@@ -111,6 +111,23 @@ export type Case = {
   keywords: string[];
 };
 
+export type Post = {
+  title: string;
+  excerpt: string;
+  tag:
+    | 'Front-end'
+    | 'SEO Técnico'
+    | 'Martech'
+    | 'Automação com LLM'
+    | 'Plugin WP';
+  published_at: string;
+  read_time_min: number;
+  body: string;
+  seo_title: string;
+  seo_description: string;
+  keywords: string[];
+};
+
 export type TimelineRow = {
   year: string;
   company: string;
