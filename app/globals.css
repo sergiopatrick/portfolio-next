@@ -462,12 +462,15 @@ a:hover { color: var(--color-accent); }
 }
 
 /* ---------- Hero ---------- */
+/* Symmetric padding-block keeps hero on the same vertical rhythm as .section
+   (desktop 128px, mobile 64px). Single value on padding-block enforces
+   equal top/bottom and avoids drift between the two tokens. */
 .hero {
-	padding-block: var(--s-11) var(--s-10);
+	padding-block: var(--s-10);
 	position: relative;
 }
 @media (max-width: 768px) {
-	.hero { padding-block: var(--s-9) var(--s-8); }
+	.hero { padding-block: var(--s-8); }
 }
 .hero__kicker {
 	display: inline-flex;
