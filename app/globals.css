@@ -114,6 +114,28 @@ button { background: none; border: 0; padding: 0; cursor: pointer; }
 	--code-function:    #a78bfa;
 }
 
+/* Light mode: header and footer stay on the dark palette so they frame
+   the page in black while the body remains white. Scoped token overrides
+   (not hardcoded colors) so every descendant picks the dark values up. */
+:root:not([data-theme="dark"]) .site-header,
+:root:not([data-theme="dark"]) .site-footer {
+	--color-ink:        #fafafa;
+	--color-ink-2:      #e5e5e5;
+	--color-ink-3:      #a3a3a3;
+	--color-muted:      #a3a3a3;
+	--color-border:     #262626;
+	--color-bg:         #000000;
+	--color-bg-2:       #0a0a0a;
+	--color-bg-3:       #171717;
+	--color-accent:     #4d8aff;
+	--color-accent-soft:#0d1a33;
+	color: var(--color-ink-2);
+}
+
+/* Sticky header would show white bleed-through from the body behind it
+   when translucent, so pin it to opaque black in light mode. */
+:root:not([data-theme="dark"]) .site-header { background: #000000; }
+
 /* ---------- Base ---------- */
 html {
 	scroll-behavior: smooth;
