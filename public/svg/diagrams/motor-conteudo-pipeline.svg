@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" class="diagram diagram-pipeline" role="img" aria-labelledby="dia-pipe-title dia-pipe-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-pipe-title">Pipeline de geração de conteúdo com IA em seis estágios</title>
+  <desc id="dia-pipe-desc">Pipeline editorial com seis estágios sequenciais, descoberta de pauta, scoring de match comercial, geração de rascunho, revisão humana, publicação e medição. Cada estágio passa o artefato adiante e o último alimenta de volta o primeiro via aprendizado do que converte.</desc>
+
+  <defs>
+    <marker id="pipe-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+  </defs>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">MOTOR DE CONTEÚDO  ·  6 ESTÁGIOS  ·  HUMANO NO MEIO</text>
+
+  <!-- 6 nodes on one row -->
+  <g transform="translate(20, 70)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">01</text>
+    <text class="diagram__node-title"  x="12" y="48">Descoberta</text>
+    <text class="diagram__node-metric" x="12" y="70">portais + Trends</text>
+    <text class="diagram__node-note"   x="12" y="88">cron diário</text>
+  </g>
+
+  <g transform="translate(175, 70)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">02</text>
+    <text class="diagram__node-title"  x="12" y="48">Scoring</text>
+    <text class="diagram__node-metric" x="12" y="70">match com catálogo</text>
+    <text class="diagram__node-note"   x="12" y="88">relevância + fit</text>
+  </g>
+
+  <g transform="translate(330, 70)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">03</text>
+    <text class="diagram__node-title"  x="12" y="48">Rascunho</text>
+    <text class="diagram__node-metric" x="12" y="70">LLM gera SEO/AEO</text>
+    <text class="diagram__node-note"   x="12" y="88">por seção, não whole</text>
+  </g>
+
+  <g transform="translate(485, 70)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">04</text>
+    <text class="diagram__node-title"  x="12" y="48">Revisão</text>
+    <text class="diagram__node-metric" x="12" y="70">humano especialista</text>
+    <text class="diagram__node-note"   x="12" y="88">E-E-A-T, CTA</text>
+  </g>
+
+  <g transform="translate(640, 70)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">05</text>
+    <text class="diagram__node-title"  x="12" y="48">Publicação</text>
+    <text class="diagram__node-metric" x="12" y="70">WordPress + schema</text>
+    <text class="diagram__node-note"   x="12" y="88">post status custom</text>
+  </g>
+
+  <g transform="translate(795, 70)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">06</text>
+    <text class="diagram__node-title"  x="12" y="48">Medição</text>
+    <text class="diagram__node-metric" x="12" y="70">dias até 1k cliques</text>
+    <text class="diagram__node-note"   x="12" y="88">teste cego vs humano</text>
+  </g>
+
+  <!-- Arrows between nodes at y=120 (vertical midpoint) -->
+  <g class="diagram__edges">
+    <line class="diagram__edge" x1="160" y1="120" x2="175" y2="120" marker-end="url(#pipe-arrow)"/>
+    <line class="diagram__edge" x1="315" y1="120" x2="330" y2="120" marker-end="url(#pipe-arrow)"/>
+    <line class="diagram__edge" x1="470" y1="120" x2="485" y2="120" marker-end="url(#pipe-arrow)"/>
+    <line class="diagram__edge" x1="625" y1="120" x2="640" y2="120" marker-end="url(#pipe-arrow)"/>
+    <line class="diagram__edge" x1="780" y1="120" x2="795" y2="120" marker-end="url(#pipe-arrow)"/>
+  </g>
+
+  <!-- Feedback loop from 06 back to 01 -->
+  <path class="diagram__edge" d="M 865 170 C 865 220 480 240 480 220 C 480 210 95 210 95 180" fill="none" marker-end="url(#pipe-arrow)"/>
+  <text class="diagram__edge-label" x="480" y="245" text-anchor="middle">feedback, o que rankeou vira base de treinamento do scoring</text>
+</svg>

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" class="diagram diagram-routing" role="img" aria-labelledby="dia-route-title dia-route-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-route-title">Roteamento de modelos por tier de custo</title>
+  <desc id="dia-route-desc">Quatro lanes horizontais empilhadas do mais barato para o mais caro. Lane 1, LLM local rodando no próprio servidor, cobre triagem, classificação e extração. Lane 2, DeepSeek, cobre rascunho e revisão adversarial. Lane 3, Claude ou GPT-5, cobre apenas polimento final seletivo. Lane 4, humano especialista, cobre revisão clínica, CTA e publicação.</desc>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">ROTEAMENTO POR CUSTO  ·  CADA TAREFA NO MODELO MAIS BARATO QUE RESOLVE</text>
+
+  <!-- Lane 1: Local LLM -->
+  <g transform="translate(20, 60)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="14" y="22">TIER 1  ·  R$ 0/token</text>
+    <text class="diagram__node-title" x="14" y="46">LLM local</text>
+    <text class="diagram__node-note"  x="14" y="66">Llama 3.x, Qwen, Meditron</text>
+  </g>
+  <g transform="translate(220, 60)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Triagem de fontes</text>
+    <text class="diagram__node-note"  x="12" y="66">filtra portais e feeds</text>
+  </g>
+  <g transform="translate(410, 60)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Extração NER</text>
+    <text class="diagram__node-note"  x="12" y="66">entidades + CID + exame</text>
+  </g>
+  <g transform="translate(600, 60)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Classificação</text>
+    <text class="diagram__node-note"  x="12" y="66">curso, tag, prioridade</text>
+  </g>
+  <g transform="translate(790, 60)">
+    <rect class="diagram__node" x="0" y="0" width="150" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Dedupe</text>
+    <text class="diagram__node-note"  x="12" y="66">near-duplicate detect</text>
+  </g>
+
+  <!-- Lane 2: DeepSeek -->
+  <g transform="translate(20, 160)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="14" y="22">TIER 2  ·  ~1/50 de Claude Opus</text>
+    <text class="diagram__node-title" x="14" y="46">DeepSeek</text>
+    <text class="diagram__node-note"  x="14" y="66">V3 chat, Reasoner</text>
+  </g>
+  <g transform="translate(220, 160)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Rascunho SEO/AEO</text>
+    <text class="diagram__node-note"  x="12" y="66">seção a seção</text>
+  </g>
+  <g transform="translate(410, 160)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Revisão adversarial</text>
+    <text class="diagram__node-note"  x="12" y="66">outro prompt, mesma API</text>
+  </g>
+  <g transform="translate(600, 160)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Meta e snippet</text>
+    <text class="diagram__node-note"  x="12" y="66">title, description, FAQ</text>
+  </g>
+  <g transform="translate(790, 160)">
+    <rect class="diagram__node" x="0" y="0" width="150" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Resumo exec</text>
+    <text class="diagram__node-note"  x="12" y="66">TL;DR + bullets</text>
+  </g>
+
+  <!-- Lane 3: Premium, selective -->
+  <g transform="translate(20, 260)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="14" y="22">TIER 3  ·  só no que importa</text>
+    <text class="diagram__node-title" x="14" y="46">Claude / GPT-5</text>
+    <text class="diagram__node-note"  x="14" y="66">ativar via flag</text>
+  </g>
+  <g transform="translate(220, 260)">
+    <rect class="diagram__node" x="0" y="0" width="360" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA (seletiva)</text>
+    <text class="diagram__node-title" x="12" y="46">Polimento final do top 10% de tráfego</text>
+    <text class="diagram__node-note"  x="12" y="66">só dispara se volume projetado justifica</text>
+  </g>
+  <g transform="translate(600, 260)">
+    <rect class="diagram__node" x="0" y="0" width="340" height="80" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA (seletiva)</text>
+    <text class="diagram__node-title" x="12" y="46">Desempate em casos clínicos ambíguos</text>
+    <text class="diagram__node-note"  x="12" y="66">escalada automática quando confiança cai</text>
+  </g>
+
+  <!-- Lane 4: Human -->
+  <g transform="translate(20, 360)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="60" rx="6"/>
+    <text class="diagram__node-tag"   x="14" y="22">HUMANO  ·  não negociável</text>
+    <text class="diagram__node-title" x="14" y="46">Especialista</text>
+  </g>
+  <g transform="translate(220, 360)">
+    <rect class="diagram__node" x="0" y="0" width="720" height="60" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="22">TAREFA</text>
+    <text class="diagram__node-title" x="12" y="46">Revisão clínica + E-E-A-T + CTA comercial + publicação (30 min por artigo)</text>
+  </g>
+</svg>

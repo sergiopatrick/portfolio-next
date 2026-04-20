@@ -1,6 +1,143 @@
 import type { Post } from './types';
 
 export const posts: Record<string, Post> = {
+  'guia-motor-conteudo-ia-local-deepseek': {
+    title:
+      'Guia de motor de geração de conteúdo com IA local e DeepSeek',
+    excerpt:
+      'Pipeline editorial em seis estágios, humano no meio, com roteamento de modelo por custo. LLM local faz triagem e extração, DeepSeek escreve o rascunho, Claude entra só no que importa.',
+    tag: 'Automação com LLM',
+    published_at: '2026-04-22',
+    read_time_min: 12,
+    body: `<p>Quase todo time que quer publicar mais conteúdo em 2026 chega na mesma conta. Um artigo médico bem feito leva de três a cinco horas entre pesquisa, redação e revisão. A equipe tem banda pra uns vinte e cinco por mês. O funil pede o quádruplo. Então o time ou congela a operação, ou terceiriza pra uma fábrica de texto, ou monta um motor próprio.</p>
+
+<p>Este guia descreve o terceiro caminho. É o que rodamos no Sanar para alimentar o Blog e o funil do <a href="https://pos.sanar.com.br" target="_blank" rel="noopener">SanarPós</a>, e é a forma que eu recomendo pra qualquer editorial com volume mínimo que justifique a arquitetura. O diferencial versus o "ChatGPT + copiar e colar" é a disciplina de <strong>rotear cada tarefa pro modelo mais barato que ainda entrega qualidade</strong>.</p>
+
+<h2>A arquitetura de referência em seis estágios</h2>
+
+<p>Antes do código, a forma geral. O motor tem seis estágios sequenciais e um humano no meio. O humano não é gargalo, é feature, e a razão disso fica clara no estágio 4.</p>
+
+{{DIAGRAM:motor-conteudo-pipeline}}
+
+<p>Leia da esquerda pra direita. Cada estágio recebe um artefato do anterior e entrega um novo pro próximo. O loop de baixo é o que dá vida ao motor com o tempo, o que rankeou no estágio 06 retroalimenta o scoring do estágio 02, e o modelo aprende o que merece ser escrito a seguir.</p>
+
+<ol>
+  <li><strong>Descoberta.</strong> Um cron diário varre portais médicos, feeds da Agência Brasil Saúde, Google Trends, Google News. Saída, uma lista crua de candidatos.</li>
+  <li><strong>Scoring.</strong> Cada candidato recebe três notas, relevância clínica, fit com o catálogo comercial (cursos, produtos, soluções) e buzz (o quanto o tema está subindo). Saída, os top-K do dia.</li>
+  <li><strong>Rascunho.</strong> O LLM gera o artigo seção a seção, seguindo um template SEO/AEO que cobre introdução, diagnóstico diferencial, conduta e referências. Saída, rascunho em Markdown.</li>
+  <li><strong>Revisão humana.</strong> Um especialista (médico, advogado, engenheiro, dependendo do domínio) valida o técnico, ajusta E-E-A-T e adiciona o CTA comercial. Saída, artigo publicável.</li>
+  <li><strong>Publicação.</strong> O post sobe no WordPress (ou equivalente) com schema, meta tags, imagens otimizadas e link interno para páginas canônicas do ecossistema.</li>
+  <li><strong>Medição.</strong> A cada artigo, contamos os dias até 1000 cliques orgânicos. Essa é a métrica de rampa, e ela alimenta o scoring do estágio 2 pra priorizar o que já provou performar.</li>
+</ol>
+
+<h2>Onde o custo explode (e por que Claude só não é a resposta)</h2>
+
+<p>A tentação é usar o melhor modelo disponível em tudo. Se Claude Opus gera artigo médico decente, por que não rodar Opus em todos os seis estágios? Porque o preço por token escala muito mais rápido que a qualidade marginal.</p>
+
+<p>Um artigo médio de 1200 palavras consome, somando rascunho e revisão adversarial, algo como 8k tokens de entrada e 4k de saída. Multiplica por 30 artigos/mês e você está em 240k in + 120k out. Em Claude Opus, isso custa na casa dos R$ 100/mês só em geração, sem contar triagem, extração, classificação e dedup que também são chamadas de LLM.</p>
+
+<p>O truque é admitir que nem toda tarefa precisa do modelo mais caro. Triagem de fontes é um <em>binary classification problem</em> que um Llama 3.x rodando local resolve com 99% de acurácia. Extração de entidades médicas é tarefa de NER (reconhecimento de entidades nomeadas), campo onde modelos open-source com fine-tune específico (Meditron, por exemplo, que é um Llama treinado em literatura médica) batem modelos generalistas fechados.</p>
+
+<h2>A trinca que funciona hoje, LLM local + DeepSeek + Claude seletivo</h2>
+
+<p>O desenho abaixo é o mapa de roteamento de modelos. Quatro lanes, do mais barato pro mais caro, com as tarefas que pertencem a cada uma.</p>
+
+{{DIAGRAM:motor-conteudo-roteamento}}
+
+<h3>Tier 1, LLM rodando local</h3>
+
+<p>Custo por token, zero. Custo real, hardware (uma máquina com GPU razoável ou mesmo Apple Silicon roda Llama 3.x 70B quantizado sem suar) e um pouco de energia. Vale pra tudo que é repetitivo, de baixa criatividade e alto volume, porque é nessas tarefas que a conta em cloud vira terror.</p>
+
+<p>As tarefas naturais dessa lane são:</p>
+
+<ul>
+  <li><strong>Triagem de fontes.</strong> Dado um feed de 200 títulos, filtrar os 20 que merecem virar candidatos. Prompt simples, temperatura baixa, saída estruturada (JSON com score + razão curta).</li>
+  <li><strong>Extração NER.</strong> Puxar do corpo de um artigo todos os termos médicos canônicos (doenças, exames, procedimentos, CID). Aqui faz diferença usar um modelo fine-tuned em domínio, caso médico use <a href="https://huggingface.co/epfl-llm/meditron-70b" target="_blank" rel="noopener">Meditron</a>.</li>
+  <li><strong>Classificação.</strong> Mapear um candidato pro curso/produto correspondente. Problema de multi-label classification, trivial pra LLM local.</li>
+  <li><strong>Dedupe.</strong> Detectar que "Chikungunya surto 2026" e "Vírus Chikungunya avança em SP" são a mesma pauta. Usa embeddings locais (Sentence-Transformers, por exemplo) e similaridade coseno, não precisa nem de LLM geradora.</li>
+</ul>
+
+<h3>Tier 2, DeepSeek</h3>
+
+<p>DeepSeek é a surpresa agradável de 2025/2026. <a href="https://api-docs.deepseek.com/" target="_blank" rel="noopener">DeepSeek-V3 Chat</a> custa na ordem de 50x menos por token que Claude Opus pra qualidade de texto que, em teste cego, bate Claude em português brasileiro estruturado. A Reasoner é o modelo de raciocínio, útil pra tarefas que envolvem passo-a-passo.</p>
+
+<p>Lane 2 cobre:</p>
+
+<ul>
+  <li><strong>Rascunho do artigo.</strong> Geração seção por seção. Isso é importante, não peça o artigo inteiro de uma vez, peça título, depois introdução, depois cada H2. Dá pra paralelizar, e você controla o tamanho do output por chamada.</li>
+  <li><strong>Revisão adversarial.</strong> Depois do rascunho, rode uma segunda chamada com prompt de "revisor crítico" que simula um editor procurando erros. Mesmo modelo, prompt diferente, custo quase dobrado mas qualidade muito superior.</li>
+  <li><strong>Meta e snippet.</strong> Title, description, FAQ schema. Tarefa bem delimitada, ideal pra saída JSON curta.</li>
+  <li><strong>Resumo executivo.</strong> TL;DR + bullets. Útil pra alimentar o próprio pipeline (os resumos viram input do scoring futuro).</li>
+</ul>
+
+<h3>Tier 3, modelo premium (Claude, GPT-5) seletivo</h3>
+
+<p>Aqui mora a disciplina. Premium só entra <strong>quando a métrica prova que vale</strong>. Duas entradas típicas:</p>
+
+<ul>
+  <li><strong>Polimento final do top 10% de tráfego.</strong> Artigos que já provaram performance (entraram no top 10% do mês em cliques) recebem um passe extra do premium pra afinar a escrita antes de um boost de internal linking. Custo marginal pequeno porque é seletivo.</li>
+  <li><strong>Desempate em casos ambíguos.</strong> Se a chamada do Tier 2 voltar com score de confiança abaixo de um threshold (por exemplo, menos de 0.7 de probabilidade de estar correto em termos clínicos), escalamos automaticamente pro Tier 3. Zero trabalho humano pra decidir, a escalada é condicional.</li>
+</ul>
+
+<h3>Lane 4, humano especialista</h3>
+
+<p>Não negociável. Mesmo em domínios menos regulados, um especialista validando antes da publicação é o que separa um motor de conteúdo que rankeia de uma fábrica que queima domínio. No nosso setup, a médica revisora valida o técnico, ajusta E-E-A-T, adiciona o CTA comercial e publica. Tempo médio, 30 minutos por artigo, contra as 3-5 horas do fluxo manual integral.</p>
+
+<h2>Seis truques concretos pra reduzir consumo de tokens em 70%</h2>
+
+<p>Depois de montar o motor, o trabalho seguinte é afinar. Esses são os seis ajustes que mais deslocam a conta final:</p>
+
+<ol>
+  <li><strong>Prompt cache.</strong> Anthropic, DeepSeek e OpenAI todos oferecem prompt caching com TTL de 5 a 10 minutos. System prompt longo (2-4k tokens de instruções editoriais) fica cacheado e você só paga 10-20% do valor em chamadas subsequentes. Se o seu pipeline roda em lote de 30 artigos numa janela, isso economiza 70% do input.</li>
+  <li><strong>Saída estruturada (JSON schema).</strong> Pedir resposta em JSON com schema definido força o modelo a ser terso. Respostas em prosa livre tendem a 2x-3x o tamanho necessário. Em todas as APIs modernas existe parâmetro de <code>response_format</code>.</li>
+  <li><strong>Geração por seção, não whole-article.</strong> Em vez de um prompt gigante pedindo o artigo inteiro, quebre em chamadas menores (intro, H2 #1, H2 #2, conclusão). Você paga por tokens de input a cada chamada, mas ganha controle sobre tamanho de output e consegue paralelizar.</li>
+  <li><strong>Retrieval em vez de context stuffing.</strong> Não mande a base de conhecimento inteira pro prompt. Use embeddings locais pra trazer os 5 documentos mais relevantes por chamada. 80% menos input tokens com qualidade igual ou superior.</li>
+  <li><strong>Short circuit em confiança alta.</strong> Se o Tier 1 voltou com 0.95 de confiança na triagem, não roda o Tier 2 de verificação. Só escala quando confiança está em zona cinza.</li>
+  <li><strong>Limite rígido de max_tokens.</strong> Defina um ceiling realista (por exemplo 1500 tokens por seção de artigo). O modelo respeita e você não paga por conclusões prolixas que o humano iria cortar de qualquer jeito.</li>
+</ol>
+
+<h2>O humano, por que o "gargalo" é feature</h2>
+
+<p>Gasta-se muito texto em artigos de AI discutindo como tirar o humano do loop. Eu discordo na raiz. Em domínios regulados (saúde, finanças, direito) ou em qualquer território YMYL (Your Money or Your Life, termo que o Google usa pra flaggar conteúdo que afeta decisões de vida), a assinatura de um especialista é o que separa conteúdo que o Google mantém rankeado de conteúdo que cai em 3 meses.</p>
+
+<p>No nosso teste, 20 artigos gerados por IA + médica versus 20 redigidos só por médica. Avaliação cega por outras médicas, 14 dos 20 com IA preferidos, contra 6 dos 20 só-humano. O ponto aqui não é "IA ganhou", é "IA com médica no loop ganhou". Tirar a médica quebraria o resultado.</p>
+
+<h2>Como medir se está funcionando</h2>
+
+<p>Três métricas. Nenhuma é "artigos por dia", apesar de ser a primeira que o stakeholder vai pedir.</p>
+
+<ol>
+  <li><strong>Dias até 1000 cliques orgânicos.</strong> Essa é a rampa. Artigo manual só-humano bate 1k em média em 27 dias. IA + humano bateu em 9 dias no nosso experimento (800 cliques já no dia 9, tendência pra cruzar 1k antes dos 15). Só-IA sem revisão, 19 dias (pior que IA + humano e perto de humano só).</li>
+  <li><strong>Preferência em teste cego.</strong> Uma vez por trimestre, produza 20 artigos em cada trilha e avalie com especialistas sem dizer qual foi como. Se a trilha do motor não estiver acima de 60%, alguma coisa regrediu.</li>
+  <li><strong>Tempo humano por artigo.</strong> Proxy de UX da ferramenta de revisão. No nosso caso caiu de 4h (fluxo manual integral) para 30 minutos (revisão do rascunho do motor). Se esse número começar a subir, a ferramenta de revisão precisa de amor.</li>
+</ol>
+
+<h2>O que reaproveitar do seu lado e o que construir</h2>
+
+<p>Se você está começando do zero, a ordem que minimiza risco é:</p>
+
+<ol>
+  <li><strong>Estágio 2 (scoring) manual + estágio 3 (rascunho) com DeepSeek.</strong> Mais barato possível, prova o conceito. Humano escolhe o tema, IA rascunha, humano revisa.</li>
+  <li><strong>Automatize o estágio 1 (descoberta).</strong> Dez scripts Python em N feeds e Trends resolvem o básico.</li>
+  <li><strong>Adicione o Tier 1 (LLM local).</strong> Primeiro pra triagem e classificação, depois NER e dedupe. Aqui a conta de API cai significativamente.</li>
+  <li><strong>Instrumente o estágio 6 (medição).</strong> Sem medir, você está voando cego e qualquer otimização é chutadeira.</li>
+  <li><strong>Adicione Tier 3 seletivo por último.</strong> Quando você tem dados de performance dos artigos, consegue identificar o top 10% que vale Claude em cima.</li>
+</ol>
+
+<p><em>Projeto relacionado: <a href="/projetos/pipeline-editorial-ia-revisao-medica/">Pipeline editorial com IA e revisão médica</a>, onde esse motor roda em produção no Sanar Medicina com Claude e DeepSeek</em>.</p>`,
+    seo_title: 'Motor de conteúdo com IA local e DeepSeek',
+    seo_description:
+      'Pipeline editorial em 6 estágios com roteamento por custo, LLM local pra triagem, DeepSeek pro rascunho e Claude só no top 10%. Humano como feature.',
+    keywords: [
+      'motor de geração de conteúdo',
+      'LLM local Llama Meditron',
+      'DeepSeek V3',
+      'roteamento de modelos',
+      'custo de tokens LLM',
+      'E-E-A-T pipeline editorial',
+    ],
+  },
+
   'google-ads-perde-atribuicao-pixel-x': {
     title:
       'Por que o Google Ads perde atribuição quando você instala o Pixel do X (e como auditar em 5 minutos)',
