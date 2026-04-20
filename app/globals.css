@@ -1247,7 +1247,11 @@ a:hover { color: var(--color-accent); }
 	color: var(--color-muted);
 }
 
-/* Inline SVG diagrams (e.g. ecosystem map) - adapts to light/dark via tokens. */
+/* Inline SVG diagrams (e.g. ecosystem map) - adapts to light/dark via tokens.
+   Inside a prose column (.prose), the wrap breaks out of the 680px text
+   gutter and expands up to 960px centered on the viewport, so the SVG
+   renders at (close to) 1:1 of its native viewBox and the in-diagram
+   text stays at the size it was designed for. */
 .diagram-wrap {
 	margin-top: var(--s-6);
 	margin-bottom: var(--s-6);
@@ -1257,6 +1261,13 @@ a:hover { color: var(--color-accent); }
 	background: var(--color-bg-2);
 	overflow: hidden;
 }
+.prose .diagram-wrap {
+	width: min(960px, calc(100vw - var(--s-5) * 2));
+	max-width: none;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
 .diagram-wrap .diagram {
 	width: 100%;
 	height: auto;
@@ -1264,46 +1275,46 @@ a:hover { color: var(--color-accent); }
 }
 .diagram__kicker {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 12px;
 	letter-spacing: var(--tracking-wide);
 	fill: var(--color-muted);
 }
 .diagram__node {
 	fill: var(--color-bg);
 	stroke: var(--color-border);
-	stroke-width: 1.5;
+	stroke-width: 1.75;
 }
 .diagram__node-tag {
 	font-family: var(--font-mono);
-	font-size: 10px;
+	font-size: 11px;
 	letter-spacing: var(--tracking-wide);
 	fill: var(--color-muted);
 }
 .diagram__node-title {
 	font-family: var(--font-body);
-	font-size: 17px;
+	font-size: 19px;
 	font-weight: 600;
 	fill: var(--color-ink);
 }
 .diagram__node-metric {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 13px;
 	fill: var(--color-ink-2);
 }
 .diagram__node-note {
 	font-family: var(--font-mono);
-	font-size: 10px;
+	font-size: 11px;
 	fill: var(--color-muted);
 }
 .diagram__edge {
 	stroke: var(--color-border);
-	stroke-width: 1.5;
+	stroke-width: 2;
 	stroke-dasharray: 3 4;
 	fill: none;
 }
 .diagram__edge-label {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 12px;
 	letter-spacing: var(--tracking-wide);
 	fill: var(--color-muted);
 }
@@ -1323,58 +1334,72 @@ a:hover { color: var(--color-accent); }
 }
 .diagram__engine-tag {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 12px;
 	letter-spacing: var(--tracking-wide);
 	fill: var(--color-muted);
 }
 .diagram__engine-title {
 	font-family: var(--font-body);
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 600;
 	fill: var(--color-ink);
 }
 .diagram__engine-meta {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 13px;
 	fill: var(--color-ink-2);
 }
 .diagram__funnel-edge {
 	stroke: var(--color-accent);
-	stroke-width: 2;
+	stroke-width: 2.5;
 	fill: none;
 }
 .diagram__funnel-label {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 12px;
 	letter-spacing: var(--tracking-wide);
 	fill: var(--color-accent);
 }
 .diagram__funnel-node {
 	fill: var(--color-accent-soft);
 	stroke: var(--color-accent);
-	stroke-width: 1.5;
+	stroke-width: 1.75;
 }
 .diagram__funnel-tag {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 12px;
 	letter-spacing: var(--tracking-wide);
 	fill: var(--color-accent);
 }
 .diagram__funnel-title {
 	font-family: var(--font-body);
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 600;
 	fill: var(--color-ink);
 }
 .diagram__funnel-meta {
 	font-family: var(--font-mono);
-	font-size: 11px;
+	font-size: 13px;
 	fill: var(--color-ink-2);
 }
 
-/* Mobile: diagram stays readable even at small widths */
+/* Mobile: don't break out of the prose column (would clip the right edge).
+   Instead keep the wrap flush with the text and let the SVG scroll
+   horizontally at a minimum of 720 user-units so the text inside doesn't
+   shrink into unreadable territory. */
 @media (max-width: 640px) {
 	.diagram-wrap { padding: var(--s-3); }
+	.prose .diagram-wrap {
+		width: 100%;
+		left: auto;
+		transform: none;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	.prose .diagram-wrap .diagram {
+		min-width: 720px;
+		width: 720px;
+	}
 }
 
 /* Link list - used to show live URLs published as part of a case. */
