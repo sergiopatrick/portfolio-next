@@ -943,7 +943,6 @@ a:hover { color: var(--color-accent); }
 }
 .services__grid--hub .service {
 	background: var(--color-bg);
-	border-left: 2px solid var(--color-accent);
 }
 
 .services-note {
