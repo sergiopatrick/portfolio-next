@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" class="diagram diagram-phases" role="img" aria-labelledby="dia-phase-title dia-phase-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-phase-title">Plano de migração SEO em cinco fases</title>
+  <desc id="dia-phase-desc">Linha do tempo de uma migração SEO com cinco fases numeradas, inventário em T menos 30, mapeamento em T menos 14, staging em T menos 7, cutover no dia zero e monitoramento em T mais 30. Cada fase lista o artefato de saída e o critério de passagem pra próxima.</desc>
+
+  <defs>
+    <marker id="phase-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+  </defs>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">MIGRAÇÃO SEO  ·  LINHA DO TEMPO  ·  5 FASES COM GATE ENTRE CADA UMA</text>
+
+  <g transform="translate(20, 70)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="180" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">FASE 01  ·  T-30</text>
+    <text class="diagram__node-title"  x="12" y="48">Inventário</text>
+    <text class="diagram__node-metric" x="12" y="74">lista completa de URLs</text>
+    <text class="diagram__node-metric" x="12" y="94">ordenada por tráfego</text>
+    <text class="diagram__node-metric" x="12" y="114">+ logs de 30 dias</text>
+    <text class="diagram__node-note"   x="12" y="140">gate, 100% coberto</text>
+    <text class="diagram__node-note"   x="12" y="158">por GA/GSC/logs</text>
+  </g>
+
+  <g transform="translate(210, 70)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="180" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">FASE 02  ·  T-14</text>
+    <text class="diagram__node-title"  x="12" y="48">Mapeamento</text>
+    <text class="diagram__node-metric" x="12" y="74">1:1 por regra clara</text>
+    <text class="diagram__node-metric" x="12" y="94">301 / 410 / consolidar</text>
+    <text class="diagram__node-metric" x="12" y="114">schema e canonical</text>
+    <text class="diagram__node-note"   x="12" y="140">gate, zero URL órfã</text>
+    <text class="diagram__node-note"   x="12" y="158">diff homologado</text>
+  </g>
+
+  <g transform="translate(400, 70)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="180" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">FASE 03  ·  T-7</text>
+    <text class="diagram__node-title"  x="12" y="48">Staging</text>
+    <text class="diagram__node-metric" x="12" y="74">crawl full no staging</text>
+    <text class="diagram__node-metric" x="12" y="94">compare com prod</text>
+    <text class="diagram__node-metric" x="12" y="114">valida redirects</text>
+    <text class="diagram__node-note"   x="12" y="140">gate, diff aprovado</text>
+    <text class="diagram__node-note"   x="12" y="158">por SEO + eng</text>
+  </g>
+
+  <g transform="translate(590, 70)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="180" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">FASE 04  ·  T-0</text>
+    <text class="diagram__node-title"  x="12" y="48">Cutover</text>
+    <text class="diagram__node-metric" x="12" y="74">deploy em low traffic</text>
+    <text class="diagram__node-metric" x="12" y="94">sitemap + GSC change</text>
+    <text class="diagram__node-metric" x="12" y="114">smoke test 50 URLs</text>
+    <text class="diagram__node-note"   x="12" y="140">gate, 200 em 95%</text>
+    <text class="diagram__node-note"   x="12" y="158">amostra do top tráfego</text>
+  </g>
+
+  <g transform="translate(780, 70)">
+    <rect class="diagram__node" x="0" y="0" width="160" height="180" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">FASE 05  ·  T+30</text>
+    <text class="diagram__node-title"  x="12" y="48">Monitorar</text>
+    <text class="diagram__node-metric" x="12" y="74">log + GSC + rank</text>
+    <text class="diagram__node-metric" x="12" y="94">404 → novo redirect</text>
+    <text class="diagram__node-metric" x="12" y="114">diff tráfego por URL</text>
+    <text class="diagram__node-note"   x="12" y="140">fix loop semanal</text>
+    <text class="diagram__node-note"   x="12" y="158">até estabilizar</text>
+  </g>
+
+  <g class="diagram__edges">
+    <line class="diagram__edge" x1="200" y1="160" x2="210" y2="160" marker-end="url(#phase-arrow)"/>
+    <line class="diagram__edge" x1="390" y1="160" x2="400" y2="160" marker-end="url(#phase-arrow)"/>
+    <line class="diagram__edge" x1="580" y1="160" x2="590" y2="160" marker-end="url(#phase-arrow)"/>
+    <line class="diagram__edge" x1="770" y1="160" x2="780" y2="160" marker-end="url(#phase-arrow)"/>
+  </g>
+</svg>

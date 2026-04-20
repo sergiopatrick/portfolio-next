@@ -1,6 +1,161 @@
 import type { Post } from './types';
 
 export const posts: Record<string, Post> = {
+  'guia-migracao-seo-sem-perder-trafego': {
+    title: 'Guia de migração SEO sem perder tráfego',
+    excerpt:
+      'Cinco fases com gate entre cada uma, do inventário à estabilização pós-cutover. O que fazer T-30, T-14, T-7, T-0 e T+30, os sete erros que derrubam tráfego e as ferramentas que de fato ajudam.',
+    tag: 'SEO Técnico',
+    published_at: '2026-04-24',
+    read_time_min: 13,
+    body: `<p>Toda migração SEO começa com alguém dizendo "é só subir o site novo e colocar os redirects". Toda migração SEO ruim termina com um report de queda de 40% de tráfego orgânico três meses depois. A distância entre as duas frases é planejamento.</p>
+
+<p>Este guia descreve o que eu faço em migração de domínio (com ou sem mudança de CMS), com a ressalva de que nenhum passo é opcional. Cada fase tem um gate, e saltar um gate é o que transforma migração técnica em incidente de negócio. Se você está lendo isso porque tem uma migração agendada, a regra de ouro é começar 30 dias antes do cutover. Se começou ontem pra amanhã, adie.</p>
+
+<h2>Por que migração mata tráfego</h2>
+
+<p>Três causas, em ordem de frequência:</p>
+
+<ol>
+  <li><strong>Redirect mapping incompleto.</strong> URLs com tráfego sumiram sem redirect 1:1. Google chega, bate 404, remove do índice.</li>
+  <li><strong>Mudança de estrutura sem preservação de sinais.</strong> URLs novas, mas canonical, schema, internal linking ou hreflang quebrados. Google re-indexa mas perde o contexto que fazia aquela URL rankear.</li>
+  <li><strong>Performance pior que a anterior.</strong> Site novo com CWV ruim, JS bloqueante, imagens não otimizadas. O Google mede isso e demora pra reestabilizar o ranking.</li>
+</ol>
+
+<p>As três são previsíveis e todas mitigáveis com o plano abaixo.</p>
+
+<h2>O plano em cinco fases</h2>
+
+{{DIAGRAM:migracao-seo-fases}}
+
+<p>Lê da esquerda pra direita. Cada fase tem um artefato de saída e um gate de passagem. Sem gate cumprido, não avança. Esse é o único disciplinamento que salva projeto.</p>
+
+<h2>Fase 01, T-30, inventário que previne 90% dos problemas</h2>
+
+<p>O erro mais comum é começar pelo redirect mapping. Errado. Comece pelo inventário completo de URLs <strong>com tráfego</strong>. Isso significa juntar três fontes:</p>
+
+<ul>
+  <li><strong>Google Analytics / GA4.</strong> Pages com cliques no último ano, não só no último mês. URL sazonal pode valer.</li>
+  <li><strong>Google Search Console.</strong> Pages com impressão e clique, mesmo as que você nem sabe que existem (tag archives antigas, URLs de parâmetro, paginação).</li>
+  <li><strong>Logs do servidor.</strong> O acesso real do Googlebot. Nem tudo aparece em GSC (especialmente URLs canibalizadas ou não indexadas). 30 dias de log mostra o crawl budget efetivo.</li>
+</ul>
+
+<p>Une as três em uma planilha, deduplica, ordena por tráfego decrescente. Essa é sua lista mestra. Marque também os top 20% que representam 80% do tráfego (Pareto) e trate eles com especial cuidado nas próximas fases.</p>
+
+<p><strong>Gate de passagem, 100% das URLs com &gt;10 cliques/mês cobertas pelo inventário.</strong></p>
+
+<h2>Fase 02, T-14, mapeamento 1:1 por regra clara</h2>
+
+<p>Cada URL antiga do inventário recebe uma das quatro saídas abaixo. A decisão é a parte que demanda o maior esforço humano do projeto e não pode ser delegada pra script.</p>
+
+{{DIAGRAM:migracao-seo-redirects}}
+
+<p>As quatro saídas:</p>
+
+<ul>
+  <li><strong>301 pra URL equivalente direta.</strong> O caso mais comum, conteúdo continua existindo no novo site. Redirect 1:1 com canonical apontando pro destino.</li>
+  <li><strong>301 pro canônico consolidado.</strong> Várias URLs antigas viram uma nova (típico em reestruturação de categoria). Todas as antigas redirecionam pra canônica, e essa canônica vira o ponto de convergência de link equity.</li>
+  <li><strong>301 pra página-pai.</strong> Quando a página-filho some (por exemplo, uma landing de produto descontinuado), redirecione pra categoria-pai, não pra home. Perder contexto é ruim, mas redirect pra home é pior.</li>
+  <li><strong>410 Gone.</strong> Conteúdo removido de propósito. 410 sinaliza ao Google que a URL não volta. Limpa o índice em semanas; redirect pra home deixaria o Google tentando entender por meses.</li>
+</ul>
+
+<p>Três regras fixas que valem em qualquer migração:</p>
+
+<ol>
+  <li><strong>Nunca use 302 em migração permanente.</strong> 302 passa menos link equity e confunde o Google sobre qual URL é canônica.</li>
+  <li><strong>Evite chains.</strong> A → B → C é pior que A → C. Sempre resolva direto pro destino final, mesmo que isso signifique reescrever regras antigas.</li>
+  <li><strong>Preserve parâmetros relevantes.</strong> UTM, gclid, fbclid precisam atravessar o redirect. Em nginx, <code>rewrite ^/old /new$is_args$args permanent;</code>. Em Next.js, garanta via middleware.</li>
+</ol>
+
+<p><strong>Gate de passagem, zero URL órfã no diff e mapeamento aprovado por SEO + engenharia.</strong></p>
+
+<h2>Fase 03, T-7, staging com crawl + diff</h2>
+
+<p>O site novo precisa estar em staging acessível pro time (com basic auth pra não indexar). Aqui rodamos dois passos técnicos:</p>
+
+<ol>
+  <li><strong>Crawl completo no staging.</strong> <a href="https://www.screamingfrog.co.uk/" target="_blank" rel="noopener">Screaming Frog</a> ou <a href="https://www.sitebulb.com/" target="_blank" rel="noopener">Sitebulb</a>. Objetivo, capturar title, description, H1, canonical, hreflang, status code, schema e internal links de cada URL. Export em CSV.</li>
+  <li><strong>Diff com produção.</strong> Rodar o mesmo crawl no site atual e comparar CSV contra CSV. Colunas que importam, title, description, canonical, status, schema. Onde o diff aparece, investiga. Onde o diff é intencional (reestruturação), documenta.</li>
+</ol>
+
+<p>Além do crawl, teste os redirects direto via curl. Um shell script que lê a planilha de mapeamento e bate <code>curl -sI -o /dev/null -w "%{http_code} %{redirect_url}\\n" &lt;url_antiga&gt;</code>. Cada linha que volta com código diferente de 301 ou com redirect_url errado é bug bloqueante.</p>
+
+<p><strong>Gate de passagem, diff aprovado + 100% dos redirects retornando 301 pro destino correto.</strong></p>
+
+<h2>Fase 04, T-0, cutover em janela de baixa demanda</h2>
+
+<p>Deploy em janela de baixa demanda (madrugada, fim de semana), nunca em horário comercial. Checklist do próprio dia:</p>
+
+<ul>
+  <li><strong>Subir o novo site</strong> com DNS apontado.</li>
+  <li><strong>Aplicar as regras de redirect</strong> no servidor/edge.</li>
+  <li><strong>Atualizar <code>sitemap.xml</code></strong> com as URLs novas, submeter no GSC.</li>
+  <li><strong>Usar a ferramenta Change of Address</strong> do GSC se for mudança de domínio.</li>
+  <li><strong>Atualizar robots.txt</strong> se havia regra específica.</li>
+  <li><strong>Smoke test em 50 URLs</strong> do top tráfego, manual, no browser. Cada uma tem que abrir em 200 com conteúdo esperado e canonical apontando pra ela mesma.</li>
+</ul>
+
+<p><strong>Gate de passagem, 95% da amostra de smoke test retorna 200 com conteúdo correto.</strong> Se 5% ou mais falhou, rollback e recomeço na próxima janela.</p>
+
+<h2>Fase 05, T+30, monitoramento e fix loop</h2>
+
+<p>Aqui mora o trabalho ingrato. Nas 4 semanas pós-cutover, três coisas precisam ser olhadas diariamente nos 7 primeiros dias e semanalmente depois:</p>
+
+<ol>
+  <li><strong>Logs do servidor.</strong> Qualquer 404 ou 500 vindo do Googlebot vira ticket imediato. Normalmente é um redirect faltando ou uma regex mal formada.</li>
+  <li><strong>GSC, relatório de cobertura.</strong> Páginas com status "Duplicado, Google escolheu canônica diferente" são sinal de que você não preservou canonical. "Descobriu, atualmente não indexado" pode ser crawl budget comido por URLs velhas ainda na fila.</li>
+  <li><strong>Rank tracking por URL.</strong> Compare o rank médio das top 100 URLs antes e depois. Queda brusca (mais de 5 posições em mais de 20% delas) é bandeira vermelha, investiga individual.</li>
+</ol>
+
+<p>O fix loop é semanal. Toda segunda: pega os 404s do Googlebot da semana anterior, cria os redirects faltantes, deploya. Em 4 semanas o número de 404s semanais cai pra zero e você pode declarar estabilização.</p>
+
+<h2>Os sete erros que mais derrubam tráfego</h2>
+
+<ol>
+  <li><strong>Redirecionar tudo pra home.</strong> O clássico. Google vê N-mil URLs convergindo pra raiz e reclassifica como soft 404.</li>
+  <li><strong>Chains de redirect.</strong> A → B → C. Perda de link equity a cada hop. Resolve direto.</li>
+  <li><strong>Mudar URLs "por estética" sem necessidade.</strong> Se a URL antiga funciona, deixa. Reestruturar sem motivo claro é queimar capital SEO.</li>
+  <li><strong>Esquecer do hreflang.</strong> Sites multi-idioma, tags de hreflang novas precisam estar no novo site apontando pras URLs canônicas corretas.</li>
+  <li><strong>Lançar com schema quebrado.</strong> Valida tudo em <a href="https://validator.schema.org/" target="_blank" rel="noopener">validator.schema.org</a> e <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Rich Results Test</a> antes do cutover.</li>
+  <li><strong>Subir com CWV pior.</strong> Se LCP sobe, rank cai. Meça CWV no staging e só vai pra produção se estiver igual ou melhor.</li>
+  <li><strong>Não avisar o GSC.</strong> Submeter novo sitemap e usar Change of Address acelera a re-indexação em semanas.</li>
+</ol>
+
+<h2>Ferramentas que de fato ajudam</h2>
+
+<ul>
+  <li><strong>Screaming Frog</strong> pra crawl e diff. Paga porque vale.</li>
+  <li><strong>GoAccess</strong> ou <strong>Matomo</strong> pra parsear logs do servidor. Se o servidor é Apache/nginx, vem dos logs mesmo, não precisa de nada fancy.</li>
+  <li><strong>Semrush</strong> ou <strong>Ahrefs</strong> pra rank tracking por URL. GSC serve pra impressão e clique, mas pra rank médio histórico você precisa de uma dessas.</li>
+  <li><strong>Sheets</strong> pra planilha de mapeamento. Não inventa ferramenta de "redirect manager", planilha resolve e é auditável.</li>
+  <li><strong>curl + bash</strong> pro shell de validação dos redirects. Simples, ninguém quebra.</li>
+</ul>
+
+<h2>O que medir no fim</h2>
+
+<p>Trinta dias depois do cutover, três métricas de sucesso:</p>
+
+<ol>
+  <li><strong>Tráfego orgânico total.</strong> Dentro de ±10% do pré-migração é sucesso. Queda maior que 20% é incidente.</li>
+  <li><strong>Impressões no GSC.</strong> Curva de impressão acompanhando ou superando a curva pré-cutover.</li>
+  <li><strong>Rank médio das top 100 URLs.</strong> Diferença menor que 2 posições no agregado.</li>
+</ol>
+
+<p>Se as três estão estáveis ou melhores, a migração cumpriu o objetivo. Se alguma está negativa, volte pro fix loop da fase 05 e investigue URL por URL.</p>
+
+<p>Migração bem feita é invisível. Usuário não percebe, Google reindexa em silêncio, e o gráfico do GSC continua subindo sem degrau. O trabalho não aparece, e é exatamente esse o sinal de que foi bem feito.</p>`,
+    seo_title: 'Guia de migração SEO sem perder tráfego',
+    seo_description:
+      'Plano em 5 fases com gate entre cada, T-30 a T+30. Inventário, mapeamento 1:1, staging com diff, cutover e fix loop. Os 7 erros que derrubam tráfego.',
+    keywords: [
+      'migração SEO',
+      'redirect 301 migração',
+      'Screaming Frog crawl diff',
+      'change of address GSC',
+      '410 gone vs 301',
+    ],
+  },
+
   'guia-motor-conteudo-ia-local-deepseek': {
     title:
       'Guia de motor de geração de conteúdo com IA local e DeepSeek',

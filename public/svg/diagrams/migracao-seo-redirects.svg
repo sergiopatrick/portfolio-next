@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" class="diagram diagram-redirects" role="img" aria-labelledby="dia-red-title dia-red-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-red-title">Árvore de decisão para redirects em migração SEO</title>
+  <desc id="dia-red-desc">Árvore de decisão que mapeia cada URL antiga para uma das quatro saídas possíveis, 301 para equivalente direto, 301 para página-pai quando só a estrutura muda, 301 para canônico quando há consolidação, ou 410 quando o conteúdo foi removido. Regra lateral destaca que nunca se usa 302 em migração permanente.</desc>
+
+  <defs>
+    <marker id="red-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+  </defs>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">REDIRECTS EM MIGRAÇÃO  ·  ÁRVORE DE DECISÃO POR URL</text>
+
+  <g transform="translate(380, 60)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">ENTRADA</text>
+    <text class="diagram__node-title"  x="12" y="48">URL antiga</text>
+    <text class="diagram__node-note"   x="12" y="62">vinda do inventário</text>
+  </g>
+
+  <text class="diagram__edge-label" x="480" y="150" text-anchor="middle">A página ainda existe no site novo?</text>
+
+  <g transform="translate(40, 170)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">SIM, 1:1 direto</text>
+    <text class="diagram__node-title"  x="12" y="48">301</text>
+    <text class="diagram__node-metric" x="12" y="72">pra URL equivalente</text>
+    <text class="diagram__node-note"   x="12" y="88">com canonical = destino</text>
+  </g>
+
+  <g transform="translate(260, 170)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">SIM, mas consolidada</text>
+    <text class="diagram__node-title"  x="12" y="48">301 pro canônico</text>
+    <text class="diagram__node-metric" x="12" y="72">várias URLs antigas</text>
+    <text class="diagram__node-note"   x="12" y="88">viram uma nova</text>
+  </g>
+
+  <g transform="translate(480, 170)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">SIM, só muda estrutura</text>
+    <text class="diagram__node-title"  x="12" y="48">301 pro pai</text>
+    <text class="diagram__node-metric" x="12" y="72">página-filho sumiu</text>
+    <text class="diagram__node-note"   x="12" y="88">redirect pra categoria</text>
+  </g>
+
+  <g transform="translate(700, 170)">
+    <rect class="diagram__node" x="0" y="0" width="220" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="12" y="22">NÃO, conteúdo removido</text>
+    <text class="diagram__node-title"  x="12" y="48">410 Gone</text>
+    <text class="diagram__node-metric" x="12" y="72">não redirecione pra home</text>
+    <text class="diagram__node-note"   x="12" y="88">410 limpa o índice mais rápido</text>
+  </g>
+
+  <g class="diagram__edges">
+    <line class="diagram__edge" x1="480" y1="130" x2="140" y2="170" marker-end="url(#red-arrow)"/>
+    <line class="diagram__edge" x1="480" y1="130" x2="360" y2="170" marker-end="url(#red-arrow)"/>
+    <line class="diagram__edge" x1="480" y1="130" x2="580" y2="170" marker-end="url(#red-arrow)"/>
+    <line class="diagram__edge" x1="480" y1="130" x2="810" y2="170" marker-end="url(#red-arrow)"/>
+  </g>
+
+  <g transform="translate(40, 300)">
+    <rect class="diagram__engine" x="0" y="0" width="880" height="80" rx="8"/>
+    <text class="diagram__engine-tag"   x="440" y="28" text-anchor="middle">REGRAS FIXAS</text>
+    <text class="diagram__engine-meta"  x="440" y="50" text-anchor="middle">Nunca use 302 em migração permanente  ·  Nunca redirecione 404 em massa pra home</text>
+    <text class="diagram__engine-meta"  x="440" y="68" text-anchor="middle">Evite chains (A→B→C), sempre resolva direto pro destino final  ·  Preserve parâmetros relevantes (UTM, gclid)</text>
+  </g>
+</svg>
