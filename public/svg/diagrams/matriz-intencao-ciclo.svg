@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" class="diagram diagram-matrix" role="img" aria-labelledby="dia-matrix-title dia-matrix-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-matrix-title">Matriz de decisão editorial, intenção de busca × ciclo da medicina</title>
+  <desc id="dia-matrix-desc">Matriz 3 por 5 que cruza três intenções de busca (descoberta, aprofundamento, decisão) com as cinco fases da formação médica (básico, clínico, internato, residência, pós). Cada célula indica o tipo de conteúdo e se é pilar ou satélite, dando ao time uma régua única pra decidir o que escrever.</desc>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">MATRIZ EDITORIAL  ·  INTENÇÃO × CICLO DA MEDICINA  ·  15 CÉLULAS</text>
+
+  <!-- Column headers -->
+  <g transform="translate(200, 56)">
+    <text class="diagram__node-tag" x="70"  y="0" text-anchor="middle">BÁSICO</text>
+    <text class="diagram__node-tag" x="220" y="0" text-anchor="middle">CLÍNICO</text>
+    <text class="diagram__node-tag" x="370" y="0" text-anchor="middle">INTERNATO</text>
+    <text class="diagram__node-tag" x="520" y="0" text-anchor="middle">RESIDÊNCIA</text>
+    <text class="diagram__node-tag" x="670" y="0" text-anchor="middle">PÓS</text>
+  </g>
+
+  <!-- Row 1: Descoberta -->
+  <g transform="translate(20, 80)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">INTENÇÃO</text>
+    <text class="diagram__node-title"  x="14" y="52">Descoberta</text>
+    <text class="diagram__node-note"   x="14" y="76">"o que é", "como funciona"</text>
+    <text class="diagram__node-note"   x="14" y="92">informacional, cauda longa</text>
+  </g>
+  <g transform="translate(210, 80)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">PILAR</text>
+    <text class="diagram__node-title" x="12" y="52">Didático</text>
+    <text class="diagram__node-note"  x="12" y="78">anatomia, histologia</text>
+  </g>
+  <g transform="translate(360, 80)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Semiologia</text>
+    <text class="diagram__node-note"  x="12" y="78">sinais clínicos</text>
+  </g>
+  <g transform="translate(510, 80)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Rotina</text>
+    <text class="diagram__node-note"  x="12" y="78">hospital + plantão</text>
+  </g>
+  <g transform="translate(660, 80)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Preparatório</text>
+    <text class="diagram__node-note"  x="12" y="78">como estudar</text>
+  </g>
+  <g transform="translate(810, 80)">
+    <rect class="diagram__node" x="0" y="0" width="130" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Carreira</text>
+    <text class="diagram__node-note"  x="12" y="78">panorama especialidade</text>
+  </g>
+
+  <!-- Row 2: Aprofundamento -->
+  <g transform="translate(20, 200)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">INTENÇÃO</text>
+    <text class="diagram__node-title"  x="14" y="52">Aprofundamento</text>
+    <text class="diagram__node-note"   x="14" y="76">"conduta", "manejo"</text>
+    <text class="diagram__node-note"   x="14" y="92">técnica e clínica</text>
+  </g>
+  <g transform="translate(210, 200)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Fisiopatologia</text>
+    <text class="diagram__node-note"  x="12" y="78">mecanismos</text>
+  </g>
+  <g transform="translate(360, 200)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">PILAR</text>
+    <text class="diagram__node-title" x="12" y="52">Conduta</text>
+    <text class="diagram__node-note"  x="12" y="78">diagnóstico + manejo</text>
+  </g>
+  <g transform="translate(510, 200)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">PILAR</text>
+    <text class="diagram__node-title" x="12" y="52">Procedimento</text>
+    <text class="diagram__node-note"  x="12" y="78">passo a passo</text>
+  </g>
+  <g transform="translate(660, 200)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">PILAR</text>
+    <text class="diagram__node-title" x="12" y="52">Casos clínicos</text>
+    <text class="diagram__node-note"  x="12" y="78">simulação de prova</text>
+  </g>
+  <g transform="translate(810, 200)">
+    <rect class="diagram__node" x="0" y="0" width="130" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">PILAR</text>
+    <text class="diagram__node-title" x="12" y="52">Avançado</text>
+    <text class="diagram__node-note"  x="12" y="78">protocolos atuais</text>
+  </g>
+
+  <!-- Row 3: Decisão -->
+  <g transform="translate(20, 320)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">INTENÇÃO</text>
+    <text class="diagram__node-title"  x="14" y="52">Decisão</text>
+    <text class="diagram__node-note"   x="14" y="76">"qual curso fazer"</text>
+    <text class="diagram__node-note"   x="14" y="92">comercial, funil fechando</text>
+  </g>
+  <g transform="translate(210, 320)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Orientação</text>
+    <text class="diagram__node-note"  x="12" y="78">como escolher FAC</text>
+  </g>
+  <g transform="translate(360, 320)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Revisão</text>
+    <text class="diagram__node-note"  x="12" y="78">simulados</text>
+  </g>
+  <g transform="translate(510, 320)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">SATÉLITE</text>
+    <text class="diagram__node-title" x="12" y="52">Preparatório</text>
+    <text class="diagram__node-note"  x="12" y="78">cursos pré-prova</text>
+  </g>
+  <g transform="translate(660, 320)">
+    <rect class="diagram__node" x="0" y="0" width="140" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">PILAR</text>
+    <text class="diagram__node-title" x="12" y="52">Comparativo</text>
+    <text class="diagram__node-note"  x="12" y="78">pós vs concurso</text>
+  </g>
+  <g transform="translate(810, 320)">
+    <rect class="diagram__node" x="0" y="0" width="130" height="100" rx="6"/>
+    <text class="diagram__node-tag"   x="12" y="24">PILAR</text>
+    <text class="diagram__node-title" x="12" y="52">Catálogo pós</text>
+    <text class="diagram__node-note"  x="12" y="78">match com vitrine</text>
+  </g>
+</svg>

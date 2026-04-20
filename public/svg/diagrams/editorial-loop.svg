@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" class="diagram diagram-loop" role="img" aria-labelledby="dia-loop-title dia-loop-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-loop-title">Loop editorial em cinco fases</title>
+  <desc id="dia-loop-desc">Ciclo editorial em cinco fases sequenciais que se fecha em loop. Planejamento define o que escrever, pesquisa valida e prioriza, produção escreve, publicação estrutura, análise mede e alimenta de volta o planejamento. O loop separa o sistema editorial de uma fábrica linear de posts.</desc>
+
+  <defs>
+    <marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+  </defs>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">LOOP EDITORIAL  ·  5 FASES  ·  O CICLO QUE A MAIORIA PULA</text>
+
+  <g transform="translate(25, 70)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">01</text>
+    <text class="diagram__node-title"  x="14" y="52">Planejamento</text>
+    <text class="diagram__node-metric" x="14" y="72">ano → semana</text>
+    <text class="diagram__node-note"   x="14" y="90">14 categorias tipadas</text>
+  </g>
+
+  <g transform="translate(210, 70)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">02</text>
+    <text class="diagram__node-title"  x="14" y="52">Pesquisa</text>
+    <text class="diagram__node-metric" x="14" y="72">intenção × ciclo</text>
+    <text class="diagram__node-note"   x="14" y="90">pilar vs satélite</text>
+  </g>
+
+  <g transform="translate(395, 70)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">03</text>
+    <text class="diagram__node-title"  x="14" y="52">Produção</text>
+    <text class="diagram__node-metric" x="14" y="72">expert + freela + time</text>
+    <text class="diagram__node-note"   x="14" y="90">revisão médica como gate</text>
+  </g>
+
+  <g transform="translate(580, 70)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">04</text>
+    <text class="diagram__node-title"  x="14" y="52">Publicação</text>
+    <text class="diagram__node-metric" x="14" y="72">taxonomia + schema</text>
+    <text class="diagram__node-note"   x="14" y="90">14 categorias, 80 subcat</text>
+  </g>
+
+  <g transform="translate(765, 70)">
+    <rect class="diagram__node" x="0" y="0" width="170" height="100" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">05</text>
+    <text class="diagram__node-title"  x="14" y="52">Análise</text>
+    <text class="diagram__node-metric" x="14" y="72">tech SEO top-100</text>
+    <text class="diagram__node-note"   x="14" y="90">+ keywords pg 4 → pg 1</text>
+  </g>
+
+  <g class="diagram__edges">
+    <line class="diagram__edge" x1="195" y1="120" x2="210" y2="120" marker-end="url(#loop-arrow)"/>
+    <line class="diagram__edge" x1="380" y1="120" x2="395" y2="120" marker-end="url(#loop-arrow)"/>
+    <line class="diagram__edge" x1="565" y1="120" x2="580" y2="120" marker-end="url(#loop-arrow)"/>
+    <line class="diagram__edge" x1="750" y1="120" x2="765" y2="120" marker-end="url(#loop-arrow)"/>
+  </g>
+
+  <path class="diagram__edge" d="M 850 175 C 850 235 480 260 480 240 C 480 230 110 230 110 180" fill="none" marker-end="url(#loop-arrow)"/>
+  <text class="diagram__edge-label" x="480" y="265" text-anchor="middle">o que rankeou retroalimenta o planejamento da próxima onda</text>
+</svg>

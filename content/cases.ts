@@ -3,6 +3,60 @@ import type { Case } from './types';
 const assets = '/images/cases';
 
 export const cases: Record<string, Case> = {
+  'sistema-editorial-sanarmed-1113-posts': {
+    title: 'Sistema editorial em escala no SanarMed, 1.113 posts',
+    excerpt:
+      'Sistema editorial de ponta a ponta no Sanar Medicina, 1.113 artigos publicados em dois anos com loop fechado de planejamento, pesquisa, produção, publicação e análise. Conteúdo tratado como ativo, não como entrega.',
+    category: 'SEO Técnico',
+    client_anon: 'Plataforma de educação médica B2C, #1 no Brasil',
+    sector: 'EdTech médica',
+    role: 'Lead de arquitetura editorial',
+    duration: '2024-2026',
+    stack: [
+      { item: 'WordPress' },
+      { item: 'Google Search Console' },
+      { item: 'GA4' },
+      { item: 'HubSpot' },
+      { item: 'GTM' },
+      { item: 'Claude + DeepSeek' },
+      { item: 'Notion' },
+      { item: 'Google Sheets' },
+    ],
+    featured_order: 0,
+
+    s1_context: `<p><strong>O que é:</strong> o sistema editorial que roda por trás do Blog Sanar Medicina, o canal de conteúdo da plataforma de educação médica #1 do Brasil. Entre 2024 e 2025 foram publicados 1.113 artigos (564 em 2024, 549 em 2025), dentro de um ciclo fechado de planejamento, pesquisa, produção, publicação e análise. O planejamento está desenhado até junho de 2026.</p><p>Este case descreve o racional, não só a execução. Quando a operação passa da casa dos mil artigos, produzir "mais conteúdo" vira gargalo, não alavanca. A diferença entre um blog que escala e um blog que afoga o time é ter um sistema que trata conteúdo como ativo a ser curado, otimizado e medido, e não como entrega pontual.</p>`,
+
+    s2_problem: `<p>Conteúdo médico em escala tem três dores que não aparecem no primeiro trimestre, mas afundam a operação entre o sexto e o décimo segundo mês. A primeira é <strong>rationale frágil no planejamento</strong>, pautas escolhidas no feeling, sem régua única entre intenção de busca e maturidade editorial. A segunda é <strong>qualidade inconsistente</strong> por falta de gate clínico, quando cada autor entrega no seu padrão. A terceira é <strong>nenhum ciclo de análise</strong>, o time produz, publica e parte pra próxima, sem olhar pra trás.</p><p>Quando entrei pra estruturar o sistema, a baseline era exatamente isso. ~30 posts por mês sem trilha editorial declarada, 113 palavras-chave paradas na 4ª página do Google sem plano de empurrada, e 88 dos top-100 URLs mais acessados sem checklist de tech SEO aplicado.</p>`,
+    s2_baseline:
+      'Sem sistema. ~30 posts/mês sem rationale, 113 keywords paradas na pg 4, 88 top-URLs sem tech SEO auditado, sem loop de otimização.',
+
+    s3_approach: `<p>O sistema é um loop de cinco fases. Planejamento define o que escrever, pesquisa valida e prioriza, produção escreve, publicação estrutura, análise mede. Análise retroalimenta o planejamento. Essa volta é o que separa um sistema editorial de uma fábrica linear de posts.</p>{{DIAGRAM:editorial-loop}}<p>Cada fase tem um artefato de saída e um dono claro. Sem essa disciplina, a fase seguinte herda ambiguidade da anterior e o loop trava. Com ela, o sistema corre sem reunião semanal de desentoco.</p><p>A régua de decisão editorial vem de uma matriz 3×5 que cruza intenção de busca (descoberta, aprofundamento, decisão) com o ciclo da formação médica (básico, clínico, internato, residência, pós). Toda pauta entra em uma das 15 células, e cada célula tem um padrão próprio de conteúdo (pilar ou satélite, formato, profundidade, cauda longa ou comercial).</p>{{DIAGRAM:matriz-intencao-ciclo}}<p>Pilares são páginas densas que cobrem um tema de ponta a ponta (ex.: conduta clínica, procedimento passo a passo, catálogo pós). Satélites são artigos mais específicos que atacam cauda longa e linkam pros pilares. A proporção ideal no Sanar ficou em torno de 20% pilares e 80% satélites, com pilares levando a maior parcela de autoridade de domínio.</p>`,
+
+    s4_execution: `<p>O sistema opera em quatro planos paralelos. Primeiro, planejamento em 4 níveis (ano → quadrimestre → mês → semana), com quadrimestre fechando temas macro alinhados a campanhas de matrícula, mês fechando cestas por categoria e semana fechando a ordem de publicação. O planejamento chega até junho de 2026 nesse nível de granularidade.</p><p>Segundo, produção com quatro fontes de autor trabalhando em paralelo e revisão médica como gate obrigatório antes de qualquer publicação. O gate não é negociável, nenhum artigo sai do rascunho sem a aprovação da médica revisora, que valida o técnico, adiciona o CTA comercial e assina.</p>{{DIAGRAM:fluxo-editorial}}<p>Terceiro, publicação estruturada em <strong>14 categorias editoriais tipadas</strong> (Atendimento, Procedimento, Internato, Ciclo Clínico, Carreira, entre outras) com 80 subcategorias. Taxonomia é decidida no planejamento, não no momento da publicação, e casa com o catálogo do Sanar Pós no nível do curso. Cada artigo puxa schema <code>MedicalWebPage</code> ou <code>Article</code> automaticamente via custom fields do WordPress.</p><p>Quarto, análise em duas frentes. Frente A, tech SEO aplicado aos <strong>top-100 URLs mais acessados</strong>. Cada um desses URLs passa por checklist de auditoria (title, H1, schema, canonical, CWV, internal linking) e recebe status de ajuste. No fechamento do ciclo 2024-2025, 88 dos top-100 estavam com pelo menos um ajuste aplicado. Frente B, <strong>monitoramento de posição de 113 palavras-chave</strong> paradas na 4ª página do Google, com trabalho cirúrgico de otimização (reescrita de intro, ajuste de schema, internal linking pro URL-alvo) pra empurrar cada uma pra primeira página.</p>`,
+    s4_snippets: [],
+
+    s5_results: [
+      { value: '1.113', label: 'Artigos publicados em 24 meses', context: '564 em 2024, 549 em 2025' },
+      { value: '332', label: 'Otimizações vs 228 novos posts', context: '2024, conteúdo como ativo' },
+      { value: '88 / 100', label: 'Top-URLs com tech SEO auditado', context: 'checklist aplicado' },
+      { value: '113', label: 'Keywords monitoradas pg 4 → 1', context: 'empurrada cirúrgica' },
+    ],
+    s5_results_text: `<p>Os números acima contam a história operacional. O número que conta a história comercial é a relação <strong>R$ 22 para cada R$ 1 investido</strong> medida no experimento de AdSense sobre o tráfego orgânico gerado pelo sistema, que validou o conteúdo como canal de receita e não só de brand.</p><p>Dois dados merecem destaque porque mostram o que o sistema muda no comportamento do time. Em 2024, foram 332 otimizações contra 228 posts novos. Essa inversão é o argumento-chave do case: <strong>a operação passou a tratar conteúdo como ativo gerenciado, não como entrega por volume</strong>. Artigo publicado não desaparece do radar, volta periodicamente pro ciclo de análise e recebe investimento adicional quando o rank ou o CTR pedem.</p><p>O segundo dado é o planejamento até junho de 2026 com granularidade semanal. Isso só existe porque o loop de análise alimenta o planejamento das próximas ondas com dados reais de performance, e não com chute de reunião.</p>`,
+
+    s6_reusable: `<p>O sistema é genérico por design, aplicável a qualquer vertical de conteúdo com volume mínimo que justifique o overhead. Os artefatos reutilizáveis:</p><ol><li><strong>Matriz intenção × ciclo</strong> como régua editorial. Substituir "ciclo da medicina" pelo que fizer sentido no domínio (funil de marketing, jornada de dor, estágios de seniority em tech, etc).</li><li><strong>Planejamento em 4 níveis</strong> (ano, quadrimestre, mês, semana) com artefato por nível.</li><li><strong>Gate obrigatório de revisão por especialista</strong> antes de publicação. Em domínios YMYL, não negociável.</li><li><strong>Loop de análise com duas frentes</strong>, tech SEO em cima do top-100 e empurrada cirúrgica de keywords em pg 2-4.</li><li><strong>Proporção 20/80 pilar/satélite</strong> como norte.</li></ol><p>Cinco teses que eu levo pra qualquer projeto de conteúdo depois desse:</p><ul><li><em>Alta impressão com baixo CTR é problema de título, não de conteúdo.</em></li><li><em>Conteúdo é ativo, não entrega. Otimização vale mais que post novo quando o funil já existe.</em></li><li><em>Planejamento granular é o que compra velocidade. Ad-hoc é o que cobra dela.</em></li><li><em>Revisão por especialista é feature de produto, não gargalo a eliminar.</em></li><li><em>O loop fechado é o sistema. Sem análise voltando pro planejamento, não é sistema, é fábrica.</em></li></ul><p><em>Este case é a macro-arquitetura. Três subsistemas são cases próprios, o <a href="/projetos/pipeline-editorial-ia-revisao-medica/">pipeline com IA e revisão médica</a> opera a fase de produção em escala, o <a href="/projetos/arquitetura-conteudo-scaffold-php-import/">importer PHP idempotente</a> opera o programmatic SEO de referências clínicas (Exames A-Z), e a <a href="/projetos/linkagem-semantica-embeddings-sanar/">linkagem semântica por embeddings</a> opera o internal linking que conecta o ecossistema inteiro de volta pro Sanar Pós.</em></p>`,
+
+    seo_title: 'Sistema editorial em escala no SanarMed',
+    seo_description:
+      'Arquitetura editorial de 1.113 artigos em 24 meses no Sanar. Loop em 5 fases, matriz intenção × ciclo, 88 URLs auditados e 113 keywords monitoradas.',
+    keywords: [
+      'sistema editorial escala',
+      'arquitetura de conteúdo',
+      'planejamento editorial SEO',
+      'programmatic SEO medicina',
+      'conteúdo como ativo',
+    ],
+  },
+
   'pipeline-editorial-ia-revisao-medica': {
     title: 'Pipeline editorial com IA e revisão médica',
     excerpt:

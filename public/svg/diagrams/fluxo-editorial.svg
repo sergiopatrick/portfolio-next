@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" class="diagram diagram-editflow" role="img" aria-labelledby="dia-edit-title dia-edit-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-edit-title">Fluxo editorial com papéis e revisão médica como gate</title>
+  <desc id="dia-edit-desc">Pipeline de produção de um artigo, do briefing à publicação, com o autor escolhido entre três fontes, expert médico, freela especializado ou time interno, e a revisão médica obrigatória como gate de qualidade antes de SEO e publicação.</desc>
+
+  <defs>
+    <marker id="edit-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+  </defs>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">FLUXO EDITORIAL  ·  AUTOR ESCOLHIDO  ·  REVISÃO MÉDICA COMO GATE</text>
+
+  <!-- Main lane: briefing -->
+  <g transform="translate(20, 180)">
+    <rect class="diagram__node" x="0" y="0" width="180" height="80" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">ENTRADA</text>
+    <text class="diagram__node-title"  x="14" y="52">Briefing</text>
+    <text class="diagram__node-note"   x="14" y="72">Notion ou Sheets + SEO brief</text>
+  </g>
+
+  <!-- Author lane (3 sources) -->
+  <g transform="translate(240, 60)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="22">AUTOR 01</text>
+    <text class="diagram__node-title"  x="14" y="48">Expert médico</text>
+    <text class="diagram__node-note"   x="14" y="64">especialistas convidados</text>
+  </g>
+  <g transform="translate(240, 140)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="22">AUTOR 02</text>
+    <text class="diagram__node-title"  x="14" y="48">Freela especializado</text>
+    <text class="diagram__node-note"   x="14" y="64">cauda longa e volume</text>
+  </g>
+  <g transform="translate(240, 220)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="22">AUTOR 03</text>
+    <text class="diagram__node-title"  x="14" y="48">Time interno</text>
+    <text class="diagram__node-note"   x="14" y="64">pilares e ajustes rápidos</text>
+  </g>
+  <g transform="translate(240, 300)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="22">AUTOR 04</text>
+    <text class="diagram__node-title"  x="14" y="48">Motor IA + médica</text>
+    <text class="diagram__node-note"   x="14" y="64">rascunho Claude + DeepSeek</text>
+  </g>
+
+  <!-- Gate: medical review -->
+  <g transform="translate(480, 180)">
+    <rect class="diagram__engine" x="0" y="0" width="200" height="80" rx="8"/>
+    <text class="diagram__engine-tag"   x="100" y="24" text-anchor="middle">GATE OBRIGATÓRIO</text>
+    <text class="diagram__engine-title" x="100" y="54" text-anchor="middle">Revisão médica</text>
+    <text class="diagram__engine-meta"  x="100" y="72" text-anchor="middle">E-E-A-T + CTA + imagem</text>
+  </g>
+
+  <!-- SEO + meta -->
+  <g transform="translate(720, 100)">
+    <rect class="diagram__node" x="0" y="0" width="220" height="80" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">ETAPA</text>
+    <text class="diagram__node-title"  x="14" y="52">SEO + meta</text>
+    <text class="diagram__node-note"   x="14" y="72">title, description, schema</text>
+  </g>
+
+  <!-- Publicação -->
+  <g transform="translate(720, 260)">
+    <rect class="diagram__node" x="0" y="0" width="220" height="80" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">SAÍDA</text>
+    <text class="diagram__node-title"  x="14" y="52">Publicação</text>
+    <text class="diagram__node-note"   x="14" y="72">WordPress + internal linking</text>
+  </g>
+
+  <!-- Arrows -->
+  <g class="diagram__edges">
+    <line class="diagram__edge" x1="200" y1="205" x2="240" y2="95"  marker-end="url(#edit-arrow)"/>
+    <line class="diagram__edge" x1="200" y1="220" x2="240" y2="175" marker-end="url(#edit-arrow)"/>
+    <line class="diagram__edge" x1="200" y1="235" x2="240" y2="255" marker-end="url(#edit-arrow)"/>
+    <line class="diagram__edge" x1="200" y1="245" x2="240" y2="335" marker-end="url(#edit-arrow)"/>
+
+    <line class="diagram__edge" x1="440" y1="95"  x2="480" y2="200" marker-end="url(#edit-arrow)"/>
+    <line class="diagram__edge" x1="440" y1="175" x2="480" y2="215" marker-end="url(#edit-arrow)"/>
+    <line class="diagram__edge" x1="440" y1="255" x2="480" y2="225" marker-end="url(#edit-arrow)"/>
+    <line class="diagram__edge" x1="440" y1="335" x2="480" y2="240" marker-end="url(#edit-arrow)"/>
+
+    <line class="diagram__edge" x1="680" y1="205" x2="720" y2="140" marker-end="url(#edit-arrow)"/>
+    <line class="diagram__edge" x1="680" y1="225" x2="720" y2="300" marker-end="url(#edit-arrow)"/>
+  </g>
+
+  <!-- Mix annotation footer -->
+  <text class="diagram__edge-label" x="480" y="420" text-anchor="middle">mix tipico anual, ~30% expert · ~40% freela · ~20% time interno · ~10% motor IA + revisão</text>
+</svg>
