@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 const STORAGE_KEY = 'sp-theme';
 const COPY_LABEL = 'Copy';
@@ -8,6 +9,7 @@ const COPIED_LABEL = 'Copied';
 const ERROR_LABEL = 'Error';
 
 export function ClientBehaviors() {
+  const pathname = usePathname();
   useEffect(() => {
     // Theme toggle
     const themeToggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
@@ -121,7 +123,7 @@ export function ClientBehaviors() {
       anchorHandlers.forEach(({ a, handler }) => a.removeEventListener('click', handler));
       io?.disconnect();
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
