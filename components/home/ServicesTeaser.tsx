@@ -14,7 +14,7 @@ export function ServicesTeaser() {
               Três eixos de trabalho, todos com código no centro.
             </h2>
           </div>
-          <Link href="/services/" className="btn btn--link">
+          <Link href="/servicos/" className="btn btn--link">
             Ver os 3 eixos em detalhe{' '}
             <span className="btn__arrow" aria-hidden="true">
               →
@@ -24,7 +24,7 @@ export function ServicesTeaser() {
 
         <div className="services__grid">
           {entries.map(([slug, svc]) => {
-            const url = `/services/${slug}/`;
+            const url = `/servicos/${slug}/`;
             const deliverablesSample = svc.deliverables.slice(0, 4).join(', ');
             return (
               <article className="service reveal" key={slug}>

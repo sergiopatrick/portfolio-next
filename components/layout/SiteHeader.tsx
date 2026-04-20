@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { SvgIcon } from '@/components/ui/SvgIcon';
 
 const NAV_ITEMS = [
-  { label: 'Work', href: '/work/' },
-  { label: 'Services', href: '/services/' },
-  { label: 'About', href: '/about/' },
-  { label: 'Contact', href: '/contact/' },
+  { label: 'Projetos', href: '/projetos/' },
+  { label: 'Serviços', href: '/servicos/' },
+  { label: 'Sobre', href: '/sobre/' },
+  { label: 'Contato', href: '/contato/' },
 ];
 
 export function SiteHeader() {

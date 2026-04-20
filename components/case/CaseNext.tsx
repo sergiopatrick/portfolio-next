@@ -12,10 +12,10 @@ export function CaseNext({ currentSlug }: Props) {
   if (!prev && !next) return null;
 
   return (
-    <nav className="container case-next" aria-label="Navegação entre cases">
+    <nav className="container case-next" aria-label="Navegação entre projetos">
       {prev ? (
-        <Link href={`/work/${prev.slug}/`} className="case-next__link">
-          <div className="case-next__label">← Case anterior</div>
+        <Link href={`/projetos/${prev.slug}/`} className="case-next__link">
+          <div className="case-next__label">← Projeto anterior</div>
           <div className="case-next__title">{prev.data.title}</div>
         </Link>
       ) : (
@@ -24,11 +24,11 @@ export function CaseNext({ currentSlug }: Props) {
 
       {next ? (
         <Link
-          href={`/work/${next.slug}/`}
+          href={`/projetos/${next.slug}/`}
           className="case-next__link"
           style={{ textAlign: 'right' }}
         >
-          <div className="case-next__label">Próximo case →</div>
+          <div className="case-next__label">Próximo projeto →</div>
           <div className="case-next__title">{next.data.title}</div>
         </Link>
       ) : (

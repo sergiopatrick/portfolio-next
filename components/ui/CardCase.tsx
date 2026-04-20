@@ -15,7 +15,7 @@ export function CardCase({ slug, data, as = 'h3' }: Props) {
       itemScope
       itemType="https://schema.org/Article"
     >
-      <Link href={`/work/${slug}/`} className="card-case__link" itemProp="url">
+      <Link href={`/projetos/${slug}/`} className="card-case__link" itemProp="url">
         <div className="card-case__meta">
           {data.sector && (
             <span className="tag" itemProp="articleSection">

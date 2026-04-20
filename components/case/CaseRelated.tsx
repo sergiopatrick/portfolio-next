@@ -27,9 +27,9 @@ export function CaseRelated({ currentSlug }: Props) {
   return (
     <section className="case-related" aria-labelledby="case-related-title">
       <div className="container">
-        <p className="section__kicker">Cases relacionados</p>
+        <p className="section__kicker">Projetos relacionados</p>
         <h2 id="case-related-title" className="section__title">
-          Mais cases na mesma área
+          Mais projetos na mesma área
         </h2>
 
         <div className="selected-work__grid">

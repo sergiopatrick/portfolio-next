@@ -31,7 +31,7 @@ export function ContactCta() {
               →
             </span>
           </a>
-          <Link href="/contact/" className="btn btn--link">
+          <Link href="/contato/" className="btn btn--link">
             Ou pelo formulário
             <span className="btn__arrow" aria-hidden="true">
               →

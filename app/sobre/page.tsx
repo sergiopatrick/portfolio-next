@@ -8,7 +8,7 @@ export const metadata: Metadata = buildMetadata({
   title: 'Sobre, Sérgio Patrick, Front-end developer com SEO técnico',
   description:
     "Front-end developer com 9 anos em empresas globais. Trajetória VTEX, L'Oreal, Unilever, Cora, Inter, QConcursos, Gupy. Base em Salvador (BA), PT-BR nativo, inglês fluente.",
-  path: '/about/',
+  path: '/sobre/',
 });
 
 export default function AboutPage() {
@@ -18,7 +18,7 @@ export default function AboutPage() {
 
       <section className="page-hero">
         <div className="container">
-          <p className="section__kicker">About</p>
+          <p className="section__kicker">Sobre</p>
           <h1 className="page-hero__title">
             Front-end com SEO técnico e LLM no sangue.
           </h1>
@@ -91,7 +91,7 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="container">
-          <Link href="/contact/" className="btn btn--primary">
+          <Link href="/contato/" className="btn btn--primary">
             Trabalhar juntos
             <span className="btn__arrow" aria-hidden="true">
               →

@@ -32,13 +32,13 @@ After edit, re-run `npm run dev` (or Vercel will rebuild automatically on push).
 app/
   layout.tsx                 root layout + header/footer
   page.tsx                   home (/)
-  about/page.tsx
-  contact/page.tsx
-  services/page.tsx          hub
-  services/[slug]/page.tsx   3 axis details
-  work/page.tsx              archive
-  work/[slug]/page.tsx       single case
-  work/category/[slug]/page.tsx
+  sobre/page.tsx
+  contato/page.tsx
+  servicos/page.tsx          hub
+  servicos/[slug]/page.tsx   3 axis details
+  projetos/page.tsx          archive
+  projetos/[slug]/page.tsx   single case
+  projetos/categoria/[slug]/page.tsx
   api/contact/route.ts       form handler (Resend)
   sitemap.ts
   robots.ts

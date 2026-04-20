@@ -26,13 +26,13 @@ export function SiteFooter() {
             <h3>Navegar</h3>
             <ul>
               <li>
-                <Link href="/work/">Work</Link>
+                <Link href="/projetos/">Projetos</Link>
               </li>
               <li>
-                <Link href="/about/">About</Link>
+                <Link href="/sobre/">Sobre</Link>
               </li>
               <li>
-                <Link href="/contact/">Contact</Link>
+                <Link href="/contato/">Contato</Link>
               </li>
             </ul>
           </div>

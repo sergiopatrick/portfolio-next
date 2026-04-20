@@ -194,7 +194,7 @@ export function articleSchema(slug: string): object {
   const wordCount = proseFields.replace(/<[^>]*>/g, ' ').trim().split(/\s+/).length;
 
   const stackNames = c.stack.map((s) => s.item).filter(Boolean);
-  const permalink = absoluteUrl(`/work/${slug}/`);
+  const permalink = absoluteUrl(`/projetos/${slug}/`);
 
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -226,10 +226,10 @@ export function collectionPageSchema(): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    url: absoluteUrl('/work/'),
-    name: 'Cases',
+    url: absoluteUrl('/projetos/'),
+    name: 'Projetos',
     description:
-      'Cases de front-end, SEO técnico e automação com LLM.',
+      'Projetos de front-end, SEO técnico e automação com LLM.',
   };
 }
 
@@ -237,7 +237,7 @@ export function workItemListSchema(): object {
   const items = allCasesSortedByFeature().map((c, i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    url: absoluteUrl(`/work/${c.slug}/`),
+    url: absoluteUrl(`/projetos/${c.slug}/`),
     name: c.data.title,
   }));
   return {
@@ -253,10 +253,10 @@ export function serviceSchema(slug: string): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': absoluteUrl(`/services/${slug}/#service`),
+    '@id': absoluteUrl(`/servicos/${slug}/#service`),
     name: s.title,
     description: s.excerpt,
-    url: absoluteUrl(`/services/${slug}/`),
+    url: absoluteUrl(`/servicos/${slug}/`),
     serviceType: s.short_title,
     provider: { '@id': absoluteUrl('/#person') },
     areaServed: { '@type': 'Country', name: 'Brasil' },
@@ -287,7 +287,7 @@ export function servicesHubItemList(): object {
   const items = Object.entries(services).map(([slug, s], i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    url: absoluteUrl(`/services/${slug}/`),
+    url: absoluteUrl(`/servicos/${slug}/`),
     name: s.title,
   }));
   return {
@@ -301,7 +301,7 @@ export function contactPageSchema(): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    url: absoluteUrl('/contact/'),
+    url: absoluteUrl('/contato/'),
     name: 'Contato',
     mainEntity: { '@id': absoluteUrl('/#person') },
   };
@@ -311,7 +311,7 @@ export function aboutPageSchema(): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    url: absoluteUrl('/about/'),
+    url: absoluteUrl('/sobre/'),
     name: 'Sobre',
     mainEntity: { '@id': absoluteUrl('/#person') },
   };

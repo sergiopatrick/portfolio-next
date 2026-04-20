@@ -29,7 +29,7 @@ export function CaseMeta({ data }: Props) {
             <div>
               <div className="case-meta__label">Categoria</div>
               <div className="case-meta__value">
-                <Link href={`/work/category/${catSlug}/`} className="case-meta__link">
+                <Link href={`/projetos/categoria/${catSlug}/`} className="case-meta__link">
                   {data.category}
                 </Link>
               </div>

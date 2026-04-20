@@ -29,11 +29,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const name = categoryNameFromSlug(slug);
-  if (!name) return buildMetadata({ title: 'Categoria', description: '', path: '/work/' });
+  if (!name) return buildMetadata({ title: 'Categoria', description: '', path: '/projetos/' });
   return buildMetadata({
-    title: `Cases em ${name}, Sérgio Patrick`,
-    description: `Cases categorizados como ${name}. Problemas e soluções reais com código e métricas.`,
-    path: `/work/category/${slug}/`,
+    title: `Projetos em ${name}, Sérgio Patrick`,
+    description: `Projetos categorizados como ${name}. Problemas e soluções reais com código e métricas.`,
+    path: `/projetos/categoria/${slug}/`,
   });
 }
 
@@ -49,9 +49,9 @@ export default async function CategoryPage({
   const items = casesByCategorySlug(slug);
 
   const crumbs = [
-    { label: 'Home', url: absoluteUrl('/') },
-    { label: 'Work', url: absoluteUrl('/work/') },
-    { label: name, url: absoluteUrl(`/work/category/${slug}/`) },
+    { label: 'Início', url: absoluteUrl('/') },
+    { label: 'Projetos', url: absoluteUrl('/projetos/') },
+    { label: name, url: absoluteUrl(`/projetos/categoria/${slug}/`) },
   ];
 
   return (
@@ -61,14 +61,14 @@ export default async function CategoryPage({
       <section className="archive-head">
         <div className="container">
           <nav className="case-hero__breadcrumbs" aria-label="Breadcrumbs">
-            <Link href="/">Home</Link>
-            <Link href="/work/">Work</Link>
+            <Link href="/">Início</Link>
+            <Link href="/projetos/">Projetos</Link>
             <span>{name}</span>
           </nav>
           <p className="section__kicker">Categoria</p>
-          <h1 className="archive-head__title">Cases em {name}</h1>
+          <h1 className="archive-head__title">Projetos em {name}</h1>
           <p className="archive-head__sub">
-            Cases categorizados como <strong>{name}</strong>, mesma disciplina
+            Projetos categorizados como <strong>{name}</strong>, mesma disciplina
             técnica, problemas diferentes.
           </p>
         </div>
@@ -83,7 +83,7 @@ export default async function CategoryPage({
               ))}
             </div>
           ) : (
-            <p className="text-muted">Nenhum case nesta categoria.</p>
+            <p className="text-muted">Nenhum projeto nesta categoria.</p>
           )}
 
           <div
@@ -93,8 +93,8 @@ export default async function CategoryPage({
               borderTop: '1px solid var(--color-border)',
             }}
           >
-            <Link href="/work/" className="btn btn--link">
-              Ver todos os cases{' '}
+            <Link href="/projetos/" className="btn btn--link">
+              Ver todos os projetos{' '}
               <span className="btn__arrow" aria-hidden="true">
                 →
               </span>

@@ -35,7 +35,7 @@ export async function generateMetadata({
     title: s.seo_title,
     description: s.seo_description,
     keywords: s.keywords,
-    path: `/services/${slug}/`,
+    path: `/servicos/${slug}/`,
   });
 }
 
@@ -50,9 +50,9 @@ export default async function ServiceDetailPage({
 
   const wa = whatsappUrl('cta');
   const breadcrumbs = [
-    { label: 'Home', url: absoluteUrl('/') },
-    { label: 'Services', url: absoluteUrl('/services/') },
-    { label: service.short_title, url: absoluteUrl(`/services/${slug}/`) },
+    { label: 'Início', url: absoluteUrl('/') },
+    { label: 'Serviços', url: absoluteUrl('/servicos/') },
+    { label: service.short_title, url: absoluteUrl(`/servicos/${slug}/`) },
   ];
 
   const relatedPosts = service.related_case_slugs
@@ -72,8 +72,8 @@ export default async function ServiceDetailPage({
       <section className="service-hero">
         <div className="container">
           <nav className="case-hero__breadcrumbs" aria-label="Breadcrumbs">
-            <Link href="/">Home</Link>
-            <Link href="/services/">Services</Link>
+            <Link href="/">Início</Link>
+            <Link href="/servicos/">Serviços</Link>
             <span>{service.short_title}</span>
           </nav>
 
@@ -89,8 +89,8 @@ export default async function ServiceDetailPage({
                 Chamar no WhatsApp sobre isso
               </a>
             )}
-            <Link href="/work/" className="btn btn--secondary">
-              Ver cases relacionados
+            <Link href="/projetos/" className="btn btn--secondary">
+              Ver projetos relacionados
               <span className="btn__arrow" aria-hidden="true">
                 →
               </span>
@@ -132,7 +132,7 @@ export default async function ServiceDetailPage({
 
           <div className="combined-grid">
             {service.problems_combined.map((c, i) => {
-              const targetUrl = c.axis_slug ? `/services/${c.axis_slug}/` : '';
+              const targetUrl = c.axis_slug ? `/servicos/${c.axis_slug}/` : '';
               return (
                 <article className="combined" key={i}>
                   <div className="combined__tag">Junto com</div>
@@ -187,7 +187,7 @@ export default async function ServiceDetailPage({
       {relatedPosts.length > 0 && (
         <section className="service-cases">
           <div className="container">
-            <p className="section__kicker">Cases deste eixo</p>
+            <p className="section__kicker">Projetos deste eixo</p>
             <h2 className="section__title">
               Exemplos reais que passaram pelo meu teclado
             </h2>

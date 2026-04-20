@@ -8,8 +8,8 @@ export function CaseHero({ data }: Props) {
     <section className="case-hero">
       <div className="container">
         <nav className="case-hero__breadcrumbs" aria-label="Breadcrumbs">
-          <Link href="/">Home</Link>
-          <Link href="/work/">Work</Link>
+          <Link href="/">Início</Link>
+          <Link href="/projetos/">Projetos</Link>
           <span>{data.title}</span>
         </nav>
 

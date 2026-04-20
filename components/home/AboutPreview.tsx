@@ -11,7 +11,7 @@ export function AboutPreview() {
         </div>
         <div>
           <p className="about-preview__text">{siteOptions.about_preview}</p>
-          <Link href="/about/" className="btn btn--link">
+          <Link href="/sobre/" className="btn btn--link">
             Ver perfil completo e trajetória{' '}
             <span className="btn__arrow" aria-hidden="true">
               →

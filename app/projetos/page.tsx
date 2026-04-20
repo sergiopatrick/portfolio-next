@@ -10,10 +10,10 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Cases, Front-end, SEO técnico e automação com LLM, Sérgio Patrick',
+  title: 'Projetos, Front-end, SEO técnico e automação com LLM, Sérgio Patrick',
   description:
-    'Cases de front-end, SEO técnico e automação com LLM, com código real, snippets, métricas atribuíveis e links pros artefatos em produção.',
-  path: '/work/',
+    'Projetos de front-end, SEO técnico e automação com LLM, com código real, snippets, métricas atribuíveis e links pros artefatos em produção.',
+  path: '/projetos/',
 });
 
 export default function WorkArchivePage() {
@@ -25,15 +25,15 @@ export default function WorkArchivePage() {
       <section className="archive-head">
         <div className="container">
           <nav className="case-hero__breadcrumbs" aria-label="Breadcrumbs">
-            <Link href="/">Home</Link>
-            <span>Work</span>
+            <Link href="/">Início</Link>
+            <span>Projetos</span>
           </nav>
-          <p className="section__kicker">Work</p>
+          <p className="section__kicker">Projetos</p>
           <h1 className="archive-head__title">
-            Cases com código real e métricas atribuíveis.
+            Projetos com código real e métricas atribuíveis.
           </h1>
           <p className="archive-head__sub">
-            Cada case aqui traz o que o time via, o que mudou no código, e o ganho
+            Cada projeto aqui traz o que o time via, o que mudou no código, e o ganho
             medido em produção. Clientes anonimizados quando necessário.
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function WorkArchivePage() {
               ))}
             </div>
           ) : (
-            <p className="text-muted">Nenhum case publicado ainda.</p>
+            <p className="text-muted">Nenhum projeto publicado ainda.</p>
           )}
         </div>
       </section>

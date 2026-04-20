@@ -4,13 +4,13 @@ export const siteOptions: SiteOptions = {
   hero_title: 'Front-end development com profundidade em SEO técnico.',
   hero_subtitle:
     "9 anos construindo interfaces performáticas, temas e plugins WordPress customizados, e estratégias de SEO técnico para Unilever, L'Oreal, VTEX, Inter, Cora e QConcursos. Atualmente como Tech and SEO Specialist na Gupy.",
-  hero_cta_label: 'Ver cases',
+  hero_cta_label: 'Ver projetos',
   hero_cta_url: '#selected-work',
 
   home_seo_title:
     'Sérgio Patrick, Front-end developer com profundidade em SEO técnico',
   home_seo_description:
-    'Front-end developer com 9 anos em WordPress custom, Core Web Vitals, SEO técnico e automação com LLM. Cases com código real e métricas: Unilever, VTEX, Inter, Cora, Gupy, SanarMed.',
+    'Front-end developer com 9 anos em WordPress custom, Core Web Vitals, SEO técnico e automação com LLM. Projetos com código real e métricas: Unilever, VTEX, Inter, Cora, Gupy, SanarMed.',
   home_keywords: [
     'front-end developer Brasil',
     'WordPress developer',

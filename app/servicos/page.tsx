@@ -9,7 +9,7 @@ export const metadata: Metadata = buildMetadata({
   title: 'Serviços, 3 eixos de trabalho com código no centro, Sérgio Patrick',
   description:
     'Três eixos de trabalho, Front-end e performance, SEO técnico e AEO, Automação com LLM. Problemas que resolvo sozinho e combinando os eixos. Para devs, SEOs e PMs que precisam de execução real.',
-  path: '/services/',
+  path: '/servicos/',
 });
 
 export default function ServicesHubPage() {
@@ -21,10 +21,10 @@ export default function ServicesHubPage() {
       <section className="page-hero">
         <div className="container">
           <nav className="case-hero__breadcrumbs" aria-label="Breadcrumbs">
-            <Link href="/">Home</Link>
-            <span>Services</span>
+            <Link href="/">Início</Link>
+            <span>Serviços</span>
           </nav>
-          <p className="section__kicker">Services</p>
+          <p className="section__kicker">Serviços</p>
           <h1 className="page-hero__title">
             Três eixos de trabalho, todos com código no centro.
           </h1>
@@ -40,7 +40,7 @@ export default function ServicesHubPage() {
         <div className="container">
           <div className="services__grid services__grid--hub">
             {Object.entries(services).map(([slug, svc]) => {
-              const url = `/services/${slug}/`;
+              const url = `/servicos/${slug}/`;
               return (
                 <article className="service service--hub" key={slug}>
                   <div className="service__num">{svc.number}</div>

@@ -28,12 +28,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const c = cases[slug];
-  if (!c) return buildMetadata({ title: 'Case', description: '', path: '/work/' });
+  if (!c) return buildMetadata({ title: 'Projeto', description: '', path: '/projetos/' });
   return buildMetadata({
     title: c.seo_title || c.title,
     description: c.seo_description || c.excerpt,
     keywords: c.keywords,
-    path: `/work/${slug}/`,
+    path: `/projetos/${slug}/`,
     ogType: 'article',
   });
 }
@@ -48,9 +48,9 @@ export default async function CasePage({
   if (!data) notFound();
 
   const crumbs = [
-    { label: 'Home', url: absoluteUrl('/') },
-    { label: 'Work', url: absoluteUrl('/work/') },
-    { label: data.title, url: absoluteUrl(`/work/${slug}/`) },
+    { label: 'Início', url: absoluteUrl('/') },
+    { label: 'Projetos', url: absoluteUrl('/projetos/') },
+    { label: data.title, url: absoluteUrl(`/projetos/${slug}/`) },
   ];
 
   const sections = [

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   const referer = req.headers.get('referer');
   const origin = req.nextUrl.origin;
-  const backPath = referer ? new URL(referer).pathname : '/contact/';
+  const backPath = referer ? new URL(referer).pathname : '/contato/';
 
   // Honeypot, real users leave it empty
   if ((form.get('sp_website') as string)?.length) {

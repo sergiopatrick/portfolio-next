@@ -9,19 +9,19 @@ export default function NotFound() {
           Rota inexistente, mas o portfolio continua no ar.
         </h1>
         <p className="error-404__sub">
-          O link que você seguiu não existe ou foi renomeado. Tente abrir um case ou
-          voltar ao início.
+          O link que você seguiu não existe ou foi renomeado. Tente abrir um projeto
+          ou voltar ao início.
         </p>
 
         <div className="contact-cta__actions">
           <Link href="/" className="btn btn--primary">
-            Voltar para home
+            Voltar para o início
             <span className="btn__arrow" aria-hidden="true">
               →
             </span>
           </Link>
-          <Link href="/work/" className="btn btn--secondary">
-            Ver cases
+          <Link href="/projetos/" className="btn btn--secondary">
+            Ver projetos
             <span className="btn__arrow" aria-hidden="true">
               →
             </span>

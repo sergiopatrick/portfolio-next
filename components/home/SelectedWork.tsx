@@ -9,13 +9,13 @@ export function SelectedWork() {
       <div className="container">
         <div className="selected-work__header">
           <div>
-            <p className="section__kicker">Selected work</p>
+            <p className="section__kicker">Projetos selecionados</p>
             <h2 className="section__title">
-              Código real. Impacto mensurável. Cases com snippets.
+              Código real. Impacto mensurável. Projetos com snippets.
             </h2>
           </div>
-          <Link href="/work/" className="btn btn--link">
-            Ver todos os cases{' '}
+          <Link href="/projetos/" className="btn btn--link">
+            Ver todos os projetos{' '}
             <span className="btn__arrow" aria-hidden="true">
               →
             </span>
@@ -29,7 +29,7 @@ export function SelectedWork() {
             ))}
           </div>
         ) : (
-          <p className="text-muted">Nenhum case publicado ainda.</p>
+          <p className="text-muted">Nenhum projeto publicado ainda.</p>
         )}
       </div>
     </section>
