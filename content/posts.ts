@@ -48,10 +48,9 @@ export const posts: Record<string, Post> = {
 <p>Auditoria cross-pixel precisa entrar no checklist de QA sempre que uma tag nova sobe. Não é paranoia; é higiene.</p>
 
 <p><em>Projeto relacionado: <a href="/projetos/fix-pixel-x-google-ads-shopify/">Fix de colisão de pixel Twitter/X vs Google Ads em Shopify</a></em>.</p>`,
-    seo_title:
-      'Google Ads perdendo atribuição por causa do Pixel do X, auditoria em 5min',
+    seo_title: 'Google Ads perde atribuição com o Pixel do X',
     seo_description:
-      'O pixel do X reescreve a URL via history.replaceState e engole UTM e gclid. Como detectar o conflito em 5 minutos sem abrir DevTools e o guard script que resolve.',
+      'O pixel do X reescreve a URL via history.replaceState e engole UTM e gclid. Como auditar em 5 minutos e o guard script que resolve o conflito.',
     keywords: [
       'pixel do X sobrescrevendo UTM',
       'Google Ads perdendo atribuição',
@@ -115,10 +114,9 @@ export const posts: Record<string, Post> = {
 <p>No engine que rodo pro Sanar, o resultado final mistura: 1 CID, 1 Exame, 1 Ferramenta, 1 Curso. Quatro vizinhos, cada um de uma propriedade diferente. Isso é o que faz o usuário sair da leitura com quatro páginas vistas em vez de uma.</p>
 
 <p><em>Projeto relacionado: <a href="/projetos/linkagem-semantica-embeddings-sanar/">Linkagem semântica por embeddings em 5 propriedades Sanar</a></em>.</p>`,
-    seo_title:
-      'Internal linking semântico sem plugin, decidindo por volume de conteúdo',
+    seo_title: 'Internal linking semântico sem plugin',
     seo_description:
-      'Quatro degraus de linkagem interna, do plugin de related ao pgvector. Framework de decisão por volume de posts e o que ninguém fala sobre embeddings.',
+      'Quatro degraus de linkagem interna, do plugin de related ao pgvector. Framework de decisão por volume e o que ninguém fala sobre embeddings.',
     keywords: [
       'internal linking semântico',
       'pgvector related posts',
@@ -179,10 +177,9 @@ export const posts: Record<string, Post> = {
 <p>Esse número só fez sentido porque o revisor ficou no loop. Sem revisor, seria 70% preferindo o pipeline e 100% do SEO desmoronando em 3 meses.</p>
 
 <p><em>Projeto relacionado: <a href="/projetos/pipeline-editorial-ia-revisao-medica/">Pipeline editorial com IA e revisão médica</a></em>.</p>`,
-    seo_title:
-      'Pipeline editorial com IA sem virar spam, revisão humana como feature',
+    seo_title: 'Pipeline editorial com IA sem virar spam',
     seo_description:
-      'Geração de conteúdo com Claude e DeepSeek + revisão médica obrigatória. Por que o revisor humano é feature de produto, não gargalo a ser eliminado.',
+      'Claude e DeepSeek com revisão médica obrigatória. Por que o revisor humano é feature de produto, não gargalo a ser eliminado.',
     keywords: [
       'geração de conteúdo com IA',
       'pipeline editorial com LLM',
@@ -252,10 +249,9 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
 <p>Antes de considerar qualquer importer "pronto", rode ele duas vezes seguidas e compare o estado do banco. Se o diff for diferente de zero, ele não é idempotente. Se for zero, você acabou de eliminar metade dos bugs de produção que teria daqui a 3 meses.</p>
 
 <p><em>Projetos relacionados: <a href="/projetos/arquitetura-conteudo-scaffold-php-import/">Arquitetura de conteúdo e scaffold PHP para import em escala</a> e <a href="/projetos/plugin-wordpress-fix-timezone-utc/">Plugin WordPress com fix de timezone (UTC)</a></em>.</p>`,
-    seo_title:
-      'Importer idempotente em PHP, hash como checksum pra rodar N vezes',
+    seo_title: 'Importer idempotente em PHP, rodar N vezes',
     seo_description:
-      'Três estratégias pra tornar um importer idempotente em PHP (chave natural, hash de linha, log auditável) e por que isso elimina metade dos bugs de produção.',
+      'Três estratégias pra tornar um importer idempotente (chave natural, hash de linha, log auditável) e como eliminar metade dos bugs de produção.',
     keywords: [
       'importer idempotente PHP',
       'hash checksum importação',
@@ -317,9 +313,9 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
 <p>A razão pela qual isso não é senso comum é simples, que é a indústria de plugins de cache ganha vendendo o atalho. O atalho funciona até a primeira falha de cache, e aí o problema volta, só que mais difícil de debugar porque agora tem uma camada a mais no caminho.</p>
 
 <p>Performance em WordPress não exige framework novo nem stack exótica. Exige disciplina com o que o core do WP já oferece e auditoria do que o tema e os plugins estão empilhando no caminho. O resto é cache camuflando sintoma.</p>`,
-    seo_title: 'Core Web Vitals verdes em WordPress sem plugin de cache',
+    seo_title: 'Core Web Vitals verdes em WordPress',
     seo_description:
-      'Cinco intervenções em ordem de ROI que fazem LCP, INP e CLS ficarem verdes em WordPress sem depender de plugin de cache, com budget de imagem, critical CSS e JS deferido.',
+      'Cinco intervenções em ordem de ROI pra LCP, INP e CLS verdes em WordPress sem plugin de cache, com budget de imagem, critical CSS e JS deferido.',
     keywords: [
       'Core Web Vitals WordPress',
       'LCP sem plugin de cache',

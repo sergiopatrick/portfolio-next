@@ -7,10 +7,9 @@ export const siteOptions: SiteOptions = {
   hero_cta_label: 'Ver projetos',
   hero_cta_url: '#selected-work',
 
-  home_seo_title:
-    'Sérgio Patrick, Front-end developer com profundidade em SEO técnico',
+  home_seo_title: 'Sérgio Patrick, front-end developer e SEO técnico',
   home_seo_description:
-    'Front-end developer com 9 anos em WordPress custom, Core Web Vitals, SEO técnico e automação com LLM. Projetos com código real e métricas: Unilever, VTEX, Inter, Cora, Gupy, SanarMed.',
+    'Front-end developer com 9 anos em WordPress custom, Core Web Vitals, SEO técnico e automação com LLM. Unilever, VTEX, Inter, Cora, Gupy, Sanar.',
   home_keywords: [
     'front-end developer Brasil',
     'WordPress developer',
@@ -229,10 +228,9 @@ export const services: Record<string, Service> = {
         a: 'Refactor incremental quase sempre vale mais que rewrite. Começo pela página de maior tráfego ou maior conversão, otimizo, meço, repito. Rewrite completo só faz sentido quando o código atual não tem como ser consertado sem custo maior que recomeçar.',
       },
     ],
-    seo_title:
-      'Front-end development e performance, WordPress custom, CWV, vanilla',
+    seo_title: 'Front-end e performance em WordPress',
     seo_description:
-      'Desenvolvedor front-end com 9 anos em WordPress custom, Core Web Vitals, JavaScript vanilla e design systems escaláveis. Refactor, otimização e builds from scratch.',
+      'Front-end com WordPress custom, Core Web Vitals, JavaScript vanilla e design systems escaláveis. Refactor, otimização e builds from scratch.',
     keywords: [
       'front-end developer WordPress',
       'Core Web Vitals',
@@ -341,9 +339,9 @@ export const services: Record<string, Service> = {
         a: 'Faço arquitetura e sistema de briefing (o que escrever, estrutura da página, semântica, linkagem). A redação fica com o time editorial do cliente, ou entra no eixo 03 (automação com LLM + revisão humana), se fizer sentido pro volume.',
       },
     ],
-    seo_title: 'SEO técnico e AEO, Core Web Vitals, schema, AI Overviews',
+    seo_title: 'SEO técnico e AEO com Core Web Vitals',
     seo_description:
-      'SEO técnico feito por dev: audit, arquitetura de conteúdo, schema markup, migração e AEO (otimização para AI Overviews, ChatGPT, Claude, Gemini).',
+      'SEO técnico feito por dev, audit, arquitetura, schema, migração e AEO pra AI Overviews, ChatGPT, Claude e Gemini extraírem resposta.',
     keywords: [
       'SEO técnico',
       'AEO',
@@ -450,10 +448,9 @@ export const services: Record<string, Service> = {
         a: 'Revisão humana como etapa obrigatória no workflow, não opcional. No case da plataforma de educação médica, a física médica revisora aprova cada artigo antes de publicar, sem aprovação, o post status custom bloqueia publicação. Em domínios regulados, LLM acelera produção mas não substitui accountability profissional.',
       },
     ],
-    seo_title:
-      'Automação com LLM e integrações martech, pipelines Claude/DeepSeek',
+    seo_title: 'Automação com LLM e integrações martech',
     seo_description:
-      'Pipelines editoriais com Claude e DeepSeek APIs, revisão humana no loop, arquitetura martech completa (tracking, UTM governance, integrações HubSpot/GA4).',
+      'Pipelines editoriais com Claude e DeepSeek, revisão humana no loop, tracking, UTM governance e integrações HubSpot/GA4.',
     keywords: [
       'automação com LLM',
       'Claude API WordPress',

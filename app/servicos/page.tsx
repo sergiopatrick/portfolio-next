@@ -6,9 +6,9 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { buildMetadata, servicesHubItemList } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Serviços, 3 eixos de trabalho com código no centro, Sérgio Patrick',
+  title: 'Serviços, três eixos com código no centro',
   description:
-    'Três eixos de trabalho, Front-end e performance, SEO técnico e AEO, Automação com LLM. Problemas que resolvo sozinho e combinando os eixos. Para devs, SEOs e PMs que precisam de execução real.',
+    'Front-end e performance, SEO técnico e AEO, automação com LLM. Três eixos com código no centro, combinados ou solo conforme o projeto.',
   path: '/servicos/',
 });
 

@@ -12,7 +12,7 @@ import { buildMetadata, personSchema, professionalServiceSchema } from '@/lib/se
 import { siteOptions } from '@/content/site';
 
 export const metadata: Metadata = buildMetadata({
-  title: siteOptions.home_seo_title,
+  title: { absolute: siteOptions.home_seo_title },
   description: siteOptions.home_seo_description,
   path: '/',
   keywords: siteOptions.home_keywords,

@@ -39,8 +39,8 @@ type Case = {
   s5_results_text: string;   // HTML. Narrativa dos resultados + evidência (links, figures)
   s6_reusable: string;       // HTML. Artefatos reutilizáveis + cross-ref a outros cases
 
-  seo_title: string;         // ≤ 65 chars, padrão "<mecanismo>: <benefício|métrica>"
-  seo_description: string;   // ≤ 160 chars, mecanismo + benefício + número
+  seo_title: string;         // ≤ 44 chars (o template adiciona ", Sérgio Patrick"), sem ":" e sem "—"
+  seo_description: string;   // 120-155 chars, mecanismo + benefício + número
   keywords: string[];        // 4-6, substantivas, sem stuffing
 };
 
@@ -83,7 +83,7 @@ type ResultMetric = {
 5. Proponha o `slug` do case em kebab-case, que vira a chave em `cases` e a URL `/projetos/<slug>/`.
 6. Proponha `category` (exatamente uma das 5) e `featured_order` (pergunte ao humano se não souber).
 7. Redija cada campo seguindo as regras de voz acima.
-8. Valide: `seo_title` ≤ 65 chars, `seo_description` ≤ 160 chars, keywords sem duplicata, HTML fechado corretamente.
+8. Valide: `seo_title` ≤ 44 chars (com template fica ≤ 60), `seo_description` 120-155 chars, sem `:` nem `—`, keywords sem duplicata, HTML fechado corretamente.
 
 ## Formato de saída
 

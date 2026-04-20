@@ -14,7 +14,10 @@ import {
 const OG_DEFAULT = '/images/og-default.jpg';
 
 type BuildArgs = {
-  title: string;
+  // Pass a string to get ", Sérgio Patrick" appended via the layout template.
+  // Pass { absolute } for pages (like the home) where the brand is already in
+  // the title and the template would duplicate it.
+  title: string | { absolute: string };
   description: string;
   path: string;
   ogImage?: string;
@@ -34,6 +37,7 @@ export function buildMetadata({
 }: BuildArgs): Metadata {
   const url = absoluteUrl(path);
   const image = ogImage ? absoluteUrl(ogImage) : absoluteUrl(OG_DEFAULT);
+  const ogTitle = typeof title === 'string' ? title : title.absolute;
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -48,7 +52,7 @@ export function buildMetadata({
     openGraph: {
       type: ogType,
       url,
-      title,
+      title: ogTitle,
       description,
       siteName: SITE_NAME,
       locale: SITE_LOCALE,
@@ -56,7 +60,7 @@ export function buildMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: ogTitle,
       description,
       images: [image],
     },

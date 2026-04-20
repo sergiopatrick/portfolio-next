@@ -11,9 +11,9 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contato, Sérgio Patrick (WhatsApp, email, LinkedIn)',
+  title: 'Contato, WhatsApp, email e LinkedIn',
   description:
-    'Entre em contato por WhatsApp, email ou formulário. Resposta em 48h em dias úteis. Base em Salvador (BA), atendo remoto para BR e exterior.',
+    'Contato por WhatsApp, email ou formulário. Resposta em 48h úteis. Base em Salvador, atendo remoto pra BR e exterior.',
   path: '/contato/',
 });
 

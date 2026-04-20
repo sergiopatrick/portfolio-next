@@ -31,8 +31,8 @@ export async function generateMetadata({
   const name = categoryNameFromSlug(slug);
   if (!name) return buildMetadata({ title: 'Categoria', description: '', path: '/projetos/' });
   return buildMetadata({
-    title: `Projetos em ${name}, Sérgio Patrick`,
-    description: `Projetos categorizados como ${name}. Problemas e soluções reais com código e métricas.`,
+    title: `Projetos em ${name}`,
+    description: `Projetos categorizados como ${name}. Problemas e soluções reais com código e métricas atribuíveis.`,
     path: `/projetos/categoria/${slug}/`,
   });
 }

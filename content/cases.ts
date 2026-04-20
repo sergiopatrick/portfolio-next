@@ -68,9 +68,9 @@ export const cases: Record<string, Case> = {
     ],
     s5_results_text: `<p><strong>Artigos em produção no Sanar Medicina</strong>, todos gerados pelo pipeline e aprovados por revisão médica antes da publicação:</p><ul class="link-list"><li><a href="https://sanarmed.com/obesidade-infantil-avaliacao-risco-cardiovascular-conduta/" target="_blank" rel="noopener">Obesidade infantil: avaliação de risco cardiovascular e conduta</a></li><li><a href="https://sanarmed.com/pense-2026-manejo-crise-saude-mental-adolescentes/" target="_blank" rel="noopener">PeNSE 2026: manejo da crise de saúde mental em adolescentes</a></li><li><a href="https://sanarmed.com/campanha-vacinacao-influenza-2026-protocolo-aps/" target="_blank" rel="noopener">Campanha de vacinação Influenza 2026: protocolo na APS</a></li><li><a href="https://sanarmed.com/chikungunya-diagnostico-manejo-controle-vetorial/" target="_blank" rel="noopener">Chikungunya: diagnóstico, manejo e controle vetorial</a></li><li><a href="https://sanarmed.com/vacinacao-hpv-adolescentes-cobertura-catch-up/" target="_blank" rel="noopener">Vacinação HPV em adolescentes: cobertura e catch-up</a></li><li><a href="https://sanarmed.com/diagnostico-manejo-tea-pratica-clinica/" target="_blank" rel="noopener">Diagnóstico e manejo do TEA na prática clínica</a></li></ul><figure><img src="${assets}/motor-sanarmed-notion-briefing.png" alt="Recorte aproximado de dois briefings editoriais no Notion mostrando Tema, Curso, Fontes, Angulo Editorial e Justificativa." loading="lazy"><figcaption>Recorte do Notion: tema + curso + fontes + ângulo editorial + justificativa, tudo populado automaticamente.</figcaption></figure>`,
     s6_reusable: `<p>PRD completo do pipeline, mega prompt versionado (sistema de prompts por tipo de conteúdo), documento de fluxo de revisão médica. Engine open source em <a href="https://github.com/sergiopatrick/motor-sanarmed-ai-vercel" target="_blank" rel="noopener">github.com/sergiopatrick/motor-sanarmed-ai-vercel</a>, reaproveitável em qualquer vertical de conteúdo.</p><p><em>Cada artigo gerado por este pipeline entra no grafo semântico descrito no <a href="/projetos/linkagem-semantica-embeddings-sanar/">case 7, linkagem por embeddings</a>, conectando-se automaticamente ao CID, ao exame e ao curso relacionado.</em></p>`,
-    seo_title: 'Pipeline editorial com IA e revisão médica no WordPress',
+    seo_title: 'Pipeline editorial com IA e revisão médica',
     seo_description:
-      'Pipeline WordPress com Claude + DeepSeek e revisão médica humana. Briefing no Notion, geração adversarial, publicação com post status custom. 6h → 35min por artigo.',
+      'Pipeline WordPress com Claude, DeepSeek e revisão médica humana. Briefing no Notion e publicação via post status custom. 6h para 35min por artigo.',
     keywords: [
       'pipeline editorial com IA',
       'Claude API WordPress',
@@ -179,9 +179,9 @@ customElements.define('bmi-calculator', BmiCalculator);`,
     s5_results_text: '',
     s6_reusable:
       '<p>Base class <code>CalculatorComponent</code>, biblioteca de design tokens, padrão de a11y replicável para qualquer formulário dinâmico do ecossistema.</p><p><em>Cada calculadora é um nó na camada semântica descrita no <a href="/projetos/linkagem-semantica-embeddings-sanar/">case 7, linkagem por embeddings</a>: da página da calculadora, o usuário é roteado pro exame correspondente, pro código CID e pro curso da especialidade.</em></p>',
-    seo_title: 'Refactor de calculadoras médicas em Web Components nativos',
+    seo_title: 'Calculadoras médicas em Web Components',
     seo_description:
-      'Calculadoras médicas refatoradas em Web Components nativos, 100% aderentes ao design system, WCAG AA+, zero framework e zero build step. Live em sanarmed.com.',
+      'Calculadoras médicas refatoradas em Web Components nativos, 100% aderentes ao design system, WCAG AA+, zero framework e zero build step.',
     keywords: [
       'Web Components',
       'calculadoras médicas',
@@ -250,9 +250,9 @@ final class Course_Schedule {
     s5_results_text: '',
     s6_reusable:
       '<p>Padrão "UTC as single source of truth, convert at display" documentado para o time. Classe portável para outros plugins internos.</p>',
-    seo_title: 'Plugin WordPress: fix de timezone com UTC como fonte única',
+    seo_title: 'Plugin WordPress, fix de timezone com UTC',
     seo_description:
-      'Datas deslocadas 3h em cronjob: apliquei UTC como single source of truth e conversão só no display com DateTimeImmutable. Zero tickets de suporte pós-deploy.',
+      'Datas deslocadas 3h em cronjob, UTC como single source of truth e conversão só no display com DateTimeImmutable. Zero tickets pós-deploy.',
     keywords: [
       'plugin WordPress timezone',
       'UTC DateTimeImmutable',
@@ -341,9 +341,9 @@ final class Course_Schedule {
     s5_results_text: '',
     s6_reusable:
       '<p>Documentação técnica do conflito (nível de browser), checklist de validação cross-pixel, snippet reaplicável em qualquer Shopify com stack similar.</p>',
-    seo_title: 'Fix: pixel X sobrescrevendo UTM e gclid no Shopify',
+    seo_title: 'Fix do Pixel X vs Google Ads no Shopify',
     seo_description:
-      'Pixel do X sobrescrevia UTM e gclid via history.replaceState, quebrando atribuição no Google Ads. Guard script interceptou pushState/replaceState e recuperou 100%.',
+      'Pixel do X sobrescrevia UTM e gclid via history.replaceState e quebrava atribuição no Google Ads. Guard script no GTM recuperou 100% da atribuição.',
     keywords: [
       'pixel X Shopify',
       'atribuição Google Ads',
@@ -434,9 +434,9 @@ window.dataLayer.push({ event: 'sp_attribution_ready', attribution });`,
     s5_results_text: '',
     s6_reusable:
       '<p>Convenção UTM governada em documento, script versionado, plano de teste pré-produção, playbook para replicar em novas BUs.</p>',
-    seo_title: 'UTM persistence e arquitetura martech em 3 BUs de educação',
+    seo_title: 'UTM persistence e martech em 3 BUs',
     seo_description:
-      'Governança única de UTM em 3 BUs: sessionStorage, propagação em links internos e push no dataLayer. HubSpot e GA4 com 100% de cobertura de atribuição.',
+      'Governança única de UTM em 3 BUs, sessionStorage, propagação em links internos e push no dataLayer. HubSpot e GA4 com 100% de cobertura.',
     keywords: [
       'UTM persistence',
       'arquitetura martech',
@@ -534,9 +534,9 @@ final class Exam_Importer {
     s5_results_text: `<p>Resultado em tráfego orgânico após a publicação do hub <code>/exames/</code> e das 114 páginas de referência individuais:</p><figure><img src="${assets}/sanarmed-exames-analytics.png" alt="Dashboard de SEO do domínio sanarmed.com/exames mostrando 35 menções em IA, 3,1K menções totais, 4,6K páginas citadas, 5,6K de tráfego orgânico, 3K palavras-chave orgânicas com +295% de crescimento, e curva de tráfego ascendente de dez/2025 a abr/2026." loading="lazy"><figcaption>sanarmed.com/exames, 5,6K sessões orgânicas, +295% em palavras-chave e 35 menções em motores de IA (ChatGPT, Claude, Gemini) pós-importação.</figcaption></figure>`,
     s6_reusable:
       '<p>Workbook de 6 abas como sistema de planejamento, importer parametrizável para qualquer CPT, convenção de hash para controle de mudança.</p><p><em>Este case alimenta o grafo semântico do <a href="/projetos/linkagem-semantica-embeddings-sanar/">case 7, linkagem por embeddings</a>: cada uma das 114 páginas virou nó no engine que conecta Exames, CID-10, Ferramentas e Blog.</em></p>',
-    seo_title: 'Importer PHP idempotente: 114 páginas publicadas via wp-cli',
+    seo_title: 'Importer PHP idempotente, 114 páginas',
     seo_description:
-      'Planilha como fonte, importer PHP idempotente (hash por linha) e wp-cli: 114 páginas A-Z Exames publicadas em escala. +295% em keywords no sanarmed.com/exames.',
+      'Planilha como fonte, importer PHP idempotente com hash por linha e wp-cli. 114 páginas A-Z publicadas, +295% em keywords no sanarmed.com/exames.',
     keywords: [
       'importer PHP WordPress',
       'wp-cli scaffold',
@@ -669,9 +669,9 @@ def similar(url: str, k: int = 4, diversify: bool = True) -> list[dict]:
       '<p>A história que os números contam: o usuário que entrava no blog pelo Google para ler sobre hiperplasia adrenal congênita agora termina a sessão com quatro páginas vistas, um código CID pra referência, um exame laboratorial pra diagnóstico, uma calculadora pediátrica pra dose de corticoide e, no fim, uma página de curso de Endocrinologia Pediátrica no SanarPós. Ele não foi empurrado pro curso; ele chegou lá seguindo o próprio interesse, porque cada página tinha a vizinha semântica certa.</p>',
     s6_reusable:
       '<p>O engine é agnóstico de CMS, o contrato é <code>{url, title, body, property_type, published_at}</code>. Reaproveitável em qualquer ecossistema com múltiplas propriedades (e-commerce multi-marca, editora com várias revistas, SaaS com docs + blog + pricing).</p><p>Artefatos reutilizáveis: pipeline de ingest (Python), shortcode WordPress com cache, léxico de entidades médicas para NER, playbook de diversificação por tipo de propriedade, queries pgvector otimizadas com HNSW.</p>',
-    seo_title: 'Linkagem semântica por embeddings entre 5 propriedades Sanar',
+    seo_title: 'Linkagem semântica com embeddings no Sanar',
     seo_description:
-      'Arquitetura de internal linking com embeddings vetoriais conectando CID-10, Exames, Ferramentas, Blog e SanarPós. -24pp bounce, +73% pages/session, +18% entries em cursos pagos.',
+      'Internal linking com embeddings conectando CID-10, Exames, Ferramentas, Blog e SanarPós. -24pp bounce, +73% páginas/sessão e +18% em cursos.',
     keywords: [
       'internal linking semântico',
       'embeddings WordPress',

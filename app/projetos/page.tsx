@@ -10,9 +10,9 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Projetos, Front-end, SEO técnico e automação com LLM, Sérgio Patrick',
+  title: 'Projetos com código real e métricas',
   description:
-    'Projetos de front-end, SEO técnico e automação com LLM, com código real, snippets, métricas atribuíveis e links pros artefatos em produção.',
+    'Projetos de front-end, SEO técnico e automação com LLM. Código real, snippets, métricas atribuíveis e links pros artefatos em produção.',
   path: '/projetos/',
 });
 

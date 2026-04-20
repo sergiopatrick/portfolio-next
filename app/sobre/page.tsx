@@ -5,9 +5,9 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { buildMetadata, aboutPageSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Sobre, Sérgio Patrick, Front-end developer com SEO técnico',
+  title: 'Sobre, 9 anos em front-end e SEO técnico',
   description:
-    "Front-end developer com 9 anos em empresas globais. Trajetória VTEX, L'Oreal, Unilever, Cora, Inter, QConcursos, Gupy. Base em Salvador (BA), PT-BR nativo, inglês fluente.",
+    "Front-end developer com 9 anos em empresas globais, VTEX, L'Oreal, Unilever, Inter, Cora, Gupy. Base em Salvador, PT-BR nativo e inglês fluente.",
   path: '/sobre/',
 });
 
