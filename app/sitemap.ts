@@ -1,42 +1,42 @@
 import type { MetadataRoute } from 'next';
-import { caseSlugs } from '@/content/cases';
+import { allCasesSortedByFeature, caseCategories, categorySlug } from '@/content/cases';
 import { services } from '@/content/site';
-import { caseCategories, categorySlug } from '@/content/cases';
 import { absoluteUrl } from '@/lib/site';
 
+// Every entry below maps 1:1 to a route that exists in /app and renders 200.
+// Slugs are derived from the same content sources the route handlers consume,
+// so adding/removing a service, case or category auto-syncs the sitemap.
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const routes: MetadataRoute.Sitemap = [
+
+  const staticRoutes: MetadataRoute.Sitemap = [
     { url: absoluteUrl('/'), lastModified: now, changeFrequency: 'weekly', priority: 1 },
-    { url: absoluteUrl('/sobre/'), lastModified: now, changeFrequency: 'monthly' },
-    { url: absoluteUrl('/servicos/'), lastModified: now, changeFrequency: 'monthly' },
-    { url: absoluteUrl('/contato/'), lastModified: now, changeFrequency: 'monthly' },
-    { url: absoluteUrl('/projetos/'), lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: absoluteUrl('/projetos/'), lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: absoluteUrl('/servicos/'), lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: absoluteUrl('/sobre/'), lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: absoluteUrl('/contato/'), lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
   ];
 
-  for (const slug of Object.keys(services)) {
-    routes.push({
-      url: absoluteUrl(`/servicos/${slug}/`),
-      lastModified: now,
-      changeFrequency: 'monthly',
-    });
-  }
+  const serviceRoutes: MetadataRoute.Sitemap = Object.keys(services).map((slug) => ({
+    url: absoluteUrl(`/servicos/${slug}/`),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
 
-  for (const slug of caseSlugs()) {
-    routes.push({
-      url: absoluteUrl(`/projetos/${slug}/`),
-      lastModified: now,
-      changeFrequency: 'monthly',
-    });
-  }
+  const caseRoutes: MetadataRoute.Sitemap = allCasesSortedByFeature().map(({ slug }) => ({
+    url: absoluteUrl(`/projetos/${slug}/`),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
 
-  for (const name of caseCategories) {
-    routes.push({
-      url: absoluteUrl(`/projetos/categoria/${categorySlug(name)}/`),
-      lastModified: now,
-      changeFrequency: 'monthly',
-    });
-  }
+  const categoryRoutes: MetadataRoute.Sitemap = caseCategories.map((name) => ({
+    url: absoluteUrl(`/projetos/categoria/${categorySlug(name)}/`),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.5,
+  }));
 
-  return routes;
+  return [...staticRoutes, ...serviceRoutes, ...caseRoutes, ...categoryRoutes];
 }
