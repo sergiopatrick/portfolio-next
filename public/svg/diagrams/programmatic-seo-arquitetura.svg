@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" class="diagram diagram-psseo" role="img" aria-labelledby="dia-psseo-title dia-psseo-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-psseo-title">Arquitetura de programmatic SEO em quatro camadas</title>
+  <desc id="dia-psseo-desc">Quatro camadas empilhadas que, juntas, produzem centenas de páginas a partir de uma planilha-fonte. A camada 1 é a planilha como fonte da verdade, a 2 é o importer PHP idempotente que converte linhas em posts, a 3 é o CPT com schema.org, e a 4 é o sistema de internal linking que conecta as páginas geradas.</desc>
+
+  <defs>
+    <marker id="psseo-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+  </defs>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">PROGRAMMATIC SEO  ·  4 CAMADAS  ·  PLANILHA → 100+ PÁGINAS</text>
+
+  <g transform="translate(40, 60)">
+    <rect class="diagram__node" x="0" y="0" width="880" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="16" y="24">CAMADA 01  ·  SINGLE SOURCE OF TRUTH</text>
+    <text class="diagram__node-title"  x="16" y="52">Planilha-fonte (Google Sheets ou Excel, 6 abas tipadas)</text>
+  </g>
+  <line class="diagram__edge" x1="480" y1="135" x2="480" y2="155" marker-end="url(#psseo-arrow)"/>
+
+  <g transform="translate(40, 160)">
+    <rect class="diagram__node" x="0" y="0" width="880" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="16" y="24">CAMADA 02  ·  IDEMPOTÊNCIA VIA HASH</text>
+    <text class="diagram__node-title"  x="16" y="52">Importer PHP via wp-cli (hash por linha, reexecutável N vezes)</text>
+  </g>
+  <line class="diagram__edge" x1="480" y1="235" x2="480" y2="255" marker-end="url(#psseo-arrow)"/>
+
+  <g transform="translate(40, 260)">
+    <rect class="diagram__node" x="0" y="0" width="880" height="70" rx="6"/>
+    <text class="diagram__node-tag"    x="16" y="24">CAMADA 03  ·  CONTEÚDO ESTRUTURADO</text>
+    <text class="diagram__node-title"  x="16" y="52">CPT + taxonomias + schema.org automático (Article, MedicalWebPage, Product)</text>
+  </g>
+  <line class="diagram__edge" x1="480" y1="335" x2="480" y2="355" marker-end="url(#psseo-arrow)"/>
+
+  <g transform="translate(40, 360)">
+    <rect class="diagram__engine" x="0" y="0" width="880" height="50" rx="8"/>
+    <text class="diagram__engine-tag"   x="440" y="22" text-anchor="middle">CAMADA 04  ·  INTERNAL LINKING QUE FECHA O LOOP</text>
+    <text class="diagram__engine-title" x="440" y="42" text-anchor="middle">template hubs + spokes + embeddings (fecha com o case 7)</text>
+  </g>
+</svg>

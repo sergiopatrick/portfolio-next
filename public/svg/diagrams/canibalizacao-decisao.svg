@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" class="diagram diagram-kanib" role="img" aria-labelledby="dia-kanib-title dia-kanib-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="dia-kanib-title">Árvore de decisão para canibalização de keywords</title>
+  <desc id="dia-kanib-desc">Dado um grupo de URLs competindo pela mesma intenção de busca, quatro saídas possíveis. Consolidar com 301 quando uma página cobre, reescrever uma delas quando as intenções divergem, fundir em pilar quando há muitos spokes, e manter as duas com canonical explícito quando a intenção é a mesma mas público diferente.</desc>
+
+  <defs>
+    <marker id="kanib-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="diagram__arrow-head"/>
+    </marker>
+  </defs>
+
+  <text class="diagram__kicker" x="480" y="28" text-anchor="middle">CANIBALIZAÇÃO  ·  ÁRVORE DE DECISÃO POR CLUSTER DE URL</text>
+
+  <g transform="translate(360, 60)">
+    <rect class="diagram__node" x="0" y="0" width="240" height="80" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">ENTRADA</text>
+    <text class="diagram__node-title"  x="14" y="50">Cluster de URLs competindo</text>
+    <text class="diagram__node-note"   x="14" y="70">detectado via GSC + crawl</text>
+  </g>
+
+  <text class="diagram__edge-label" x="480" y="165" text-anchor="middle">As URLs respondem à mesma intenção de busca?</text>
+
+  <g transform="translate(20, 190)">
+    <rect class="diagram__node" x="0" y="0" width="220" height="110" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">SIM, e uma é melhor</text>
+    <text class="diagram__node-title"  x="14" y="52">Consolidar com 301</text>
+    <text class="diagram__node-metric" x="14" y="78">mantém a forte</text>
+    <text class="diagram__node-metric" x="14" y="96">redireciona as outras</text>
+  </g>
+
+  <g transform="translate(260, 190)">
+    <rect class="diagram__node" x="0" y="0" width="220" height="110" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">SIM, várias iguais</text>
+    <text class="diagram__node-title"  x="14" y="52">Fundir em pilar</text>
+    <text class="diagram__node-metric" x="14" y="78">uma página-hub</text>
+    <text class="diagram__node-metric" x="14" y="96">absorve os spokes</text>
+  </g>
+
+  <g transform="translate(500, 190)">
+    <rect class="diagram__node" x="0" y="0" width="220" height="110" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">NÃO, intenções diferentes</text>
+    <text class="diagram__node-title"  x="14" y="52">Reescrever uma</text>
+    <text class="diagram__node-metric" x="14" y="78">diferenciar ângulos</text>
+    <text class="diagram__node-metric" x="14" y="96">informacional vs comercial</text>
+  </g>
+
+  <g transform="translate(740, 190)">
+    <rect class="diagram__node" x="0" y="0" width="200" height="110" rx="6"/>
+    <text class="diagram__node-tag"    x="14" y="24">MESMA, público diferente</text>
+    <text class="diagram__node-title"  x="14" y="52">Canonical explícito</text>
+    <text class="diagram__node-metric" x="14" y="78">ex.: B2B vs B2C</text>
+    <text class="diagram__node-metric" x="14" y="96">um é canônico</text>
+  </g>
+
+  <g class="diagram__edges">
+    <line class="diagram__edge" x1="480" y1="145" x2="130" y2="190" marker-end="url(#kanib-arrow)"/>
+    <line class="diagram__edge" x1="480" y1="145" x2="370" y2="190" marker-end="url(#kanib-arrow)"/>
+    <line class="diagram__edge" x1="480" y1="145" x2="610" y2="190" marker-end="url(#kanib-arrow)"/>
+    <line class="diagram__edge" x1="480" y1="145" x2="840" y2="190" marker-end="url(#kanib-arrow)"/>
+  </g>
+
+  <g transform="translate(40, 330)">
+    <rect class="diagram__engine" x="0" y="0" width="880" height="90" rx="8"/>
+    <text class="diagram__engine-tag"   x="440" y="24" text-anchor="middle">ANTES DE DECIDIR, CONFIRME 3 COISAS</text>
+    <text class="diagram__engine-meta"  x="440" y="48" text-anchor="middle">1. O Google está de fato alternando qual rankeia (GSC, aba Páginas filtrada pela query)</text>
+    <text class="diagram__engine-meta"  x="440" y="68" text-anchor="middle">2. O CTR agregado do cluster é inferior ao que uma URL só teria (a canibalização dói em CTR antes de dói em posição)</text>
+    <text class="diagram__engine-meta"  x="440" y="85" text-anchor="middle">3. Existe link equity concentrado em uma URL do cluster (essa é a candidata a ficar)</text>
+  </g>
+</svg>

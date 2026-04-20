@@ -1,6 +1,428 @@
 import type { Post } from './types';
 
 export const posts: Record<string, Post> = {
+  'guia-data-layer-bem-modelado': {
+    title: 'Guia de data layer bem modelado',
+    excerpt:
+      'Data layer é contrato, não sobra. Sem schema versionado, nomenclatura estável e separação clara entre evento e variável, o report nunca fecha. Princípios, estrutura de referência e os anti-padrões que mais derrubam projeto.',
+    tag: 'Martech',
+    published_at: '2026-04-30',
+    read_time_min: 11,
+    body: `<p>Em todo projeto de tracking que entro pra auditar, o problema raiz é o mesmo. O data layer foi tratado como "coisa que o GTM lê", e não como contrato de dados entre engenharia, marketing, produto e BI. O resultado é previsível, tag que dispara em 70% das vezes, KPI que oscila sem mudança de comportamento, relatório em HubSpot que não fecha com GA4 e time de ads que aponta pra "migração de consent" cada vez que o funil muda.</p>
+
+<p>Data layer bem feito é a fundação que não aparece. Quando está certo, ninguém fala dele. Quando está errado, é o primeiro suspeito em toda investigação.</p>
+
+<h2>A função do data layer (e por que 90% erra)</h2>
+
+<p>O data layer é um objeto JavaScript (normalmente <code>window.dataLayer</code>) que serve de ponte entre o site e as tags de terceiros. O cliente (browser ou app) empurra eventos, o GTM escuta, valida, enriquece e distribui pros destinos.</p>
+
+<p>Os três erros fundamentais que eu vejo repetidamente:</p>
+
+<ol>
+  <li><strong>Misturar nomenclatura.</strong> <code>event_name</code> em alguns pushes, <code>eventName</code> em outros. O GTM consegue lidar, mas o BI downstream não. Queries SQL precisam de UNION dos dois nomes em todo report.</li>
+  <li><strong>Tratar data layer como sobra.</strong> "O desenvolvedor joga o que tem". Resultado, eventos inconsistentes, campos faltando, tipos variando. O dado chega mas ninguém confia.</li>
+  <li><strong>Não versionar o schema.</strong> O time acrescenta campos ao longo dos anos. Ninguém sabe mais o que é autoritativo, o que está deprecado, o que é usado por qual tag.</li>
+</ol>
+
+<h2>A estrutura de referência em uma figura</h2>
+
+{{DIAGRAM:data-layer-fluxo}}
+
+<p>Uma figura já resolve 80% do alinhamento. O cliente emite eventos no dataLayer. O GTM recebe, valida contra um schema versionado, enriquece com contexto (UTM persistida, user_id, page_type) e distribui pros destinos (GA4, Meta, Google Ads, HubSpot, Salesforce). O schema é o contrato, ele é consumido pelo GTM, pelos testes automatizados, pelo pipeline de BI e por toda pessoa que precisa entender o que o site está emitindo.</p>
+
+<h2>Princípios inegociáveis</h2>
+
+<h3>1. Um schema único, versionado e público</h3>
+
+<p>Crie um arquivo <code>data_layer_schema_v3.json</code> (ou equivalente) num repositório acessível ao time. Ele define todos os eventos válidos, todos os campos de cada evento, os tipos, enum fechado onde aplica. Esse arquivo vira fonte da verdade. O GTM valida contra ele. Os testes automatizados validam contra ele. A doc do time aponta pra ele.</p>
+
+<p>Versionar é crítico. <code>v3</code> significa "terceira versão compatível do schema". Quando você precisa quebrar compatibilidade (renomear um campo, trocar tipo), sobe pra <code>v4</code> e roda paralelo por um período.</p>
+
+<h3>2. snake_case em tudo</h3>
+
+<p>Não é questão de gosto, é de consistência. Escolha um e não misture. <code>snake_case</code> é o que pega melhor no ecossistema GA4 (que é quem vai consumir o evento no final). <code>event_name</code>, não <code>eventName</code>. <code>user_role</code>, não <code>userRole</code>.</p>
+
+<p>Inclui campos que vêm de fontes externas. Se a sua API retorna <code>userId</code>, você normaliza pra <code>user_id</code> no push.</p>
+
+<h3>3. Evento é gatilho, variável é atributo</h3>
+
+<p>Eventos são verbos, ações que acontecem. <code>page_view</code>, <code>form_submit</code>, <code>cta_click</code>, <code>video_play</code>, <code>purchase</code>. Variáveis são atributos que descrevem o contexto. <code>page_type</code>, <code>user_role</code>, <code>logged_in</code>, <code>product_category</code>.</p>
+
+<p>Confundir os dois quebra o pipeline. Se você empurra <code>page_type</code> como evento, o GTM dispara tag toda vez que a variável muda, inundando o report com pseudo-eventos.</p>
+
+<h3>4. Valores com enum fechado, sempre</h3>
+
+<p><code>page_type</code> não é string livre. É enum: <code>home | catalog | product | cart | checkout | thank_you | blog | account | other</code>. Qualquer valor fora disso é bug. Idem pra <code>user_role</code>, <code>locale</code>, <code>payment_method</code>.</p>
+
+<p>Fechar o enum te dá duas coisas. Uma, o report não quebra por erro de digitação. Duas, você detecta bug cedo, se uma URL empurra <code>page_type: "product-detail"</code> (com hífen em vez de underscore), o validador do GTM barra.</p>
+
+<h3>5. Identificadores estáveis, não traduzidos</h3>
+
+<p>Se você tem evento "adicionar ao carrinho" e o site é multi-idioma, o event name é <code>add_to_cart</code>, não <code>adicionar_ao_carrinho</code> ou <code>añadir_al_carrito</code>. Idem pra ids de produto, de categoria, de plano. O valor do id é invariante ao idioma ou localização.</p>
+
+<h2>A estrutura de um evento, linha a linha</h2>
+
+<p>Template mínimo que eu recomendo pra todo push de evento:</p>
+
+<pre><code class="language-javascript">window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  event: 'cta_click',              // verbo em snake_case
+  schema_version: '3',             // qual schema este push usa
+  page_type: 'blog',               // enum fechado
+  page_id: 'guia-data-layer',      // id estável
+  locale: 'pt-BR',
+  user_role: 'visitor',            // enum fechado
+  cta_id: 'hero-primary',          // id canônico do CTA
+  cta_label: 'Ver projetos',       // label exibido (pode mudar)
+  cta_destination: '/projetos/',   // URL de destino
+  timestamp: new Date().toISOString(),
+});</code></pre>
+
+<p>Cinco coisas pra notar. Primeiro, <code>event</code> é o único campo reservado pelo GTM e usado como trigger. Segundo, <code>schema_version</code> viaja em todo push pra o pipeline saber como interpretar. Terceiro, campos ambíguos (<code>cta_label</code>) convivem com ids estáveis (<code>cta_id</code>), os dois servem, cada um pra um propósito. Quarto, <code>timestamp</code> no client é útil pra debug mas nunca é autoritativo (o time do servidor é). Quinto, nada de aninhar objetos em 3 níveis, dataLayer plano é mais fácil de consumir.</p>
+
+<h2>Eventos críticos por tipo de site</h2>
+
+<p>Uma lista mínima viável pros dois casos de uso mais comuns:</p>
+
+<p><strong>E-commerce.</strong> <code>page_view</code>, <code>view_item_list</code>, <code>view_item</code>, <code>select_item</code>, <code>add_to_cart</code>, <code>remove_from_cart</code>, <code>view_cart</code>, <code>begin_checkout</code>, <code>add_shipping_info</code>, <code>add_payment_info</code>, <code>purchase</code>, <code>refund</code>. O GA4 padroniza esses nomes, não reinvente.</p>
+
+<p><strong>Lead gen.</strong> <code>page_view</code>, <code>form_view</code>, <code>form_focus</code>, <code>form_submit</code>, <code>form_success</code>, <code>form_error</code>, <code>cta_click</code>, <code>scroll_depth</code>, <code>engagement_heartbeat</code> (a cada 15s de scroll ativo).</p>
+
+<h2>Enriquecimento no GTM, não no client</h2>
+
+<p>Contexto persistente (UTMs capturadas na entry page, <code>logged_in</code> lido do cookie, <code>session_id</code>) deve ser adicionado no GTM, não re-emitido a cada push do client. Isso reduz a superfície de erro.</p>
+
+<p>O padrão que uso: script de <em>attribution guard</em> roda no início do <code>&lt;head&gt;</code>, captura e persiste UTMs em <code>sessionStorage</code>. Variável do GTM lê o sessionStorage e anexa em toda tag destinada a destinos externos. Os cases <a href="/projetos/fix-pixel-x-google-ads-shopify/">4</a> e <a href="/projetos/utm-persistence-arquitetura-martech-3-bus/">5</a> mostram o código em produção.</p>
+
+<h2>Validação em QA e produção</h2>
+
+<p>Três camadas de validação. Nenhuma substitui a outra.</p>
+
+<ol>
+  <li><strong>Validação em tempo de push (no GTM).</strong> Use Custom Template ou Variable que valida o shape do push contra o schema v3. Pushes inválidos logam em console (em dev) e num endpoint interno (em prod).</li>
+  <li><strong>Testes automatizados em CI.</strong> Playwright ou Cypress, script que navega pelas jornadas críticas (página de produto, checkout, submit de form) e captura o dataLayer. Assertions contra o schema.</li>
+  <li><strong>Monitoramento em produção.</strong> BigQuery (ou o data warehouse da sua stack) recebe os pushes via Measurement Protocol ou server-side GTM. Query que compara shape recebido vs schema esperado, alerta se taxa de erro cruza threshold.</li>
+</ol>
+
+<h2>Integração com destinos, o que muda por tag</h2>
+
+<ul>
+  <li><strong>GA4.</strong> Consome <code>event</code> direto, e parâmetros do push vão em Event Parameters. Limite de 25 parâmetros por evento, priorize os que importam no report.</li>
+  <li><strong>Meta Pixel / CAPI.</strong> Mapeamento 1:1 entre seus eventos e <a href="https://developers.facebook.com/docs/meta-pixel/reference" target="_blank" rel="noopener">Standard Events</a>. <code>add_to_cart</code> do schema → <code>AddToCart</code> do Meta.</li>
+  <li><strong>Google Ads.</strong> Conversões mapeadas via <code>conversion_id</code> e <code>conversion_label</code>. Passa <code>transaction_id</code> pra deduplicar com o CAPI.</li>
+  <li><strong>HubSpot.</strong> Eventos customizados via <code>_hsq.push(['trackCustomBehavioralEvent'])</code>, ou via API se quiser server-side. Associa ao contato via <code>email</code>.</li>
+</ul>
+
+<h2>Os cinco anti-padrões que mais derrubam projeto</h2>
+
+<ol>
+  <li><strong>Camel/snake misturado.</strong> Já falado, mas a fonte mais comum é o desenvolvedor puxar direto do payload JSON do backend sem normalizar.</li>
+  <li><strong>Valores localizados.</strong> <code>adicionar_ao_carrinho</code> no site PT e <code>add_to_cart</code> no site EN. O report não soma, o BI passa a ter que fazer CASE WHEN em toda query.</li>
+  <li><strong>Evento pra tudo, variável pra nada.</strong> Alguém empurra <code>dataLayer.push({event: 'user_logged_in', logged: true})</code>, e o GTM passa a disparar tag cada vez que o usuário se loga. <code>logged_in</code> é variável de contexto, não evento.</li>
+  <li><strong>IDs instáveis.</strong> Usar o label traduzido como id (<code>cta_id: "Ver projetos"</code>). Muda o texto do botão, muda a chave do dashboard inteiro.</li>
+  <li><strong>Push antes do dataLayer existir.</strong> <code>window.dataLayer.push(...)</code> sem o <code>window.dataLayer = window.dataLayer || []</code> anterior. Quebra silencioso no Safari e em algumas versões de Edge.</li>
+</ol>
+
+<h2>O checklist de passagem pra produção</h2>
+
+<ol>
+  <li>Schema v{N} definido em repositório com owner claro.</li>
+  <li>Todos os eventos listados têm push implementado e testado em staging.</li>
+  <li>Script de validação passa em CI sem erro.</li>
+  <li>GTM tem Custom Template de validação rodando.</li>
+  <li>Endpoint de log de erros de schema está configurado.</li>
+  <li>Time de marketing tem acesso ao arquivo schema (não só dev).</li>
+  <li>Doc explicando "quando adicionar um evento novo" existe e é lida.</li>
+</ol>
+
+<p>Se você passou nos 7, o data layer virou fundação. Se falhou em algum, é aí que o relatório vai parar de fechar seis meses depois. Data layer bem modelado é paciência antes do código, e é o que separa projeto de martech sério de fila de tickets.</p>
+
+<p><em>Projetos relacionados: <a href="/projetos/fix-pixel-x-google-ads-shopify/">Fix de colisão de pixel Twitter/X vs Google Ads em Shopify</a> e <a href="/projetos/utm-persistence-arquitetura-martech-3-bus/">UTM persistence e arquitetura martech em 3 BUs</a></em>.</p>`,
+    seo_title: 'Guia de data layer bem modelado pra GTM',
+    seo_description:
+      'Data layer como contrato versionado, não sobra. Schema, nomenclatura estável, evento vs variável, validação em QA e os 5 anti-padrões mais comuns.',
+    keywords: [
+      'data layer GTM',
+      'data layer schema versionado',
+      'nomenclatura data layer',
+      'validação GTM QA',
+      'GA4 data layer',
+    ],
+  },
+
+  'guia-canibalizacao-keywords-auditoria': {
+    title: 'Guia de canibalização de keywords, auditoria e fix',
+    excerpt:
+      'Duas ou três URLs do seu site competindo pela mesma query e nenhuma rankeando direito. Como detectar com GSC + crawl + Semrush, a árvore de decisão pra consolidar, fundir, reescrever ou usar canonical, e o que NÃO é canibalização.',
+    tag: 'SEO Técnico',
+    published_at: '2026-04-28',
+    read_time_min: 10,
+    body: `<p>Canibalização de keyword é o jeito mais silencioso de perder tráfego. Você publica mais conteúdo, seu site tem mais URLs, mais backlinks, aparentemente está fazendo tudo certo. E mesmo assim o gráfico de tráfego no Search Console fica plano ou cai. Quando você investiga, descobre que duas ou três URLs do próprio site estão brigando pela mesma query, e nenhuma rankeia tão bem quanto uma só rankearia.</p>
+
+<p>Esse guia é pra identificar, decidir e resolver. Com foco em não inventar canibalização onde não tem, que é o erro mais comum depois de ignorar o problema.</p>
+
+<h2>O que é (e o que não é) canibalização</h2>
+
+<p>Canibalização acontece quando <strong>duas ou mais URLs do seu site competem pela mesma intenção de busca</strong>, e o Google não consegue decidir com confiança qual rankear pra uma query específica. O sintoma clássico, o rank da query oscila entre duas URLs ao longo das semanas, e o CTR agregado é pior do que uma URL teria.</p>
+
+<p>O que NÃO é canibalização, e esse é o ponto que mais gente erra:</p>
+
+<ul>
+  <li><strong>Duas URLs rankeando pra queries diferentes mas com overlap de palavras.</strong> "Como fazer pão" e "receita de pão francês" têm palavras em comum, mas são intenções diferentes. O Google entende. Não é canibalização, é cobertura de long tail.</li>
+  <li><strong>Uma URL rankeando pra N queries diferentes.</strong> É a URL fazendo seu trabalho. Não mexa.</li>
+  <li><strong>Ranking oscilando normalmente.</strong> Toda URL oscila ±3 posições sem razão aparente. Pânico por 2 posições de queda é receita pra mudança prematura.</li>
+</ul>
+
+<h2>Como detectar com confiança</h2>
+
+<p>Três fontes cruzadas. Nenhuma resolve sozinha.</p>
+
+<h3>1. Google Search Console, a fonte da verdade</h3>
+
+<p>No GSC, vá em Performance, filtre por Query, escolha uma query suspeita, clique na aba Pages. Se aparecem 2+ URLs com impressões relevantes (não só uma com 1000 e outra com 3), é um candidato.</p>
+
+<p>Pra scan em massa, exporte os dados via API do GSC. Um script simples que agrupa por query e conta URLs com &gt;= 5% do share de impressões da query faz o trabalho.</p>
+
+<h3>2. Crawl do site pra confirmar estrutura</h3>
+
+<p>Screaming Frog ou Sitebulb roda crawl completo. Exporte <code>title</code>, <code>h1</code>, <code>meta_description</code>, <code>canonical</code>. Onde o title ou h1 é idêntico entre URLs diferentes, canibalização é quase certa. Onde o canonical aponta pra uma URL consistente, o Google provavelmente já entende.</p>
+
+<h3>3. Rank tracker histórico</h3>
+
+<p>Semrush, Ahrefs ou equivalente. Pegue a query suspeita e veja o histórico de 90 dias. Se o rank alterna entre URLs diferentes semanas sim, semanas não, é canibalização. Se está estável numa URL só, relaxa.</p>
+
+<h2>A árvore de decisão</h2>
+
+{{DIAGRAM:canibalizacao-decisao}}
+
+<p>Antes de aplicar a árvore, confirme as três coisas do painel inferior: o Google está alternando URLs (não só uma ganhando devagar da outra), o CTR agregado está abaixo do que uma URL só teria, e existe link equity concentrado em alguma URL do cluster. Sem essas três, você pode estar transformando variação natural em projeto de refactoring.</p>
+
+<p>A árvore tem quatro saídas:</p>
+
+<h3>Consolidar com 301</h3>
+
+<p>A saída mais comum. Uma URL do cluster é objetivamente melhor (mais tráfego histórico, mais backlinks, melhor CTR). Mantém ela, redireciona as outras com 301, atualiza links internos pra apontar pra nova canônica.</p>
+
+<p>Truque importante: antes de redirecionar, <strong>mescla o conteúdo útil das URLs que vão sumir na URL que fica</strong>. Se a "URL perdedora" tinha uma seção boa que a vencedora não tem, copia antes de apagar. O 301 passa link equity mas não passa conteúdo.</p>
+
+<h3>Fundir em pilar</h3>
+
+<p>Quando há 5+ URLs pequenas cobrindo o mesmo tema em fragmentos. Cria uma página-hub (pilar) que cobre o tema de ponta a ponta, move o conteúdo das pequenas pra seções da pilar, e redireciona as pequenas com 301 pra pilar (ou pra anchors específicas dela).</p>
+
+<p>Resultado, uma página com autoridade agregada em vez de cinco diluídas. Esse é o movimento clássico de reorganização de blog antigo.</p>
+
+<h3>Reescrever uma</h3>
+
+<p>Quando descobre que as URLs estavam competindo por acidente, mas na verdade deveriam cobrir intenções diferentes (ex.: uma informacional e outra comercial). Em vez de consolidar, reescreve uma pra deixar claro o ângulo diferente. Título, H1, primeiro parágrafo, schema, tudo ajustado pra sinalizar pro Google o que é cada página.</p>
+
+<p>Demora mais que consolidar, mas preserva a cobertura de duas intenções.</p>
+
+<h3>Canonical explícito</h3>
+
+<p>A saída menos comum. Você tem duas URLs pra mesma intenção, mas servindo públicos diferentes (por exemplo, página B2B em <code>/empresa/solucao</code> e B2C em <code>/solucao</code>). O Google não precisa decidir, você decide, colocando <code>&lt;link rel="canonical"&gt;</code> explícito apontando uma pra outra.</p>
+
+<p>Só usa canonical se realmente não dá pra consolidar, porque canonical não transmite todo o link equity que um 301 transmite.</p>
+
+<h2>Padrões comuns de canibalização</h2>
+
+<p>Nove em cada dez casos que audito caem num destes padrões:</p>
+
+<ol>
+  <li><strong>Tag archives vs categoria vs post.</strong> WordPress cria <code>/tag/seo</code> e <code>/category/seo</code> pra o mesmo tópico, e se o post se chama "guia de SEO", três URLs competem. Solução padrão, <code>noindex</code> nos tag archives.</li>
+  <li><strong>Paginação competindo com página 1.</strong> <code>/blog/page/2/</code> rankeando pro mesmo termo do <code>/blog/</code>. Use <code>rel="next"</code> e <code>rel="prev"</code> corretamente, e o canonical de todas as paginadas aponta pra página 1.</li>
+  <li><strong>URLs com e sem trailing slash / com e sem www.</strong> Canonical resolve. Config do servidor resolve melhor.</li>
+  <li><strong>Duplicação por parâmetros.</strong> <code>?sort=price</code>, <code>?category=x</code>. Todas servem conteúdo praticamente igual. Canonical pra URL sem parâmetros.</li>
+  <li><strong>Versão móvel em subdomínio (<code>m.site.com</code>).</strong> Era padrão em 2013, hoje é dívida. Consolida em responsive, redireciona <code>m.</code> com 301.</li>
+  <li><strong>Autor de blog com bio rankeando pro mesmo tema.</strong> <code>/autor/fulano</code> lista posts dele, e um desses posts se chama "Fulano Silva é o especialista em X". As duas URLs competem. Ajusta o title da página de autor pra ser explicitamente de autor ("Posts de Fulano Silva"), não do tópico.</li>
+</ol>
+
+<h2>Como consolidar sem perder tráfego</h2>
+
+<p>Checklist do movimento de consolidação:</p>
+
+<ol>
+  <li><strong>Identifique a URL vencedora.</strong> A que tem mais backlinks e mais tráfego histórico na query-alvo.</li>
+  <li><strong>Mescle conteúdo útil.</strong> Traga as seções boas das URLs perdedoras pra vencedora. Atualize a data de publicação pra hoje se fizer sentido (trigger de "novo" no Google).</li>
+  <li><strong>Atualize internal links.</strong> Todos os links do seu site que apontavam pras URLs perdedoras agora apontam pra vencedora direto. Não dependa do 301.</li>
+  <li><strong>Aplique 301.</strong> Só agora. As perdedoras redirecionam pra vencedora.</li>
+  <li><strong>Monitore por 30 dias.</strong> GSC na query-alvo, Page que está impressionando, CTR. O sucesso é a vencedora absorvendo o tráfego das perdedoras + um pouco a mais (porque o Google agora confia).</li>
+</ol>
+
+<h2>O que medir pra provar que funcionou</h2>
+
+<ul>
+  <li><strong>Impressões agregadas na query-alvo.</strong> Devem ficar estáveis ou subir. Queda forte é bandeira vermelha.</li>
+  <li><strong>CTR.</strong> Melhora sempre. Antes, múltiplos resultados da mesma query dilutivam o CTR. Depois, concentrado numa URL, clique sobe.</li>
+  <li><strong>Rank médio da URL vencedora.</strong> Sobe 2 a 5 posições em média na query-alvo.</li>
+  <li><strong>Sessões orgânicas na URL vencedora.</strong> Sobe proporcionalmente.</li>
+</ul>
+
+<p>Se todas as quatro melhoram em 30 dias, a consolidação foi bem feita. Se alguma piora, volta nos logs, olha se o 301 está direito, e verifica se não destruiu nenhum anchor interno importante.</p>
+
+<h2>Ferramentas que ajudam</h2>
+
+<ul>
+  <li><strong>GSC API + script em Python</strong> pra pegar todas as queries com &gt;1 URL impressionando. Saída em CSV.</li>
+  <li><strong>Screaming Frog</strong> pra crawl + comparação de title/h1/canonical.</li>
+  <li><strong>Semrush ou Ahrefs</strong> pro histórico de rank por URL.</li>
+  <li><strong>Sheets</strong> pra matriz de decisão. Cada cluster vira uma linha com URLs, tráfego, backlinks, saída escolhida.</li>
+</ul>
+
+<p>Canibalização é problema comum mas diagnosticável. O erro real é diagnosticar de mais, porque "tem palavras em comum" vira projeto gigante de reestruturação que não precisava acontecer. Olha o sintoma (rank oscilando, CTR baixo), confirma com dados, age cirurgicamente.</p>
+
+<p><em>Projeto relacionado: <a href="/projetos/linkagem-semantica-embeddings-sanar/">Linkagem semântica por embeddings em 5 propriedades Sanar</a>, onde o engine previne canibalização desde o desenho do ecossistema</em>.</p>`,
+    seo_title: 'Canibalização de keywords, auditoria e fix',
+    seo_description:
+      'Como detectar canibalização com GSC + crawl + rank tracker, a árvore de decisão pra consolidar, fundir, reescrever ou canonical, e o que não é canibalização.',
+    keywords: [
+      'canibalização de keywords',
+      'auditoria SEO canibalização',
+      'consolidar URLs SEO',
+      '301 canibalização',
+      'rel canonical explícito',
+    ],
+  },
+
+  'guia-programmatic-seo-wordpress': {
+    title: 'Guia de programmatic SEO em WordPress',
+    excerpt:
+      'Programmatic SEO em WordPress feito com disciplina, não planilha exportada pro formulário do plugin. Arquitetura em 4 camadas, importer PHP idempotente e os erros que transformam escala em thin content.',
+    tag: 'SEO Técnico',
+    published_at: '2026-04-26',
+    read_time_min: 12,
+    body: `<p>Programmatic SEO, quando funciona, é uma das alavancas de crescimento mais eficientes que existem. Você gera dezenas ou centenas de páginas a partir de uma fonte estruturada (planilha, banco, API), cada uma atacando uma cauda longa específica, e o tráfego orgânico escala não-linearmente depois que o Google indexa.</p>
+
+<p>Quando não funciona, é um desastre em câmera lenta. O Google detecta thin content, rebaixa o domínio inteiro, e 3 meses depois você está tentando entender por que o blog principal também caiu.</p>
+
+<p>A diferença entre os dois cenários é arquitetura. Este guia descreve o motor que eu rodo em WordPress pra publicar a escala sem queimar domínio.</p>
+
+<h2>Quando programmatic SEO faz sentido</h2>
+
+<p>Três pré-condições. Se uma falta, procure outro alavanca.</p>
+
+<ol>
+  <li><strong>Você tem dado estruturado que vira conteúdo útil.</strong> Catálogo de produtos com especificações, lista de cidades com dados oficiais de saúde, 114 exames laboratoriais com preparo e valores de referência. Dado cru + template de boa qualidade vira página útil. Planilha de palavras-chave aleatórias vira spam.</li>
+  <li><strong>Cada página tem valor próprio.</strong> Se você não consegue explicar em uma frase por que um usuário humano acharia útil visitar aquela página, o Google também não vai achar.</li>
+  <li><strong>Volume ≥ 100 páginas e crescendo.</strong> Pra menos que isso, não vale o overhead. Escreve à mão.</li>
+</ol>
+
+<p>No <a href="/projetos/arquitetura-conteudo-scaffold-php-import/">case 6</a> (SanarMed Exames) publicamos 114 páginas A-Z de exames laboratoriais, cada uma com preparo, indicação, valores de referência, interpretação. Três pré-condições atendidas. Resultado, +295% em keywords orgânicas e 5,6K sessões/mês no hub <code>/exames/</code>.</p>
+
+<h2>A arquitetura em 4 camadas</h2>
+
+{{DIAGRAM:programmatic-seo-arquitetura}}
+
+<p>Quatro camadas empilhadas. Cada uma tem uma responsabilidade clara e não invade as outras. Desenho assim é o que permite manter o motor ao longo de anos sem virar espaguete.</p>
+
+<h3>Camada 01, a planilha como single source of truth</h3>
+
+<p>Google Sheets ou Excel com 6 abas tipadas. No caso dos Exames:</p>
+
+<ul>
+  <li><strong>aba <code>exames</code></strong>, uma linha por exame. Colunas, <code>slug</code>, <code>title</code>, <code>indication</code>, <code>preparation</code>, <code>reference_values</code>, <code>category</code>, <code>body</code>.</li>
+  <li><strong>aba <code>categorias</code></strong>, a taxonomia que agrupa os exames (hematologia, bioquímica, etc). Uma linha por categoria.</li>
+  <li><strong>aba <code>subcategorias</code></strong>, 2ª camada de agrupamento se necessária.</li>
+  <li><strong>aba <code>sinonimos</code></strong>, mapping de nomes alternativos pro nome canônico (pra internal linking).</li>
+  <li><strong>aba <code>referencias</code></strong>, bibliografia citada no corpo. Referência é tabela à parte, FK por id.</li>
+  <li><strong>aba <code>changelog</code></strong>, o que foi revisado quando e por quem. Fica versionado implicitamente pelo próprio Google Docs.</li>
+</ul>
+
+<p>Três coisas importam nessa camada. Primeiro, <strong>o time editorial edita aqui, não no WordPress</strong>. A planilha é autoritativa. Segundo, <strong>os dados têm tipo</strong> (enum pra categoria, texto longo pro body, lista pra referências). Terceiro, <strong>há um pipeline que exporta a planilha pra um JSON normalizado</strong> toda vez que alguém edita. Esse JSON é o input do próximo estágio.</p>
+
+<h3>Camada 02, o importer PHP idempotente</h3>
+
+<p>Essa é a parte técnica chave. Script PHP rodado via <code>wp-cli</code>, lê o JSON, converte cada linha em um post do CPT correspondente, aplica schema.org. <strong>Idempotente</strong> significa que pode rodar N vezes sem efeito colateral. O importer detecta o que mudou (via hash MD5 da linha) e só atualiza o que de fato precisa.</p>
+
+<pre><code class="language-php">// Trecho do importer, hash da linha como checksum
+\$hash = md5( serialize( \$row ) );
+\$existing = get_page_by_path( \$row['slug'], OBJECT, 'exame_medico' );
+
+if ( \$existing && get_post_meta( \$existing-&gt;ID, '_source_hash', true ) === \$hash ) {
+    continue; // Nenhuma mudança, pula
+}
+
+\$id = wp_insert_post( \$this-&gt;map_fields( \$row, \$existing-&gt;ID ?? 0 ) );
+update_post_meta( \$id, '_source_hash', \$hash );
+\$this-&gt;apply_taxonomy( \$id, \$row['category'] );</code></pre>
+
+<p>Por que idempotência é não negociável no programmatic SEO? Porque <strong>o editor vai querer rodar o script 50 vezes durante a vida do projeto</strong>. Corrigiu um preparo? Rodou o script. Adicionou 20 exames novos? Rodou. Mudou o template de valores de referência? Rodou. Se cada run pudesse duplicar ou sobrescrever tudo, ninguém usaria.</p>
+
+<p>O <a href="/blog/importer-idempotente-php-rodar-n-vezes/">guia de importer idempotente</a> entra em mais profundidade nas três estratégias (chave natural, hash, log auditável).</p>
+
+<h3>Camada 03, CPT + schema automático</h3>
+
+<p>Cada linha da planilha vira um post num Custom Post Type específico (<code>exame_medico</code>, no caso), com taxonomia aplicada, permalink amigável e schema.org injetado pelo próprio importer.</p>
+
+<p>Schema é onde a mágica de AEO acontece. Pra cada tipo de página, um schema adequado:</p>
+
+<ul>
+  <li><strong>Exames</strong>, <code>MedicalWebPage</code> + <code>MedicalTest</code>.</li>
+  <li><strong>CID-10</strong>, <code>MedicalWebPage</code> + <code>MedicalCondition</code>.</li>
+  <li><strong>Cidades em catálogo de serviço</strong>, <code>Service</code> + <code>areaServed</code>.</li>
+  <li><strong>Produtos</strong>, <code>Product</code> com <code>offers</code>, <code>review</code>, <code>aggregateRating</code>.</li>
+</ul>
+
+<p>O schema não é nice-to-have em programmatic SEO. É o que faz o Google distinguir sua página de 100 páginas genéricas com o mesmo template. É também o que faz os AI engines (ChatGPT, Claude, Gemini) citarem sua página como fonte quando o usuário pergunta algo relacionado.</p>
+
+<p>Um detalhe operacional, valide o schema com o <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Rich Results Test</a> no primeiro post gerado antes de deixar o importer processar os 114. Schema quebrado em escala é dor de cabeça cara.</p>
+
+<h3>Camada 04, internal linking que fecha o loop</h3>
+
+<p>Sem internal linking, programmatic SEO vira cemitério de páginas órfãs. Cada página precisa ter um caminho de entrada do restante do site, e cada página precisa linkar pra páginas relacionadas.</p>
+
+<p>Dois padrões complementares:</p>
+
+<p><strong>1. Hub + spokes.</strong> A página-categoria (<code>/exames/hematologia/</code>) é o hub. Todas as páginas de exame daquela categoria são spokes, linkam de volta pro hub, e o hub linka pra todos. Site map visual, estrela.</p>
+
+<p><strong>2. Linkagem semântica por embeddings.</strong> No topo de cada página de exame, um bloco "Exames relacionados" puxado via similarity search no pgvector. Isso escala sem marcação manual e cruza naturalmente entre categorias (o que é ouro pra cobertura de cauda longa).</p>
+
+<p>O <a href="/projetos/linkagem-semantica-embeddings-sanar/">case 7</a> entra nesse detalhe, e a combinação de programmatic SEO + linkagem por embeddings é o que transforma um "banco de páginas" num ecossistema navegável.</p>
+
+<h2>Os quatro erros que transformam escala em thin content</h2>
+
+<ol>
+  <li><strong>Template com 80% de conteúdo repetido.</strong> Se o cabeçalho, o disclaimer, a seção "sobre este exame" e os CTAs são idênticos em todas as páginas, e só o nome do exame muda, o Google detecta template-heavy content. Solução, coloque conteúdo variável em maior proporção. Valores de referência específicos, casos de uso, indicações clínicas, bibliografia.</li>
+  <li><strong>Sem dado único por página.</strong> Se a página de "Exame X" não tem nenhum dado que só ela tem, não existe razão pra ela existir. Thin content é Google-speak pra "essa página não agrega nada que outras 50 não agregariam".</li>
+  <li><strong>Geração a partir de LLM sem revisão humana.</strong> LLM gera conteúdo competente mas genérico. Pro Google, genérico é morte. O motor que roda no Sanar tem revisão médica obrigatória antes da publicação, <a href="/projetos/pipeline-editorial-ia-revisao-medica/">case 1</a>.</li>
+  <li><strong>Indexação precipitada.</strong> Publicar 500 páginas de uma vez e deixar o Google descobrir é pior que publicar em ondas de 50 com 2 semanas entre cada. O crawl budget é finito e o Google penaliza sites que parecem ter spam em massa. Publica aos poucos, monitora qualidade por coorte.</li>
+</ol>
+
+<h2>Métricas que importam</h2>
+
+<ol>
+  <li><strong>Indexação rate por coorte.</strong> Dos 50 publicados na semana X, quantos estão indexados em 30 dias? Se menos de 70%, algo no template está sinalizando thin.</li>
+  <li><strong>Impressões médias por página indexada.</strong> Meta realista, 5 a 50 impressões/mês por página programática. Se for abaixo, a cauda longa não está sendo capturada (problema de title, schema ou linkagem).</li>
+  <li><strong>Sessões orgânicas no hub.</strong> O hub (categoria) deve concentrar 30-40% do tráfego agregado das páginas-filho. Se for menos, internal linking está fraco.</li>
+  <li><strong>Keywords únicas cobertas.</strong> Proxy de cauda longa. O case 6 entregou +295% de keywords em produção.</li>
+</ol>
+
+<h2>Ordem recomendada pra implementar</h2>
+
+<ol>
+  <li>Defina a planilha-fonte com 2-3 abas pequenas e valida com 10 linhas.</li>
+  <li>Escreve o importer PHP rodando via wp-cli em ambiente de staging. Testa idempotência rodando 5 vezes.</li>
+  <li>Gera 10 páginas em staging. Valida schema no Rich Results Test. Abre no browser e confere se o conteúdo é útil.</li>
+  <li>Aplica internal linking básico (hub + spokes). Ainda em staging.</li>
+  <li>Sobe pra produção com as primeiras 30-50 páginas. Publica no sitemap, aguarda Google descobrir.</li>
+  <li>Monitora indexação por 15 dias. Se &gt; 70% indexou e está aparecendo em impressão, publique a próxima onda.</li>
+  <li>Itere. Adiciona embeddings pro internal linking quando o volume justificar (&gt;500 páginas).</li>
+</ol>
+
+<p>Programmatic SEO em WordPress não é simples mas é sistemático. Com as 4 camadas certas, a planilha vira página útil, o Google confia, e o gráfico de keywords orgânicas cresce em curva não-linear. Sem elas, vira o pesadelo de thin content que todo mundo já viu.</p>
+
+<p><em>Projetos relacionados: <a href="/projetos/arquitetura-conteudo-scaffold-php-import/">Arquitetura de conteúdo e scaffold PHP para import em escala</a> e <a href="/projetos/linkagem-semantica-embeddings-sanar/">Linkagem semântica por embeddings em 5 propriedades Sanar</a></em>.</p>`,
+    seo_title: 'Programmatic SEO em WordPress',
+    seo_description:
+      'Arquitetura em 4 camadas pra programmatic SEO que escala, planilha-fonte, importer PHP idempotente, CPT com schema e internal linking que fecha o loop.',
+    keywords: [
+      'programmatic SEO WordPress',
+      'importer PHP wp-cli',
+      'thin content escala',
+      'schema markup CPT',
+      'internal linking hub spokes',
+    ],
+  },
+
   'guia-migracao-seo-sem-perder-trafego': {
     title: 'Guia de migração SEO sem perder tráfego',
     excerpt:
