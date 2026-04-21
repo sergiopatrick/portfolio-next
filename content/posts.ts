@@ -1,6 +1,237 @@
 import type { Post } from './types';
 
 export const posts: Record<string, Post> = {
+  'guia-sitemap-dinamico-em-escala': {
+    title: 'Sitemap dinâmico em escala, sem estourar memória',
+    excerpt:
+      'Como gerar e atualizar sitemap de milhões de URLs sem derrubar o servidor. Arquitetura em três camadas, delta updates, e os sete erros que fazem o Google parar de ler seu sitemap do dia pra noite.',
+    tag: 'SEO Técnico',
+    published_at: '2026-04-21',
+    read_time_min: 12,
+    body: `<p>Programmatic SEO no WordPress (ou em qualquer stack) gera uma conta que o time de engenharia nem sempre espera: um site de trezentas URLs vira um site de dois milhões, e de repente o sitemap que era um arquivo de 40kb precisa virar uma infraestrutura. Abordagem naïve (juntar tudo em memória, renderizar, servir em uma rota dinâmica) estoura em dois lugares, ou o servidor trava tentando montar o XML, ou o Googlebot desiste porque o arquivo é maior que 50 MB e não lê mais nada.</p>
+
+<p>Este post é como eu monto a estrutura de sitemap em sites de catálogo grande, programmatic SEO ou e-commerce com milhões de SKUs. Técnico, mas não precisa ser dev sênior pra acompanhar, o objetivo é deixar claro o que precisa acontecer e onde as decisões importam.</p>
+
+<h2>O que o sitemap precisa fazer bem</h2>
+
+<p>O sitemap tem três funções práticas, e só três:</p>
+
+<ol>
+  <li><strong>Listar as URLs canônicas do site.</strong> A versão oficial de cada página, sem duplicatas com parâmetro.</li>
+  <li><strong>Sinalizar quando cada URL mudou de verdade.</strong> É o campo <code>lastmod</code>, e é o único sinal forte que o Google ainda leva a sério no protocolo.</li>
+  <li><strong>Respeitar os dois limites do formato.</strong> No máximo 50.000 URLs por arquivo e no máximo 50 MB descomprimido. Passou disso, o Google simplesmente ignora.</li>
+</ol>
+
+<p>Três coisas que o sitemap <em>não</em> precisa fazer, e que a gente perde tempo configurando à toa:</p>
+
+<ul>
+  <li><strong>priority.</strong> O Google ignora esse campo há anos. Pode deletar.</li>
+  <li><strong>changefreq.</strong> Idem. O Google confia no <code>lastmod</code> real, não na estimativa de frequência.</li>
+  <li><strong>Listar URLs com parâmetro de tracking.</strong> UTMs e similares entram como ruído e geram duplicata. Só a URL canônica.</li>
+</ul>
+
+<h2>Os dois limites do protocolo, e como dar folga</h2>
+
+<p>O limite oficial é 50.000 URLs ou 50 MB por arquivo. Na prática, eu trabalho com 40.000 URLs por arquivo, pra dar folga caso o conteúdo cresça entre uma geração e a próxima. Passou de 40k, divido em um sitemap a mais.</p>
+
+<p>Quando o site tem mais que 40k URLs, a estrutura correta é um <strong>sitemap de sitemaps</strong> (o nome formal é <em>sitemap index</em>). Fica assim:</p>
+
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;sitemap&gt;
+    &lt;loc&gt;https://exemplo.com.br/sitemap-produtos-1.xml&lt;/loc&gt;
+    &lt;lastmod&gt;2026-04-21T14:00:00Z&lt;/lastmod&gt;
+  &lt;/sitemap&gt;
+  &lt;sitemap&gt;
+    &lt;loc&gt;https://exemplo.com.br/sitemap-produtos-2.xml&lt;/loc&gt;
+    &lt;lastmod&gt;2026-04-20T09:30:00Z&lt;/lastmod&gt;
+  &lt;/sitemap&gt;
+  &lt;sitemap&gt;
+    &lt;loc&gt;https://exemplo.com.br/sitemap-categorias.xml&lt;/loc&gt;
+    &lt;lastmod&gt;2026-04-15T18:00:00Z&lt;/lastmod&gt;
+  &lt;/sitemap&gt;
+&lt;/sitemapindex&gt;</code></pre>
+
+<p>Só o sitemap index é submetido no Search Console. O Google segue os ponteiros e lê cada arquivo filho sozinho.</p>
+
+<h2>Por que gerar ingênuo estoura</h2>
+
+<p>O jeito errado (que eu já vi em produção várias vezes) é:</p>
+
+<ol>
+  <li>A rota <code>/sitemap.xml</code> aciona um controller no framework.</li>
+  <li>O controller faz um <code>SELECT *</code> em toda a tabela de produtos.</li>
+  <li>Coloca o resultado inteiro num array na memória do processo.</li>
+  <li>Monta a string do XML concatenando linha por linha.</li>
+  <li>Devolve a resposta.</li>
+</ol>
+
+<p>Em um site de 50 mil URLs isso funciona mal, mas funciona. Em um site de 2 milhões, o processo consome 3 GB de RAM, estoura o limite do worker, e o Googlebot recebe um erro 500 ou um tempo de resposta altíssimo. No primeiro caso o crawl fica capado. No segundo, o Google reduz a frequência de visita no domínio todo, o que arrasta outras páginas junto.</p>
+
+<p>A correção é parar de gerar sob demanda e parar de carregar tudo em memória. As duas coisas.</p>
+
+<h2>Arquitetura em três camadas</h2>
+
+<p>O padrão que eu uso em site grande tem três camadas bem separadas.</p>
+
+<h3>1. Fonte, o banco de dados</h3>
+
+<p>A verdade sobre quais URLs existem está no banco. Uma tabela (ou view materializada) que tem as URLs canônicas do site, com o timestamp real da última modificação de cada uma. Essa view é atualizada via triggers ou via um job quando os dados de origem mudam.</p>
+
+<p>O importante aqui é que consultar essa view tem que ser rápido. Indexe pela coluna que você usa pra particionar (tipo de conteúdo, range de ID, data). Se a consulta sozinha demora dois minutos, o job de sitemap fica escravo disso.</p>
+
+<h3>2. Geração, um worker que escreve em streaming</h3>
+
+<p>O sitemap é gerado em <strong>worker separado</strong>, não na rota que o Googlebot chama. Esse worker roda em horário controlado (1x por hora ou por cron mais espaçado pra partes que mudam pouco), abre um cursor no banco (não um <code>SELECT *</code>, um cursor que busca em blocos de 1000 linhas), escreve o XML direto em arquivo usando escritor em streaming (<code>XMLWriter</code> em PHP, <code>xml2js</code> streaming em Node, <code>lxml.etree</code> em Python), e faz upload do resultado pra um storage (S3, CloudFront origin, disco local servido via CDN).</p>
+
+<p>O consumo de memória dessa versão é constante, não importa se o site tem 10 mil ou 10 milhões de URLs. Sempre 20-40 MB de RAM no processo, porque a qualquer momento só mil linhas estão carregadas.</p>
+
+<h3>3. Servir, via CDN, nunca dinâmico</h3>
+
+<p>O Googlebot chama <code>/sitemap.xml</code> e recebe um arquivo estático do storage, via CDN. A rota nunca aciona código de aplicação em tempo real. O tempo de resposta fica em dezenas de milissegundos, independente do tamanho do arquivo.</p>
+
+<p>Se o framework obriga a passar por alguma rota (Next.js, Laravel), a rota lê o arquivo do storage e devolve, sem regerar. A geração é uma coisa, o serviço é outra.</p>
+
+<h2>Estratégia de particionamento, o que vai em cada arquivo</h2>
+
+<p>Com um sitemap index, você decide como quebrar o site em partições. Existem dois padrões comuns.</p>
+
+<h3>Por tipo de conteúdo (recomendado)</h3>
+
+<p>Um arquivo pra produtos, um pra categorias, um pra blog, um pra páginas institucionais. Esse padrão ganha em um ponto crítico, <strong>invalidação seletiva</strong>. Se só os produtos mudaram, você regera só o sitemap de produtos e atualiza o <code>lastmod</code> daquela entrada no index. Os outros arquivos ficam parados.</p>
+
+<p>Quando produtos passam de 40k URLs, o sitemap de produtos vira dois (<code>sitemap-produtos-1.xml</code>, <code>sitemap-produtos-2.xml</code>). Você pode dividir por range de ID, alfabético, por categoria principal, não importa muito desde que seja determinístico, ou seja, a URL X cai sempre na mesma partição.</p>
+
+<h3>Por range de ID (mais simples, pior pra manutenção)</h3>
+
+<p>Todos os tipos misturados, divididos só por ID. É mais simples de gerar, mas qualquer mudança em qualquer tipo invalida o arquivo inteiro. Só uso esse padrão em protótipo.</p>
+
+<h2>Lastmod de verdade vs lastmod de enfeite</h2>
+
+<p>O Google aprendeu, com o tempo, quais sites mentem no <code>lastmod</code>. Quando o sistema detecta que o campo sempre muda pra "agora" em toda requisição, mas o conteúdo da página não mudou de fato, ele começa a ignorar o <code>lastmod</code> daquele site inteiro. Isso é ruim, porque é o único sinal forte que o sitemap ainda carrega.</p>
+
+<p>Regra de bolso: o <code>lastmod</code> tem que vir do timestamp real da última edição de conteúdo, o campo <code>updated_at</code> (ou equivalente) da tabela. Nunca <code>NOW()</code> na hora de gerar o sitemap.</p>
+
+<p>No sitemap index, o <code>lastmod</code> de cada entrada deve ser o maior <code>updated_at</code> das URLs dentro daquele arquivo filho. Isso sinaliza pro Google exatamente quais arquivos vale a pena rechecar desde a última visita, e ele consegue priorizar.</p>
+
+<h2>Delta updates, regerar só o que mudou</h2>
+
+<p>Em site de escala, regerar o sitemap inteiro a cada cron é desnecessário e caro. O padrão maduro é:</p>
+
+<ol>
+  <li>Uma tabela de controle marca quais partições estão "sujas" (ou seja, tiveram alguma mudança desde a última geração).</li>
+  <li>O cron lê essa tabela, regera só as partições sujas, atualiza o <code>lastmod</code> delas no sitemap index, e marca como limpas.</li>
+  <li>Partições sem mudança ficam intocadas, servidas direto da CDN com o mesmo arquivo da semana passada.</li>
+</ol>
+
+<p>Efeito prático, em um site de 2 milhões de URLs que eu trabalhei, o sitemap completo regerava em 12 minutos. Depois do delta update, a execução típica regerava 3 a 5 partições de 40k URLs e terminava em 40 segundos. O cron passou de 1x por dia pra 1x por hora sem encostar em custo.</p>
+
+<h2>gzip, economizando 80% de banda</h2>
+
+<p>O sitemap é texto XML, comprime muito bem. O Google aceita <code>.xml.gz</code> sem cerimônia. Sempre gere o arquivo e suba comprimido. A economia de banda é significativa em site grande, e o tempo de download pra o bot também cai.</p>
+
+<p>A única ressalva, submeta a URL com a extensão <code>.xml.gz</code> no Search Console pra deixar explícito.</p>
+
+<h2>Imagem, vídeo e news, quando vale a pena</h2>
+
+<p>Existem extensões do protocolo pra imagem, vídeo e news. Minha recomendação:</p>
+
+<ul>
+  <li><strong>Imagem.</strong> Vale se o site depende de tráfego em Google Imagens (moda, catálogo, receita). O ganho é real. Pode ser embutido nos sitemaps existentes (namespace extra) em vez de arquivo separado.</li>
+  <li><strong>Vídeo.</strong> Vale só se o site hospeda vídeo próprio com ambição de ranquear. Embutar direto em YouTube sem vídeo no próprio site dispensa.</li>
+  <li><strong>News.</strong> Só pra publicações registradas no Google News. Requer formato específico e regras de frescor, não é drop-in.</li>
+</ul>
+
+<p>Em geral, não crie tipo de sitemap que você não vai manter. Manter vazio ou desatualizado é pior que não ter.</p>
+
+<h2>Submissão e monitoramento</h2>
+
+<p>Dois lugares pra declarar o sitemap:</p>
+
+<ol>
+  <li><strong>Search Console.</strong> Submeta a URL do sitemap index. O Search Console vai ler recursivamente. Acompanhe a coluna "Last read" (Última leitura), se o valor não atualizar em mais de 7 dias, algo está errado.</li>
+  <li><strong>robots.txt.</strong> Adicione uma linha <code>Sitemap: https://exemplo.com.br/sitemap.xml</code>. Alguns crawlers (incluindo motores menores) descobrem o sitemap por aí.</li>
+</ol>
+
+<p>Monitoramento semanal mínimo, veja no Search Console:</p>
+
+<ul>
+  <li>Status de cada sitemap (Success vs Couldn't fetch).</li>
+  <li>Discovered URLs vs Indexed URLs. Se a diferença é grande e aumenta, algo na qualidade das URLs está afastando o Google (canônica errada, thin content, duplicata).</li>
+  <li>"Última leitura" próxima da data do cron. Se o Google está lendo rápido, seu sitemap está saudável.</li>
+</ul>
+
+<h2>Sete anti-padrões que fazem o Google parar de confiar</h2>
+
+<ol>
+  <li><strong>Colocar URL que retorna 404.</strong> É o pior erro possível. O Google penaliza fortemente domínios que listam URLs mortas no sitemap, a leitura pode parar inteira.</li>
+  <li><strong>Colocar URL que redireciona (301).</strong> Segunda pior coisa. O sitemap é pra versão final, não pra alias que redireciona.</li>
+  <li><strong>Colocar URL com <code>noindex</code> na página.</strong> Contradição direta, o bot lê, verifica a página, encontra noindex, perde a confiança no seu sitemap em geral.</li>
+  <li><strong><code>lastmod</code> sempre igual ao momento atual.</strong> Mencionei antes. Se for assim, melhor não ter <code>lastmod</code> do que ter <code>lastmod</code> fake.</li>
+  <li><strong>URL com parâmetro de tracking.</strong> Entra como duplicata da versão canônica e gera ruído no índice.</li>
+  <li><strong>Gerar na hora da requisição em site grande.</strong> Tempo de resposta de segundos, bot desiste, crawl budget vai embora.</li>
+  <li><strong>Não declarar o charset em UTF-8.</strong> Caracteres acentuados quebram. O XML precisa começar com <code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</code>.</li>
+</ol>
+
+<h2>Esqueleto em PHP, em streaming</h2>
+
+<p>Pra quem vai implementar, esqueleto mínimo em PHP usando <code>XMLWriter</code> (streaming) e <code>PDO</code> com cursor:</p>
+
+<pre><code class="language-php">&lt;?php
+$pdo = new PDO($dsn, $user, $pass, [
+  PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,
+  PDO::ATTR_EMULATE_PREPARES =&gt; false, // cursor server-side real
+]);
+
+$xml = new XMLWriter();
+$xml-&gt;openUri('php://output');
+$xml-&gt;startDocument('1.0', 'UTF-8');
+$xml-&gt;startElement('urlset');
+$xml-&gt;writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+
+$stmt = $pdo-&gt;prepare(
+  'SELECT slug, updated_at FROM produtos WHERE ativo = 1 ORDER BY id'
+);
+$stmt-&gt;execute();
+
+while ($row = $stmt-&gt;fetch(PDO::FETCH_ASSOC)) {
+  $xml-&gt;startElement('url');
+  $xml-&gt;writeElement('loc', "https://exemplo.com.br/produto/{$row['slug']}/");
+  $xml-&gt;writeElement('lastmod', (new DateTime($row['updated_at']))-&gt;format('c'));
+  $xml-&gt;endElement();
+  $xml-&gt;flush(); // descarrega pro buffer, evita acúmulo
+}
+
+$xml-&gt;endElement();
+$xml-&gt;endDocument();</code></pre>
+
+<p>Esse worker escreve o arquivo inteiro com consumo constante de memória, independente do número de produtos. Depois, um passo adicional comprime em gzip e sobe pro S3 ou equivalente.</p>
+
+<h2>Quando dinâmico em requisição ainda vale</h2>
+
+<p>Sitemap gerado na hora faz sentido só em dois casos. Site pequeno (menos de 10 mil URLs totais), onde o custo de gerar é desprezível. E site com requisito de freshness extremo (ex: conteúdo de notícia em tempo real), onde atrasar o sitemap em 15 minutos é problema. Fora desses dois casos, sempre gere em background e sirva estático.</p>
+
+<p>Se o site é Next.js, o padrão <code>sitemap.ts</code> do App Router roda no build, ou em ISR, e funciona bem até uns 30-50 mil URLs. Passou disso, também migre pra worker externo que publica o arquivo, e transforme o endpoint do Next em um proxy que lê do storage.</p>
+
+<h2>Fechando</h2>
+
+<p>Três ideias pra guardar. Sitemap é arquivo, não aplicação, separe quem gera de quem serve. <code>lastmod</code> é o único sinal forte que ainda importa no protocolo, trate com cuidado e nunca minta. E delta update é a diferença entre sitemap saudável em escala e servidor travado toda hora.</p>
+
+<p>Pra conectar com o resto da trilha, o <a href="/blog/guia-programmatic-seo-wordpress/">guia de programmatic SEO em WordPress</a> mostra o lado de gerar as URLs em volume, e o <a href="/projetos/arquitetura-conteudo-scaffold-php-import/">case do scaffold de importação em PHP</a> traz o mesmo padrão de streaming que descrevi aqui, aplicado à ingestão em vez de à exposição.</p>`,
+    seo_title: 'Sitemap dinâmico em escala, sem estourar memória',
+    seo_description:
+      'Como gerar e atualizar sitemap de milhões de URLs sem derrubar o servidor. Streaming, delta updates, particionamento e os sete erros que matam o crawl.',
+    keywords: [
+      'sitemap xml',
+      'sitemap dinâmico',
+      'sitemap escala',
+      'sitemap index',
+      'programmatic SEO sitemap',
+      'lastmod sitemap',
+      'delta update sitemap',
+      'streaming XML PHP',
+    ],
+  },
   'guia-conteudo-citavel-por-llm': {
     title: 'Como estruturar conteúdo pra ser citado por LLM',
     excerpt:
