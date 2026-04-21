@@ -4,154 +4,154 @@ export const posts: Record<string, Post> = {
   'guia-conteudo-citavel-por-llm': {
     title: 'Como estruturar conteúdo pra ser citado por LLM',
     excerpt:
-      'GEO na prática. Chunk autocontido, densidade factual, schema que o pipeline de LLM ainda lê. Sete anti-padrões que silenciam seu conteúdo e três camadas de medição, do manual ao automatizado.',
+      'Como o Perplexity, o ChatGPT e o AI Overview do Google escolhem quem citar, e o que mudar no seu conteúdo pra entrar nessa lista. Sete erros comuns que deixam seu site invisível pra IA e três formas práticas de medir se o trabalho está funcionando.',
     tag: 'SEO Técnico',
     published_at: '2026-04-21',
-    read_time_min: 12,
-    body: `<p>Tráfego em 2026 vem de dois canais muito diferentes. SERP tradicional (Google, Bing), que o mercado otimiza há vinte anos, e motor generativo (Perplexity, ChatGPT Search, Claude, AI Overview do Google), que opera por extração e citação. O primeiro é conhecido. O segundo quase ninguém estruturou o site pra se otimizar de verdade.</p>
+    read_time_min: 11,
+    body: `<p>Tráfego em 2026 vem de dois caminhos bem diferentes. O Google e o Bing, que o mercado aprendeu a otimizar nos últimos vinte anos. E os buscadores com IA, Perplexity, ChatGPT Search, Claude, o "AI Overview" do próprio Google, que funcionam por citação em vez de lista de links azuis. O primeiro caminho quase todo mundo conhece. O segundo, quase ninguém estruturou o site pra disputar de verdade.</p>
 
-<p>O ponto que confunde gerente de conteúdo é que ranquear não garante citação. Página que fica em primeiro no Google por "consent mode v2" pode nunca aparecer como fonte no Perplexity pra mesma query. LLM avalia o conteúdo de forma diferente, pondera outras coisas, e descarta trechos que o Google indexou sem reclamar. Este post é o que eu faço na prática pra aumentar a chance de um trecho virar citação.</p>
+<p>O ponto que confunde gerente de marketing é que ranquear bem no Google não garante citação nesses buscadores novos. Sua página pode estar em primeiro lugar pra "consent mode v2" e nunca aparecer como fonte no Perplexity pra mesma pergunta. A IA avalia o conteúdo de um jeito diferente, olha outras coisas, e descarta trechos que o Google indexou sem problema. Este post é o que eu faço na prática pra aumentar a chance de um pedaço do seu conteúdo virar citação.</p>
 
-<h2>O que "ser citado" realmente quer dizer</h2>
+<h2>O que "ser citado por IA" realmente quer dizer</h2>
 
-<p>Um LLM que responde com citação não está "lendo" a internet em tempo real. Está usando um pipeline RAG (Retrieval Augmented Generation). A query vira embedding, o sistema busca trechos similares num índice, seleciona os mais relevantes, e um modelo gera a resposta referenciando aqueles trechos. Você não está competindo por ranking de página, está competindo por trecho (chunk), tipicamente de 200 a 800 tokens, que faça sentido isolado do resto da página.</p>
+<p>Um buscador com IA não lê a internet na hora em que alguém pergunta. Ele tem um índice próprio, um "caderno de anotações" com pedaços de texto que já leu antes. Quando chega uma pergunta, ele escolhe alguns desses pedaços e monta a resposta em cima deles. Sua disputa deixa de ser por página inteira e passa a ser por pedaço. Cada parágrafo (ou bloco curto de parágrafos) precisa fazer sentido sozinho, desconectado do resto da página.</p>
 
-<p>Isso muda a unidade de otimização. No Google tradicional a página é o átomo. Em LLM o parágrafo (ou um conjunto curto deles) é o átomo. Muda também a métrica, porque "impressions" e "CTR" não existem, o que você tem é taxa de citação em um conjunto de queries que importa pro negócio.</p>
+<p>Isso muda a forma de trabalhar. No Google, a página é a unidade que você otimiza. Na IA, o parágrafo é. Muda também o que você mede. Não existe mais "impressões" e "CTR", o que você acompanha é taxa de citação num conjunto de perguntas que importa pro seu negócio.</p>
 
-<h2>Os três filtros silenciosos entre seu conteúdo e a citação</h2>
+<h2>Os três filtros invisíveis entre seu conteúdo e a citação</h2>
 
-<p>Entre publicar uma página e um LLM citá-la, existem três gates que não aparecem em documentação oficial. Sintetizei observando o comportamento dos motores em dezenas de queries de clientes ao longo de 2025.</p>
+<p>Entre publicar uma página e a IA citar você, existem três filtros que ninguém documenta. Eu observei cada um funcionando em dezenas de perguntas de cliente ao longo de 2025.</p>
 
 <ol>
-  <li><strong>Crawl e chunking.</strong> O crawler de LLM (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) precisa ler o conteúdo sem executar JS pesado. Site que hidrata no client com o conteúdo principal dentro de React sem SSR é invisível pra maioria desses bots.</li>
-  <li><strong>Densidade semântica.</strong> O pipeline de retrieval favorece trechos que carreguem muita informação em pouco espaço. Dois parágrafos com claim concreto, número, nome próprio, tendem a ser recuperados mais que dez parágrafos de introdução narrativa.</li>
-  <li><strong>Coerência isolada do trecho.</strong> Se o parágrafo faz sentido só no contexto dos anteriores (pronomes, "como vimos acima", "essa técnica"), ele é descartado na etapa de relevância. Trecho que começa com "Ela" e termina com "isso resolve" é ilegível quando chega ao gerador.</li>
+  <li><strong>O robô da IA precisa conseguir ler seu site.</strong> Cada buscador com IA tem o próprio robô, parecido com o Googlebot. Se o conteúdo principal do seu site só aparece depois que o navegador processa JavaScript, o robô não enxerga e o seu texto fica de fora do índice. Site que depende de framework moderno sem "renderização no servidor" tende a cair nesse buraco.</li>
+  <li><strong>Quantidade de informação por parágrafo.</strong> O sistema dá preferência a pedaços que contam muita coisa em pouco espaço. Dois parágrafos com número, nome próprio e data concretos ganham de dez parágrafos de introdução romantizada.</li>
+  <li><strong>O parágrafo precisa fazer sentido sozinho.</strong> Se ele começa com "Essa técnica" ou "Como vimos acima", no momento em que o sistema recorta a página em pedaços aquele parágrafo fica órfão e é descartado. Parágrafo que depende dos anteriores pra ser entendido nunca vira citação.</li>
 </ol>
 
 <h2>Estrutura da página, o que mudou</h2>
 
-<p>Algumas regras que valiam em 2016 pra SEO tradicional continuam de pé. Outras mudam de peso. E algumas práticas que eram opcionais viraram determinantes.</p>
+<p>Algumas regras que valiam em 2016 pra SEO continuam de pé. Outras mudam de peso. E algumas práticas que eram opcionais viraram determinantes.</p>
 
-<h3>1. Abra com a resposta, não com o setup</h3>
+<h3>1. Comece com a resposta, não com o aquecimento</h3>
 
-<p>A regra do <em>inverted pyramid</em> volta com força. Os primeiros dois parágrafos da página precisam conter a resposta mais direta possível à query principal. LLM privilegia esses tokens de abertura porque eles tendem a ser extraídos como summary. Introdução narrativa ("Há anos a comunidade debate…") é suicídio de citação.</p>
+<p>A velha regra de jornalismo (resposta primeiro, contexto depois) voltou com força. Os dois primeiros parágrafos da página precisam conter a resposta mais direta possível pra pergunta central. A IA costuma puxar abertura como resumo, então introdução que dá duas voltas ("Há anos a comunidade debate…") é suicídio de citação.</p>
 
-<p>Refatore conteúdo antigo com essa heurística. Pegue o H1, identifique a pergunta implícita, e garanta que os primeiros 300 caracteres respondam essa pergunta de forma autônoma.</p>
+<p>Revise conteúdo antigo com essa régua. Pega o título, identifica a pergunta embutida nele, e garante que os primeiros 300 caracteres respondam essa pergunta de forma autônoma.</p>
 
-<h3>2. Um parágrafo, uma ideia, zero pronomes órfãos</h3>
+<h3>2. Um parágrafo, uma ideia, zero pronomes soltos</h3>
 
-<p>Parágrafo que começa com "Isso" ou "Essa técnica" só faz sentido no contexto da página inteira. Quando o chunker corta a página em pedaços de 500 tokens, metade dos parágrafos ficam sem antecedente e o sistema descarta. Repita o sujeito. Escreva "O Consent Mode v2 opera em dois estágios…" em vez de "Ele opera em dois estágios…" mesmo que tenha mencionado no parágrafo anterior.</p>
+<p>Parágrafo que começa com "Isso" ou "Essa técnica" só faz sentido no contexto da página inteira. Quando o sistema corta a página em pedaços menores, metade dos parágrafos fica sem referência e é descartada. Repete o sujeito. Escreve "O Consent Mode v2 funciona em dois estágios…" em vez de "Ele funciona em dois estágios…", mesmo que tenha mencionado no parágrafo anterior.</p>
 
-<p>Lê um pouco mais pesado pra humano. O ganho em citação compensa com folga. Em testes que rodei em 2025, o mesmo conteúdo com pronomes substituídos teve 2 a 4 vezes mais recuperações em queries de validação.</p>
+<p>Pro humano fica um pouco mais repetitivo. O ganho em citação compensa com folga. Em testes que rodei em 2025, o mesmo conteúdo com pronomes substituídos foi citado 2 a 4 vezes mais que a versão original.</p>
 
-<h3>3. Datas e versões visíveis, não só no metadata</h3>
+<h3>3. Datas e versões visíveis no texto, não só no rodapé</h3>
 
-<p>O modelo, quando avalia frescor, olha pra tokens dentro do conteúdo, não só o <code>datePublished</code> do schema. Frases como "a partir de março de 2026", "na versão 4.2 do plugin", "após a política de 2023 do Google" funcionam como ancoragem temporal explícita. Datas relativas ("recentemente", "nos últimos meses") envelhecem mal e confundem o modelo.</p>
+<p>A IA, quando avalia se o conteúdo está atualizado, olha pra datas escritas dentro do texto, não só pra data de publicação do sistema. Frases como "a partir de março de 2026", "na versão 4.2 do plugin", "após a política de 2023 do Google" servem de âncora temporal clara. Datas relativas ("recentemente", "nos últimos meses") envelhecem mal e confundem o modelo.</p>
 
-<h3>4. Listas com frase completa por item</h3>
+<h3>4. Listas com frase completa em cada item</h3>
 
-<p>Bullet que é uma palavra ("Rápido", "Escalável", "Seguro") não é citável. O chunker não entende o contexto. Bullet que é uma frase inteira ("O pipeline reduz o tempo de ingestão de 40 min pra 6 min no benchmark de 10 mil URLs") é ouro, o LLM recupera aquele bullet sozinho e o cita.</p>
+<p>Item de lista que é uma palavra só ("Rápido", "Escalável", "Seguro") não é citável, o sistema não tem contexto pra entender. Item que é uma frase inteira ("O pipeline reduz o tempo de ingestão de 40 minutos pra 6 minutos em benchmark de 10 mil URLs") é ouro, a IA recupera aquele item sozinho e cita.</p>
 
-<h2>Densidade factual, a métrica que quase ninguém mede</h2>
+<h2>Densidade de fatos, a régua que quase ninguém usa</h2>
 
-<p>Defino densidade factual como o número de claims concretos (número, data, nome próprio, versão, referência externa) por 100 palavras. Artigo médio de blog tem densidade 1 a 2. Artigo que funciona em RAG tende a ter densidade 4 a 8.</p>
+<p>Chamo de densidade de fatos a quantidade de informação concreta (número, data, nome próprio, versão, referência externa) por 100 palavras. Artigo médio de blog tem 1 a 2 fatos. Artigo que funciona bem em IA tem 4 a 8.</p>
 
 <p>Comparação direta:</p>
 
-<blockquote><p><em>Baixa densidade (1 claim em 35 palavras):</em> Otimizar Core Web Vitals é importante porque impacta a experiência do usuário e também é um fator de ranqueamento considerado pelo Google nos últimos anos em praticamente todos os tipos de site.</p></blockquote>
+<blockquote><p><em>Baixa densidade (1 fato em 35 palavras):</em> Otimizar Core Web Vitals é importante porque impacta a experiência do usuário e também é um fator de ranqueamento considerado pelo Google nos últimos anos em praticamente todos os tipos de site.</p></blockquote>
 
-<blockquote><p><em>Alta densidade (6 claims em 38 palavras):</em> LCP abaixo de 2.5s, INP abaixo de 200ms, CLS abaixo de 0.1 são os três limiares verdes definidos pelo Google no Core Web Vitals update de março de 2024, medidos no 75º percentil de usuários móveis reais.</p></blockquote>
+<blockquote><p><em>Alta densidade (6 fatos em 38 palavras):</em> LCP abaixo de 2.5s, INP abaixo de 200ms, CLS abaixo de 0.1 são os três limites verdes definidos pelo Google em março de 2024 como critério de Core Web Vitals em navegação mobile.</p></blockquote>
 
-<p>O segundo parágrafo tem números citáveis, método (p75, mobile), fonte (Google), data (março 2024). Um LLM que recebe uma query sobre "qual o limiar bom de LCP" vai recuperar o segundo e ignorar o primeiro, sem concorrência.</p>
+<p>O segundo tem números citáveis, fonte (Google) e data (março 2024). Quando a IA recebe uma pergunta do tipo "qual o limite bom de LCP", vai puxar o segundo parágrafo e ignorar o primeiro, sem concorrência.</p>
 
-<p>O checklist de revisão antes de publicar que uso, parágrafo a parágrafo: tem pelo menos um número, uma data ou um nome próprio? Se não tem, reescrevo ou removo.</p>
+<p>Checklist que uso antes de publicar, parágrafo a parágrafo: tem pelo menos um número, uma data ou um nome próprio? Se não tem, reescrevo ou removo.</p>
 
-<h2>O chunk pattern, um trecho autocontido</h2>
+<h2>Cada seção precisa se sustentar sozinha</h2>
 
-<p>Pense em cada seção de 200 a 500 palavras como um mini-post. Tem que ter, sozinho:</p>
+<p>Pensa em cada seção de 200 a 500 palavras como um mini-post. Tem que ter, sozinha:</p>
 
 <ul>
-  <li><strong>Um título descritivo.</strong> H3 com a afirmação explícita vence H3 genérico. <em>Como medir densidade factual</em> é pior que <em>Densidade factual se mede em claims por 100 palavras</em>.</li>
-  <li><strong>Uma abertura que se sustenta sem as seções anteriores.</strong> Evite "continuando", "além disso", "como vimos". Reintroduza o conceito em uma linha.</li>
-  <li><strong>Um exemplo ou número nos primeiros 100 tokens.</strong> Se a seção é abstrata por 300 palavras antes do primeiro exemplo, o chunk central não tem nada citável.</li>
-  <li><strong>Um fechamento que não precise de conclusão externa.</strong> A seção resolve o próprio claim.</li>
+  <li><strong>Um título que já afirma algo.</strong> Título explícito ("Densidade de fatos se mede por 100 palavras") vence título genérico ("Como medir densidade de fatos").</li>
+  <li><strong>Uma abertura que não depende do que veio antes.</strong> Evita "continuando", "além disso", "como vimos". Reintroduz o conceito em uma frase.</li>
+  <li><strong>Um exemplo ou número nas primeiras linhas.</strong> Se a seção fica abstrata por meia página antes do primeiro exemplo, o pedaço central não tem nada citável.</li>
+  <li><strong>Um fechamento que não precisa de conclusão externa.</strong> A seção resolve a própria afirmação.</li>
 </ul>
 
-<p>Fiz esse exercício em três posts de um cliente no trimestre passado. Antes da refatoração, zero citações no Perplexity em 15 queries alvo. Depois, oito citações consistentes ao longo de seis semanas de monitoramento. Mesma URL, mesma autoridade de domínio, mesmo backlink profile. A diferença foi estrutural.</p>
+<p>Fiz esse exercício em três posts de um cliente no trimestre passado. Antes da revisão, zero citações no Perplexity em 15 perguntas-alvo. Depois, oito citações consistentes ao longo de seis semanas de acompanhamento. Mesma URL, mesma autoridade de domínio, mesmos backlinks. A diferença foi só estrutural.</p>
 
-<h2>Schema que ainda importa</h2>
+<h2>Marcação de schema que ainda importa</h2>
 
-<p>Tem muito hype sobre schema em GEO, metade é placebo. Separando o que move a agulha do que não move:</p>
+<p>Tem muita conversa sobre schema pra ser citado por IA. Metade é placebo. Separando o que move o ponteiro do que não move:</p>
 
-<h3>Schema com impacto mensurável em LLM</h3>
+<h3>Schema com impacto real</h3>
 
 <ul>
-  <li><strong>Article com author Person e datePublished/dateModified.</strong> Identifica entidade autor. Sem isso, o conteúdo fica anônimo do ponto de vista do modelo, o que reduz score de confiança.</li>
-  <li><strong>Organization no domínio com sameAs pra Wikidata e LinkedIn.</strong> Ancora o site a entidades que o modelo já conhece do treino. Diferença real em queries de domínio estabelecido.</li>
-  <li><strong>FAQPage.</strong> O Google deprecou o rich result em 2023, mas pipelines de LLM continuam extraindo pares Q/A desse formato com altíssima precisão. É um dos schemas com melhor ROI específico pra GEO hoje.</li>
-  <li><strong>BreadcrumbList.</strong> Ajuda o crawler a entender hierarquia, o que afeta como os chunks são contextualizados.</li>
+  <li><strong>Article com autor e datas de publicação e atualização.</strong> Identifica quem escreveu. Sem isso, seu conteúdo fica anônimo pros buscadores com IA, o que reduz a confiança no trecho.</li>
+  <li><strong>Organization no domínio, com links pra Wikipedia, Wikidata e LinkedIn.</strong> Amarra seu site a entidades que o modelo já reconhece. Faz diferença real em marcas já estabelecidas.</li>
+  <li><strong>FAQPage.</strong> O Google deixou de mostrar esse formato como destaque em 2023, mas os buscadores com IA continuam extraindo pares de pergunta e resposta desse formato com altíssima precisão. É o schema com melhor custo-benefício específico pra citação em IA hoje.</li>
+  <li><strong>BreadcrumbList.</strong> Ajuda o robô a entender a hierarquia do site, o que influencia como cada seção é contextualizada.</li>
 </ul>
 
 <h3>Schema que é só ritual</h3>
 
 <ul>
-  <li><strong>HowTo.</strong> Depreciado no Google em 2023, sem sinal de que LLMs tratem de forma diferenciada. Emita se te agrada, não conta como trabalho útil.</li>
-  <li><strong>ImageObject solto sem figura correspondente.</strong> Os modelos visuais de hoje processam imagem direto, schema cosmético agrega pouco.</li>
-  <li><strong>AggregateRating sem reviews visíveis na página.</strong> Além de inútil pra LLM, é risco de ação manual do Google sob a <a href="https://developers.google.com/search/blog/2023/09/review-snippet-policy-update" target="_blank" rel="noopener">política de review snippets</a>.</li>
+  <li><strong>HowTo.</strong> Descontinuado pelo Google em 2023, sem sinal de que os buscadores com IA tratem diferente. Emite se te agrada, mas não conta como trabalho útil.</li>
+  <li><strong>ImageObject sem imagem correspondente.</strong> Os modelos visuais de hoje entendem imagem direto, esse schema cosmético agrega pouco.</li>
+  <li><strong>AggregateRating sem reviews visíveis na página.</strong> Além de não ajudar a IA, é risco de penalização pelo Google sob a <a href="https://developers.google.com/search/blog/2023/09/review-snippet-policy-update" target="_blank" rel="noopener">política de snippet de avaliações</a>.</li>
 </ul>
 
-<h2>Sete anti-padrões que silenciam seu conteúdo</h2>
+<h2>Sete erros que deixam seu conteúdo invisível pra IA</h2>
 
 <ol>
-  <li><strong>Conteúdo principal só no client.</strong> React/Vue sem SSR/SSG. GPTBot e ClaudeBot não executam JS. Se o conteúdo só aparece depois da hidratação, não existe pro LLM.</li>
-  <li><strong>Parede de introdução.</strong> 500 palavras antes da primeira afirmação concreta. Os primeiros chunks da página são os mais recuperados, se estão vazios você perde o leilão.</li>
-  <li><strong>Pronominalização agressiva.</strong> "Ele", "ela", "isso", "essa abordagem" atravessando parágrafos. Quebra em retrieval.</li>
-  <li><strong>Claims sem número.</strong> "Rápido", "econômico", "escalável" sem métrica quantificada. O modelo prefere "reduz latência em 34%" mil vezes a "reduz latência significativamente".</li>
-  <li><strong>Citações em rodapé longe da afirmação.</strong> LLM não puxa contexto de 2000 tokens abaixo. Atribua a fonte no próprio parágrafo ("segundo o estudo X de 2025").</li>
-  <li><strong>User-agent bloqueado por descuido.</strong> Audite o <code>robots.txt</code> e os cabeçalhos. Muitos sites bloqueiam GPTBot ou ClaudeBot sem perceber, herança de middleware de segurança ou do plugin de firewall do WP.</li>
-  <li><strong>Republicação sem atualização de data.</strong> Página com data de 2022 falando de "Consent Mode v2" é descartada como inconsistente. Atualize <code>dateModified</code> a cada edição relevante.</li>
+  <li><strong>Conteúdo principal que só aparece depois do JavaScript.</strong> Se o texto só carrega depois que o navegador processa o código do site, o robô da IA não enxerga. O teste rápido é desligar JavaScript no navegador e ver o que sobra.</li>
+  <li><strong>Parede de introdução.</strong> Quinhentas palavras antes da primeira afirmação concreta. Os primeiros pedaços da página são os mais puxados pela IA, se estão vazios você perde a disputa.</li>
+  <li><strong>Pronomes soltos.</strong> "Ele", "ela", "isso", "essa abordagem" atravessando parágrafos. Quebra no momento em que o sistema recorta a página.</li>
+  <li><strong>Afirmação sem número.</strong> "Rápido", "econômico", "escalável" sem medida. A IA prefere "reduz latência em 34%" mil vezes a "reduz latência de forma significativa".</li>
+  <li><strong>Fonte em nota de rodapé, longe da afirmação.</strong> O sistema não liga o parágrafo a uma referência que está duas mil palavras abaixo. Atribui a fonte dentro do próprio parágrafo ("segundo o estudo X de 2025").</li>
+  <li><strong>Robô da IA bloqueado sem querer.</strong> Revisa o <code>robots.txt</code> e as regras de firewall. Muitos sites bloqueiam os robôs do ChatGPT ou do Claude sem perceber, por herança de plugin de segurança ou configuração antiga.</li>
+  <li><strong>Republicar sem atualizar a data.</strong> Página com data de 2022 falando de "Consent Mode v2" é descartada como inconsistente. Atualiza a data de modificação toda vez que edita de verdade.</li>
 </ol>
 
 <h2>Como medir hoje</h2>
 
-<p>GEO tem um problema operacional sério, não existe Search Console pra LLM. Mas dá pra montar medição razoável em três camadas, da mais barata à mais cara.</p>
+<p>Não existe Search Console pra IA. Mas dá pra montar medição em três camadas, da mais barata à mais cara.</p>
 
 <h3>Camada 1, teste manual semanal</h3>
 
-<p>Defina 20 a 30 queries que representam as dores que o negócio resolve. Toda sexta, alguém roda essas queries em Perplexity, ChatGPT Search, Claude, AI Overview do Google, e registra em uma planilha:</p>
+<p>Define 20 a 30 perguntas que representam as dores que o seu negócio resolve. Toda sexta, alguém do time roda essas perguntas no Perplexity, ChatGPT Search, Claude e AI Overview do Google, e registra numa planilha:</p>
 
 <ul>
-  <li>A resposta citou o site? Sim/Não.</li>
-  <li>Se não, quem citou? Concorrente, Wikipedia, publicação setorial.</li>
-  <li>Qual trecho da resposta veio (ou pareceu vir) do seu conteúdo?</li>
+  <li>A resposta citou o site? Sim ou não.</li>
+  <li>Se não, quem citou? Concorrente, Wikipedia, publicação do setor.</li>
+  <li>Qual trecho da resposta parece ter vindo do seu conteúdo?</li>
 </ul>
 
-<p>Três meses dessa disciplina mostram tendência clara.</p>
+<p>Três meses dessa disciplina já mostram tendência clara.</p>
 
-<h3>Camada 2, referral em analytics</h3>
+<h3>Camada 2, referência no Google Analytics</h3>
 
-<p>Segmenta tráfego por referrer de LLM, <code>chatgpt.com</code>, <code>perplexity.ai</code>, <code>claude.ai</code>, <code>gemini.google.com</code>. No GA4, cria um segmento custom. Volume absoluto ainda é pequeno na maioria dos setores, mas a tendência vale muito. Cliente em nicho técnico B2B já vê 3 a 8% do tráfego vindo de LLM em 2026, e esse número dobra a cada dois trimestres.</p>
+<p>Separa o tráfego que vem das IAs. No GA4, cria um segmento que filtra referenciadores como <code>chatgpt.com</code>, <code>perplexity.ai</code>, <code>claude.ai</code>, <code>gemini.google.com</code>. O volume absoluto ainda é pequeno na maior parte dos setores, mas a tendência vale muito. Cliente em nicho técnico B2B já vê 3 a 8% do tráfego vindo de IA em 2026, e esse número vem dobrando a cada dois trimestres.</p>
 
-<h3>Camada 3, monitoramento automatizado</h3>
+<h3>Camada 3, automação</h3>
 
-<p>Se o volume justifica, você constrói um pipeline com cron semanal que dispara as queries via API (OpenAI, Anthropic, Perplexity quando disponível), parseia a resposta, detecta menções ao domínio ou marca, e alimenta um dashboard. Custo operacional fica em ~US$20 a 50/mês pra 100 queries × 4 motores. Um pipeline parecido aparece no <a href="/projetos/linkagem-semantica-embeddings-sanar/">case de linkagem semântica com embeddings</a>, medindo share of voice em nicho de educação médica.</p>
+<p>Se o volume justifica, monta um script que roda semanalmente, dispara as perguntas direto nas APIs das IAs, detecta menções ao seu domínio ou marca, e alimenta um painel. Custo operacional fica em torno de US$ 20 a US$ 50 por mês pra 100 perguntas × 4 ferramentas. Um pipeline parecido aparece no <a href="/projetos/linkagem-semantica-embeddings-sanar/">case de linkagem semântica</a>, onde monitorei share of voice em nicho de educação médica.</p>
 
 <h2>Três tentações caras</h2>
 
 <ol>
-  <li><strong>Pagar ferramenta de "GEO dashboard" sem ter linha base.</strong> A ferramenta entrega relatório bonito. Se você não sabe quais são suas queries alvo, o relatório é decorativo.</li>
-  <li><strong>Encher o site de FAQPage genéricos gerados por IA.</strong> Pares Q/A fracos reduzem o score de qualidade. Melhor 15 FAQs reais que 150 auto-geradas.</li>
-  <li><strong>Tentar enganar o LLM com keyword stuffing reciclado.</strong> Os motores atuais são robustos a isso e punem via baixa recuperação. Densidade factual não é densidade de palavra-chave.</li>
+  <li><strong>Assinar ferramenta de "dashboard de IA" sem ter linha de base.</strong> A ferramenta entrega relatório bonito. Se você ainda não sabe quais são suas perguntas-alvo, o relatório é decoração.</li>
+  <li><strong>Encher o site de FAQ genérico gerado por IA.</strong> Perguntas fracas baixam a qualidade média do conteúdo. Melhor 15 FAQs reais que 150 automáticas.</li>
+  <li><strong>Tentar enganar a IA repetindo palavra-chave.</strong> Os buscadores com IA já são bem resistentes a isso e punem via baixa recuperação. Densidade de fatos não é a mesma coisa que densidade de palavra-chave.</li>
 </ol>
 
 <h2>Fechando</h2>
 
-<p>GEO ainda é território novo e parte do que escrevi aqui vai precisar de revisão em doze meses. Mas três coisas não vão mudar: conteúdo tem que ser lido sem JS, trecho tem que se sustentar sozinho, e densidade factual vence verbosidade. Comece por aí.</p>
+<p>Essa área ainda é nova e parte do que escrevi aqui vai precisar de revisão em doze meses. Mas três coisas não vão mudar: seu conteúdo tem que ser lido sem JavaScript, cada parágrafo tem que se sustentar sozinho, e densidade de fatos vence prosa. Comece por aí.</p>
 
-<p>Pra conectar com o resto da trilha, o <a href="/blog/internal-linking-semantico-sem-plugin-pgvector/">guia de internal linking semântico com pgvector</a> cobre o pipeline de retrieval aplicado no próprio site, e o <a href="/blog/guia-data-layer-bem-modelado/">data layer bem modelado</a> mostra o mesmo princípio (chunk autocontido, densidade factual) aplicado a dados em vez de texto.</p>`,
-    seo_title: 'Como estruturar conteúdo pra ser citado por LLM',
+<p>Pra conectar com o resto da trilha, o <a href="/blog/internal-linking-semantico-sem-plugin-pgvector/">guia de ligação semântica entre páginas</a> mostra como aplicar o mesmo raciocínio de recuperação por trechos no seu próprio site, e o <a href="/blog/guia-data-layer-bem-modelado/">guia de data layer bem modelado</a> aplica o princípio de "pedaço autocontido e rico em fatos" a dados em vez de texto.</p>`,
+    seo_title: 'Como estruturar conteúdo pra ser citado por IA',
     seo_description:
-      'GEO na prática: chunk autocontido, densidade factual, schema que o pipeline de LLM ainda lê. Sete anti-padrões e três camadas de medição.',
+      'Como entrar nas citações do Perplexity, ChatGPT Search e AI Overview. Erros comuns, o que marcar na página e três formas de medir o resultado.',
     keywords: [
       'GEO',
       'generative engine optimization',
