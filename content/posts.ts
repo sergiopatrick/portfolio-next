@@ -399,7 +399,7 @@ $xml-&gt;endDocument();</code></pre>
     excerpt:
       'Data layer é contrato, não sobra. Sem schema versionado, nomenclatura estável e separação clara entre evento e variável, o report nunca fecha. Princípios, estrutura de referência e os anti-padrões que mais derrubam projeto.',
     tag: 'Martech',
-    published_at: '2026-04-30',
+    published_at: '2026-04-20',
     read_time_min: 11,
     body: `<p>Em todo projeto de tracking que entro pra auditar, o problema raiz é o mesmo. O data layer foi tratado como "coisa que o GTM lê", e não como contrato de dados entre engenharia, marketing, produto e BI. O resultado é previsível, tag que dispara em 70% das vezes, KPI que oscila sem mudança de comportamento, relatório em HubSpot que não fecha com GA4 e time de ads que aponta pra "migração de consent" cada vez que o funil muda.</p>
 
@@ -548,7 +548,7 @@ window.dataLayer.push({
     excerpt:
       'Duas ou três URLs do seu site competindo pela mesma query e nenhuma rankeando direito. Como detectar com GSC + crawl + Semrush, a árvore de decisão pra consolidar, fundir, reescrever ou usar canonical, e o que NÃO é canibalização.',
     tag: 'SEO Técnico',
-    published_at: '2026-04-28',
+    published_at: '2026-04-20',
     read_time_min: 10,
     body: `<p>Canibalização de keyword é o jeito mais silencioso de perder tráfego. Você publica mais conteúdo, seu site tem mais URLs, mais backlinks, aparentemente está fazendo tudo certo. E mesmo assim o gráfico de tráfego no Search Console fica plano ou cai. Quando você investiga, descobre que duas ou três URLs do próprio site estão brigando pela mesma query, e nenhuma rankeia tão bem quanto uma só rankearia.</p>
 
@@ -681,7 +681,7 @@ window.dataLayer.push({
     excerpt:
       'Programmatic SEO em WordPress feito com disciplina, não planilha exportada pro formulário do plugin. Arquitetura em 4 camadas, importer PHP idempotente e os erros que transformam escala em thin content.',
     tag: 'SEO Técnico',
-    published_at: '2026-04-26',
+    published_at: '2026-04-20',
     read_time_min: 12,
     body: `<p>Programmatic SEO, quando funciona, é uma das alavancas de crescimento mais eficientes que existem. Você gera dezenas ou centenas de páginas a partir de uma fonte estruturada (planilha, banco, API), cada uma atacando uma cauda longa específica, e o tráfego orgânico escala não-linearmente depois que o Google indexa.</p>
 
@@ -821,7 +821,7 @@ update_post_meta( \$id, '_source_hash', \$hash );
     excerpt:
       'Cinco fases com gate entre cada uma, do inventário à estabilização pós-cutover. O que fazer T-30, T-14, T-7, T-0 e T+30, os sete erros que derrubam tráfego e as ferramentas que de fato ajudam.',
     tag: 'SEO Técnico',
-    published_at: '2026-04-24',
+    published_at: '2026-04-20',
     read_time_min: 13,
     body: `<p>Toda migração SEO começa com alguém dizendo "é só subir o site novo e colocar os redirects". Toda migração SEO ruim termina com um report de queda de 40% de tráfego orgânico três meses depois. A distância entre as duas frases é planejamento.</p>
 
@@ -977,7 +977,7 @@ update_post_meta( \$id, '_source_hash', \$hash );
     excerpt:
       'Pipeline editorial em seis estágios, humano no meio, com roteamento de modelo por custo. LLM local faz triagem e extração, DeepSeek escreve o rascunho, Claude entra só no que importa.',
     tag: 'Automação com LLM',
-    published_at: '2026-04-22',
+    published_at: '2026-04-20',
     read_time_min: 12,
     body: `<p>Quase todo time que quer publicar mais conteúdo em 2026 chega na mesma conta. Um artigo médico bem feito leva de três a cinco horas entre pesquisa, redação e revisão. A equipe tem banda pra uns vinte e cinco por mês. O funil pede o quádruplo. Então o time ou congela a operação, ou terceiriza pra uma fábrica de texto, ou monta um motor próprio.</p>
 
