@@ -1431,6 +1431,387 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
       'INP WordPress',
     ],
   },
+  'manual-aeo-geo-escrever-post-citado-llm': {
+    title: 'Manual de AEO/GEO, como escrever um post que LLM cita',
+    excerpt:
+      'Manual prático pra escrever post de blog que ChatGPT, Perplexity, Gemini e Claude citem. TL;DR no topo, seções autocontidas, citações com fonte, tabela comparativa, FAQ no final, mais checklist e template prontos pra colar no editorial.',
+    tag: 'SEO Técnico',
+    published_at: '2026-04-26',
+    read_time_min: 13,
+    body: `<p><strong>Resposta curta:</strong> LLM não lê post inteiro, ele fragmenta em pedaços de 100 a 300 palavras e recupera o pedaço isolado pra citar. Pra entrar nessa lista, cada seção precisa fazer sentido sozinha, começar pela resposta direta, e trazer um elemento extraível (estatística com fonte, citação com aspas, tabela ou item justificado).</p>
+
+<p><strong>Resposta detalhada:</strong> as cinco técnicas com efeito empírico medido em <a href="https://arxiv.org/abs/2311.09735">Aggarwal et al. (KDD'24)</a> são citação direta com aspas e atribuição (<strong>+41% de visibilidade em respostas geradas</strong>), inclusão de estatística com fonte (+33%), referência inline com link pra fonte primária (+30%, e até +115% em sites pequenos), tabela comparativa explícita, e atributo justificador em bold ("<strong>40% mais rápido</strong> porque…"). Anti-padrões com efeito negativo medido: keyword stuffing (-8%) e tom autoritativo sem dado (efeito quase nulo, segundo <a href="https://aclanthology.org/2024.acl-long.547/">Wan et al., ACL'24</a>).</p>
+
+<h2>A regra de ouro, cada H2 será lido isolado</h2>
+
+<p>LLM não lê como humano. Ele <strong>fragmenta</strong> o post em pedaços de 100 a 300 palavras (chunks), embeda cada pedaço em vetor, e recupera apenas o trecho mais relevante pra cada query. Isso muda o peso de tudo na escrita.</p>
+
+<p>Significa que se a sua melhor frase está no parágrafo 8 e ela referencia o parágrafo 3, o motor não cita. Ele só recuperou o pedaço 8 e não tem o contexto do 3. Se o parágrafo começa com "Essa técnica" ou "Como vimos acima", vira órfão no momento do recorte e é descartado.</p>
+
+<p>Regra de produção: <strong>escreva assumindo que cada <code>&lt;h2&gt;</code> será lido isoladamente</strong>. Repete o sujeito ("O Consent Mode v2 funciona…" em vez de "Ele funciona…"), entrega a resposta na primeira frase da seção, e fecha cada bloco com pelo menos um elemento extraível.</p>
+
+<h2>Anatomia de um post otimizado, do topo ao fim</h2>
+
+<p>A estrutura abaixo é a que funciona em 2026 pra Perplexity, ChatGPT Search, AI Overview do Google e Claude. Não é estética, é função.</p>
+
+<h3>1. Título (H1) que reflete a query real</h3>
+
+<p>Padrões que vencem: "Como fazer X", "X vs Y, qual escolher", "O que é X (e quando usar)", "Melhores X pra Y". Evite título opaco ("A revolução silenciosa do mercado"). LLM não decifra metáfora, decifra intenção. Mantém entre 50 e 65 caracteres pra não cortar no SERP.</p>
+
+<h3>2. TL;DR no topo, em dois níveis</h3>
+
+<p>Pesquisa da <a href="https://www.frase.io/research/ai-citations-2026/">Frase.io (2026, análise de 17M de citações)</a> mostra que <strong>44% das citações em ChatGPT vêm do primeiro terço do conteúdo</strong>. Comece pela resposta antes de qualquer contexto. Formato que funciona: uma frase curta com a resposta direta, seguida de duas a três frases com nuance, números e contexto. Nada de aquecimento, nada de "no mundo cada vez mais digital".</p>
+
+<h3>3. H2s descritivos, resposta na primeira frase</h3>
+
+<p>Cada H2 precisa de quatro coisas. Pergunta ou afirmação clara como heading (não criativa). Resposta direta na primeira frase, é essa frase que o LLM extrai. Dois a quatro parágrafos curtos depois, uma ideia cada. E pelo menos um elemento extraível por seção, estatística, citação, lista ou tabela.</p>
+
+<p><strong>Tamanho ideal por seção: 150 a 300 palavras.</strong> Esse é o tamanho típico de chunk em sistemas RAG. Seção mais longa será fragmentada pelo motor, e você perde controle sobre qual pedaço vai virar citação.</p>
+
+<h3>4. FAQ no final, alta taxa de citação</h3>
+
+<p>LLM <em>adora</em> FAQ. Schema <code>FAQPage</code> tem das maiores taxas de citação em AI Overviews e Perplexity, segundo análise de 17M citações da Frase.io. Use cinco a oito perguntas, escritas exatamente como o usuário faria, com resposta direta de uma a três frases. Inclua variações de "People Also Ask" do Google quando souber.</p>
+
+<h3>5. Bio do autor + data de revisão</h3>
+
+<p>Bloco final com nome real do autor, uma a duas linhas de credenciais, link pra LinkedIn ou página do autor, e "Última revisão em DD/MM/AAAA". Isso ativa schema <code>Person</code> e sinais de E-E-A-T, que o Gemini valoriza explicitamente em sua documentação pública de qualidade de conteúdo.</p>
+
+<h2>As 5 técnicas com efeito empírico de impacto</h2>
+
+<p>A tabela abaixo resume as técnicas testadas em <a href="https://arxiv.org/abs/2311.09735">GEO: Generative Engine Optimization (Aggarwal et al., KDD'24)</a>, com o lift médio de visibilidade em respostas geradas. As cinco que valem o trabalho:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Técnica</th>
+      <th>O que faz</th>
+      <th>Lift médio</th>
+      <th>Esforço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Quotation Addition</strong></td>
+      <td>Citação direta com aspas e atribuição</td>
+      <td>+41%</td>
+      <td>Baixo</td>
+    </tr>
+    <tr>
+      <td><strong>Statistics Addition</strong></td>
+      <td>Substituir afirmação qualitativa por número com fonte</td>
+      <td>+33%</td>
+      <td>Médio</td>
+    </tr>
+    <tr>
+      <td><strong>Cite Sources</strong></td>
+      <td>Referência inline com link pra fonte primária</td>
+      <td>+30% (até +115% em sites pequenos)</td>
+      <td>Baixo</td>
+    </tr>
+    <tr>
+      <td><strong>Comparison Tables</strong></td>
+      <td>Tabela markdown comparando opções</td>
+      <td>Não medido isolado, alto na prática</td>
+      <td>Médio</td>
+    </tr>
+    <tr>
+      <td><strong>Justification Attributes</strong></td>
+      <td>Atributo curto + razão quantificada em bold</td>
+      <td>Não medido isolado, alto em "best X for Y"</td>
+      <td>Baixo</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Técnica 1, Quotation Addition (+41%)</h3>
+
+<p>É a estratégia mais eficaz medida no paper. Substitui afirmação genérica por citação direta, com aspas, atribuição e fonte.</p>
+
+<p>Genérico (não citável): <em>Estudos indicam que o setor cresceu nos últimos anos.</em></p>
+
+<p>Citação direta (citável): <em>Em relatório de outubro de 2025, a McKinsey afirmou: "<strong>A adoção de IA generativa em empresas brasileiras passou de 18% para 47% em apenas 14 meses</strong>" (Estado da IA no Brasil, 2025).</em></p>
+
+<p><strong>Densidade ideal: uma a duas citações diretas a cada 800 palavras.</strong> Mais que isso vira plágio. Menos perde o efeito.</p>
+
+<h3>Técnica 2, Statistics Addition (+33%)</h3>
+
+<p>Toda afirmação que contém "muitos", "a maioria", "geralmente", "cresceu" ou "diminuiu" precisa virar número com fonte.</p>
+
+<p>Genérico: <em>A maioria dos brasileiros usa WhatsApp.</em></p>
+
+<p>Quantificado: <strong>93% dos brasileiros conectados usam WhatsApp diariamente</strong>, segundo a <a href="https://cetic.br/pt/pesquisa/domicilios/">Pesquisa TIC Domicílios 2024</a> do Cetic.br.</p>
+
+<p>Meta de densidade: um dado quantificado a cada 80 a 120 palavras.</p>
+
+<h3>Técnica 3, Cite Sources (+30%, até +115% em sites pequenos)</h3>
+
+<p>Inclua referência inline com link pra fonte primária. Não é só "segundo a Forbes", é com link real pro artigo específico. Em ordem decrescente de peso, prefira papers acadêmicos (arXiv, ACL, NeurIPS), relatórios oficiais (governo, órgão regulador), pesquisas originais de empresa (McKinsey, Gartner, Pew), imprensa séria (Reuters, AP, Folha, Valor) e blogs reconhecidos como último recurso.</p>
+
+<p>O lift de até +115% em sites pequenos vem da contrapartida de autoridade que a fonte externa empresta ao seu domínio jovem.</p>
+
+<h3>Técnica 4, Comparison Tables explícitas</h3>
+
+<p>LLM extrai tabela inteira como bloco. É uma das formas mais "sequestráveis" de conteúdo. Use pra comparar produto, recurso, plano, método, prós e contras.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Critério</th>
+      <th>Opção A</th>
+      <th>Opção B</th>
+      <th>Opção C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Preço inicial</td>
+      <td>R$ 99/mês</td>
+      <td>R$ 149/mês</td>
+      <td>R$ 79/mês</td>
+    </tr>
+    <tr>
+      <td>Limite de usuários</td>
+      <td>5</td>
+      <td>Ilimitado</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Suporte 24/7</td>
+      <td>Não</td>
+      <td>Sim</td>
+      <td>Não</td>
+    </tr>
+    <tr>
+      <td>Integração Slack</td>
+      <td>Sim</td>
+      <td>Sim</td>
+      <td>Não</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Técnica 5, Justification Attributes em destaque</h3>
+
+<p>Não diga "é bom". Diga "é bom porque [razão quantificada]".</p>
+
+<p>Genérico: <em>Tem ótima bateria.</em></p>
+
+<p>Justificado: <strong>Bateria de 12h em uso intenso</strong>, 50% mais que a média da categoria (8h, segundo benchmark da TechRadar 2025).</p>
+
+<p>LLM em resposta de "best X for Y" extrai atributo justificador, frase curta com claim mais evidência. Use bold no atributo principal.</p>
+
+<h2>O que NÃO fazer, anti-padrões com efeito medido</h2>
+
+<p>Cinco práticas com efeito negativo ou nulo documentado em pesquisa empírica. Cortar essas vale mais que adicionar técnica nova.</p>
+
+<ul>
+  <li><strong>Keyword stuffing.</strong> Resultado: -8% de visibilidade em LLM, segundo Aggarwal et al. Repetir "consultoria empresarial" 30 vezes confunde o embedding semântico.</li>
+  <li><strong>Tom autoritativo sem dado.</strong> Efeito quase nulo, segundo Wan et al., ACL'24. "É amplamente reconhecido que…" sem nome e sem número é desperdício de palavras.</li>
+  <li><strong>Introdução-fluff.</strong> "No mundo atual, em constante transformação digital, as empresas precisam se adaptar…" vai pro lixo. LLM raramente extrai das primeiras 100 palavras de aquecimento.</li>
+  <li><strong>Parágrafo de 8+ linhas.</strong> Vira chunk único e indivisível. O motor extrai tudo ou nada. Quebre em parágrafo de uma a três frases.</li>
+  <li><strong>Conteúdo escondido em JS.</strong> Se o texto principal só aparece após renderização JavaScript, muitos crawlers de AI não pegam. Teste com <code>curl -A "ChatGPT-User" sua-url | grep "frase principal"</code>.</li>
+</ul>
+
+<p>Bonus, dois anti-padrões com correlação de citação medida no <a href="https://www.frase.io/research/ai-citations-2026/">GEO-16 da Frase</a>: heading criativo sem keyword, e ausência de data visível (correlação 0,68 com citação, a mais alta do estudo).</p>
+
+<h2>Schema markup mínimo pra um post</h2>
+
+<p>Adicione no <code>&lt;head&gt;</code> ou via plugin. Esse bloco ativa <code>Article</code> + <code>Person</code> e é o piso pra qualquer post sério em 2026.</p>
+
+<pre><code class="language-json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Título do post",
+  "datePublished": "2026-04-26",
+  "dateModified": "2026-04-26",
+  "author": {
+    "@type": "Person",
+    "name": "Nome do Autor",
+    "url": "https://seusite.com/autor",
+    "sameAs": [
+      "https://linkedin.com/in/seuautor",
+      "https://twitter.com/seuautor"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nome do Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://seusite.com/logo.png"
+    }
+  },
+  "description": "Resumo de 150 a 160 caracteres",
+  "image": "https://seusite.com/imagem-do-post.jpg"
+}</code></pre>
+
+<p>Pra post com FAQ, adicione <code>FAQPage</code> schema separado. Pra tutorial, <code>HowTo</code>. Sem schema, o motor ainda lê, mas perde sinal estrutural que diferencia post sério de post genérico.</p>
+
+<h2>Tamanho ideal e frescor de conteúdo</h2>
+
+<p>Análise da Frase.io em 2026 sobre 17M de citações dá uma faixa clara. Post curto (menos de 800 palavras) tem baixa taxa de citação, falta substância. Post médio (1.500 a 2.500 palavras) é o sweet spot, cobertura sem dispersão. Post long-form (3.000+ palavras) só vale pra guia pilar, e exige subseção autocontida ou o motor se perde.</p>
+
+<p>Mais importante que tamanho é <strong>densidade de informação</strong>. 1.500 palavras com cinco estatísticas, três citações e uma tabela vencem 3.000 palavras de prosa solta.</p>
+
+<p>Sobre frescor, o mesmo relatório aponta que <strong>URLs citadas por AI são 25,7% mais frescas que orgânico tradicional</strong>. Inclua o ano em headings quando relevante ("Melhores ferramentas de X em 2026"), atualize posts antigos com nota visível ("Atualizado em abril/2026, adicionada análise dos novos modelos") e mantenha <code>dateModified</code> atualizado no schema apenas quando houver edição real, motores detectam fraude.</p>
+
+<h2>Linking interno, não é só pra SEO</h2>
+
+<p>LLM usa link interno pra entender clusters de tópico. Post bem citado precisa estar conectado a outros relacionados. Regras práticas: três a sete links internos por post, sempre contextuais e nunca em footer; anchor text descritivo ("guia completo de Generative Engine Optimization") em vez de "clique aqui"; link de página antiga pra post novo, não só o contrário; e clusters formados por uma página pilar e cinco a dez posts que linkam entre si e pra ela.</p>
+
+<p>Pra ver o lado conceitual desse mesmo problema, com foco em por que a IA escolhe um trecho em vez de outro, leia o <a href="/blog/guia-conteudo-citavel-por-llm/">guia de conteúdo citável por LLM</a>. O post atual é o operacional, esse é o conceitual.</p>
+
+<h2>Checklist pré-publicação</h2>
+
+<p>Cole no seu editorial. Use antes de cada publicação. A meta é checar todos os itens, não só os "fáceis".</p>
+
+<h3>Estrutura</h3>
+<ul>
+  <li>H1 reflete query real, não criatividade</li>
+  <li>TL;DR de duas a três frases no topo, em dois níveis (curta + detalhada)</li>
+  <li>H2s descritivos, não criativos</li>
+  <li>Cada seção autocontida, faz sentido sozinha</li>
+  <li>Parágrafos de uma a três frases</li>
+  <li>Pelo menos um elemento extraível por seção (lista, tabela, citação ou estatística)</li>
+</ul>
+
+<h3>Conteúdo</h3>
+<ul>
+  <li>Uma a duas citações diretas com aspas e atribuição</li>
+  <li>Três a cinco estatísticas com fonte</li>
+  <li>Cinco a dez links externos pra fonte primária</li>
+  <li>Uma tabela comparativa, se aplicável</li>
+  <li>Justification attributes em bold ("<strong>40% mais rápido</strong> porque…")</li>
+  <li>Seção FAQ no final, cinco a oito perguntas</li>
+  <li>Bio do autor com credenciais</li>
+</ul>
+
+<h3>Técnico</h3>
+<ul>
+  <li>Schema <code>Article</code> + <code>FAQPage</code> se houver FAQ</li>
+  <li>Data de publicação e revisão visíveis no corpo, não só no rodapé</li>
+  <li>Três a sete links internos contextuais</li>
+  <li>Conteúdo principal no HTML, não só JS</li>
+  <li>Meta description de 150 a 160 caracteres</li>
+  <li>URL slug com keyword principal, sem datas e sem números aleatórios</li>
+</ul>
+
+<h3>Anti-padrões verificados</h3>
+<ul>
+  <li>Sem keyword stuffing</li>
+  <li>Sem introdução-fluff</li>
+  <li>Sem afirmação vaga ("muitas pessoas", "estudos mostram") sem dado</li>
+  <li>Sem parágrafo gigante</li>
+  <li>Sem heading criativo sem keyword</li>
+</ul>
+
+<h2>Template-base de blog post otimizado</h2>
+
+<p>Esqueleto pronto pra colar no editor. Cada bloco tem propósito de citação, não é só preenchimento.</p>
+
+<pre><code class="language-markdown"># [Título com keyword principal e intent claro]
+
+**Resposta curta:** [Resposta direta em uma a duas frases.]
+
+**Resposta detalhada:** [Duas a três frases com nuance, número e fonte.]
+
+## [H2 que é uma pergunta ou afirmação clara]
+
+[Frase de abertura que responde diretamente o H2.]
+
+[Parágrafo curto com contexto.]
+
+[Lista, tabela, citação ou estatística relevante.]
+
+## [Próximo H2]
+
+[Mesmo padrão.]
+
+> "Citação direta de fonte autoritativa, com atribuição clara." —
+> [Fonte com link](https://link.real)
+
+## Comparativo, [tema] vs [alternativa]
+
+| Critério | Opção A | Opção B |
+|----------|---------|---------|
+| ...      | ...     | ...     |
+
+## Perguntas frequentes
+
+### [Pergunta exata como usuário faria]?
+[Resposta de uma a três frases.]
+
+### [Próxima pergunta]?
+[Resposta.]
+
+---
+
+*Escrito por [Nome], [credencial].
+Última revisão: [data].
+[Link para LinkedIn].*</code></pre>
+
+<h2>Resumo executivo, dez regras pra colar na parede</h2>
+
+<ol>
+  <li>Comece pela resposta (TL;DR no topo, em dois níveis).</li>
+  <li>Cada seção autocontida, 150 a 300 palavras.</li>
+  <li>Citações diretas com aspas e atribuição (a estratégia #1 da pesquisa, +41%).</li>
+  <li>Estatísticas com fonte em vez de adjetivos vagos.</li>
+  <li>Headings descritivos, nunca criativos.</li>
+  <li>FAQ no final, sempre, cinco a oito perguntas.</li>
+  <li>Schema markup completo (Article + FAQPage + Person).</li>
+  <li>Datas visíveis e atualizadas com honestidade.</li>
+  <li>Tabelas comparativas quando fizer sentido.</li>
+  <li>Bio do autor com credenciais ativando E-E-A-T.</li>
+</ol>
+
+<p>Resumo do resumo: <strong>escreva como se o LLM fosse pegar só uma seção sua e mostrar isolada para o usuário</strong>. Porque é exatamente isso que ele faz.</p>
+
+<h2>Perguntas frequentes</h2>
+
+<h3>GEO substitui SEO?</h3>
+
+<p>Não. GEO (Generative Engine Optimization) é complemento, não substituto. SEO continua entregando tráfego do Google e Bing tradicionais. GEO entrega visibilidade em respostas geradas por LLM (ChatGPT, Perplexity, AI Overview). Sites bem otimizados em 2026 fazem os dois em paralelo, e várias práticas (densidade de informação, fonte primária, schema) ajudam ambos.</p>
+
+<h3>Qual o tamanho ideal de um post pra ser citado por LLM?</h3>
+
+<p>Entre 1.500 e 2.500 palavras é o sweet spot, segundo análise da Frase.io de 17M citações em 2026. Posts abaixo de 800 palavras raramente têm densidade suficiente. Acima de 3.000 só vale pra guia pilar, e exige subseções autocontidas. Mais importante que tamanho é densidade de fato (número, data, nome próprio) por 100 palavras.</p>
+
+<h3>Preciso reescrever todos os posts antigos?</h3>
+
+<p>Não. Priorize por tráfego e por intenção comercial. Pegue os dez posts que mais geram tráfego ou conversão, aplique o checklist completo, e meça citação em três a quatro semanas. Posts longtail de baixo volume podem esperar. ROI de reescrita está concentrado em poucos posts pilares, não em volume.</p>
+
+<h3>Como mensuro se o post está sendo citado?</h3>
+
+<p>Três métodos práticos. Primeiro, monitorar logs de servidor por user-agents de bot de AI (ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended), volume crescente indica indexação ativa. Segundo, rodar manualmente um conjunto fixo de 20 a 30 perguntas relevantes ao seu negócio em ChatGPT, Perplexity e AI Overview, registrando se seu domínio aparece como fonte. Terceiro, ferramentas dedicadas (Profound, Otterly, AthenaHQ) que automatizam essa medição em escala.</p>
+
+<h3>FAQ no final é mesmo necessário?</h3>
+
+<p>É. Schema <code>FAQPage</code> tem das maiores taxas de citação em AI Overviews e Perplexity, segundo análise de 17M citações da Frase.io. Use cinco a oito perguntas, escritas como o usuário faria (não como você gostaria que fossem feitas), com resposta de uma a três frases.</p>
+
+<h3>Posso usar IA pra escrever o post?</h3>
+
+<p>Pode, mas com revisão humana de citação e fonte. Modelos alucinam estatística e atribuição, e citação fake é o pior anti-padrão possível, queima credibilidade do domínio em ciclos futuros. Use IA pra primeiro draft de estrutura, mas valide cada número, cada link e cada nome próprio à mão antes de publicar.</p>
+
+<hr/>
+
+<p><em>Pra fechar a trilha, o <a href="/blog/guia-conteudo-citavel-por-llm/">guia de conteúdo citável por LLM</a> traz a explicação conceitual de por que esses padrões funcionam, e o <a href="/blog/guia-sitemap-dinamico-em-escala/">guia de sitemap dinâmico em escala</a> resolve o pré-requisito técnico de garantir que o motor consiga ler seu site de fato.</em></p>`,
+    seo_title: 'Manual de AEO/GEO, como escrever um post que LLM cita',
+    seo_description:
+      'Manual prático com checklist e template pra escrever post que ChatGPT, Perplexity e Gemini citem. Cinco técnicas com lift medido, anti-padrões, schema markup.',
+    keywords: [
+      'GEO',
+      'AEO',
+      'Generative Engine Optimization',
+      'Answer Engine Optimization',
+      'conteúdo citado por LLM',
+      'SEO ChatGPT',
+      'SEO Perplexity',
+      'AI Overview Google',
+      'checklist GEO',
+      'template blog AEO',
+    ],
+  },
 };
 
 export function postSlugs(): string[] {
