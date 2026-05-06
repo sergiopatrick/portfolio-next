@@ -1812,6 +1812,407 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
       'template blog AEO',
     ],
   },
+  'tech-seo-google-news-top-stories': {
+    title: 'Google News e Top Stories, o que de fato decide aparecer',
+    excerpt:
+      'Candidatura ao Google News acabou em 2019, AMP deixou de ser obrigatório em 2021, e Top Stories nem usa o índice do Google News. As 12 coisas que decidem indexação rápida e citação em carrossel, com news-sitemap dinâmico, schema completo e hook de IndexNow no publish.',
+    tag: 'SEO Técnico',
+    published_at: '2026-05-08',
+    read_time_min: 14,
+    body: `<p><strong>Resposta curta:</strong> Google News e Top Stories são dois produtos distintos. Top Stories é onde está 90% do tráfego de notícia, usa o índice principal do Google e não exige aprovação em lugar nenhum. Pra entrar, o que decide é news-sitemap dinâmico das últimas 48h, schema <code>NewsArticle</code> com <code>datePublished</code>/<code>dateModified</code> em ISO 8601 com timezone, autoria com <code>sameAs</code> apontando pra perfil real, SSR do schema, link da home pra URL nova, três aspect ratios de imagem, e hook automático de IndexNow + URL Inspection API no publish.</p>
+
+<p><strong>Resposta detalhada:</strong> a maior parte do que se lê em PT-BR sobre Google News é de 2019 a 2022, fala de candidatura (acabou) e AMP (deixou de ser obrigatório em junho/2021). O que realmente move ponteiro hoje é (1) entender que Top Stories usa o índice normal e Google News usa um índice próprio, (2) news-sitemap separado com regra dura de 48h, (3) <code>NewsArticle</code> renderizado server-side, não client-side, (4) consistência entre header HTTP <code>Last-Modified</code> e <code>dateModified</code> do JSON-LD (quando divergem, Google ignora), (5) imagem em 16:9, 4:3 e 1:1 porque cada superfície escolhe diferente, (6) crawl budget priorizado pra URLs frescas via <code>robots.txt</code> agressivo nos arquivos antigos, (7) janela de relevância em horas, então hook de IndexNow + URL Inspection API no <code>publish_post</code> é não-negociável.</p>
+
+<h2>A confusão que custa caro, Google News ≠ Top Stories ≠ Discover</h2>
+
+<p>Três produtos diferentes, três caminhos pra otimizar. Misturar os três é o motivo mais comum de cliente reclamar que "investiu em Google News e não viu retorno".</p>
+
+<p><strong>Google News</strong> é o app/aba dedicada (news.google.com). Tem índice próprio, audiência menor mas qualificada (jornalistas, analistas, gente que já busca notícia direto). Pra entrar, configurar Publisher Center ajuda, mas não é obrigatório desde 2019.</p>
+
+<p><strong>Top Stories</strong> é o carrossel que aparece no SERP normal do google.com em queries de notícia. Usa o índice principal do Google, não o índice do Google News. Não tem candidatura, é elegibilidade técnica. <strong>É onde está cerca de 90% do tráfego de news</strong> em sites comerciais.</p>
+
+<p><strong>Discover</strong> é o feed mobile no app do Google e na home do Chrome Android. Não é busca, é recomendação. Otimização separada (imagem grande de alta qualidade pesa mais, intent não importa). Discover entrega volume de tráfego de marca como nenhum outro canal, mas é instável.</p>
+
+<p>Implicação prática: se o seu blog é de marca (não veículo), <strong>foque Top Stories e Discover</strong>. Google News dedicado é pra portal puro-sangue.</p>
+
+<h2>O que mudou desde 2019, e os guides desatualizados não contam</h2>
+
+<p>Antes de qualquer checklist, descarte mentalmente o que ficou pra trás:</p>
+
+<ul>
+  <li><strong>Candidatura ao Google News acabou em dezembro/2019.</strong> Hoje é auto-discovery via crawl. Quem ainda vende "aprovação no Google News" tá vendendo placebo.</li>
+  <li><strong>AMP deixou de ser obrigatório no Top Stories em junho/2021.</strong> Continua funcional, mas não dá mais boost. Se você ainda mantém AMP só por isso, pode tirar.</li>
+  <li><strong>Standout markup foi descontinuado.</strong> Não use, ignora silenciosamente.</li>
+  <li><strong>Subscriber-only content via structured data</strong> substitui o cloaking pra paywall. Use <code>isAccessibleForFree</code> + <code>cssSelector</code> apontando pro bloco premium.</li>
+  <li><strong>IndexNow virou caminho prático</strong> pra acelerar descoberta. Bing aceita oficialmente, Google ainda não confirma, mas vale o ping pelo custo zero.</li>
+</ul>
+
+<h2>News-sitemap, a regra dura de 48 horas</h2>
+
+<p>O sitemap de notícias é separado do principal e tem três regras que não podem ser quebradas:</p>
+
+<ol>
+  <li><strong>Só URLs publicadas nas últimas 48 horas.</strong> URL com mais que isso é ignorada e queima a confiança no arquivo. Se o sitemap consistentemente serve URLs velhas, Google reduz frequência de leitura.</li>
+  <li><strong>No máximo 1.000 URLs por arquivo.</strong> Acima disso, divide em sitemap-index dedicado pra news.</li>
+  <li><strong>Atualizar a cada publicação.</strong> Sitemap de news estático que regenera de hora em hora perde 30 a 50 minutos de janela em cada matéria. Em news, isso é a diferença entre entrar no Top Stories ou não.</li>
+</ol>
+
+<p>Estrutura mínima do XML:</p>
+
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://exemplo.com.br/noticia/slug-da-materia/&lt;/loc&gt;
+    &lt;news:news&gt;
+      &lt;news:publication&gt;
+        &lt;news:name&gt;Nome do Veículo&lt;/news:name&gt;
+        &lt;news:language&gt;pt&lt;/news:language&gt;
+      &lt;/news:publication&gt;
+      &lt;news:publication_date&gt;2026-05-08T09:30:00-03:00&lt;/news:publication_date&gt;
+      &lt;news:title&gt;Título exato da matéria&lt;/news:title&gt;
+    &lt;/news:news&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</code></pre>
+
+<p>No WordPress, o gerador dinâmico vive como rota custom registrada via <code>add_rewrite_rule</code>, com query filtrando posts dos últimos dois dias. Um esqueleto:</p>
+
+<pre><code class="language-php">add_action('init', function () {
+  add_rewrite_rule('^news-sitemap\\.xml$', 'index.php?news_sitemap=1', 'top');
+});
+
+add_filter('query_vars', fn($v) => array_merge($v, ['news_sitemap']));
+
+add_action('template_redirect', function () {
+  if (!get_query_var('news_sitemap')) return;
+
+  header('Content-Type: application/xml; charset=UTF-8');
+  $posts = get_posts([
+    'post_type'      => 'post',
+    'post_status'    => 'publish',
+    'posts_per_page' => 1000,
+    'date_query'     => [['after' => '48 hours ago']],
+  ]);
+
+  echo '&lt;?xml version="1.0" encoding="UTF-8"?&gt;';
+  echo '&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+     . 'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"&gt;';
+
+  foreach ($posts as $p) {
+    $date = get_the_date('c', $p);
+    printf(
+      '&lt;url&gt;&lt;loc&gt;%s&lt;/loc&gt;&lt;news:news&gt;'
+      . '&lt;news:publication&gt;&lt;news:name&gt;%s&lt;/news:name&gt;'
+      . '&lt;news:language&gt;pt&lt;/news:language&gt;&lt;/news:publication&gt;'
+      . '&lt;news:publication_date&gt;%s&lt;/news:publication_date&gt;'
+      . '&lt;news:title&gt;%s&lt;/news:title&gt;&lt;/news:news&gt;&lt;/url&gt;',
+      esc_url(get_permalink($p)),
+      esc_html(get_bloginfo('name')),
+      esc_html($date),
+      esc_html(get_the_title($p))
+    );
+  }
+
+  echo '&lt;/urlset&gt;';
+  exit;
+});</code></pre>
+
+<p>Em Next.js, a mesma lógica vive num route handler em <code>app/news-sitemap.xml/route.ts</code> com <code>revalidate</code> baixo (60 segundos é razoável) e o mesmo filtro de 48h aplicado à fonte de dados.</p>
+
+<h2>NewsArticle schema, o que importa de verdade</h2>
+
+<p>Schema <code>Article</code> serve pra blog post comum. Pra matéria de notícia, use <code>NewsArticle</code> ou <code>ReportageNewsArticle</code> (esse último pra reportagem original). O motor distingue, e Top Stories prioriza explicitamente <code>NewsArticle</code>.</p>
+
+<p>Os campos que decidem inclusão:</p>
+
+<ul>
+  <li><strong><code>datePublished</code> e <code>dateModified</code> em ISO 8601 com timezone.</strong> <code>2026-05-08T09:30:00-03:00</code> e não <code>2026-05-08</code>. Sem timezone, Google trata como UTC e a matéria parece ter sido publicada três horas antes ou depois do que de fato.</li>
+  <li><strong><code>author</code> como <code>Person</code> com <code>@id</code> e <code>sameAs</code>.</strong> Apontar pra página de autor interna e perfis externos verificáveis (LinkedIn, X). Mais sobre isso na seção de E-E-A-T.</li>
+  <li><strong><code>publisher</code> com logo em URL pública direta.</strong> Não pode ser CDN com auth, não pode ser sprite, não pode ser imagem por trás de redirect. Proporção máxima 600x60px.</li>
+  <li><strong><code>image</code> como array com três aspect ratios.</strong> 16:9, 4:3, 1:1. Detalhe na seção dedicada.</li>
+  <li><strong><code>headline</code> com no máximo 110 caracteres.</strong> Regra silenciosa, headline maior que isso pode ser ignorada e Google usa o <code>title</code> tag.</li>
+  <li><strong><code>articleSection</code></strong> com a editoria principal (Saúde, Tecnologia, Negócios). Reforça contexto temático.</li>
+</ul>
+
+<p>JSON-LD canônico pra colar no <code>&lt;head&gt;</code>:</p>
+
+<pre><code class="language-json">{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "Título exato com no máximo 110 caracteres",
+  "datePublished": "2026-05-08T09:30:00-03:00",
+  "dateModified": "2026-05-08T09:30:00-03:00",
+  "author": {
+    "@type": "Person",
+    "@id": "https://exemplo.com.br/autores/maria-silva/#person",
+    "name": "Maria Silva",
+    "url": "https://exemplo.com.br/autores/maria-silva/",
+    "sameAs": [
+      "https://www.linkedin.com/in/mariasilvarealperfil/",
+      "https://twitter.com/mariasilvareal"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nome do Veículo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://exemplo.com.br/logo-publisher.png",
+      "width": 600,
+      "height": 60
+    }
+  },
+  "image": [
+    "https://exemplo.com.br/img/materia-16x9.jpg",
+    "https://exemplo.com.br/img/materia-4x3.jpg",
+    "https://exemplo.com.br/img/materia-1x1.jpg"
+  ],
+  "articleSection": "Saúde",
+  "description": "Resumo de 150 a 160 caracteres",
+  "mainEntityOfPage": "https://exemplo.com.br/noticia/slug-da-materia/"
+}</code></pre>
+
+<h2>Os contra-intuitivos, onde a maioria queima sem perceber</h2>
+
+<h3>1. Top Stories e AI Overviews disputam o mesmo pixel</h3>
+
+<p>Quando AI Overview dispara numa query, o carrossel de Top Stories costuma sumir ou descer pra abaixo da dobra. Isso muda a estratégia: <strong>otimizar pra Top Stories em queries informacionais virou jogo perdedor</strong>. O ouro hoje é query transacional, query local, query de evento (eleição, jogo, lançamento) e breaking news verdadeira, onde AIO ainda não dispara por questão de latência e responsabilidade. Mapeie suas queries por SERP feature antes de investir.</p>
+
+<h3>2. A trap do <code>dateModified</code></h3>
+
+<p>Atualizar uma matéria já publicada perde freshness. Google trata como "republished" e a matéria pode sair do Top Stories antes do esperado. Estratégia contra-intuitiva pra atualização substancial: <strong>republicar em URL nova</strong> com <code>301</code> da antiga, preservando sinal de "matéria nova" no índice de news. Pra correção pequena (typo, ajuste factual), atualizar in-place está ok, mas não inflar <code>dateModified</code> pra ganhar boost, é detectado e penaliza.</p>
+
+<h3>3. <code>Last-Modified</code> do header HTTP vence o <code>dateModified</code> do schema</h3>
+
+<p>Quando os dois divergem, Google prioriza o header HTTP. WordPress com cache mal configurado serve a página com header de duas horas atrás enquanto o JSON-LD diz que foi atualizada agora. Resultado, Google ignora a "atualização" e a notícia perde freshness sem ninguém perceber.</p>
+
+<p>Cheque o header com <code>curl -I https://exemplo.com.br/materia/</code>. Se o <code>Last-Modified</code> não bate com a data real do post, é problema de cache. Em WordPress, o hook <code>publish_post</code> precisa fazer purge da página, do feed RSS e do news-sitemap em uma operação atômica.</p>
+
+<h3>4. O período de quarentena não-documentado</h3>
+
+<p>Domínios novos não entram em Top Stories nas primeiras quatro a oito semanas mesmo fazendo tudo certo do lado técnico. Não está em nenhuma documentação oficial, mas é consistente em casos observados. Importante setar expectativa do cliente, "vamos publicar com tudo certo desde o dia 1, mas o tráfego de Top Stories só começa a aparecer no segundo mês".</p>
+
+<h3>5. Mobile-first crawler + schema client-side = invisível</h3>
+
+<p>Se o seu schema <code>NewsArticle</code> é injetado por JavaScript depois do <code>DOMContentLoaded</code>, o Googlebot mobile pode não pegar pra Top Stories. SSR ou SSG do JSON-LD não é luxo, é requisito. Em Next.js, isso significa renderizar via metadata API ou inline no componente do server. Em WordPress, hookar em <code>wp_head</code> com <code>echo</code> direto, não enfileirar script.</p>
+
+<h2>Os subestimados, sinais que pesam mais do que parecem</h2>
+
+<h3>Imagem em três aspect ratios não é vaidade</h3>
+
+<p>Cada superfície do Google escolhe um aspect ratio diferente:</p>
+
+<ul>
+  <li><strong>Top Stories desktop</strong> usa 4:3 ou 16:9.</li>
+  <li><strong>Top Stories mobile</strong> usa 16:9.</li>
+  <li><strong>Discover</strong> usa 1:1 ou imagens largas com no mínimo 1200px de largura, marcadas com <code>max-image-preview:large</code>.</li>
+  <li><strong>Google News app</strong> usa thumbnail quadrado.</li>
+</ul>
+
+<p>Faltar uma proporção = sumir daquela superfície. Em editor WordPress, isso vira upload obrigatório de três variações no momento do publish, ou um pipeline de geração automática via Sharp/ImageMagick a partir de uma master image.</p>
+
+<h3>Link da homepage pro novo post é mais forte que IndexNow</h3>
+
+<p>Internal link da home pra URL recém-publicada é um dos sinais mais fortes de "isso é breaking, indexa agora". Por isso todo portal de notícia tem bloco "últimas notícias" no header, não é UX, é arquitetura de SEO de news. Se a sua home tem cinco notícias visíveis, o sexto post fica órfão até alguém clicar na categoria. Implicação: bloco dinâmico de últimas dez ou últimas quinze, com link direto, sem JS.</p>
+
+<h3><code>sameAs</code> no autor muda ranking</h3>
+
+<p>Google verifica se o autor existe fora do site. <code>Person</code> schema com <code>sameAs</code> apontando pra LinkedIn ativo, X ativo e (idealmente) ORCID ou outro perfil profissional ranqueia diferente de byline anônima. Isso cresce em peso quando o tema é YMYL (saúde, finanças, jurídico).</p>
+
+<p>Anti-padrão clássico: criar autores fictícios com bio inventada e foto de stock. Detectado por reverse image search e por ausência de pegada externa. Resultado: rebaixamento do domínio inteiro, não só da matéria.</p>
+
+<h3>Velocidade de TTFB importa muito mais em news que em web normal</h3>
+
+<p>Janela de relevância de uma notícia é em horas, às vezes minutos. Durante surge de tráfego (quebra de notícia grande), Googlebot abandona crawl em sites lentos antes de pegar a matéria. Core Web Vitals não captura isso, porque CWV é métrica do usuário final pós-cache; o que importa pra crawler de news é TTFB de origem em pico de tráfego. Stress test antes do próximo evento previsível.</p>
+
+<h2>Os ignorados, onde tem alavanca grande</h2>
+
+<h3>Crawl budget priorizado pra URLs frescas</h3>
+
+<p>Em sites grandes, Googlebot perde tempo em paginação infinita, tag pages, archive de autor e parâmetros de filtro. Cada URL não-news que ele crawleia é uma URL fresca que ele não crawleia. Robots.txt agressivo bloqueando tudo que não é matéria libera budget pra news:</p>
+
+<pre><code class="language-text">User-agent: *
+Disallow: /tag/
+Disallow: /author/
+Disallow: /page/
+Disallow: /*?s=
+Disallow: /*?page=
+Disallow: /*?utm_
+
+Sitemap: https://exemplo.com.br/sitemap.xml
+Sitemap: https://exemplo.com.br/news-sitemap.xml</code></pre>
+
+<p>Em sites com volume editorial alto (algumas centenas de matérias por dia), essa é a diferença entre indexar matéria nova em 30 minutos ou em 6 horas.</p>
+
+<h3>Site Reputation Abuse Policy (mar/2024)</h3>
+
+<p>Política do Google que pune marca publicando conteúdo "parasita" sob domínio principal pra rankear em temas que não tem a ver com a marca core. Relevante pra qualquer SaaS ou B2B que decide criar <code>/noticias/</code> pra capturar tráfego informacional sem ter linha editorial real. Aplicada com mão pesada desde maio/2024.</p>
+
+<p>Como evitar, três regras: (1) o conteúdo precisa ser produzido por equipe interna ou parceiros com vínculo declarado, não por agência terceirizada por palavra; (2) tema precisa ter nexo com a área de atuação da marca; (3) autoria real, com bio e credencial verificáveis.</p>
+
+<h3>CDN cache servindo <code>dateModified</code> velho</h3>
+
+<p>Cenário comum: você atualiza a matéria, a origem tem o JSON-LD novo, mas o CDN serve a versão cacheada com <code>dateModified</code> antigo por mais 10 minutos. Google entra, vê inconsistência entre header HTTP <code>Last-Modified</code> (que veio do CDN) e <code>dateModified</code> do schema (idem, velho), e a "atualização" vira fantasma.</p>
+
+<p>Solução: hook automático de purge no <code>publish_post</code> e <code>save_post</code> chamando a API do CDN (Cloudflare, Fastly, BunnyCDN) pra invalidar a URL específica e o news-sitemap. Sem manual.</p>
+
+<h3>Search Console, aba "Notícias" em tipo de busca</h3>
+
+<p>Em Performance → tipo de busca, existe a opção "Notícias" separada de "Web". Quase ninguém olha. Mostra exatamente queries que trouxeram tráfego do Google News (não Top Stories, esse aparece em Web). Use pra calibrar editoria, identificar tópicos com tração e cortar tópicos com zero retorno.</p>
+
+<h2>Velocidade publish-to-index, onde a corrida é decidida</h2>
+
+<p>Em news, o ranking é decidido em 30 minutos a 2 horas após publicação. Quem chega depois pega o resto. Três alavancas pra acelerar descoberta:</p>
+
+<ol>
+  <li><strong>Ping de news-sitemap</strong> via <code>https://www.google.com/ping?sitemap=https://exemplo.com.br/news-sitemap.xml</code>. Ainda funciona pra news (deixou de funcionar pra sitemap normal em 2023).</li>
+  <li><strong>URL Inspection API</strong> do Search Console, força recrawl programático da URL específica.</li>
+  <li><strong>IndexNow</strong> via Bing (oficial) e via Yandex. Google ainda não confirma uso, mas o ping é gratuito e cobre Bing News, que tem distribuição via Microsoft Start.</li>
+</ol>
+
+<p>Hook em WordPress que dispara as três no publish:</p>
+
+<pre><code class="language-php">add_action('publish_post', function ($post_id, $post) {
+  if ($post->post_type !== 'post') return;
+
+  $url = get_permalink($post_id);
+
+  // 1. Ping de news-sitemap
+  wp_remote_get(
+    'https://www.google.com/ping?sitemap=' . urlencode(home_url('/news-sitemap.xml')),
+    ['timeout' => 5, 'blocking' => false]
+  );
+
+  // 2. IndexNow (Bing)
+  wp_remote_post('https://api.indexnow.org/indexnow', [
+    'headers'  => ['Content-Type' => 'application/json'],
+    'body'     => wp_json_encode([
+      'host'        => parse_url(home_url(), PHP_URL_HOST),
+      'key'         => INDEXNOW_KEY,
+      'urlList'     => [$url],
+    ]),
+    'timeout'  => 5,
+    'blocking' => false,
+  ]);
+
+  // 3. Purge CDN (exemplo Cloudflare)
+  wp_remote_post(
+    'https://api.cloudflare.com/client/v4/zones/' . CF_ZONE . '/purge_cache',
+    [
+      'headers'  => [
+        'Authorization' => 'Bearer ' . CF_TOKEN,
+        'Content-Type'  => 'application/json',
+      ],
+      'body'     => wp_json_encode(['files' => [$url, home_url('/news-sitemap.xml')]]),
+      'timeout'  => 5,
+      'blocking' => false,
+    ]
+  );
+}, 10, 2);</code></pre>
+
+<p>URL Inspection API é mais chata (OAuth + biblioteca Google), mas vale pro time de SEO ter um botão de "forçar reindexação" no painel admin pra matéria que não foi pega após 30min.</p>
+
+<h2>YMYL pra news, o filtro extra que ninguém comenta</h2>
+
+<p>Top Stories aplica filtro de credibilidade mais agressivo em temas YMYL (Your Money or Your Life), saúde, finanças, jurídico, eleição. Não basta ter <code>NewsArticle</code> e bom schema, precisa de:</p>
+
+<ul>
+  <li><strong>Autor com credencial declarada via <code>hasCredential</code>.</strong> Pra saúde, CRM, CRP, CRO ou similar como propriedade do <code>Person</code>.</li>
+  <li><strong>Revisor médico/jurídico nomeado e linkado.</strong> Schema <code>reviewedBy</code> é underused, mas válido.</li>
+  <li><strong>Citação de fonte primária.</strong> Em saúde, PubMed, Ministério da Saúde, sociedade médica brasileira da especialidade. Em finanças, Banco Central, B3, fonte oficial.</li>
+  <li><strong>Data de revisão visível no corpo,</strong> não só no schema.</li>
+  <li><strong>Política editorial pública.</strong> Página explicando processo de revisão e correção.</li>
+</ul>
+
+<p>Conteúdo médico, jurídico ou financeiro sem essa camada raramente entra em Top Stories mesmo fazendo tudo do checklist técnico. E quando entra, sai rápido na primeira reavaliação algorítmica.</p>
+
+<h2>Checklist final, em ordem de prioridade</h2>
+
+<p>Cole no editorial. Itens 1 a 5 são bloqueadores, 6 a 9 são sinais de força, 10 a 12 são otimização fina.</p>
+
+<h3>Bloqueadores</h3>
+<ol>
+  <li>News-sitemap separado, dinâmico, só URLs das últimas 48h, máximo 1.000 URLs.</li>
+  <li><code>NewsArticle</code> renderizado server-side, com <code>datePublished</code> e <code>dateModified</code> em ISO 8601 com timezone.</li>
+  <li>Author como <code>Person</code> com <code>sameAs</code> apontando pra perfis externos verificáveis.</li>
+  <li>Imagem em três aspect ratios (16:9, 4:3, 1:1), todas em URL pública direta.</li>
+  <li>Header HTTP <code>Last-Modified</code> consistente com <code>dateModified</code> do schema.</li>
+</ol>
+
+<h3>Sinais de força</h3>
+<ol start="6">
+  <li>Hook automático de IndexNow + ping de news-sitemap + purge de CDN no publish.</li>
+  <li>Bloco "últimas notícias" na home com link direto, no HTML, sem JS.</li>
+  <li>Robots.txt bloqueando paginação, archives e parâmetros de filtro.</li>
+  <li>Página de autor por pessoa, com bio real, foto, credencial e link externo.</li>
+</ol>
+
+<h3>Otimização fina</h3>
+<ol start="10">
+  <li>Publisher Center configurado (vale se você quer Google News app).</li>
+  <li>Stress test de TTFB de origem em pico de tráfego.</li>
+  <li>URL Inspection API exposta como botão admin pra recrawl manual de matérias atrasadas.</li>
+</ol>
+
+<h2>O que NÃO vale o esforço em 2026</h2>
+
+<ul>
+  <li><strong>AMP.</strong> Deprecated pro Top Stories, sem boost. Mantém só se já tem instalado e funciona, não cria novo.</li>
+  <li><strong>Standout markup.</strong> Descontinuado.</li>
+  <li><strong>Re-submeter URLs antigas.</strong> Não acelera nada, só queima budget.</li>
+  <li><strong>Pagar consultoria que promete "aprovação no Google News".</strong> Não existe candidatura desde 2019.</li>
+  <li><strong>Schema duplicado pra "garantir".</strong> Dois <code>NewsArticle</code> na mesma página confundem o motor, escolha um e mantenha.</li>
+</ul>
+
+<h2>Perguntas frequentes</h2>
+
+<h3>Meu blog de marca pode aparecer no Top Stories?</h3>
+
+<p>Pode. Top Stories não exige ser veículo de notícia, só elegibilidade técnica e tema com tração de news. Marca que publica conteúdo editorial sério em ritmo previsível, com autoria real e schema completo, entra. O risco é a Site Reputation Abuse Policy se o conteúdo for descolado da área de atuação da marca.</p>
+
+<h3>Preciso publicar todo dia pra entrar em Top Stories?</h3>
+
+<p>Não. Mas precisa de <strong>regularidade previsível</strong>, três a cinco matérias por semana é suficiente em nicho. Publicar em rajada e sumir queima sinal de "fonte ativa de news". Calendário editorial estável pesa mais que volume.</p>
+
+<h3>Quanto tempo até aparecer?</h3>
+
+<p>Com tudo certo do lado técnico, descoberta acontece em 5 a 30 minutos por matéria. Inclusão no Top Stories pode levar de 4 a 8 semanas se o domínio é novo (período de quarentena não-documentado). Domínio com histórico bom indexa e aparece no mesmo ciclo.</p>
+
+<h3>AMP ainda ajuda?</h3>
+
+<p>Não pra ranking, sim pra UX em mobile lento se você não tem CWV verde de outro jeito. Em 2026 é mais fácil resolver CWV de origem do que manter AMP paralelo. Quem cria site novo hoje, não cria com AMP.</p>
+
+<h3>Top Stories e AI Overviews vão coexistir?</h3>
+
+<p>Coexistem hoje no mesmo SERP, mas competem pelo mesmo espaço acima da dobra. AI Overview tende a aparecer em query informacional ampla, Top Stories em query de notícia recente, evento ou nome próprio. A leitura prática é: monitorar SERP feature por query e escolher pelo que aparece, não pelo que você quer que apareça.</p>
+
+<h3>Vale a pena configurar Publisher Center se foco é Top Stories?</h3>
+
+<p>Não como prioridade. Publisher Center serve Google News app/aba, que é fração pequena do tráfego de news. Configure se quiser cobrir o canal completo, mas Top Stories não depende disso.</p>
+
+<h3>Como meço se entrei no Top Stories?</h3>
+
+<p>Search Console em Performance → Aparência da pesquisa filtra por "Notícias" e por "Top Stories" (esse último em "tipos de resultado"). Em paralelo, monitorar logs de servidor por <code>Googlebot-News</code> user-agent dá pista da frequência de leitura. Pra validação manual, rodar conjunto fixo de queries de notícia em janela anônima e verificar presença no carrossel.</p>
+
+<hr/>
+
+<p><em>Pra fechar a trilha técnica, o <a href="/blog/guia-sitemap-dinamico-em-escala/">guia de sitemap dinâmico em escala</a> resolve o sitemap principal (separado do news-sitemap), e o <a href="/blog/guia-core-web-vitals-wordpress-sem-plugin-cache/">guia de Core Web Vitals em WordPress</a> cobre a base de TTFB e renderização que o Top Stories assume como ponto de partida.</em></p>`,
+    seo_title: 'Google News e Top Stories, tech SEO em 2026',
+    seo_description:
+      'Como aparecer no Google News e Top Stories sem ser veículo. News-sitemap dinâmico, NewsArticle schema, hook de IndexNow, contra-intuitivos que ninguém escreve em PT-BR.',
+    keywords: [
+      'Google News SEO',
+      'Top Stories SEO',
+      'tech SEO notícias',
+      'news sitemap',
+      'NewsArticle schema',
+      'Publisher Center 2026',
+      'IndexNow WordPress',
+      'URL Inspection API',
+      'Discover SEO',
+      'YMYL news',
+    ],
+  },
 };
 
 export function postSlugs(): string[] {
