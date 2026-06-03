@@ -12,7 +12,29 @@ export const posts: Record<string, Post> = {
 
 <p><strong>Resposta detalhada:</strong> este guia separa o que tem evidência do que é folclore. Cada número aqui veio de fonte primária (paper, documentação oficial de plataforma) ou de estudo de mercado de grande amostra, e está <strong>datado</strong>, porque o campo muda mês a mês. Onde a evidência é fraca, contestada ou ausente, eu sinalizo. É um guia longo de propósito, pra ser referência. Se você quer o passo a passo de <em>como escrever</em> um post citável, o atalho está no <a href="/blog/manual-aeo-geo-escrever-post-citado-llm/">Manual de AEO/GEO</a>, que é o companheiro prático deste aqui.</p>
 
-<h2>O que é GEO, de onde veio o termo</h2>
+<nav class="toc" aria-label="Sumário">
+<p class="toc__title">Neste guia</p>
+<ol>
+  <li><a href="#o-que-e-geo">O que é GEO, de onde veio o termo</a></li>
+  <li><a href="#zero-click">O dado que iniciou a corrida: a busca virou zero-click</a></li>
+  <li><a href="#como-citam">Como os motores realmente escolhem e citam fontes</a></li>
+  <li><a href="#geo-vs-seo">GEO × SEO: o que muda e o que continua igual</a></li>
+  <li><a href="#o-que-funciona">O que a evidência diz que funciona no conteúdo</a></li>
+  <li><a href="#reddit-ugc">Reddit, UGC e mídia de terceiros: o fator que varia mais</a></li>
+  <li><a href="#camada-tecnica">A camada técnica: crawlers, rendering, robots.txt, schema</a></li>
+  <li><a href="#como-medir">Como medir GEO (e por que é mais difícil do que parece)</a></li>
+  <li><a href="#hype-vs-realidade">Hype × realidade: o caso cético e a posição do Google</a></li>
+  <li><a href="#mitos">Mitos pra aposentar (afirmações que não sobrevivem à evidência)</a></li>
+  <li><a href="#cenarios">GEO na prática: três cenários</a></li>
+  <li><a href="#erros-comuns">Os erros mais comuns de GEO (e como evitar)</a></li>
+  <li><a href="#playbook">Playbook acionável, priorizado por nível de evidência</a></li>
+  <li><a href="#faq">Perguntas frequentes sobre GEO</a></li>
+  <li><a href="#nao-sabemos">O que a evidência ainda não responde</a></li>
+  <li><a href="#conclusao">Conclusão: o que levar pra casa</a></li>
+</ol>
+</nav>
+
+<h2 id="o-que-e-geo">O que é GEO, de onde veio o termo</h2>
 
 <p>GEO foi formalizado em <strong>2024</strong> por um paper acadêmico: <a href="https://arxiv.org/abs/2311.09735">"GEO: Generative Engine Optimization", de Aggarwal et al., apresentado no KDD 2024</a> (a principal conferência de mineração de dados, da ACM). O paper define GEO como "o primeiro paradigma para ajudar criadores a melhorar a visibilidade do seu conteúdo nas respostas de motores generativos", e define motor generativo como um sistema que <strong>sintetiza informação de várias fontes e resume via LLM</strong>, em vez de devolver dez links azuis.</p>
 
@@ -22,7 +44,7 @@ export const posts: Record<string, Post> = {
 
 <p>Pra situar onde estamos: o paper que cunhou GEO saiu em <strong>novembro de 2023</strong> (a versão final, no KDD, é de 2024). Em <strong>maio de 2024</strong> o Google começou a liberar os AI Overviews em larga escala nos EUA. Ao longo de <strong>2025</strong> vieram os grandes estudos de impacto (Pew, Ahrefs, Semrush, SparkToro) que transformaram a discussão de especulação em dado. E em <strong>2026</strong> o campo entrou numa fase de consolidação e ceticismo saudável, com o próprio Google publicando material pra dizer que "AEO/GEO ainda é SEO" e desencorajar táticas mágicas. Esse arco, de hype a evidência, é exatamente o que este guia tenta refletir.</p>
 
-<h2>O dado que iniciou a corrida: a busca virou zero-click</h2>
+<h2 id="zero-click">O dado que iniciou a corrida: a busca virou zero-click</h2>
 
 <p>A razão de GEO existir como pauta é simples: a resposta gerada por IA fica entre o usuário e o seu site, e ela canibaliza o clique. Isso parou de ser teoria.</p>
 
@@ -36,7 +58,7 @@ export const posts: Record<string, Post> = {
 
 <p>Há uma mudança de mentalidade embutida aqui. Por anos, a métrica final do SEO foi o clique. Com respostas geradas, parte do valor passa a ser <strong>aparecer na resposta</strong> mesmo sem clique, como menção, recomendação ou citação que constrói lembrança e confiança de marca. Não dá pra medir isso direito com a régua antiga de sessões, e fingir que dá é parte do problema. O enquadramento mais útil pra 2026 é separar duas metas: <strong>tráfego</strong> (que ainda vem majoritariamente do orgânico clássico e do clique) e <strong>presença em IA</strong> (ser a fonte que o assistente escolhe citar). As táticas pra alcançar as duas se sobrepõem bastante, é por isso que "ainda é SEO" faz sentido, mas as metas e as métricas não são a mesma coisa, e tratá-las como se fossem leva a relatórios que não explicam o que está acontecendo. Quem entende essa separação para de entrar em pânico com a queda de CTR e começa a perguntar a pergunta certa: estou sendo a resposta, ou só mais um link que ninguém abre?</p>
 
-<h2>Como os motores realmente escolhem e citam fontes</h2>
+<h2 id="como-citam">Como os motores realmente escolhem e citam fontes</h2>
 
 <p>Antes de qualquer tática, você precisa entender o mecanismo, porque ele desmonta metade das "dicas de GEO" que circulam. Os motores generativos não inventam citações do nada: eles fazem <strong>retrieval</strong> (recuperam documentos) e <strong>grounding</strong> (ancoram a resposta nesses documentos) em cima de um índice de busca, e na prática esse índice é o mesmo da busca tradicional ou muito parecido.</p>
 
@@ -108,7 +130,7 @@ export const posts: Record<string, Post> = {
 
 <p>A leitura prática dessa tabela: pro <strong>Google e o Gemini</strong>, JavaScript não é problema e o jogo é muito parecido com SEO clássico. Pro <strong>ChatGPT, a Perplexity e o Claude</strong>, o conteúdo precisa estar no HTML do servidor, o frescor pesa mais, e presença em comunidade pode importar dependendo do nicho. Um único conteúdo bem feito atende todos eles, mas saber a diferença evita gastar esforço no motor errado, por exemplo, brigar por velocidade de atualização pensando no Google AI Overviews, que é justamente o que menos liga pra frescor.</p>
 
-<h2>GEO × SEO: o que muda e o que continua igual</h2>
+<h2 id="geo-vs-seo">GEO × SEO: o que muda e o que continua igual</h2>
 
 <p>A pergunta que todo mundo faz: rankear bem no Google ainda importa pra ser citado pela IA? A resposta é <strong>sim, mas só parcialmente, e cada vez menos no nível do prompt literal</strong>.</p>
 
@@ -122,7 +144,7 @@ export const posts: Record<string, Post> = {
 
 <p>Uma ressalva de método que importa: a parcela de citações que vem do top-10 não é estável. A Ahrefs viu cair de ~76% (julho de 2025) pra ~37-38% em medições posteriores; a BrightEdge reporta números ainda menores, na casa de 17%. Não cite um desses números como "o" número, eles são móveis. O que é estável é a direção: <strong>rankear ajuda, não garante, e cobrir o cluster ajuda mais do que cravar uma keyword</strong>.</p>
 
-<h2>O que a evidência diz que funciona no conteúdo</h2>
+<h2 id="o-que-funciona">O que a evidência diz que funciona no conteúdo</h2>
 
 <p>Aqui está o coração do paper de 2024, e é a parte com evidência controlada mais forte que existe. Aggarwal et al. testaram <strong>nove estratégias</strong> de reescrita sobre o GEO-Bench (um benchmark de 10 mil queries) e mediram quanto cada uma muda a visibilidade da fonte na resposta gerada.</p>
 
@@ -197,7 +219,7 @@ export const posts: Record<string, Post> = {
 
 <p>Há um fator que não cabe numa lista de "9 estratégias de reescrita" mas atravessa tudo: autoridade. Os motores preferem citar fontes que parecem confiáveis, e isso se manifesta em sinais de E-E-A-T (experiência, expertise, autoridade e confiabilidade) e na reputação da marca/entidade. Uma estimativa da Brainlabs sugere que cerca de <strong>96% das fontes citadas por IA passariam num filtro de E-E-A-T</strong>, o que diz muito sobre o piso de qualidade necessário só pra entrar na conversa. Na prática, isso significa autor real e identificável, credenciais visíveis, fontes primárias linkadas, consistência da marca pela web e presença em lugares que o motor já trata como confiáveis. É o tipo de coisa que não se "hackeia" num post, se constrói ao longo do tempo, e é justamente onde o GEO mais se confunde com a boa e velha construção de autoridade do SEO. Se você tem que escolher onde investir e seu domínio é jovem, autoridade rende mais no longo prazo do que qualquer ajuste de formatação.</p>
 
-<h2>Reddit, UGC e mídia de terceiros: o fator que varia mais</h2>
+<h2 id="reddit-ugc">Reddit, UGC e mídia de terceiros: o fator que varia mais</h2>
 
 <p>Um dos achados mais úteis e mais mal interpretados de 2025 é o peso de fóruns e conteúdo de comunidade nas citações. A resposta curta: <strong>depende brutalmente do nicho e do motor</strong>, e qualquer afirmação de "Reddit domina as citações de IA" sem qualificar o vertical está errada.</p>
 
@@ -207,7 +229,7 @@ export const posts: Record<string, Post> = {
 
 <p>O prego final no caixão de qualquer ranking fixo de domínios: eles são <strong>voláteis</strong>. A Semrush viu a participação do Reddit nas respostas do ChatGPT <strong>cair de ~60% para ~10% em cerca de duas semanas</strong>, e a da Wikipedia de ~55% pra menos de 20% na mesma janela. Não construa estratégia em cima de um share de domínio de um mês. A leitura acionável e estável é outra: <strong>presença em fontes de terceiros (menções, reviews, presença em comunidades relevantes do seu nicho) é um sinal real, e o peso dele varia por vertical e por motor</strong>.</p>
 
-<h2>A camada técnica: crawlers, rendering, robots.txt, schema</h2>
+<h2 id="camada-tecnica">A camada técnica: crawlers, rendering, robots.txt, schema</h2>
 
 <p>Esta é a parte mais acionável e menos ambígua do GEO, porque é documentada pelas próprias plataformas. E é onde mais se erra por confundir bots.</p>
 
@@ -292,7 +314,7 @@ Disallow: /</code></pre>
 
 <p>Vale conhecer porque ilustra uma zona cinzenta. Em agosto de 2025, a <a href="https://blog.cloudflare.com/perplexity-is-using-stealth-undeclared-crawlers-to-evade-website-no-crawl-directives/">Cloudflare acusou a Perplexity</a> de usar crawlers "furtivos" que trocam user-agent e IP pra <strong>ignorar o robots.txt</strong>. A <a href="https://www.perplexity.ai/hub/blog/agents-or-bots-making-sense-of-ai-on-the-open-web">Perplexity rebateu</a> dizendo que são "agentes disparados pelo usuário" (que, como os fetchers do próprio Google, priorizam o pedido da pessoa sobre o robots.txt) e que a Cloudflare confundiu tráfego de um terceiro com o dela. É uma <strong>disputa não resolvida entre duas partes interessadas</strong> (a Cloudflare vende bloqueio de bots; a Perplexity se defende), sem logs públicos pra arbitrar. A lição prática: <strong>o robots.txt não é tratado como vinculante para retrieval iniciado pelo usuário</strong>, então não conte com ele como mecanismo de controle absoluto.</p>
 
-<h2>Como medir GEO (e por que é mais difícil do que parece)</h2>
+<h2 id="como-medir">Como medir GEO (e por que é mais difícil do que parece)</h2>
 
 <p>Existe um mercado crescente de ferramentas pra medir "visibilidade em IA", Profound, Ahrefs Brand Radar, Semrush AI Toolkit, Otterly, Peec AI, Scrunch, entre outras. Elas geralmente fazem <strong>prompt sampling</strong> (rodam um conjunto de prompts repetidamente) e reportam métricas como <em>share of voice</em> e <em>citation share</em> (quanto a sua marca/domínio aparece versus os concorrentes).</p>
 
@@ -314,7 +336,7 @@ Disallow: /</code></pre>
 
 <p>Sobre as ferramentas: todas fazem variações de prompt sampling e diferem mais em cobertura e preço do que em método. A <strong>Profound</strong> e a <strong>Peec AI</strong> nasceram focadas em visibilidade em IA; o <strong>Ahrefs Brand Radar</strong> e o <strong>Semrush AI Toolkit</strong> acoplam isso a suítes de SEO que você talvez já use; <strong>Otterly</strong> e <strong>Scrunch</strong> miram monitoramento de marca em respostas de IA. Nenhuma escapa do problema de reprodutibilidade, então o critério de escolha é prático (cobertura dos motores que te interessam, integração com o resto do seu stack, custo), não a promessa de precisão.</p>
 
-<h2>Hype × realidade: o caso cético e a posição do Google</h2>
+<h2 id="hype-vs-realidade">Hype × realidade: o caso cético e a posição do Google</h2>
 
 <p>Eu fechei o guia com isto de propósito, porque é o contraponto que dá credibilidade ao resto. A posição mais defensável hoje, e ela vem do próprio Google e de vozes respeitadas do SEO, é que <strong>"GEO ainda é SEO"</strong>.</p>
 
@@ -324,7 +346,7 @@ Disallow: /</code></pre>
 
 <p>Pra ser justo com os dois lados, vale separar o que está em disputa do que não está. Ninguém sério nega que os motores generativos mudaram a descoberta e que vale a pena ser citado. O que os céticos disputam é mais específico: que exista um conjunto de táticas "de GEO", distintas de boas práticas de SEO e de conteúdo, com retorno comprovado. Nessa parte eles têm razão pela evidência, a maioria das "técnicas exclusivas de IA" ou não tem suporte (llms.txt) ou é simplesmente bom conteúdo com nome novo (dados, estrutura, autoridade). O risco prático do hype é concreto: times redirecionam orçamento pra táticas mágicas e param de fazer o feijão com arroz que de fato move o ponteiro. A postura madura é tratar GEO como uma <em>lente</em> nova sobre o trabalho de sempre, com alguns ajustes apoiados em dados, e não como um balde de truques inéditos.</p>
 
-<h2>Mitos pra aposentar (afirmações que não sobrevivem à evidência)</h2>
+<h2 id="mitos">Mitos pra aposentar (afirmações que não sobrevivem à evidência)</h2>
 
 <p>Pra fechar a parte conceitual, uma lista de coisas que circulam como verdade e que <strong>não se sustentam</strong> quando você checa a fonte:</p>
 
@@ -337,7 +359,7 @@ Disallow: /</code></pre>
   <li><strong>"Menção de marca importa mais que backlink em GEO."</strong> Tese plausível, mas a cifra que circulava pra prová-la foi refutada; falta evidência quantificada.</li>
 </ul>
 
-<h2>GEO na prática: três cenários</h2>
+<h2 id="cenarios">GEO na prática: três cenários</h2>
 
 <p>Como a evidência vira decisão muda conforme o tipo de site. Três exemplos do que eu priorizaria em cada caso.</p>
 
@@ -353,7 +375,7 @@ Disallow: /</code></pre>
 
 <p>Seu objetivo costuma ser ser citado quando alguém pergunta "melhores ferramentas de X". Isso depende menos do seu próprio site e mais da sua presença em fontes de terceiros que o motor confia: listicles de comparação, reviews, menções em mídia do setor. Crie o conteúdo de fundo no seu site (é o que sustenta a elegibilidade e a sua narrativa), mas invista também em estar presente, com dado real, nas páginas que os motores recuperam pra essas perguntas. E meça com humildade: como mostrou a SparkToro, a sua posição nessas listas oscila a cada rodada, então pense em frequência ao longo do tempo, não em "cravei o 1º lugar".</p>
 
-<h2>Os erros mais comuns de GEO (e como evitar)</h2>
+<h2 id="erros-comuns">Os erros mais comuns de GEO (e como evitar)</h2>
 
 <p>Depois de toda a evidência, é útil olhar pelo avesso, os tropeços que mais aparecem na prática:</p>
 
@@ -366,7 +388,7 @@ Disallow: /</code></pre>
   <li><strong>Brigar por uma keyword em vez de cobrir o tema.</strong> O fan-out premia quem responde o cluster inteiro de subperguntas; a obsessão por posição numa única query é herança do SEO antigo.</li>
 </ol>
 
-<h2>Playbook acionável, priorizado por nível de evidência</h2>
+<h2 id="playbook">Playbook acionável, priorizado por nível de evidência</h2>
 
 <p>Junta tudo. Eu organizei por <strong>força da evidência</strong>, não por hype, porque é assim que você aloca esforço sem se enganar.</p>
 
@@ -400,7 +422,7 @@ Disallow: /</code></pre>
 
 <p>Escolha um conjunto de prompts que representem a intenção do seu público, rode cada um <strong>várias vezes</strong>, e acompanhe <strong>tendência ao longo do tempo</strong> (sua marca aparece mais ou menos, mês a mês?) em vez de um número absoluto numa rodada. Cruze com o que dá pra medir de verdade: tráfego de referência vindo de domínios de IA (chat.openai.com, perplexity.ai etc.) no seu analytics. Esse é o sinal mais concreto que você tem.</p>
 
-<h2>Perguntas frequentes sobre GEO</h2>
+<h2 id="faq">Perguntas frequentes sobre GEO</h2>
 
 <h3>GEO vai substituir o SEO?</h3>
 
@@ -426,7 +448,7 @@ Disallow: /</code></pre>
 
 <p>Garantir que o conteúdo essencial das suas páginas está no HTML renderizado no servidor (porque ChatGPT, Claude e Perplexity não executam JavaScript) e que você cobre seus temas com profundidade, usando dados e fontes reais. O resto é refinamento sobre essa base.</p>
 
-<h2>O que a evidência ainda não responde</h2>
+<h2 id="nao-sabemos">O que a evidência ainda não responde</h2>
 
 <p>Um guia honesto também marca os limites do que se sabe. Estes pontos seguem em aberto em meados de 2026, e desconfie de quem te der resposta categórica sobre eles:</p>
 
@@ -439,7 +461,7 @@ Disallow: /</code></pre>
 
 <p>Nada disso invalida o playbook, ele é construído sobre o que <em>tem</em> evidência. Mas saber onde a evidência acaba é o que separa um guia sério de um folheto de vendas.</p>
 
-<h2>Conclusão: o que levar pra casa</h2>
+<h2 id="conclusao">Conclusão: o que levar pra casa</h2>
 
 <p>GEO é real no sentido de que motores generativos agora intermediam a descoberta, e isso muda como o clique acontece. Mas a maior parte do que funciona pra ser citado é o que sempre funcionou pra ranquear bem, mais um punhado de ajustes de estrutura e cobertura de tema apoiados por evidência. A diferença entre fazer GEO com método e cair no hype está em três hábitos: <strong>separar elegibilidade de seleção, datar todo número (porque o campo muda mês a mês), e exigir evidência antes de gastar esforço.</strong> Se você fizer só isso, já está à frente da maioria dos guias de GEO que existem por aí.</p>
 
