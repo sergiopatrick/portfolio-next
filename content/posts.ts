@@ -1,6 +1,465 @@
 import type { Post } from './types';
 
 export const posts: Record<string, Post> = {
+  'geo-guia-completo-baseado-em-evidencias': {
+    title: 'GEO (Generative Engine Optimization): o guia baseado em evidências',
+    excerpt:
+      'O mega guia de GEO sem hype: o que os papers (KDD 2024, AutoGEO, GEO-16) e os dados de mercado (Ahrefs, Semrush, Pew, SparkToro) realmente provam sobre ser citado por ChatGPT e Google AI Overviews. Mecanismos, números datados, o que é mito e um playbook priorizado por nível de evidência.',
+    tag: 'SEO Técnico',
+    published_at: '2026-06-02',
+    read_time_min: 34,
+    body: `<p><strong>Resposta curta:</strong> GEO (Generative Engine Optimization) é otimizar conteúdo para ser citado nas respostas geradas por IA, como AI Overviews do Google e ChatGPT. A evidência de 2024 a 2026 converge num ponto desconfortável pra quem vende GEO como disciplina nova: na maior parte, <strong>ainda é SEO</strong>. O que torna sua página <em>elegível</em> a aparecer é SEO técnico padrão (estar indexada e poder ganhar um snippet). O que faz ela ser <em>selecionada e citada</em> é qualidade, estrutura extraível, frescor relativo, autoridade e presença em fontes de terceiros. Quase nenhuma tática "exclusiva de IA" (llms.txt, reescrita para LLM) tem suporte empírico.</p>
+
+<p><strong>Resposta detalhada:</strong> este guia separa o que tem evidência do que é folclore. Cada número aqui veio de fonte primária (paper, documentação oficial de plataforma) ou de estudo de mercado de grande amostra, e está <strong>datado</strong>, porque o campo muda mês a mês. Onde a evidência é fraca, contestada ou ausente, eu sinalizo. É um guia longo de propósito, pra ser referência. Se você quer o passo a passo de <em>como escrever</em> um post citável, o atalho está no <a href="/blog/manual-aeo-geo-escrever-post-citado-llm/">Manual de AEO/GEO</a>, que é o companheiro prático deste aqui.</p>
+
+<h2>O que é GEO, de onde veio o termo</h2>
+
+<p>GEO foi formalizado em <strong>2024</strong> por um paper acadêmico: <a href="https://arxiv.org/abs/2311.09735">"GEO: Generative Engine Optimization", de Aggarwal et al., apresentado no KDD 2024</a> (a principal conferência de mineração de dados, da ACM). O paper define GEO como "o primeiro paradigma para ajudar criadores a melhorar a visibilidade do seu conteúdo nas respostas de motores generativos", e define motor generativo como um sistema que <strong>sintetiza informação de várias fontes e resume via LLM</strong>, em vez de devolver dez links azuis.</p>
+
+<p>Vale separar do barulho de mercado. Você vai ver os acrônimos <strong>GEO</strong> (Generative Engine Optimization), <strong>AEO</strong> (Answer Engine Optimization) e até <strong>AI SEO</strong> usados quase como sinônimos. A diferença é mais de branding de agência do que de substância. O Google, inclusive, trata a sopa de letrinhas com desconfiança, e eu volto a isso na seção de ceticismo. Para este guia: GEO é otimizar pra ser citado por motores que geram resposta, e os dois que mais importam em volume são <strong>Google AI Overviews / AI Mode</strong> e <strong>ChatGPT (search)</strong>, com Perplexity e Gemini logo atrás.</p>
+
+<h3>Uma linha do tempo rápida</h3>
+
+<p>Pra situar onde estamos: o paper que cunhou GEO saiu em <strong>novembro de 2023</strong> (a versão final, no KDD, é de 2024). Em <strong>maio de 2024</strong> o Google começou a liberar os AI Overviews em larga escala nos EUA. Ao longo de <strong>2025</strong> vieram os grandes estudos de impacto (Pew, Ahrefs, Semrush, SparkToro) que transformaram a discussão de especulação em dado. E em <strong>2026</strong> o campo entrou numa fase de consolidação e ceticismo saudável, com o próprio Google publicando material pra dizer que "AEO/GEO ainda é SEO" e desencorajar táticas mágicas. Esse arco, de hype a evidência, é exatamente o que este guia tenta refletir.</p>
+
+<h2>O dado que iniciou a corrida: a busca virou zero-click</h2>
+
+<p>A razão de GEO existir como pauta é simples: a resposta gerada por IA fica entre o usuário e o seu site, e ela canibaliza o clique. Isso parou de ser teoria.</p>
+
+<p>O estudo mais limpo é do <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research (julho de 2025)</a>, porque mede comportamento real de navegação, não opinião: 900 adultos nos EUA, quase 69 mil buscas reais. Quando aparece um AI Overview na página, o usuário clica num resultado orgânico em <strong>8% das visitas, contra 15% quando não há resumo de IA</strong>, ou seja, cerca de metade. Clica num link <em>dentro</em> do resumo em apenas <strong>1%</strong>. E encerra a sessão de navegação em <strong>26% das páginas com AI Overview, contra 16%</strong> das páginas só com resultados tradicionais. Esse é o comportamento "zero-click": a pessoa teve a resposta e foi embora.</p>
+
+<p>Do lado de quem rankeia, a <a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks/">Ahrefs analisou 300 mil keywords</a> e achou que a presença de um AI Overview correlaciona com <strong>CTR 34,5% menor</strong> na posição 1 (comparando março de 2024, pré-rollout nos EUA, com março de 2025). Em 2026 a própria Ahrefs revisou esse número pra cerca de <strong>58%</strong> de queda. Dois avisos importantes aqui, e eles valem pro guia inteiro: primeiro, é <strong>correlação</strong>, não causa isolada, o Google Search Console não deixa separar clique de AI Overview do resto, então o efeito é inferido. Segundo, é dado de <em>vendor</em> de SEO, robusto em amostra mas com interesse comercial. O Google contesta publicamente tanto o Pew quanto a tese de queda de CTR, embora até hoje não tenha apresentado números próprios pra rebater.</p>
+
+<p>O contrapeso otimista: o tráfego que <em>vem</em> dos assistentes cresce rápido. A <a href="https://www.semrush.com/blog/chatgpt-search-insights/">Semrush mediu +206% de crescimento ano a ano</a> nos referrals do ChatGPT pra sites (comparando janeiro de 2025 a janeiro de 2026, sobre 1 bilhão de linhas de clickstream). É um número grande, mas sobre uma base baixíssima (o ChatGPT search mal tinha lançado no início de 2025), e o volume absoluto ainda é pequeno perto da busca tradicional. A leitura honesta é: o canal existe, está crescendo, e ainda é minoritário.</p>
+
+<p>Outras leituras reforçam a tendência sem encerrar a controvérsia. A Similarweb apontou crescimento de referrals de IA na casa de três dígitos percentuais em 2025; a Digiday reportou que alguns publishers associaram os AI Overviews a uma queda de cerca de 25% no tráfego de referência. Some tudo e aparece uma assimetria incômoda: o lado da <em>perda</em> (cliques que somem do orgânico quando a IA já respondeu) é grande e imediato; o lado do <em>ganho</em> (tráfego que vem dos assistentes) é real e cresce rápido, mas ainda é pequeno em volume absoluto. Pra maioria dos sites em 2026, a conta líquida de tráfego direto de IA ainda é modesta. O motivo de fazer GEO, então, não é um pico de sessões no analytics no mês que vem, é presença e autoridade na superfície onde as pessoas estão, cada vez mais, buscando, mais a proteção da marca contra o cenário em que o concorrente é citado e você não.</p>
+
+<p>Há uma mudança de mentalidade embutida aqui. Por anos, a métrica final do SEO foi o clique. Com respostas geradas, parte do valor passa a ser <strong>aparecer na resposta</strong> mesmo sem clique, como menção, recomendação ou citação que constrói lembrança e confiança de marca. Não dá pra medir isso direito com a régua antiga de sessões, e fingir que dá é parte do problema. O enquadramento mais útil pra 2026 é separar duas metas: <strong>tráfego</strong> (que ainda vem majoritariamente do orgânico clássico e do clique) e <strong>presença em IA</strong> (ser a fonte que o assistente escolhe citar). As táticas pra alcançar as duas se sobrepõem bastante, é por isso que "ainda é SEO" faz sentido, mas as metas e as métricas não são a mesma coisa, e tratá-las como se fossem leva a relatórios que não explicam o que está acontecendo. Quem entende essa separação para de entrar em pânico com a queda de CTR e começa a perguntar a pergunta certa: estou sendo a resposta, ou só mais um link que ninguém abre?</p>
+
+<h2>Como os motores realmente escolhem e citam fontes</h2>
+
+<p>Antes de qualquer tática, você precisa entender o mecanismo, porque ele desmonta metade das "dicas de GEO" que circulam. Os motores generativos não inventam citações do nada: eles fazem <strong>retrieval</strong> (recuperam documentos) e <strong>grounding</strong> (ancoram a resposta nesses documentos) em cima de um índice de busca, e na prática esse índice é o mesmo da busca tradicional ou muito parecido.</p>
+
+<p>Em termos simples, o que acontece por baixo é um <strong>RAG</strong> (Retrieval-Augmented Generation): em vez de responder só com o que "lembra" do treino, o modelo primeiro <em>busca</em> documentos relevantes, e depois <em>gera</em> a resposta ancorada neles, citando de onde tirou. Isso tem uma implicação que muda a estratégia inteira: pra ser citado, você não precisa "estar no modelo" (ter sido usado no treino), precisa <strong>estar recuperável no momento da pergunta</strong>. Ou seja, ser indexável e relevante vale mais do que qualquer coisa relacionada a treino. É também por isso que conteúdo novo, que nunca poderia estar num modelo treinado meses atrás, aparece nas respostas: ele entra pela porta do retrieval, não pela do treino.</p>
+
+<h3>Google AI Overviews e AI Mode usam query fan-out</h3>
+
+<p>O mecanismo central do Google se chama <strong>query fan-out</strong>. Em vez de buscar a sua pergunta literal, o sistema a <strong>decompõe em várias subconsultas e dispara todas em paralelo</strong>, depois junta os resultados e sintetiza. Isso não é especulação de SEO: está descrito no <a href="https://blog.google/products-and-platforms/products/search/google-search-ai-mode-update/">blog oficial do Google</a> ("AI Mode uses our query fan-out technique, breaking down your question into subtopics and issuing a multitude of queries simultaneously") e numa <a href="https://patents.google.com/patent/US20240289407A1">patente do Google (US20240289407A1)</a> que descreve a geração de "synthetic queries".</p>
+
+<p>Na API do Gemini (o <a href="https://ai.google.dev/gemini-api/docs/google-search">grounding with Google Search</a>), dá pra ver o encanamento: o modelo <strong>decide sozinho</strong> se vale buscar (há um classificador com threshold), pode gerar várias queries, e devolve metadados de citação, <code>webSearchQueries</code> (as queries que usou), <code>groundingChunks</code> (as fontes, com URL e título) e <code>groundingSupports</code> (que mapeia cada trecho do texto à fonte que o sustenta, é daí que saem as citações inline).</p>
+
+<h3>ChatGPT search e Perplexity</h3>
+
+<p>O ChatGPT search teve, no início de 2025, forte alinhamento com o índice do <strong>Bing</strong>. A <a href="https://www.seerinteractive.com/insights/87-percent-of-searchgpt-citations-match-bings-top-results">Seer Interactive mediu (fevereiro de 2025)</a> que 87% das citações batiam no topo orgânico do Bing, contra só 56% de match com o Google. Mas atenção, e esse é um caso onde uma afirmação popular não sobrevive à verificação: <strong>esse 87% NÃO prova "dependência forte e permanente" do Bing</strong>. As citações são pós-hoc (geradas depois da resposta), o número é um snapshot de uma metodologia específica, e ele já erodiu, a Profound mostrou o alinhamento ChatGPT-Bing caindo de ~26% para ~8% ao longo de 2025 enquanto a OpenAI roda mais o seu próprio crawler. Use como foto datada, não como lei.</p>
+
+<p>A Perplexity opera de forma parecida (retrieval + síntese com citações explícitas), e é a que mais se aproxima do ranking orgânico tradicional, como você vai ver no overlap abaixo.</p>
+
+<p>Vale uma dose de humildade aqui: boa parte do que sabemos sobre como ChatGPT e Perplexity montam o índice e escolhem fontes é inferência a partir de comportamento observado, não documentação oficial detalhada. A OpenAI confirma que o OAI-SearchBot indexa pra busca do ChatGPT, mas não publica os critérios de ranqueamento interno. Por isso, no nível desses motores, a estratégia segura é não perseguir um algoritmo específico (que muda e é opaco), e sim fazer o que funciona pra qualquer sistema de retrieval: conteúdo acessível, relevante, profundo e confiável. Quanto mais opaco o motor, mais você deveria apostar nos fundamentos em vez de em truques.</p>
+
+<h3>A distinção que organiza tudo: elegibilidade × seleção</h3>
+
+<p>Guarde esta separação, ela é o esqueleto do guia: <strong>elegibilidade</strong> é o que coloca sua página no conjunto de candidatas, e é puro SEO técnico (estar indexada, ser rastreável, poder ganhar snippet). <strong>Seleção</strong> é o que faz, dentre as candidatas, a sua ser a citada, e aí entram qualidade, estrutura, frescor, autoridade e presença em terceiros. Quase toda confusão sobre GEO vem de misturar as duas.</p>
+
+<h3>Os quatro motores, lado a lado</h3>
+
+<p>Generalizar "a IA" é o erro mais comum de quem começa em GEO. Cada motor recupera, renderiza e prefere fontes de um jeito diferente, e isso muda o que você faz. Esta tabela resume o que a evidência de 2025-2026 mostra:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Motor</th>
+      <th>Como recupera</th>
+      <th>Renderiza JS?</th>
+      <th>Viés de frescor</th>
+      <th>Preferência de fonte</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Google AI Overviews / AI Mode</strong></td>
+      <td>Grounding + query fan-out sobre o índice do Google (Googlebot)</td>
+      <td>Sim (usa o WRS do Googlebot)</td>
+      <td>Mais baixo (cita o conteúdo mais antigo, ~1.432 dias em média)</td>
+      <td>Fontes comerciais e autoritativas; propriedades do ecossistema Google</td>
+    </tr>
+    <tr>
+      <td><strong>ChatGPT (search)</strong></td>
+      <td>OAI-SearchBot + índice próprio (historicamente alinhado ao Bing, alinhamento caindo)</td>
+      <td>Não</td>
+      <td>Mais alto (cita o conteúdo mais novo, ~958 dias em média)</td>
+      <td>Forte uso de comunidade/Reddit em várias categorias</td>
+    </tr>
+    <tr>
+      <td><strong>Perplexity</strong></td>
+      <td>Retrieval + síntese com citações explícitas</td>
+      <td>Não</td>
+      <td>Médio</td>
+      <td>Maior overlap com o ranking orgânico tradicional (~28,6%)</td>
+    </tr>
+    <tr>
+      <td><strong>Gemini</strong></td>
+      <td>Grounding with Google Search (o modelo decide se busca)</td>
+      <td>Sim (infra do Google)</td>
+      <td>Médio</td>
+      <td>Índice do Google + decisão dinâmica de quando buscar</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A leitura prática dessa tabela: pro <strong>Google e o Gemini</strong>, JavaScript não é problema e o jogo é muito parecido com SEO clássico. Pro <strong>ChatGPT, a Perplexity e o Claude</strong>, o conteúdo precisa estar no HTML do servidor, o frescor pesa mais, e presença em comunidade pode importar dependendo do nicho. Um único conteúdo bem feito atende todos eles, mas saber a diferença evita gastar esforço no motor errado, por exemplo, brigar por velocidade de atualização pensando no Google AI Overviews, que é justamente o que menos liga pra frescor.</p>
+
+<h2>GEO × SEO: o que muda e o que continua igual</h2>
+
+<p>A pergunta que todo mundo faz: rankear bem no Google ainda importa pra ser citado pela IA? A resposta é <strong>sim, mas só parcialmente, e cada vez menos no nível do prompt literal</strong>.</p>
+
+<p>A <a href="https://ahrefs.com/blog/does-ranking-higher-on-google-mean-youll-get-cited-in-ai-overviews/">Ahrefs cruzou 1 milhão de keywords</a> que disparam AI Overview com 1,9 milhão de links citados e achou uma correlação de Spearman de <strong>0,347</strong>, "positiva moderada", entre estar no top-10 orgânico e ser citado. O dado mais ilustrativo: <strong>mesmo páginas em 1º lugar só aparecem entre os três links citados no AI Overview cerca de 50% das vezes</strong>. É cara ou coroa. E a Ahrefs é explícita: "os AI Overviews não são uma simples reembalagem dos top results".</p>
+
+<p>Quando você olha o overlap no <em>prompt original</em>, ele despenca. Outra <a href="https://ahrefs.com/blog/ai-search-overlap/">análise da Ahrefs</a> (via Brand Radar, 15 mil queries long-tail) achou que <strong>só ~12% das URLs citadas por ChatGPT, Gemini e Copilot estão no top-10 do Google para o mesmo prompt</strong>. A Perplexity é a exceção, com ~28,6% de overlap. Por que tão baixo? Por causa do fan-out: o assistente não busca o seu prompt, busca várias reformulações dele. Uma página que rankeia em 6º lugar para várias queries relacionadas pode ser citada acima de uma página que é 1ª numa única query.</p>
+
+<p>Isso tem uma consequência tática forte, e ela é apoiada por dados: a <a href="https://surferseo.com/blog/ai-citation-report/">Surfer analisou 173 mil URLs</a> e achou que páginas que rankeiam para a query principal <strong>mais pelo menos uma query de fan-out</strong> têm <strong>+161% de chance de citação</strong> (Spearman de 0,77 entre número de fan-out queries cobertas e citação), e que 68% das páginas citadas estavam <em>fora</em> do top-10 da query principal. Em português direto: cobrir o <strong>tema inteiro</strong> (o cluster de subperguntas) vale mais do que cravar a posição 1 numa keyword só.</p>
+
+<p>Um exemplo torna isso palpável. Imagine a pergunta "qual o melhor plano de saúde para autônomo?". O motor não busca essa frase literal, ele dispara um leque de subconsultas, algo como "planos de saúde individuais 2026", "plano de saúde para MEI vale a pena", "carência de plano de saúde individual", "reembolso em plano individual" e "plano de saúde autônomo x CLT". Quem ganha a citação não é necessariamente quem está em 1º lugar para "melhor plano para autônomo", é quem responde bem <em>esse conjunto inteiro de subperguntas</em> num conteúdo só. É por isso que, na prática, um guia profundo e abrangente sobre o tema vence um post raso superotimizado para uma única keyword. E é também por isso que a tática "uma página, uma keyword" do SEO antigo perde força: o fan-out premia quem trata o assunto como um bloco coeso.</p>
+
+<p>Uma ressalva de método que importa: a parcela de citações que vem do top-10 não é estável. A Ahrefs viu cair de ~76% (julho de 2025) pra ~37-38% em medições posteriores; a BrightEdge reporta números ainda menores, na casa de 17%. Não cite um desses números como "o" número, eles são móveis. O que é estável é a direção: <strong>rankear ajuda, não garante, e cobrir o cluster ajuda mais do que cravar uma keyword</strong>.</p>
+
+<h2>O que a evidência diz que funciona no conteúdo</h2>
+
+<p>Aqui está o coração do paper de 2024, e é a parte com evidência controlada mais forte que existe. Aggarwal et al. testaram <strong>nove estratégias</strong> de reescrita sobre o GEO-Bench (um benchmark de 10 mil queries) e mediram quanto cada uma muda a visibilidade da fonte na resposta gerada.</p>
+
+<p>Um parêntese sobre o GEO-Bench, porque entender o teste ajuda a calibrar a confiança. São 10 mil queries de 25 domínios diferentes, e pra cada uma o benchmark usa os <strong>cinco primeiros resultados do Google</strong> como fontes candidatas. O método pega essas fontes, aplica uma estratégia de reescrita a uma delas, e mede se ela passa a ser mais "visível" na resposta gerada (uma métrica que combina se a fonte é citada e quanto da resposta vem dela). É um desenho sólido pra comparar estratégias entre si, mas note o que ele <em>não</em> é: não é o Google AI Overviews real, é um motor que imita o comportamento de um assistente sobre essas fontes. Daí a regra que repito no guia, ótimo pra direção, fraco pra cravar números absolutos em produção.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Estratégia</th>
+      <th>Efeito medido</th>
+      <th>Veredito</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Citações de fontes (Cite Sources)</strong></td>
+      <td>Entre as campeãs, +30-40% relativo</td>
+      <td>Vale o trabalho</td>
+    </tr>
+    <tr>
+      <td><strong>Estatísticas (Statistics Addition)</strong></td>
+      <td>Entre as campeãs</td>
+      <td>Vale o trabalho</td>
+    </tr>
+    <tr>
+      <td><strong>Citação direta com aspas (Quotation)</strong></td>
+      <td>Entre as campeãs</td>
+      <td>Vale o trabalho</td>
+    </tr>
+    <tr>
+      <td><strong>Fluência (Fluency Optimization)</strong></td>
+      <td>Entre as campeãs</td>
+      <td>Vale o trabalho</td>
+    </tr>
+    <tr>
+      <td>Keyword stuffing (SEO clássico)</td>
+      <td>~10% PIOR que o baseline (na Perplexity)</td>
+      <td>Não faça</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Olhando os números por estratégia, as campeãs ficam na faixa de <strong>+30% a +41% de visibilidade relativa</strong>: citação direta com aspas no topo, seguida de estatística com fonte e de referência inline a fontes primárias. Um detalhe que casa com o que vimos sobre autoridade: o ganho de citar fontes externas tende a ser <strong>ainda maior em sites pequenos ou novos</strong>, porque a fonte confiável "empresta" credibilidade a um domínio que ainda não a construiu. Se o seu site é jovem, citar bem fontes fortes é das alavancas mais baratas que existem.</p>
+
+<p>O número de manchete do paper é "<strong>até +40% de visibilidade</strong>". Ele é verdadeiro e importante, mas exige três asteriscos que quase ninguém coloca: (1) é <strong>teto, melhor caso por estratégia, não média nem garantia</strong>; (2) foi medido sobre o GEO-Bench num motor que <strong>imita o Bing Chat</strong>, e o único teste em motor real foi na Perplexity, onde o ganho chegou a <strong>+37%</strong>, não há validação direta no Google AI Overviews nem no ChatGPT; (3) há um alerta ético embutido. Lendo o código que o próprio paper publicou, as estratégias campeãs de "quotes" e "citações" incluem, no benchmark, a possibilidade de <strong>fabricar</strong> citações ("invented but plausible citations"). <strong>Não faça isso.</strong> Citação e estatística inventadas destroem confiança, contradizem E-E-A-T e, em qualquer tema sério, são um risco real. A versão honesta da tática é: use dados e quotes <strong>reais e verificáveis</strong>, com link pra fonte primária.</p>
+
+<h3>Na prática: o que "dado extraível" quer dizer</h3>
+
+<p>A diferença entre uma frase que vira citação e uma que é ignorada é concreta. Compare:</p>
+
+<p><strong>Versão genérica (raramente citada):</strong> "A maioria das buscas hoje já mostra algum tipo de resumo de IA."</p>
+
+<p><strong>Versão extraível (citável):</strong> "Cerca de 18% das buscas no Google já exibiam um AI Overview em meados de 2025, segundo o <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research</a> (12.593 de 68.879 buscas analisadas)."</p>
+
+<p>A segunda versão entrega ao motor exatamente o que ele precisa pra citar com segurança: um número específico, uma fonte nomeada e linkada, e uma frase que faz sentido sozinha, fora do parágrafo. Repare que isso também é, simplesmente, escrever com rigor, é a sobreposição GEO-SEO em ação. Você não está "enganando a IA", está produzindo o tipo de conteúdo que um editor humano também acharia mais confiável. Essa é a melhor heurística que existe: <strong>o que aumenta a confiança de um leitor exigente costuma ser o mesmo que aumenta a chance de citação por IA</strong>.</p>
+
+<p>O trabalho seguinte confirma e refina. O <a href="https://arxiv.org/abs/2510.11438">AutoGEO (CMU, aceito no ICLR 2026)</a> mostrou que regras aprendidas automaticamente superam as heurísticas manuais do paper de 2024 (ganho médio de ~36%, até ~51% sobre o melhor baseline), e trouxe um achado conceitual: <strong>cada motor e cada domínio têm preferências próprias, não existe receita única universal</strong>. Com uma ressalva que reduz a confiança: os "motores" do AutoGEO também são simulados (LLMs grandes instruídos a agir como motores), não os produtos reais.</p>
+
+<p>Por que confiar nesses estudos, então, se os motores são simulados? Porque eles isolam variáveis de um jeito que a observação de mercado não consegue: num experimento controlado você muda só a estatística, ou só a citação, e mede o efeito sem o ruído de mil outros fatores. A fraqueza é a validade externa (será que vale no ChatGPT real?), e por isso o uso correto é <strong>combinar as duas evidências</strong>: o experimento controlado diz <em>o que tende a causar</em> efeito, e o dado de mercado diz <em>o que está acontecendo</em> nos motores reais. Quando os dois apontam na mesma direção, como no caso de "dados e citações reais ajudam a ser citado", você pode agir com bastante confiança. Quando só um aponta, trate como hipótese, não como lei.</p>
+
+<h3>Frescor: importa, mas é relativo</h3>
+
+<p>Conteúdo novo é citado com mais frequência, só que de forma desigual entre motores. A <a href="https://ahrefs.com/blog/do-ai-assistants-prefer-to-cite-fresh-content/">Ahrefs analisou quase 17 milhões de URLs citadas</a> (julho de 2025) e achou que citações de IA são, em média, <strong>25,7% mais "frescas"</strong> que o resultado orgânico (1.064 contra 1.432 dias). O ranking de preferência por recência: <strong>ChatGPT cita o conteúdo mais novo</strong> (média de 958 dias), e o <strong>Google AI Overviews o mais antigo</strong> (1.432 dias), com Copilot, Gemini e Perplexity no meio.</p>
+
+<p>Antes de sair atualizando data de tudo: <strong>dentro de um conjunto de candidatas, relevância pesa mais que frescor</strong> ("freshness alone isn't enough; relevance still does the heavy lifting", nas palavras da Ahrefs), e há páginas com 7+ anos sendo citadas. Além disso, o efeito cai pra 13,1% quando medido por data de <em>última atualização</em> em vez de publicação, o que sugere que <strong>manter conteúdo antigo atualizado conta tanto quanto publicar novo</strong>. Frescor é desempate, principalmente em temas de notícia, não é o fator dominante.</p>
+
+<h3>Estrutura: escreva para ser fragmentado</h3>
+
+<p>Os motores recortam seu post em pedaços (chunks) e recuperam o pedaço, não o artigo. Por isso estrutura é função, não estética: H2 descritivos, resposta direta na primeira frase de cada seção, listas, tabelas e blocos autocontidos. Como esse é exatamente o assunto do <a href="/blog/manual-aeo-geo-escrever-post-citado-llm/">Manual de AEO/GEO</a>, não vou repetir o passo a passo aqui, o resumo é: cada H2 precisa fazer sentido lido isoladamente.</p>
+
+<h3>Autoridade e E-E-A-T: o filtro invisível</h3>
+
+<p>Há um fator que não cabe numa lista de "9 estratégias de reescrita" mas atravessa tudo: autoridade. Os motores preferem citar fontes que parecem confiáveis, e isso se manifesta em sinais de E-E-A-T (experiência, expertise, autoridade e confiabilidade) e na reputação da marca/entidade. Uma estimativa da Brainlabs sugere que cerca de <strong>96% das fontes citadas por IA passariam num filtro de E-E-A-T</strong>, o que diz muito sobre o piso de qualidade necessário só pra entrar na conversa. Na prática, isso significa autor real e identificável, credenciais visíveis, fontes primárias linkadas, consistência da marca pela web e presença em lugares que o motor já trata como confiáveis. É o tipo de coisa que não se "hackeia" num post, se constrói ao longo do tempo, e é justamente onde o GEO mais se confunde com a boa e velha construção de autoridade do SEO. Se você tem que escolher onde investir e seu domínio é jovem, autoridade rende mais no longo prazo do que qualquer ajuste de formatação.</p>
+
+<h2>Reddit, UGC e mídia de terceiros: o fator que varia mais</h2>
+
+<p>Um dos achados mais úteis e mais mal interpretados de 2025 é o peso de fóruns e conteúdo de comunidade nas citações. A resposta curta: <strong>depende brutalmente do nicho e do motor</strong>, e qualquer afirmação de "Reddit domina as citações de IA" sem qualificar o vertical está errada.</p>
+
+<p>A <a href="https://surferseo.com/blog/ai-citation-report/">Surfer analisou 36 milhões de AI Overviews</a> (março a agosto de 2025) e o contraste por vertical é gritante: em <strong>games</strong>, o AI Overview cita o Reddit em ~78% das vezes; em <strong>e-commerce</strong>, ~11%; em <strong>esportes</strong>, ~13%; em <strong>saúde</strong>, comunidade quase não aparece, dominam fontes clínicas (NIH ~39%, Healthline ~15%, Mayo Clinic ~15%). Ou seja: em tema sério e regulado, autoridade institucional vence; em tema de experiência pessoal, comunidade vence.</p>
+
+<p>E o motor muda tudo. A <a href="https://www.semrush.com/blog/most-cited-domains-ai/">Semrush rastreou 230 mil prompts</a> e viu que o <strong>Google AI Mode prefere fontes comerciais e autoritativas</strong> (em finanças, Bankrate e NerdWallet dominam), enquanto o <strong>ChatGPT trata o Reddit como autoridade primária</strong> em várias categorias. Dois cuidados: números como "Reddit citado em 176,89%" carregam falsa precisão sobre uma saída estatística instável, leia como direção, não decimal; e há diferença entre o domínio ser <em>consultado</em> internamente e ser <em>citado</em> de forma visível (um estudo da 5W/Discovered Labs estima o Reddit como fonte interna em ~27% das respostas do ChatGPT, mas citação visível em só ~0,35%).</p>
+
+<p>O prego final no caixão de qualquer ranking fixo de domínios: eles são <strong>voláteis</strong>. A Semrush viu a participação do Reddit nas respostas do ChatGPT <strong>cair de ~60% para ~10% em cerca de duas semanas</strong>, e a da Wikipedia de ~55% pra menos de 20% na mesma janela. Não construa estratégia em cima de um share de domínio de um mês. A leitura acionável e estável é outra: <strong>presença em fontes de terceiros (menções, reviews, presença em comunidades relevantes do seu nicho) é um sinal real, e o peso dele varia por vertical e por motor</strong>.</p>
+
+<h2>A camada técnica: crawlers, rendering, robots.txt, schema</h2>
+
+<p>Esta é a parte mais acionável e menos ambígua do GEO, porque é documentada pelas próprias plataformas. E é onde mais se erra por confundir bots.</p>
+
+<h3>Os crawlers de IA têm funções diferentes</h3>
+
+<p>Bloquear "a IA" não é uma decisão única, porque cada bot faz uma coisa. A <a href="https://developers.openai.com/api/docs/bots">documentação da OpenAI</a> e a <a href="https://developers.cloudflare.com/ai-crawl-control/reference/bots/">taxonomia da Cloudflare</a> deixam claro:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Categoria</th>
+      <th>Função</th>
+      <th>Bots</th>
+      <th>O que acontece se você bloquear</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Treino</td>
+      <td>Coletar dados pra treinar o modelo</td>
+      <td>GPTBot, ClaudeBot, Google-Extended, Bytespider, Meta-ExternalAgent</td>
+      <td>Sai do treino. NÃO afeta ser citado nas respostas.</td>
+    </tr>
+    <tr>
+      <td>Busca / retrieval</td>
+      <td>Indexar pra busca do assistente</td>
+      <td>OAI-SearchBot, PerplexityBot</td>
+      <td>Bloquear OAI-SearchBot = some das respostas de busca do ChatGPT.</td>
+    </tr>
+    <tr>
+      <td>Ação do usuário</td>
+      <td>Buscar quando um humano pede</td>
+      <td>ChatGPT-User, Perplexity-User</td>
+      <td>Afeta fetch em tempo real a pedido do usuário.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A OpenAI é literal: "sites que optam por sair do OAI-SearchBot não serão mostrados nas respostas de busca do ChatGPT". E os controles são independentes, dá pra liberar o OAI-SearchBot (pra ser citado) e bloquear o GPTBot (pra não treinar o modelo) no mesmo <code>robots.txt</code>.</p>
+
+<p>Na prática, um <code>robots.txt</code> de quem quer aparecer na busca do ChatGPT mas não alimentar o treino fica assim:</p>
+
+<pre><code class="language-text"># Quero ser citado na busca do ChatGPT
+User-agent: OAI-SearchBot
+Allow: /
+
+# Mas não quero alimentar o treino do modelo da OpenAI
+User-agent: GPTBot
+Disallow: /
+
+# Idem para o treino do Gemini (atenção: isto NÃO te tira do AI Overviews)
+User-agent: Google-Extended
+Disallow: /</code></pre>
+
+<p>Repare no comentário da última linha. É o erro mais comum: gente que bloqueia o <code>Google-Extended</code> achando que "saiu da IA do Google" e continua aparecendo no AI Overviews do mesmo jeito, porque o AI Overviews lê pelo Googlebot, não pelo Google-Extended.</p>
+
+<p>A pegadinha que derruba muita gente é o Google. <strong>O AI Overviews e o AI Mode usam o Googlebot, não o Google-Extended.</strong> Bloquear o <code>Google-Extended</code> tira você do treino e do grounding do Gemini, mas <strong>não</strong> tira do AI Overviews, que segue o índice de busca normal. E bloquear o <code>Googlebot</code> tira você de tudo, inclusive da busca orgânica. Então "bloquear a IA do Google" sem perder busca é, na prática, quase impossível, é o mesmo crawler.</p>
+
+<h3>Os crawlers de IA (quase todos) não executam JavaScript</h3>
+
+<p>Esse é o item técnico mais subestimado. Um <a href="https://vercel.com/blog/the-rise-of-the-ai-crawler">estudo da Vercel/MERJ sobre mais de 500 milhões de requisições</a> (dezembro de 2024) concluiu: <strong>nenhum dos principais crawlers de IA renderiza JavaScript</strong>, vale pra OpenAI (GPTBot, OAI-SearchBot, ChatGPT-User), Anthropic (ClaudeBot), Meta, ByteDance e Perplexity. O ChatGPT chega a baixar arquivos <code>.js</code> em ~11,5% das requisições, e o Claude em ~24%, mas <strong>nenhum executa</strong> esse JavaScript.</p>
+
+<p>A consequência é dura e direta: <strong>se o conteúdo só aparece depois do JavaScript rodar no navegador, esses motores não veem nada.</strong> Tudo que importa, corpo do texto, títulos, metadados, navegação, links, precisa estar no <strong>HTML renderizado no servidor (SSR)</strong> ou pré-renderizado. A exceção é o Google, AI Overviews e Gemini renderizam JS porque usam a infra do Googlebot (o WRS), e o AppleBot também. Mas projetar pra exceção é arriscado: o piso seguro é <strong>conteúdo essencial no HTML inicial</strong>.</p>
+
+<p>O teste é trivial e vale ouro: pegue a URL e veja o HTML <em>bruto</em>, sem deixar o JavaScript rodar. Pelo terminal:</p>
+
+<pre><code class="language-bash">curl -sL https://seusite.com.br/sua-pagina/ | grep -i "trecho do seu texto principal"</code></pre>
+
+<p>Se o trecho que você procurou <strong>não</strong> aparecer no retorno, ele provavelmente está sendo injetado por JavaScript no navegador, e os crawlers de ChatGPT, Claude e Perplexity não vão vê-lo. O mesmo teste serve pra navegador: abra a página, use "Ver código-fonte da página" (Ctrl+U) e procure pelo texto, isso mostra o HTML inicial, diferente do "Inspecionar elemento", que mostra o DOM já modificado pelo JS. Em stacks modernas (React, Vue, Angular) sem renderização no servidor, é comum o corpo do artigo só existir depois do JS, o que é fatal pra esses motores. A correção é SSR (server-side rendering), SSG (geração estática) ou pré-renderização da rota.</p>
+
+<h3>Schema.org não é requisito (mas não é inútil)</h3>
+
+<p>O Google é inequívoco na <a href="https://developers.google.com/search/docs/appearance/ai-features">documentação oficial</a>: "você não precisa criar arquivos legíveis por máquina, arquivos de texto de IA, ou markup pra aparecer nessas features. Também não há nenhum schema.org especial que você precise adicionar". A elegibilidade pro AI Overviews e AI Mode é <strong>a mesma do Google Search</strong>: estar indexado e poder ser mostrado com snippet.</p>
+
+<p>Isso não quer dizer que schema seja inútil. "Não obrigatório" é diferente de "sem valor", o Google ainda recomenda dados estruturados pra <em>rich results</em>, que as features de IA podem aproveitar. E há um sinal acadêmico, com asteriscos: o framework <a href="https://arxiv.org/abs/2509.10762">GEO-16 (preprint de set/2025)</a>, sobre 1.702 citações em três motores, achou que metadados/frescor, HTML semântico e dados estruturados estavam entre os fatores <strong>associados</strong> a mais citação, e que qualidade geral de página é forte preditor estatístico (odds ratio 4,2). Os asteriscos: é preprint não revisado, é <strong>correlacional, não causal</strong>, é restrito a páginas B2B SaaS em inglês, e não cobre ChatGPT nem Gemini. Traduzindo pra decisão: faça schema porque é boa higiene de SEO e ajuda em rich results, <strong>não</strong> porque alguém te prometeu que LLM cita mais por causa dele.</p>
+
+<h3>llms.txt: a tática sem evidência</h3>
+
+<p>O <code>llms.txt</code> é um arquivo proposto pra "dar instruções aos LLMs" sobre seu site. A evidência de que ele funciona é, hoje, <strong>nula</strong>. A <a href="https://seranking.com/blog/llms-txt/">SE Ranking analisou cerca de 300 mil domínios</a>: ter <code>llms.txt</code> não tornava o site mais propenso a ser citado, e <strong>remover essa variável do modelo até melhorou a precisão</strong>. Só ~10% dos sites têm o arquivo. E o Google foi explícito por dois porta-vozes: Gary Illyes disse que "o Google não suporta llms.txt e não planeja", e John Mueller que "nenhum sistema de IA usa llms.txt hoje". Custa pouco pra implementar, mas não é tática de GEO, é, no máximo, aposta especulativa. Não venda isso como resultado.</p>
+
+<h3>Nota sobre o caso Perplexity × Cloudflare</h3>
+
+<p>Vale conhecer porque ilustra uma zona cinzenta. Em agosto de 2025, a <a href="https://blog.cloudflare.com/perplexity-is-using-stealth-undeclared-crawlers-to-evade-website-no-crawl-directives/">Cloudflare acusou a Perplexity</a> de usar crawlers "furtivos" que trocam user-agent e IP pra <strong>ignorar o robots.txt</strong>. A <a href="https://www.perplexity.ai/hub/blog/agents-or-bots-making-sense-of-ai-on-the-open-web">Perplexity rebateu</a> dizendo que são "agentes disparados pelo usuário" (que, como os fetchers do próprio Google, priorizam o pedido da pessoa sobre o robots.txt) e que a Cloudflare confundiu tráfego de um terceiro com o dela. É uma <strong>disputa não resolvida entre duas partes interessadas</strong> (a Cloudflare vende bloqueio de bots; a Perplexity se defende), sem logs públicos pra arbitrar. A lição prática: <strong>o robots.txt não é tratado como vinculante para retrieval iniciado pelo usuário</strong>, então não conte com ele como mecanismo de controle absoluto.</p>
+
+<h2>Como medir GEO (e por que é mais difícil do que parece)</h2>
+
+<p>Existe um mercado crescente de ferramentas pra medir "visibilidade em IA", Profound, Ahrefs Brand Radar, Semrush AI Toolkit, Otterly, Peec AI, Scrunch, entre outras. Elas geralmente fazem <strong>prompt sampling</strong> (rodam um conjunto de prompts repetidamente) e reportam métricas como <em>share of voice</em> e <em>citation share</em> (quanto a sua marca/domínio aparece versus os concorrentes).</p>
+
+<p>O problema é de validade, e é sério. A <a href="https://sparktoro.com/blog/new-research-ais-are-highly-inconsistent-when-recommending-brands-or-products-marketers-should-take-care-when-tracking-ai-visibility/">SparkToro rodou um estudo (fim de 2025, ~3 mil execuções)</a> e achou que as respostas de IA são <strong>quase irreprodutíveis</strong>: há <strong>menos de 1 chance em 100</strong> de o ChatGPT ou a IA do Google devolverem a <em>mesma lista de marcas</em> em duas rodadas da mesma pergunta, e cerca de <strong>1 em 1.000</strong> de devolverem na <em>mesma ordem</em>. Ou seja, qualquer métrica de visibilidade baseada em poucas rodadas é um ponto numa distribuição muito ruidosa.</p>
+
+<p>Isso não significa "não meça". Significa medir direito: trate visibilidade em IA como uma <strong>distribuição, não um número</strong>. Rode cada prompt muitas vezes, reporte faixas e tendências ao longo do tempo em vez de uma foto, e desconfie de qualquer ferramenta que te dê um share de voz com duas casas decimais e ar de certeza. Não existe, até onde a evidência alcança, um benchmark independente comparando a validade dessas ferramentas entre si.</p>
+
+<h3>Um método de medição que aguenta a crítica</h3>
+
+<p>Se você precisa reportar visibilidade em IA pra um cliente ou pra diretoria, dá pra fazer de forma defensável, desde que você aceite a natureza ruidosa do dado:</p>
+
+<ol>
+  <li><strong>Defina um conjunto fixo de prompts</strong> que representem a intenção real do seu público (as perguntas que levam à sua categoria), não só o nome da sua marca.</li>
+  <li><strong>Rode cada prompt de 10 a 30 vezes</strong> por motor, nunca uma só. O achado da SparkToro torna a rodada única estatisticamente inútil.</li>
+  <li><strong>Reporte como frequência, com intervalo:</strong> "minha marca apareceu em 40% das 30 rodadas deste prompt no ChatGPT", e não "estou em 1º lugar".</li>
+  <li><strong>Acompanhe a tendência mês a mês</strong>, não o valor absoluto. A pergunta certa é "estou aparecendo mais ou menos do que no mês passado?".</li>
+  <li><strong>Cruze com o tráfego de referência real</strong> de domínios de IA no seu analytics. Esse é o único sinal que não é estimado.</li>
+</ol>
+
+<p>Sobre as ferramentas: todas fazem variações de prompt sampling e diferem mais em cobertura e preço do que em método. A <strong>Profound</strong> e a <strong>Peec AI</strong> nasceram focadas em visibilidade em IA; o <strong>Ahrefs Brand Radar</strong> e o <strong>Semrush AI Toolkit</strong> acoplam isso a suítes de SEO que você talvez já use; <strong>Otterly</strong> e <strong>Scrunch</strong> miram monitoramento de marca em respostas de IA. Nenhuma escapa do problema de reprodutibilidade, então o critério de escolha é prático (cobertura dos motores que te interessam, integração com o resto do seu stack, custo), não a promessa de precisão.</p>
+
+<h2>Hype × realidade: o caso cético e a posição do Google</h2>
+
+<p>Eu fechei o guia com isto de propósito, porque é o contraponto que dá credibilidade ao resto. A posição mais defensável hoje, e ela vem do próprio Google e de vozes respeitadas do SEO, é que <strong>"GEO ainda é SEO"</strong>.</p>
+
+<p>O <a href="https://developers.google.com/search/docs/appearance/ai-features">guia oficial do Google sobre AI features</a> (reforçado por um material de maio de 2026) reafirma que <strong>não há otimização especial necessária</strong> pra AI Overviews e AI Mode, e desmente nominalmente llms.txt, "content chunking" e reescrita "para IA" como requisitos. John Mueller, do Google, chegou a dizer (agosto de 2025) que <a href="https://ppc.land/googles-john-mueller-warns-ai-seo-acronyms-signal-spam-tactics/">a urgência em torno dos acrônimos GEO/AEO costuma sinalizar táticas de spam/scam</a>. E o Rand Fishkin, da SparkToro, resume a tese cética numa frase: é <strong>"Search Everywhere Optimization"</strong>, a mesma disciplina aplicada a mais superfícies, não uma ciência nova.</p>
+
+<p>Mas ceticismo bem feito não vira negação. O que os céticos <strong>concedem</strong> importa: os fatores de <em>seleção</em> (qualidade, profundidade, estrutura extraível, E-E-A-T, presença em terceiros) <strong>realmente influenciam</strong> quais páginas elegíveis são citadas. Uma estimativa da Brainlabs sugere que ~96% das fontes citadas passariam num filtro de E-E-A-T. Então o debate real não é "GEO existe ou não", é mais preciso que isso: <strong>a regra de elegibilidade é SEO puro; a otimização de desempenho e a medição é onde o "novo" mora, e é menos exótico do que o marketing vende.</strong></p>
+
+<p>Pra ser justo com os dois lados, vale separar o que está em disputa do que não está. Ninguém sério nega que os motores generativos mudaram a descoberta e que vale a pena ser citado. O que os céticos disputam é mais específico: que exista um conjunto de táticas "de GEO", distintas de boas práticas de SEO e de conteúdo, com retorno comprovado. Nessa parte eles têm razão pela evidência, a maioria das "técnicas exclusivas de IA" ou não tem suporte (llms.txt) ou é simplesmente bom conteúdo com nome novo (dados, estrutura, autoridade). O risco prático do hype é concreto: times redirecionam orçamento pra táticas mágicas e param de fazer o feijão com arroz que de fato move o ponteiro. A postura madura é tratar GEO como uma <em>lente</em> nova sobre o trabalho de sempre, com alguns ajustes apoiados em dados, e não como um balde de truques inéditos.</p>
+
+<h2>Mitos pra aposentar (afirmações que não sobrevivem à evidência)</h2>
+
+<p>Pra fechar a parte conceitual, uma lista de coisas que circulam como verdade e que <strong>não se sustentam</strong> quando você checa a fonte:</p>
+
+<ul>
+  <li><strong>"llms.txt aumenta suas citações."</strong> Sem evidência; estudo de 300 mil domínios não achou efeito, e o Google não usa.</li>
+  <li><strong>"GEO dá +40% de visibilidade garantido."</strong> O +40% é teto, em motor simulado; o real medido (Perplexity) foi +37%, e como melhor caso, não média.</li>
+  <li><strong>"O ChatGPT depende fortemente do Bing."</strong> Era um snapshot de início de 2025 (87%) que caiu pra ~8% no mesmo ano.</li>
+  <li><strong>"Reddit/Wikipedia/YouTube é o domínio número 1 das citações."</strong> Varia por vertical, por motor e por semana; nenhum ranking fixo se sustenta.</li>
+  <li><strong>"Schema faz o LLM te citar mais."</strong> Google diz que não é requisito; a evidência a favor é correlacional e fraca.</li>
+  <li><strong>"Menção de marca importa mais que backlink em GEO."</strong> Tese plausível, mas a cifra que circulava pra prová-la foi refutada; falta evidência quantificada.</li>
+</ul>
+
+<h2>GEO na prática: três cenários</h2>
+
+<p>Como a evidência vira decisão muda conforme o tipo de site. Três exemplos do que eu priorizaria em cada caso.</p>
+
+<h3>E-commerce e catálogo</h3>
+
+<p>O risco número um aqui é técnico: páginas de produto que carregam preço, estoque e descrição via JavaScript ficam invisíveis pro ChatGPT e pra Perplexity, que não executam JS. Primeira tarefa, então, é garantir SSR do conteúdo essencial do produto. Depois, foque em conteúdo de comparação ("X vs Y", "melhor X para Y") que cubra o cluster de subperguntas de compra, porque é isso que o fan-out recupera. Reviews e presença em terceiros (marketplaces, comparadores) pesam, mas o peso de comunidade em e-commerce é baixo (~11% de citação ao Reddit nos dados da Surfer), então não aposte só nisso.</p>
+
+<h3>Publisher e conteúdo informacional</h3>
+
+<p>Aqui frescor e profundidade são seus aliados, principalmente pro ChatGPT, que tem o maior viés de recência. Atualize conteúdo evergreen com data de revisão real (lembre que atualizar conta tanto quanto publicar novo), estruture cada matéria em seções autocontidas com resposta direta no topo, e use dados e citações reais com fonte. Em temas sérios (saúde, finanças, direito), autoridade institucional e E-E-A-T são decisivos, comunidade quase não é citada nesses verticais, ao contrário de games ou cultura pop.</p>
+
+<h3>Marca, SaaS e B2B</h3>
+
+<p>Seu objetivo costuma ser ser citado quando alguém pergunta "melhores ferramentas de X". Isso depende menos do seu próprio site e mais da sua presença em fontes de terceiros que o motor confia: listicles de comparação, reviews, menções em mídia do setor. Crie o conteúdo de fundo no seu site (é o que sustenta a elegibilidade e a sua narrativa), mas invista também em estar presente, com dado real, nas páginas que os motores recuperam pra essas perguntas. E meça com humildade: como mostrou a SparkToro, a sua posição nessas listas oscila a cada rodada, então pense em frequência ao longo do tempo, não em "cravei o 1º lugar".</p>
+
+<h2>Os erros mais comuns de GEO (e como evitar)</h2>
+
+<p>Depois de toda a evidência, é útil olhar pelo avesso, os tropeços que mais aparecem na prática:</p>
+
+<ol>
+  <li><strong>Tratar "a IA" como uma coisa só.</strong> Otimizar para frescor pensando no Google AI Overviews (que é o que menos liga pra recência) ou esquecer que o ChatGPT não enxerga seu conteúdo em JavaScript. Cada motor é diferente; volte à tabela comparativa.</li>
+  <li><strong>Esquecer o teste de HTML bruto.</strong> Investir meses em conteúdo que os crawlers de ChatGPT, Claude e Perplexity nunca veem porque depende de JS. É o erro mais caro e o mais fácil de evitar.</li>
+  <li><strong>Comprar tática sem evidência.</strong> Gastar energia com llms.txt, reescrita "para IA" ou schema "pra ser citado" enquanto o conteúdo de fundo continua raso.</li>
+  <li><strong>Confiar num share de voz de uma rodada.</strong> Como a medição é quase irreprodutível, reportar "estou em 1º na IA" com base numa única consulta é se enganar e enganar o cliente.</li>
+  <li><strong>Fabricar dados ou citações.</strong> Além de antiético, contradiz E-E-A-T e é risco real em qualquer tema sério. O efeito do paper vem de dados <em>reais</em> bem apresentados, não de invenção.</li>
+  <li><strong>Brigar por uma keyword em vez de cobrir o tema.</strong> O fan-out premia quem responde o cluster inteiro de subperguntas; a obsessão por posição numa única query é herança do SEO antigo.</li>
+</ol>
+
+<h2>Playbook acionável, priorizado por nível de evidência</h2>
+
+<p>Junta tudo. Eu organizei por <strong>força da evidência</strong>, não por hype, porque é assim que você aloca esforço sem se enganar.</p>
+
+<h3>Nível 1, evidência forte, faça primeiro</h3>
+
+<ol>
+  <li><strong>Garanta elegibilidade técnica.</strong> Esteja indexado, rastreável, e com conteúdo essencial no HTML renderizado no servidor (porque ChatGPT, Claude e Perplexity não executam JavaScript). Isso é pré-requisito; sem isso, o resto não acontece.</li>
+  <li><strong>Continue fazendo SEO bem.</strong> Rankear no orgânico ainda correlaciona com ser citado, e cobrir o <em>cluster</em> de subperguntas (não só uma keyword) maximiza a chance via fan-out, +161% de chance de citação nos dados da Surfer.</li>
+  <li><strong>Estruture pra ser fragmentado.</strong> H2 descritivos, resposta direta no topo de cada seção, listas e tabelas, blocos autocontidos. Detalhe operacional no <a href="/blog/manual-aeo-geo-escrever-post-citado-llm/">Manual de AEO/GEO</a>.</li>
+  <li><strong>Use dados, estatísticas e citações reais com fonte.</strong> São as estratégias campeãs do paper. Reais e linkadas, nunca fabricadas.</li>
+</ol>
+
+<h3>Nível 2, evidência moderada, faça em seguida</h3>
+
+<ol>
+  <li><strong>Mantenha conteúdo atualizado.</strong> Frescor é desempate, e atualizar conteúdo antigo conta tanto quanto publicar novo.</li>
+  <li><strong>Construa presença em fontes de terceiros</strong> relevantes pro seu nicho (menções, reviews, comunidades). O peso varia por vertical, mas é um sinal real.</li>
+  <li><strong>Invista em autoridade e E-E-A-T</strong> (autor real, credenciais, fontes primárias). É o que diferencia entre candidatas elegíveis.</li>
+  <li><strong>Mantenha schema/dados estruturados</strong> pela higiene de SEO e rich results, sem esperar que ele "faça" a citação.</li>
+</ol>
+
+<h3>Nível 3, sem evidência, não invista esforço sério</h3>
+
+<ol>
+  <li><strong>llms.txt.</strong> Baixo custo, mas não espere retorno. Implemente por experimentação, não como estratégia.</li>
+  <li><strong>Reescrever conteúdo "pra IA"</strong> de forma diferente do que é bom pro leitor. O Google desmente, e bom conteúdo é o denominador comum.</li>
+  <li><strong>Perseguir um share de voz com duas casas decimais.</strong> A medição é ruidosa demais; foque em tendência, não em foto.</li>
+</ol>
+
+<h3>Como medir sem se enganar</h3>
+
+<p>Escolha um conjunto de prompts que representem a intenção do seu público, rode cada um <strong>várias vezes</strong>, e acompanhe <strong>tendência ao longo do tempo</strong> (sua marca aparece mais ou menos, mês a mês?) em vez de um número absoluto numa rodada. Cruze com o que dá pra medir de verdade: tráfego de referência vindo de domínios de IA (chat.openai.com, perplexity.ai etc.) no seu analytics. Esse é o sinal mais concreto que você tem.</p>
+
+<h2>Perguntas frequentes sobre GEO</h2>
+
+<h3>GEO vai substituir o SEO?</h3>
+
+<p>Não, e a evidência aponta o contrário. A elegibilidade pra ser citado por IA é, na maior parte, SEO técnico padrão, e rankear bem ainda correlaciona com ser citado. O termo mais honesto, do Rand Fishkin, é "Search Everywhere Optimization": a mesma disciplina aplicada a mais superfícies, não uma ciência nova que substitui a anterior.</p>
+
+<h3>Preciso bloquear os crawlers de IA pra proteger meu conteúdo?</h3>
+
+<p>Depende do seu objetivo, e os efeitos são diferentes. Bloquear o GPTBot tira você do treino do modelo, mas não muda se você é citado nas respostas. Bloquear o OAI-SearchBot tira você das respostas de busca do ChatGPT, o que reduz visibilidade. No Google, não dá pra sair do AI Overviews sem sair da busca orgânica, porque é o mesmo Googlebot.</p>
+
+<h3>Vale a pena criar um arquivo llms.txt?</h3>
+
+<p>Pela evidência atual, não como estratégia. Um estudo de cerca de 300 mil domínios não achou efeito sobre citação, e o Google declarou que não usa o arquivo. Custa pouco implementar e você pode testar, mas não prometa retorno mensurável a ninguém com base nele.</p>
+
+<h3>Schema markup ajuda a ser citado por IA?</h3>
+
+<p>Não é requisito, segundo o próprio Google. Faça schema pela higiene de SEO e por rich results, não porque alguém prometeu mais citações de IA. A evidência a favor disso é correlacional e fraca, e o Google afirma explicitamente que não há schema especial necessário pra aparecer nas features de IA.</p>
+
+<h3>Por que meu concorrente é citado e eu não, se eu ranqueio melhor que ele?</h3>
+
+<p>Porque ranking não garante citação (uma página em 1º só entra no top-3 de links citados cerca de 50% das vezes) e porque o fan-out recupera por várias reformulações da query. Quem cobre melhor o cluster de subperguntas tende a vencer, mesmo sem ser o 1º na keyword principal. Vale também checar o básico: o conteúdo dele está acessível no HTML e o seu, talvez, dependa de JavaScript?</p>
+
+<h3>Qual a única coisa mais importante que eu posso fazer hoje?</h3>
+
+<p>Garantir que o conteúdo essencial das suas páginas está no HTML renderizado no servidor (porque ChatGPT, Claude e Perplexity não executam JavaScript) e que você cobre seus temas com profundidade, usando dados e fontes reais. O resto é refinamento sobre essa base.</p>
+
+<h2>O que a evidência ainda não responde</h2>
+
+<p>Um guia honesto também marca os limites do que se sabe. Estes pontos seguem em aberto em meados de 2026, e desconfie de quem te der resposta categórica sobre eles:</p>
+
+<ul>
+  <li><strong>Schema causa mais citação?</strong> Há associação correlacional (GEO-16) mas também estudos que não acham efeito e a declaração do Google de que não é requisito. Falta um experimento controlado que isole a variável.</li>
+  <li><strong>Menção de marca vale mais que backlink em GEO?</strong> A tese é popular, mas o número que circulava pra prová-la foi refutado. Falta evidência quantificada e replicada.</li>
+  <li><strong>Os achados valem para conteúdo em português?</strong> Quase toda a evidência modelada é em inglês e exclui o ChatGPT. A transferência pra outros idiomas e pro motor mais usado ainda não foi medida com rigor.</li>
+  <li><strong>Como medir de forma reprodutível?</strong> Dada a instabilidade das respostas, ainda não há um padrão metodológico consolidado nem benchmark independente de validade entre as ferramentas comerciais.</li>
+</ul>
+
+<p>Nada disso invalida o playbook, ele é construído sobre o que <em>tem</em> evidência. Mas saber onde a evidência acaba é o que separa um guia sério de um folheto de vendas.</p>
+
+<h2>Conclusão: o que levar pra casa</h2>
+
+<p>GEO é real no sentido de que motores generativos agora intermediam a descoberta, e isso muda como o clique acontece. Mas a maior parte do que funciona pra ser citado é o que sempre funcionou pra ranquear bem, mais um punhado de ajustes de estrutura e cobertura de tema apoiados por evidência. A diferença entre fazer GEO com método e cair no hype está em três hábitos: <strong>separar elegibilidade de seleção, datar todo número (porque o campo muda mês a mês), e exigir evidência antes de gastar esforço.</strong> Se você fizer só isso, já está à frente da maioria dos guias de GEO que existem por aí.</p>
+
+<p><em>Última revisão: 2 de junho de 2026. As estatísticas de mercado citadas são datadas porque o comportamento dos motores muda rápido; trate-as como direção e tendência, não como constantes.</em></p>`,
+    seo_title: 'GEO (Generative Engine Optimization): guia baseado em evidências',
+    seo_description:
+      'Mega guia de GEO sem hype: o que os papers (KDD 2024, AutoGEO, GEO-16) e os dados (Ahrefs, Semrush, Pew, SparkToro) provam sobre ser citado por ChatGPT e Google AI Overviews. Mecanismos, números datados e playbook por nível de evidência.',
+    keywords: [
+      'GEO',
+      'Generative Engine Optimization',
+      'AEO',
+      'AI Overviews',
+      'ChatGPT search',
+      'otimização para IA',
+      'citação por LLM',
+      'SEO para IA',
+      'query fan-out',
+      'GEO baseado em evidências',
+    ],
+  },
   'guia-sitemap-dinamico-em-escala': {
     title: 'Sitemap dinâmico em escala, sem estourar memória',
     excerpt:
