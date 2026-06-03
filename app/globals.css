@@ -1223,6 +1223,29 @@ a:hover { color: var(--color-accent); }
 	color: var(--code-text);
 }
 
+/* Tables inside prose content. */
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid var(--color-border);
+	font-size: 0.95em;
+}
+.prose th,
+.prose td {
+	border: 1px solid var(--color-border);
+	padding: var(--s-2) var(--s-3);
+	text-align: left;
+	vertical-align: top;
+}
+.prose thead th {
+	background: var(--color-bg-2);
+	color: var(--color-ink);
+	font-weight: 500;
+}
+.prose tbody tr:nth-child(even) {
+	background: var(--color-bg-2);
+}
+
 /* Figures (images + captions) inside prose content. */
 .prose figure {
 	margin-top: var(--s-6);
