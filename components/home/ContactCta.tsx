@@ -8,13 +8,13 @@ export function ContactCta() {
   return (
     <section className="contact-cta" id="contact">
       <div className="container">
-        <p className="section__kicker">Vamos trabalhar juntos</p>
+        <p className="section__kicker">Próximo passo</p>
         <h2 className="contact-cta__title">
-          Precisa de performance, SEO técnico e código de verdade?
+          Quer ser achado no Google e citado pelas IAs?
         </h2>
         <p className="contact-cta__sub">
-          Respondo todos os emails dentro de 48h. Sem formulário genérico. Chega uma
-          descrição clara, volta um escopo claro.
+          Conta o contexto em três linhas. Respondo em até 48 horas úteis com um
+          caminho claro e o que eu faria primeiro.
         </p>
 
         <div className="contact-cta__actions">
@@ -22,7 +22,7 @@ export function ContactCta() {
             <a href={wa} target="_blank" rel="noopener" className="btn btn--whatsapp">
               <SvgIcon name="whatsapp" width={18} height={18} />
               {' '}
-              Chamar no WhatsApp
+              Conversar no WhatsApp
             </a>
           )}
           <a href={`mailto:${siteOptions.email}`} className="btn btn--secondary">

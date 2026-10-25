@@ -34,6 +34,9 @@ export function ClientBehaviors() {
       menuToggle?.setAttribute('aria-expanded', open ? 'false' : 'true');
     };
     menuToggle?.addEventListener('click', onMenuClick);
+    // A route change (tapping a menu link) closes the full-screen menu.
+    siteNav?.setAttribute('aria-expanded', 'false');
+    menuToggle?.setAttribute('aria-expanded', 'false');
 
     // Copy buttons
     const copyHandlers: Array<{ btn: HTMLButtonElement; handler: () => void }> = [];

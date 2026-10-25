@@ -1,0 +1,168 @@
+/* =============================================================
+   2026 redesign, shared pieces used outside the home:
+   service pages (steps, "eu implemento"), services hub groups,
+   blog byline and author box.
+   ============================================================= */
+
+h1, h2, h3 { font-weight: 600; }
+
+/* ---------- Steps (service pages and home) ---------- */
+.service-steps { padding-block: var(--s-9); border-top: 1px solid var(--color-border); }
+.steps {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: var(--s-5);
+	margin-top: var(--s-6);
+	counter-reset: none;
+}
+.steps__item {
+	padding-top: var(--s-5);
+	border-top: 2px solid var(--color-ink);
+}
+.steps__num {
+	display: block;
+	font-family: var(--font-mono);
+	font-size: var(--fs-sm);
+	color: var(--color-muted);
+	margin-bottom: var(--s-3);
+}
+.steps__title {
+	font-size: var(--fs-lg);
+	margin-bottom: var(--s-3);
+}
+.steps__body { color: var(--color-ink-2); }
+@media (max-width: 900px) {
+	.steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+	.steps { grid-template-columns: 1fr; }
+}
+
+/* ---------- "Eu implemento" block ---------- */
+.service-implement {
+	padding-block: var(--s-9);
+	border-top: 1px solid var(--color-border);
+	background: var(--color-bg-2);
+}
+.service-implement__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+	gap: var(--s-8);
+	align-items: start;
+}
+.service-implement__body {
+	font-size: var(--fs-md);
+	color: var(--color-ink-2);
+	max-width: 52ch;
+	margin-bottom: var(--s-5);
+}
+.service-implement__code .code-block { margin: 0; }
+@media (max-width: 900px) {
+	.service-implement__grid { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+
+.service-posts { padding-block: var(--s-9); border-top: 1px solid var(--color-border); }
+.service-posts .selected-work__grid { margin-top: var(--s-6); }
+
+/* ---------- Services hub groups ---------- */
+.services-group + .services-group { padding-top: 0; }
+.services-group__title {
+	font-size: var(--fs-xl);
+	margin-bottom: var(--s-6);
+	padding-bottom: var(--s-4);
+	border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Blog byline and author box ---------- */
+.post-byline {
+	margin-top: var(--s-5);
+	color: var(--color-ink-2);
+	font-weight: 500;
+}
+.post-byline a { border-bottom: 1px solid var(--color-border); }
+.post-dates {
+	margin-top: var(--s-2);
+	font-size: var(--fs-sm);
+	color: var(--color-ink-3);
+}
+.author-box {
+	margin-top: var(--s-8);
+	padding: var(--s-6);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-lg);
+	background: var(--color-bg-2);
+}
+.author-box__name {
+	font-size: var(--fs-lg);
+	font-weight: 600;
+	color: var(--color-ink);
+	margin-bottom: var(--s-2);
+}
+.author-box__bio { color: var(--color-ink-2); margin-bottom: var(--s-4); }
+.author-box__links { display: flex; flex-wrap: wrap; gap: var(--s-5); }
+.author-box__links a {
+	font-weight: 600;
+	color: var(--color-ink);
+	border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Header CTA ---------- */
+.header-cta {
+	padding: 8px 16px;
+	border-radius: 999px;
+	background: var(--color-ink);
+	color: var(--color-bg);
+	font-size: var(--fs-sm);
+	font-weight: 600;
+	white-space: nowrap;
+}
+.header-cta:hover { color: var(--color-bg); opacity: 0.88; }
+@media (max-width: 768px) {
+	.header-cta { display: none; }
+}
+
+/* The menu icon collapsed to 0x0 inside the grid button (svg has
+   max-width 100% and no intrinsic size), so the mobile menu was invisible. */
+.menu-toggle svg { width: 20px; height: 20px; }
+
+/* ---------- Mobile menu, full screen ---------- */
+@media (max-width: 768px) {
+	.site-nav[aria-expanded="true"] {
+		position: fixed;
+		inset: 64px 0 0 0;
+		z-index: 90;
+		display: block;
+		padding: var(--s-7) var(--s-5);
+		background: #000;
+		overflow-y: auto;
+	}
+	.site-nav[aria-expanded="true"] ul {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--s-5);
+	}
+	.site-nav[aria-expanded="true"] a {
+		font-size: 30px;
+		font-weight: 600;
+		letter-spacing: var(--tracking-tight);
+		color: #fafafa;
+	}
+	.site-nav[aria-expanded="true"] .site-nav__cta { display: list-item; }
+}
+.site-nav__cta { display: none; }
+/* backdrop-filter makes the header the containing block of fixed children,
+   which would trap the overlay inside the 64px bar. Drop it while open. */
+.site-header:has(.site-nav[aria-expanded="true"]) {
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	background: #000;
+}
+
+/* ---------- Contrast (WCAG AA) ---------- */
+/* #737373 on black is 4.4:1, under AA for the small mono labels. */
+[data-theme="dark"] { --color-muted: #8f8f8f; }
+:root:not([data-theme="dark"]) .site-header,
+:root:not([data-theme="dark"]) .site-footer { --color-muted: #a3a3a3; }
+/* White on WhatsApp green is 2:1. Dark text keeps the brand color readable. */
+.btn--whatsapp,
+.btn--whatsapp:hover { color: #052e16; }

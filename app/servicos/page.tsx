@@ -1,16 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { services, siteOptions } from '@/content/site';
+import { siteOptions } from '@/content/site';
+import { servicesByGroup, serviceGroupLabels } from '@/content/services';
+import type { ServiceGroup } from '@/content/types';
 import { whatsappUrl } from '@/lib/whatsapp';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { buildMetadata, servicesHubItemList } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Serviços, três eixos com código no centro',
+  title: 'Serviços de SEO técnico, GEO e desenvolvimento',
   description:
-    'Front-end e performance, SEO técnico e AEO, automação com LLM. Três eixos com código no centro, combinados ou solo conforme o projeto.',
+    'Consultoria SEO, SEO técnico e auditoria, GEO e SEO para IA, desenvolvimento WordPress, automação com IA e SEO para saúde e e-commerce.',
   path: '/servicos/',
 });
+
+const GROUPS: ServiceGroup[] = ['consultoria', 'desenvolvimento', 'nicho'];
 
 export default function ServicesHubPage() {
   const wa = whatsappUrl('contact');
@@ -26,51 +30,57 @@ export default function ServicesHubPage() {
           </nav>
           <p className="section__kicker">Serviços</p>
           <h1 className="page-hero__title">
-            Três eixos de trabalho, todos com código no centro.
+            Serviços de SEO técnico e GEO, com o código incluído.
           </h1>
           <p className="page-hero__sub">
-            Front-end performático, SEO técnico de quem programa, e automação com
-            LLM feita como engenharia. Em quase todo projeto, pelo menos dois desses
-            eixos precisam andar juntos, por isso opero nos três.
+            Eu faço o diagnóstico, monto o plano e implemento. Você não precisa esperar
+            a fila do time de desenvolvimento para ver a recomendação no ar.
           </p>
         </div>
       </section>
 
+      {GROUPS.map((group) => {
+        const items = servicesByGroup(group);
+        if (!items.length) return null;
+        return (
+          <section className="section services-group" key={group}>
+            <div className="container">
+              <h2 className="services-group__title">{serviceGroupLabels[group]}</h2>
+              <div className="services__grid services__grid--hub">
+                {items.map(({ slug, data }) => (
+                  <article className="service service--hub reveal" key={slug}>
+                    <div className="service__num">{data.number}</div>
+                    <h3 className="service__name">
+                      <Link href={`/${slug}/`}>{data.short_title}</Link>
+                    </h3>
+                    <p className="service__description">{data.excerpt}</p>
+                    <Link href={`/${slug}/`} className="btn btn--link service__link">
+                      Ver serviço{' '}
+                      <span className="btn__arrow" aria-hidden="true">
+                        →
+                      </span>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
       <section className="section">
         <div className="container">
-          <div className="services__grid services__grid--hub">
-            {Object.entries(services).map(([slug, svc]) => {
-              const url = `/servicos/${slug}/`;
-              return (
-                <article className="service service--hub" key={slug}>
-                  <div className="service__num">{svc.number}</div>
-                  <h2 className="service__name">
-                    <Link href={url}>{svc.title}</Link>
-                  </h2>
-                  <p className="service__description">{svc.excerpt}</p>
-                  <Link href={url} className="btn btn--link service__link">
-                    Ver este eixo{' '}
-                    <span className="btn__arrow" aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
-
           <div className="services-note">
-            <p>Não sei qual eixo encaixa no meu problema.</p>
+            <p>Não sabe qual serviço encaixa no seu caso?</p>
             <p className="text-muted">
-              Manda mensagem direto:{' '}
+              Mande uma mensagem pelo{' '}
               {wa && (
                 <a href={wa} target="_blank" rel="noopener">
                   WhatsApp
                 </a>
               )}{' '}
-              ou <a href={`mailto:${siteOptions.email}`}>email</a>. Em 48h te digo
-              qual eixo (ou combinação) faz sentido, ou te aponto pra alguém mais
-              adequado.
+              ou por <a href={`mailto:${siteOptions.email}`}>e-mail</a>. Em até 48 horas
+              eu digo qual caminho faz sentido, ou indico alguém mais adequado.
             </p>
           </div>
         </div>

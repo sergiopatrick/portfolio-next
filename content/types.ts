@@ -23,6 +23,8 @@ export type HomeServiceTeaser = {
 
 export type SiteOptions = {
   hero_title: string;
+  // Second, lighter half of the two-tone H1.
+  hero_title_tail: string;
   hero_subtitle: string;
   hero_cta_label: string;
   hero_cta_url: string;
@@ -34,7 +36,6 @@ export type SiteOptions = {
   results_strip: ResultStripItem[];
   results_footnote: string;
 
-  services: HomeServiceTeaser[];
 
   stack_groups: StackGroup[];
 
@@ -55,19 +56,32 @@ export type ProblemStandalone = { title: string; body: string };
 export type ProblemCombined = { axis: string; axis_slug: string; body: string };
 export type Faq = { q: string; a: string };
 
+export type ServiceGroup = 'consultoria' | 'desenvolvimento' | 'nicho';
+
+export type ServiceStep = { title: string; body: string };
+
 export type Service = {
+  // Sort order inside the group, also printed as "01", "02".
   number: string;
+  group: ServiceGroup;
+  // H1. Starts with the focus keyword.
   title: string;
   short_title: string;
   kicker: string;
+  focus_keyword: string;
   excerpt: string;
+  // First paragraph after the H1, answers the search in 2 or 3 sentences.
   direct_answer: string;
   body_lead: string;
   problems_standalone: ProblemStandalone[];
   problems_combined: ProblemCombined[];
+  steps: ServiceStep[];
   deliverables: string[];
   stack: string[];
+  // "Eu implemento" block, ties the consulting pitch to real code.
+  implementation: { title: string; body: string; snippet?: CodeSnippet };
   related_case_slugs: string[];
+  related_post_slugs: string[];
   faqs: Faq[];
   seo_title: string;
   seo_description: string;
@@ -121,6 +135,8 @@ export type Post = {
     | 'Automação com LLM'
     | 'Plugin WP';
   published_at: string;
+  // Last real content edit. Feeds dateModified, the sitemap and the visible date.
+  updated_at?: string;
   read_time_min: number;
   body: string;
   seo_title: string;

@@ -11,9 +11,9 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contato, WhatsApp, email e LinkedIn',
+  title: 'Contato, fale com o consultor de SEO',
   description:
-    'Contato por WhatsApp, email ou formulário. Resposta em 48h úteis. Base em Salvador, atendo remoto pra BR e exterior.',
+    'Fale com o Sérgio Patrick, consultor de SEO técnico e GEO, por WhatsApp, e-mail ou formulário. Resposta em até 48 horas úteis. Atende todo o Brasil.',
   path: '/contato/',
 });
 
@@ -112,7 +112,7 @@ export default function ContactPage() {
                 className="contact-channel"
               >
                 <div className="contact-channel__label">LinkedIn</div>
-                <div className="contact-channel__value">/in/sergiopatrick1</div>
+                <div className="contact-channel__value">linkedin.com/in/sergiopatrick1</div>
               </a>
               <a
                 href={siteOptions.github}

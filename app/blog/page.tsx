@@ -6,9 +6,9 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { buildMetadata, blogCollectionSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Blog, notas técnicas de dev e SEO',
+  title: 'Blog de SEO técnico e GEO',
   description:
-    'Notas técnicas curtas de front-end, performance, SEO técnico, AEO e automação com LLM. Cada post nasce de um problema real de cliente.',
+    'Guias de SEO técnico, GEO, Core Web Vitals, dados estruturados e automação com IA. Cada guia nasce de um problema real de cliente.',
   path: '/blog/',
 });
 

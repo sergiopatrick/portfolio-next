@@ -59,23 +59,20 @@ export default async function BlogPostPage({
     { label: data.title, url: absoluteUrl(`/blog/${slug}/`) },
   ];
 
-  const related = allPostsSortedByDate()
-    .filter((p) => p.slug !== slug)
-    .slice(0, 2);
+  // Same topic first, then the newest. Every post links to three others so
+  // the crawler reaches the whole blog from any entry point.
+  const others = allPostsSortedByDate().filter((p) => p.slug !== slug);
+  const related = [
+    ...others.filter((p) => p.data.tag === data.tag),
+    ...others.filter((p) => p.data.tag !== data.tag),
+  ].slice(0, 3);
+  const updated = data.updated_at && data.updated_at !== data.published_at ? data.updated_at : '';
 
   return (
     <>
       <JsonLd schema={[blogPostSchema(slug), breadcrumbSchema(crumbs)]} />
 
-      <article
-        className="case-article"
-        itemScope
-        itemType="https://schema.org/BlogPosting"
-      >
-        <meta itemProp="headline" content={data.title} />
-        <meta itemProp="author" content="Sérgio Patrick" />
-        <meta itemProp="inLanguage" content="pt-BR" />
-        <meta itemProp="datePublished" content={data.published_at} />
+      <article className="case-article">
 
         <section className="page-hero">
           <div className="container container--prose">
@@ -87,10 +84,17 @@ export default async function BlogPostPage({
             <p className="section__kicker">{data.tag}</p>
             <h1 className="page-hero__title">{data.title}</h1>
             <p className="page-hero__sub">{data.excerpt}</p>
-            <p className="text-muted" style={{ marginTop: 'var(--s-4)' }}>
-              <time dateTime={data.published_at}>
-                {formatDate(data.published_at)}
-              </time>
+            <p className="post-byline">
+              Por <Link href="/sobre/">Sérgio Patrick</Link>, consultor de SEO técnico e GEO
+            </p>
+            <p className="post-dates">
+              Publicado em{' '}
+              <time dateTime={data.published_at}>{formatDate(data.published_at)}</time>
+              {updated && (
+                <>
+                  {' · '}Atualizado em <time dateTime={updated}>{formatDate(updated)}</time>
+                </>
+              )}
               {' · '}
               {data.read_time_min} min de leitura
             </p>
@@ -100,6 +104,18 @@ export default async function BlogPostPage({
         <section className="section">
           <div className="container container--prose">
             <Prose html={data.body} />
+            <aside className="author-box">
+              <p className="author-box__name">Sérgio Patrick</p>
+              <p className="author-box__bio">
+                Consultor de SEO técnico e GEO que também escreve o código. Foi SEO Lead no
+                QConcursos e na VTEX e hoje atende Insider Store, Sanar, Hapvida NotreDame e
+                Fluency.
+              </p>
+              <p className="author-box__links">
+                <Link href="/consultoria-seo/">Consultoria SEO</Link>
+                <Link href="/sobre/">Trajetória completa</Link>
+              </p>
+            </aside>
           </div>
         </section>
       </article>

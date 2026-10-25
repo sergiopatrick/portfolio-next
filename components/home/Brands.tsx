@@ -1,42 +1,31 @@
 import { siteOptions } from '@/content/site';
 
+// Continuous marquee. The list is rendered twice so the loop has no seam;
+// the copy is aria-hidden so screen readers read each brand once.
 export function Brands() {
   if (!siteOptions.brands.length) return null;
+  const items = siteOptions.brands.map((b) => b.name);
   return (
-    <section className="brands section--sm" aria-labelledby="brands-title">
+    <section className="brands brands--marquee" aria-labelledby="brands-title">
       <div className="container">
-        <div className="brands__head">
-          <p className="section__kicker">{siteOptions.brands_kicker}</p>
-          <h2 id="brands-title" className="brands__title">
-            {siteOptions.brands_title}
-          </h2>
-        </div>
-
-        <ul className="brands__grid" role="list">
-          {siteOptions.brands.map((b, i) => {
-            const inner = (
-              <span className="brand__wordmark">{b.name.toUpperCase()}</span>
-            );
-            return (
-              <li className="brand" title={b.name} key={i}>
-                {b.url ? (
-                  <a
-                    href={b.url}
-                    target="_blank"
-                    rel="noopener"
-                    className="brand__link"
-                    aria-label={b.name}
-                  >
-                    {inner}
-                  </a>
-                ) : (
-                  <span className="brand__link" aria-label={b.name}>
-                    {inner}
-                  </span>
-                )}
-              </li>
-            );
-          })}
+        <h2 id="brands-title" className="brands__label">
+          Marcas e times com quem já trabalhei
+        </h2>
+      </div>
+      <div className="marquee">
+        <ul className="marquee__track" role="list">
+          {items.map((name) => (
+            <li className="marquee__item" key={name}>
+              {name}
+            </li>
+          ))}
+        </ul>
+        <ul className="marquee__track" aria-hidden="true">
+          {items.map((name) => (
+            <li className="marquee__item" key={name}>
+              {name}
+            </li>
+          ))}
         </ul>
       </div>
     </section>

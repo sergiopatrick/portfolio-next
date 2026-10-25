@@ -1,16 +1,506 @@
 import type { Post } from './types';
 
 export const posts: Record<string, Post> = {
-  'geo-guia-completo-baseado-em-evidencias': {
-    title: 'GEO (Generative Engine Optimization): o guia baseado em evidências',
+  'seo-e-geo-diferencas-na-pratica': {
+    title: 'SEO e GEO, o que muda na prática e o que continua igual',
     excerpt:
-      'O mega guia de GEO sem hype: o que os papers (KDD 2024, AutoGEO, GEO-16) e os dados de mercado (Ahrefs, Semrush, Pew, SparkToro) realmente provam sobre ser citado por ChatGPT e Google AI Overviews. Mecanismos, números datados, o que é mito e um playbook priorizado por nível de evidência.',
+      'SEO busca o clique, GEO busca a citação na resposta da IA. O que continua igual entre SEO, GEO e AEO, o que muda de verdade, como medir GEO hoje e um checklist prático.',
+    tag: 'SEO Técnico',
+    published_at: '2026-10-25',
+    updated_at: '2026-10-25',
+    read_time_min: 11,
+    body: `<p>SEO é otimizar um site para aparecer e ser clicado nos resultados de busca. GEO (Generative Engine Optimization) é otimizar para ser citado nas respostas geradas por IA, como os AI Overviews do Google, o ChatGPT e o Perplexity. Os dois usam a mesma base técnica, e a diferença está no que conta como vitória, o clique no SEO e a citação no GEO.</p>
+
+<p>No meu trabalho, SEO e GEO são um projeto só. Quase tudo que faz uma página ser citada por uma IA começa no SEO técnico. O próprio Google diz isso no <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide?hl=pt-br">guia de otimização para recursos de IA generativa</a>, onde afirma que as práticas recomendadas de SEO continuam relevantes. O que muda é um conjunto menor de hábitos de escrita, de estrutura e de medição. É isso que eu separo abaixo.</p>
+
+<nav class="toc" aria-label="Sumário">
+<p class="toc__title">Neste guia</p>
+<ol>
+  <li><a href="#definicoes">O que é SEO, GEO e AEO</a></li>
+  <li><a href="#tabela">SEO, GEO e AEO lado a lado</a></li>
+  <li><a href="#continua-igual">O que continua igual</a></li>
+  <li><a href="#o-que-muda">O que muda</a></li>
+  <li><a href="#como-medir">Como medir GEO hoje</a></li>
+  <li><a href="#checklist">Checklist prático de SEO e GEO</a></li>
+  <li><a href="#faq">Perguntas frequentes</a></li>
+</ol>
+</nav>
+
+<h2 id="definicoes">O que é SEO, GEO e AEO</h2>
+
+<p><strong>SEO</strong> (Search Engine Optimization) é o trabalho de fazer um site ser encontrado na busca. Ele cuida de três coisas. O Google precisa conseguir ler o site (rastreio). Precisa guardar as páginas no índice (indexação). E precisa achar que a sua página é a melhor resposta para a busca (ranqueamento).</p>
+
+<p><strong>GEO</strong> (Generative Engine Optimization) é o trabalho de fazer o seu conteúdo ser usado e citado quando uma IA monta uma resposta. O termo nasceu num artigo acadêmico de pesquisadores de Princeton e de outras instituições, <a href="https://arxiv.org/abs/2311.09735">"GEO, Generative Engine Optimization"</a>, aceito no KDD 2024. Os motores que mais importam hoje são os AI Overviews e o Modo IA do Google, o ChatGPT, o Perplexity e o Gemini.</p>
+
+<p><strong>AEO</strong> (Answer Engine Optimization) é o trabalho de ser a resposta direta para uma pergunta. Ele nasceu antes da IA generativa, para o snippet em destaque (aquela caixa de resposta no topo do Google), para a seção "As pessoas também perguntam" e para assistentes de voz.</p>
+
+<p>No mercado, as três siglas viraram quase sinônimos. Muita agência vende "SEO, GEO e AEO" como três serviços. Eu prefiro tratar como um só trabalho com três metas. Ser encontrado, ser a resposta e ser citado. No meu <a href="/blog/geo-guia-completo-baseado-em-evidencias/">guia de GEO baseado em evidências</a> eu explico de onde veio cada termo e o que os estudos dizem sobre eles.</p>
+
+<h2 id="tabela">SEO, GEO e AEO lado a lado</h2>
+
+<p>A tabela resume a diferença em cinco pontos. Ela é uma simplificação. Na prática as três metas se misturam na mesma página.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Critério</th>
+      <th>SEO</th>
+      <th>AEO</th>
+      <th>GEO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Objetivo</th>
+      <td>Ranquear e receber o clique</td>
+      <td>Ser a resposta direta para uma pergunta</td>
+      <td>Ser usado e citado numa resposta gerada por IA</td>
+    </tr>
+    <tr>
+      <th scope="row">Onde aparece</th>
+      <td>Resultados orgânicos do Google e do Bing</td>
+      <td>Snippet em destaque, "As pessoas também perguntam", assistentes de voz</td>
+      <td>AI Overviews, Modo IA, ChatGPT, Perplexity, Gemini</td>
+    </tr>
+    <tr>
+      <th scope="row">Como se mede</th>
+      <td>Posição, impressões, cliques e CTR no Search Console</td>
+      <td>Presença no snippet e na caixa de perguntas</td>
+      <td>Citações e menções da marca, visitas vindas de assistentes, relatório de IA generativa do Search Console</td>
+    </tr>
+    <tr>
+      <th scope="row">O que pesa mais</th>
+      <td>Rastreio, indexação, relevância, links, experiência da página</td>
+      <td>Resposta curta e clara logo abaixo da pergunta</td>
+      <td>Tudo do SEO, mais trecho fácil de extrair, dado com fonte, autor e marca identificáveis</td>
+    </tr>
+    <tr>
+      <th scope="row">Unidade de sucesso</th>
+      <td>A visita</td>
+      <td>A resposta exibida</td>
+      <td>A citação ou a menção</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="continua-igual">O que continua igual</h2>
+
+<p>Esta é a parte que mais surpreende quem chega no GEO pelo hype. A base é a mesma. Se o SEO técnico do site está quebrado, nenhuma tática de GEO resolve.</p>
+
+<h3>Rastreio</h3>
+
+<p>Rastreio é o robô visitar a página e ler o HTML. Para o Google, o robô é o Googlebot. Para a busca do ChatGPT, é o OAI-SearchBot, e um site que bloqueia esse robô não aparece nas respostas de busca do ChatGPT (<a href="https://developers.openai.com/api/docs/bots">documentação da OpenAI</a>). Se o robô não chega na página, ela não existe para nenhum dos dois. Por isso o primeiro passo continua sendo conferir robots.txt, códigos de resposta, redirecionamentos e links internos.</p>
+
+<p>Um detalhe pesa mais em GEO. O Google renderiza JavaScript, mas o próprio Google lembra que nem todos os robôs fazem isso e que renderizar no servidor ainda é uma ótima ideia (<a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=pt-br">noções básicas de SEO com JavaScript</a>). Texto que só aparece depois que o JavaScript roda corre o risco de ficar invisível para parte dos robôs de IA.</p>
+
+<h3>Indexação</h3>
+
+<p>Para aparecer nos AI Overviews e no Modo IA, o Google pede o mesmo que pede para a busca comum. A página precisa estar indexada e qualificada para aparecer com um snippet. Isso está escrito no <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide?hl=pt-br">guia do Google</a>. Ou seja, página com <code>noindex</code>, página canônica errada ou página com <code>nosnippet</code> fica fora da disputa.</p>
+
+<h3>Autoridade e qualidade</h3>
+
+<p>Os recursos de IA do Google usam os mesmos sistemas de ranqueamento e de qualidade da busca para escolher as páginas. Então os sinais de sempre continuam valendo. Conteúdo útil, autor que entende do assunto, site com reputação no tema e links de outros sites.</p>
+
+<h3>Arquivos e marcações especiais</h3>
+
+<p>Você vai ouvir que precisa de um <code>llms.txt</code> ou de um schema especial para IA. O llms.txt é uma proposta de 2024 de Jeremy Howard para dar aos modelos uma versão limpa do site (<a href="https://llmstxt.org/">llmstxt.org</a>). É uma proposta, não um padrão. O guia do Google diz que não é preciso criar arquivos de IA, Markdown ou marcação nova para aparecer nos recursos de IA da busca, e que não existe schema.org especial para isso. Dado estruturado continua útil, mas pelo motivo de sempre, que é o resultado enriquecido.</p>
+
+<h2 id="o-que-muda">O que muda</h2>
+
+<p>Se a base é a mesma, por que falar em GEO? Porque a resposta gerada muda o que acontece depois que a página foi escolhida. Quatro coisas mudam de verdade.</p>
+
+<h3>A citação ganha peso, o clique perde</h3>
+
+<p>Quando a IA responde na própria página do Google, menos gente clica. O Pew Research Center acompanhou a navegação de 900 adultos nos Estados Unidos em março de 2025. Quando aparecia um resumo de IA, as pessoas clicavam num resultado comum em 8% das visitas. Sem o resumo, eram 15%. E o clique em links dentro do resumo aconteceu em só 1% das visitas (<a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research, julho de 2025</a>).</p>
+
+<p>Isso muda a meta. Em SEO a página só gera valor se recebe a visita. Em GEO parte do valor está em ser a fonte nomeada na resposta, mesmo sem clique. A marca aparece, a pessoa lembra e às vezes volta depois por busca direta.</p>
+
+<h3>A resposta direta vira obrigatória</h3>
+
+<p>A IA monta a resposta com pedaços de várias páginas. Um trecho que responde a pergunta sozinho, em duas ou três frases, é fácil de usar. Um trecho que depende do parágrafo anterior para fazer sentido é difícil.</p>
+
+<p>Por isso eu abro cada página com a resposta, e não com contexto. Cada H2 vira uma pergunta que alguém faria, e o primeiro parágrafo depois dele responde. É o mesmo hábito que o AEO já pedia para o snippet em destaque. O passo a passo está no <a href="/blog/manual-aeo-geo-escrever-post-citado-llm/">manual de AEO e GEO para escrever um post que a IA cita</a>.</p>
+
+<h3>A entidade precisa ser clara</h3>
+
+<p>Entidade é uma coisa que o motor reconhece como única. Uma pessoa, uma empresa, um produto, um conceito. Em SEO clássico dava para ranquear uma página sem que o Google soubesse direito quem estava por trás. Em GEO eu trato isso como prioridade, porque a resposta cita marcas e pessoas pelo nome.</p>
+
+<p>Na prática, isso é ter o mesmo nome em todo lugar, uma página de autor e uma página sobre a empresa, schema de <code>Person</code> e de <code>Organization</code> com links para perfis reais, e o assunto principal do site dito de forma clara. Não há estudo que prove quanto isso pesa sozinho. Eu faço porque é barato e porque ajuda a busca comum do mesmo jeito.</p>
+
+<h3>Dado com fonte vira vantagem</h3>
+
+<p>O artigo que criou o termo GEO testou nove formas de reescrever um texto e mediu quanto cada uma aumentava a presença dele nas respostas. As três melhores foram acrescentar citações de especialistas, acrescentar estatísticas e citar fontes. No melhor caso, a visibilidade subiu até 40%. Encher o texto de palavra-chave, o truque antigo, ficou abaixo do texto original (<a href="https://arxiv.org/abs/2311.09735">Aggarwal e outros, KDD 2024</a>).</p>
+
+<p>É um experimento de laboratório, em inglês, com um motor montado pelos próprios autores. Não é garantia de nada no ChatGPT real. Mas aponta na mesma direção do bom jornalismo. Número com data, nome de quem disse e link para a fonte primária.</p>
+
+<h2 id="como-medir">Como medir GEO hoje</h2>
+
+<p>Medir SEO é maduro. O Search Console mostra posição, clique e impressão por página. Medir GEO ainda é parcial, e eu prefiro dizer isso logo. Eu uso quatro fontes juntas.</p>
+
+<ol>
+  <li><strong>Search Console.</strong> O guia do Google indica o relatório de performance da IA generativa para ver como as pessoas encontram o seu conteúdo pelos recursos de IA da busca e do Discover. É o único dado oficial do lado do Google.</li>
+  <li><strong>Visitas vindas de assistentes no GA4.</strong> Eu crio um grupo de canais para os domínios de origem dos assistentes, como chatgpt.com, perplexity.ai e gemini.google.com. O volume costuma ser pequeno, mas a tendência mês a mês diz muito.</li>
+  <li><strong>Amostra fixa de perguntas.</strong> Eu monto uma lista de 20 a 50 perguntas que o cliente ideal faria e rodo todo mês nos motores principais. Anoto se a marca aparece, se é citada com link e quem é citado no lugar. As respostas mudam de uma vez para outra, então o que vale é a série ao longo do tempo, não um print isolado.</li>
+  <li><strong>Menções da marca.</strong> Busca por menções em sites de terceiros, fóruns e imprensa. Os motores de IA leem a web inteira, não só o seu site.</li>
+</ol>
+
+<p>Ferramentas pagas de monitoramento de IA fazem a terceira etapa em escala. Elas ajudam, mas cada uma usa um método próprio, e ainda não existe um padrão de mercado para comparar os números entre elas.</p>
+
+<h2 id="checklist">Checklist prático de SEO e GEO</h2>
+
+<p>É a lista que eu passo por página importante, na ordem. Os seis primeiros itens são SEO puro. Sem eles, os outros não servem para nada.</p>
+
+<ol>
+  <li>A página responde 200 e não está bloqueada no robots.txt.</li>
+  <li>A página está indexada no Search Console, e a canônica escolhida pelo Google é a mesma que você declarou.</li>
+  <li>O conteúdo principal está no HTML que o servidor entrega, sem depender de JavaScript.</li>
+  <li>A página não tem <code>nosnippet</code> nem <code>noindex</code> por engano.</li>
+  <li>Pelo menos três links internos de páginas relevantes apontam para ela.</li>
+  <li>LCP, INP e CLS estão no verde no relatório de Core Web Vitals.</li>
+  <li>O primeiro parágrafo responde a busca principal em duas ou três frases.</li>
+  <li>Cada H2 é uma pergunta real, e o parágrafo logo abaixo responde sozinho.</li>
+  <li>Todo número tem data e link para a fonte primária.</li>
+  <li>O autor tem nome, página própria e perfil externo verificável.</li>
+  <li>Há uma tabela ou lista quando a pergunta pede comparação ou passos.</li>
+  <li>A página mostra a data da última atualização real, e ela bate com o schema.</li>
+  <li>A marca é citada fora do site, em fontes que o seu público lê.</li>
+  <li>A amostra mensal de perguntas está rodando e registrada numa planilha.</li>
+</ol>
+
+<p>Se você quer o checklist técnico completo, com ferramenta e prioridade para cada etapa, ele está na minha <a href="/blog/auditoria-seo-tecnico-checklist/">auditoria de SEO técnico</a>.</p>
+
+<h2 id="faq">Perguntas frequentes</h2>
+
+<h3>GEO vai substituir o SEO?</h3>
+
+<p>Não. GEO depende do SEO. Para o Google, uma página só entra nos recursos de IA se estiver indexada e qualificada para snippet, e isso é SEO. O que muda é a meta, que passa a incluir a citação além do clique.</p>
+
+<h3>Qual a diferença entre GEO e AEO?</h3>
+
+<p>AEO mira a resposta direta, como o snippet em destaque e os assistentes de voz. GEO mira a resposta gerada por IA, que junta várias fontes. As técnicas de escrita são quase as mesmas. Por isso muita gente usa os dois termos como sinônimos.</p>
+
+<h3>Preciso de llms.txt para aparecer em respostas de IA?</h3>
+
+<p>Para o Google, não. O guia oficial diz que não é necessário criar arquivos de IA para aparecer nos recursos de IA da busca. O llms.txt é uma proposta aberta, e não há evidência pública de que ele aumente citações. Se custar pouco no seu site, não faz mal. Só não trate como prioridade.</p>
+
+<h3>Dá para fazer GEO sem mexer no SEO?</h3>
+
+<p>Dá para reescrever textos pensando em citação, mas o ganho some se a página não for rastreada e indexada. Eu sempre começo pela base técnica e só depois ajusto a escrita.</p>
+
+<h3>SEO, GEO e AEO são três serviços diferentes?</h3>
+
+<p>Eu não separo. É o mesmo site, a mesma base técnica e o mesmo conteúdo. Separar em três contratos costuma gerar três relatórios que não conversam.</p>
+
+<p>Se você quer aplicar isso no seu site, eu faço o diagnóstico e implemento as mudanças no código, do schema à estrutura das páginas. Veja como funciona em <a href="/geo-seo-para-ia/">GEO e SEO para IA</a>.</p>`,
+    seo_title: 'SEO e GEO, diferenças na prática (GEO x SEO x AEO)',
+    seo_description:
+      'SEO e GEO usam a mesma base técnica. O que muda e o que continua igual entre SEO, GEO e AEO, como medir citações em IA e um checklist para começar hoje.',
+    keywords: [
+      'seo e geo',
+      'geo x seo',
+      'geo e seo',
+      'geo vs seo',
+      'seo vs geo',
+      'seo geo aeo',
+      'GEO',
+      'AEO',
+      'SEO para IA',
+      'AI Overviews',
+    ],
+  },
+
+  'auditoria-seo-tecnico-checklist': {
+    title: 'Auditoria de SEO técnico, o checklist que eu uso e em que ordem',
+    excerpt:
+      'Auditoria de SEO técnico em 10 etapas, na ordem da cadeia do Google. O que olhar em cada uma, que ferramenta abrir, como priorizar por impacto e esforço e o exemplo real do SanarMed.',
+    tag: 'SEO Técnico',
+    published_at: '2026-10-25',
+    updated_at: '2026-10-25',
+    read_time_min: 12,
+    body: `<p>Auditoria de SEO é a revisão de um site para achar o que impede o Google de rastrear, indexar e ranquear as páginas. A parte técnica segue uma ordem, porque um erro de rastreio anula qualquer ajuste de conteúdo feito depois. Eu começo pelo robots.txt, termino nos logs do servidor e entrego uma lista de correções priorizada por impacto e esforço.</p>
+
+<p>SEO técnico é a parte do SEO que cuida da estrutura do site, como rastreio, indexação, velocidade, código e dados estruturados. Não é o texto, é o que deixa o texto ser encontrado. Abaixo está o checklist que eu uso, na ordem, com o que olhar e qual ferramenta abrir.</p>
+
+<nav class="toc" aria-label="Sumário">
+<p class="toc__title">Neste guia</p>
+<ol>
+  <li><a href="#por-que-ordem">Por que a ordem importa</a></li>
+  <li><a href="#antes">O que separar antes de começar</a></li>
+  <li><a href="#rastreio">1. Rastreio e robots.txt</a></li>
+  <li><a href="#indexacao">2. Indexação no Search Console</a></li>
+  <li><a href="#sitemap">3. Sitemap</a></li>
+  <li><a href="#canonical">4. Canonical e duplicação</a></li>
+  <li><a href="#arquitetura">5. Arquitetura e link interno</a></li>
+  <li><a href="#javascript">6. Renderização de JavaScript</a></li>
+  <li><a href="#cwv">7. Core Web Vitals</a></li>
+  <li><a href="#schema">8. Dados estruturados</a></li>
+  <li><a href="#conteudo">9. Conteúdo e canibalização</a></li>
+  <li><a href="#logs">10. Logs do servidor</a></li>
+  <li><a href="#priorizar">Como priorizar por impacto e esforço</a></li>
+  <li><a href="#sanarmed">Exemplo real, o checklist no SanarMed</a></li>
+  <li><a href="#faq">Perguntas frequentes</a></li>
+</ol>
+</nav>
+
+<h2 id="por-que-ordem">Por que a ordem importa</h2>
+
+<p>O Google trabalha em cadeia. Primeiro o robô precisa chegar na página. Depois ele decide se guarda a página no índice. Só então ela disputa posição. Se a cadeia quebra no primeiro elo, o resto não chega a acontecer.</p>
+
+<p>Por isso eu não começo pela velocidade nem pelo schema. Um site com Core Web Vitals perfeitos e metade das páginas fora do índice continua perdendo tráfego.</p>
+
+<h2 id="antes">O que separar antes de começar</h2>
+
+<ul>
+  <li><strong>Acesso ao Google Search Console</strong>, de preferência como propriedade de domínio.</li>
+  <li><strong>Acesso ao GA4</strong>, para saber quais páginas trazem visita e conversão.</li>
+  <li><strong>Um crawler</strong>, programa que navega pelo site como o Googlebot e lista todas as URLs. Eu uso o Screaming Frog.</li>
+  <li><strong>PageSpeed Insights</strong>, para dados de velocidade de usuários reais.</li>
+  <li><strong>Logs do servidor</strong> dos últimos 30 dias, se o site for grande.</li>
+  <li><strong>A lista das 100 URLs com mais tráfego orgânico.</strong> Elas recebem atenção primeiro, porque é onde um erro custa mais.</li>
+</ul>
+
+<h2 id="rastreio">1. Rastreio e robots.txt</h2>
+
+<p>Rastreio é o robô do Google visitar a página e baixar o HTML. O robots.txt é um arquivo na raiz do site que diz ao robô o que ele pode e o que não pode visitar.</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li>Se o robots.txt bloqueia pastas importantes, ou bloqueia CSS e JavaScript que a página precisa para ser montada.</li>
+  <li>Se alguém usou o robots.txt para tirar páginas do Google. Isso não funciona. O próprio Google diz que o robots.txt não é um mecanismo para manter uma página fora dos resultados, e que o certo é usar <code>noindex</code> ou senha (<a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=pt-br">guia do robots.txt</a>).</li>
+  <li>Páginas que respondem 404 ou 5xx e ainda recebem link interno.</li>
+  <li>Cadeias de redirecionamento, quando uma URL leva a outra que leva a uma terceira.</li>
+</ul>
+
+<p><strong>Ferramenta.</strong> Crawler para status e redirecionamentos, e o relatório de robots.txt do Search Console.</p>
+
+<h2 id="indexacao">2. Indexação no Search Console</h2>
+
+<p>Indexação é o Google guardar a página no índice. Página fora do índice não aparece em busca nenhuma, nem nos recursos de IA.</p>
+
+<p>O relatório de indexação de páginas do Search Console mostra o motivo de cada página ficar de fora (<a href="https://support.google.com/webmasters/answer/7440203?hl=pt-BR">ajuda do Search Console</a>). Três status pedem atenção quase sempre.</p>
+
+<ul>
+  <li><strong>"Rastreada, mas ainda não indexada".</strong> O Google leu a página e escolheu não guardar. Costuma ser sinal de página fraca, parecida demais com outra, ou com poucos links internos apontando para ela.</li>
+  <li><strong>"Detectada, mas não indexada no momento".</strong> O Google sabe que a URL existe e ainda não visitou. Em site grande, é um sinal de que o rastreio está curto para a quantidade de URLs.</li>
+  <li><strong>"Cópia, o Google e o usuário não escolheram a mesma página canônica".</strong> Você disse que a página é a principal, e o Google discordou e indexou outra.</li>
+</ul>
+
+<p><strong>O que eu olho.</strong> A proporção entre páginas indexadas e páginas que deveriam estar indexadas. E se alguma das 100 URLs principais aparece em algum desses status.</p>
+
+<p><strong>Ferramenta.</strong> Relatório de indexação de páginas e a ferramenta de inspeção de URL, que mostra como o Google vê uma página específica.</p>
+
+<h2 id="sitemap">3. Sitemap</h2>
+
+<p>O sitemap é um arquivo XML com a lista das URLs que você quer no índice. Ele ajuda o Google a descobrir páginas novas.</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li>Se cada arquivo respeita o limite de 50.000 URLs ou 50 MB sem compressão.</li>
+  <li>Se as URLs são absolutas e só as canônicas. Página com <code>noindex</code>, redirecionada ou com erro não deveria estar lá.</li>
+  <li>Se o <code>lastmod</code> mostra a data real da última mudança importante. O Google só usa esse campo quando ele é correto de forma consistente, e ignora <code>priority</code> e <code>changefreq</code> (<a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap?hl=pt-br">guia de sitemaps do Google</a>).</li>
+</ul>
+
+<p><strong>Ferramenta.</strong> Relatório de sitemaps do Search Console e o crawler em modo de lista, rodando só as URLs do sitemap. Para site com milhares de URLs, o <a href="/blog/guia-sitemap-dinamico-em-escala/">guia de sitemap dinâmico em escala</a> mostra como gerar sem estourar memória.</p>
+
+<h2 id="canonical">4. Canonical e duplicação</h2>
+
+<p>Canonical é a URL principal de um conteúdo que existe em mais de um endereço. Isso acontece muito. Versão com e sem barra no fim, com e sem www, com parâmetro de filtro, com parâmetro de campanha.</p>
+
+<p>A tag <code>rel="canonical"</code> e o redirecionamento são indicadores fortes para o Google escolher a canônica, e o sitemap é um indicador fraco (<a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=pt-br">guia de URLs canônicos</a>). São indicadores, não ordens. Quando eles se contradizem, o Google escolhe sozinho.</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li>Se toda página indexável tem canonical apontando para ela mesma, ou para a versão principal.</li>
+  <li>Se o canonical, o sitemap e os links internos apontam para a mesma URL.</li>
+  <li>Se HTTP, não-www e barra no fim redirecionam com um único 301 para a versão certa.</li>
+  <li>Se parâmetros de filtro e de busca interna geram milhares de URLs rastreáveis.</li>
+</ul>
+
+<p><strong>Ferramenta.</strong> Crawler, com o relatório de canonicals, e a inspeção de URL do Search Console, que mostra a canônica declarada e a canônica escolhida pelo Google lado a lado.</p>
+
+<h2 id="arquitetura">5. Arquitetura e link interno</h2>
+
+<p>Arquitetura é como as páginas se ligam umas às outras. O Google usa links para encontrar páginas novas e para entender a relevância de cada uma. E ele, em geral, só consegue seguir um link se for um elemento HTML <code>&lt;a&gt;</code> com atributo <code>href</code> (<a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable?hl=pt-br">guia de links do Google</a>).</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li><strong>Páginas órfãs</strong>, que estão no sitemap mas não recebem nenhum link interno.</li>
+  <li><strong>Profundidade de clique</strong>, quantos cliques a partir da home até chegar numa página importante.</li>
+  <li><strong>Links feitos em JavaScript</strong>, como botão com <code>onclick</code> no lugar de <code>&lt;a href&gt;</code>.</li>
+  <li><strong>Texto âncora</strong>, se o texto do link diz do que trata a página de destino.</li>
+</ul>
+
+<p><strong>Ferramenta.</strong> Crawler, cruzado com a lista do sitemap para achar órfãs. Em site com muito conteúdo, o post sobre <a href="/blog/internal-linking-semantico-sem-plugin-pgvector/">link interno semântico sem plugin</a> mostra como automatizar.</p>
+
+<h2 id="javascript">6. Renderização de JavaScript</h2>
+
+<p>O Google processa páginas com JavaScript em três fases, rastreamento, renderização e indexação (<a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=pt-br">noções básicas de SEO com JavaScript</a>). Renderizar é executar o JavaScript para montar a página final. Se o conteúdo só aparece depois dessa etapa, ele depende de uma fase a mais para ser visto.</p>
+
+<p>O mesmo guia diz que renderizar no servidor ou antes ainda é uma ótima ideia, porque deixa o site mais rápido e porque nem todo robô executa JavaScript. Isso pesa ainda mais hoje, com robôs de IA lendo o site.</p>
+
+<p><strong>O que eu olho.</strong> Comparo o HTML que o servidor entrega com o HTML renderizado. Título, H1, texto principal, links e schema precisam estar nos dois.</p>
+
+<p><strong>Ferramenta.</strong> Inspeção de URL do Search Console, na opção de testar a URL publicada e ver a página rastreada. E o crawler com renderização ligada e desligada, para comparar.</p>
+
+<h2 id="cwv">7. Core Web Vitals</h2>
+
+<p>Core Web Vitals são três métricas de experiência. LCP mede o carregamento do maior elemento visível. INP mede a resposta a cliques e toques. CLS mede o quanto o layout pula. O bom é LCP até 2,5 segundos, INP até 200 milissegundos e CLS até 0,1, medidos no 75º percentil das visitas, separado por celular e computador (<a href="https://web.dev/articles/vitals?hl=pt-br">web.dev</a>).</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li>O relatório de Core Web Vitals do Search Console, que agrupa páginas parecidas. Um problema num modelo de página costuma afetar centenas de URLs de uma vez.</li>
+  <li>Dado de campo (usuários reais) antes de dado de laboratório.</li>
+  <li>Imagem principal pesada, CSS bloqueando a renderização, JavaScript de terceiros no <code>&lt;head&gt;</code> e redirecionamentos na home.</li>
+</ul>
+
+<p><strong>Ferramenta.</strong> Search Console, PageSpeed Insights e o painel de performance do Chrome. Para WordPress, o passo a passo está em <a href="/blog/core-web-vitals-wordpress-sem-plugin-cache/">Core Web Vitals no WordPress sem plugin de cache</a>.</p>
+
+<h2 id="schema">8. Dados estruturados</h2>
+
+<p>Dados estruturados (ou schema) são um código que descreve a página para o Google em formato de dados, como "isto é um artigo, de tal autor, publicado em tal data". O Google recomenda o formato JSON-LD quando o site permite (<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=pt-br">introdução aos dados estruturados</a>). Schema bem feito pode ativar resultados enriquecidos, mas não garante que eles apareçam.</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li>Se o tipo de schema bate com o tipo de página. <code>Article</code> em post, <code>Product</code> em produto, <code>Organization</code> e <code>Person</code> na página sobre.</li>
+  <li>Se os campos obrigatórios estão preenchidos e sem erro.</li>
+  <li>Se o schema está no HTML do servidor, e não injetado por JavaScript depois.</li>
+  <li>Se as datas do schema batem com as datas visíveis na página.</li>
+</ul>
+
+<p><strong>Ferramenta.</strong> Teste de pesquisa aprimorada do Google, inspeção de URL e os relatórios de aprimoramentos do Search Console.</p>
+
+<h2 id="conteudo">9. Conteúdo e canibalização</h2>
+
+<p>Só aqui eu entro no conteúdo, pelo lado técnico. Canibalização é quando duas ou mais páginas do mesmo site disputam a mesma busca. O Google alterna entre elas, e nenhuma se firma.</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li>Títulos e H1 duplicados ou vazios.</li>
+  <li>Meta description ausente nas páginas com mais impressão.</li>
+  <li>Páginas finas, com pouco texto próprio, geradas por tag, filtro ou modelo.</li>
+  <li>Buscas em que duas URLs do site trocam de posição no Search Console.</li>
+  <li>Se o primeiro parágrafo das páginas principais responde a busca de forma direta.</li>
+</ul>
+
+<p><strong>Ferramenta.</strong> Search Console, no relatório de desempenho filtrado por consulta, e o crawler para títulos e H1. O método completo de achar e corrigir está no <a href="/blog/guia-canibalizacao-keywords-auditoria/">guia de canibalização de palavras-chave</a>.</p>
+
+<h2 id="logs">10. Logs do servidor</h2>
+
+<p>O log do servidor registra cada visita, inclusive as do Googlebot. É o único lugar que mostra o que o robô fez de verdade.</p>
+
+<p><strong>O que eu olho.</strong></p>
+
+<ul>
+  <li>Onde o Googlebot gasta as visitas. Se ele passa a maior parte do tempo em URLs de filtro e paginação, sobra pouco para as páginas que importam.</li>
+  <li>Páginas importantes que o robô não visita há semanas.</li>
+  <li>Se a visita é mesmo do Google. Muita ferramenta finge ser Googlebot. O Google ensina a confirmar com uma busca de DNS reversa no IP ou comparando com a lista de IPs que ele publica (<a href="https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot?hl=pt-br">como verificar o Googlebot</a>).</li>
+</ul>
+
+<p>Essa etapa vale mais em site grande. O guia do Google sobre orçamento de rastreio é voltado para sites com mais de 1 milhão de páginas que mudam toda semana, ou mais de 10 mil páginas que mudam todo dia, ou com muitas URLs em "Detectada, mas não indexada no momento" (<a href="https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget?hl=pt-br">gerenciamento do orçamento de rastreio</a>). Em site pequeno, eu pulo os logs e confio no Search Console.</p>
+
+<p><strong>Ferramenta.</strong> Screaming Frog Log File Analyser, ou uma consulta direta nos logs com <code>grep</code> e uma planilha.</p>
+
+<h2 id="priorizar">Como priorizar por impacto e esforço</h2>
+
+<p>Uma auditoria acha dezenas de problemas. Lista sem ordem é o jeito mais rápido de nada ser corrigido. Eu dou duas notas para cada item.</p>
+
+<ul>
+  <li><strong>Impacto.</strong> Quantas URLs o problema afeta, multiplicado pelo tráfego ou pela receita dessas URLs. Problema que bloqueia rastreio ou indexação ganha nota máxima.</li>
+  <li><strong>Esforço.</strong> Quantas horas de desenvolvimento leva e quantas pessoas precisam aprovar.</li>
+</ul>
+
+<p>Com as duas notas, cada item cai num destes quatro grupos.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Esforço baixo</th>
+      <th>Esforço alto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Impacto alto</strong></td>
+      <td>Fazer já. Ex. robots.txt bloqueando pasta, canonical errado num modelo de página.</td>
+      <td>Planejar no próximo ciclo. Ex. trocar renderização no cliente por renderização no servidor.</td>
+    </tr>
+    <tr>
+      <td><strong>Impacto baixo</strong></td>
+      <td>Juntar num lote de manutenção. Ex. meta descriptions ausentes em páginas com pouca impressão.</td>
+      <td>Deixar para depois, ou não fazer. Ex. refazer o tema inteiro por ganho pequeno de velocidade.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Problema em modelo de página vem antes de problema em página solta. Corrigir o modelo de post corrige mil posts de uma vez.</p>
+
+<p>Se o site vai passar por mudança de domínio, de plataforma ou de estrutura de URL, a auditoria precisa ser feita antes e repetida depois. O <a href="/blog/guia-migracao-seo-sem-perder-trafego/">guia de migração de SEO sem perder tráfego</a> mostra o que comparar.</p>
+
+<h2 id="sanarmed">Exemplo real, o checklist no SanarMed</h2>
+
+<p>No blog do Sanar Medicina, a maior plataforma de educação médica do Brasil, eu estruturei o sistema editorial entre 2024 e 2026. Em dois anos, o sistema publicou 1.113 artigos. Quando entrei, 88 das 100 URLs mais acessadas estavam sem nenhum checklist de SEO técnico aplicado.</p>
+
+<p>Comecei pelas 100 URLs com mais tráfego, porque era onde cada ajuste rendia mais. Cada URL passava por um checklist curto, com title, H1, schema, canonical, Core Web Vitals e link interno, e recebia um status de ajuste. No fechamento do ciclo 2024 e 2025, as 88 estavam com pelo menos um ajuste aplicado.</p>
+
+<p>Em paralelo, 113 palavras-chave paradas na quarta página do Google entraram num plano de empurrada, com reescrita de introdução, ajuste de schema e link interno para a URL alvo. Em 2024 o time fez 332 otimizações de posts existentes contra 228 posts novos. Auditoria virou rotina do sistema, não um projeto que acaba.</p>
+
+<p>O case completo está em <a href="/projetos/sistema-editorial-sanarmed-1113-posts/">sistema editorial em escala no SanarMed, 1.113 posts</a>.</p>
+
+<h2 id="faq">Perguntas frequentes</h2>
+
+<h3>Auditoria de SEO e auditoria de SEO técnico são a mesma coisa?</h3>
+
+<p>Não exatamente. A auditoria de SEO completa olha técnica, conteúdo e links de outros sites. A de SEO técnico olha a estrutura, que é o que vem primeiro. Neste checklist, as etapas 1 a 8 e a 10 são técnicas, e a 9 faz a ponte com o conteúdo.</p>
+
+<h3>Com que frequência devo auditar o site?</h3>
+
+<p>Eu faço uma auditoria completa uma vez e depois transformo as etapas em rotina. Search Console toda semana, as 100 URLs principais todo mês e o resto a cada trimestre ou depois de uma mudança grande.</p>
+
+<h3>Ferramenta gratuita resolve?</h3>
+
+<p>Para começar, sim. Search Console, PageSpeed Insights e o Teste de pesquisa aprimorada são gratuitos e cobrem boa parte das etapas. A versão gratuita do Screaming Frog rastreia até 500 URLs por vez (<a href="https://www.screamingfrog.co.uk/seo-spider/">site do Screaming Frog</a>), então em site grande a licença paga se paga rápido.</p>
+
+<h3>A auditoria já entrega as correções?</h3>
+
+<p>Em geral, ela entrega um relatório. No meu caso, eu também escrevo o código quando o cliente quer, do robots.txt ao schema.</p>
+
+<p>Se você quer essa auditoria no seu site, com a lista priorizada e as correções implementadas, veja como funciona o serviço de <a href="/seo-tecnico/">SEO técnico</a>. Se a necessidade é um acompanhamento mensal, com estratégia além da parte técnica, o caminho é a <a href="/consultoria-seo/">consultoria de SEO</a>.</p>`,
+    seo_title: 'Auditoria de SEO técnico, checklist em 10 etapas',
+    seo_description:
+      'Auditoria de SEO técnico em 10 etapas, na ordem que eu uso. Rastreio, indexação, sitemap, canonical, links, JavaScript, Core Web Vitals, schema e logs.',
+    keywords: [
+      'auditoria seo',
+      'auditoria de seo',
+      'seo técnico',
+      'auditoria de seo técnico',
+      'checklist de seo técnico',
+      'auditoria de site',
+      'Search Console',
+      'Core Web Vitals',
+      'canonical',
+      'orçamento de rastreio',
+    ],
+  },
+
+  'geo-guia-completo-baseado-em-evidencias': {
+    title: 'O que é GEO (Generative Engine Optimization), o guia baseado em evidências',
+    excerpt:
+      'O que é GEO, como ChatGPT e os AI Overviews do Google escolhem as fontes que citam e o que os estudos provam de fato. Mecanismos, números com data, mitos e um playbook priorizado por nível de evidência.',
     tag: 'SEO Técnico',
     published_at: '2026-06-02',
+    updated_at: '2026-10-25',
     read_time_min: 34,
-    body: `<p><strong>Resposta curta:</strong> GEO (Generative Engine Optimization) é otimizar conteúdo para ser citado nas respostas geradas por IA, como AI Overviews do Google e ChatGPT. A evidência de 2024 a 2026 converge num ponto desconfortável pra quem vende GEO como disciplina nova: na maior parte, <strong>ainda é SEO</strong>. O que torna sua página <em>elegível</em> a aparecer é SEO técnico padrão (estar indexada e poder ganhar um snippet). O que faz ela ser <em>selecionada e citada</em> é qualidade, estrutura extraível, frescor relativo, autoridade e presença em fontes de terceiros. Quase nenhuma tática "exclusiva de IA" (llms.txt, reescrita para LLM) tem suporte empírico.</p>
+    body: `<p>GEO (Generative Engine Optimization) é otimizar um conteúdo para que ele seja citado nas respostas geradas por IA, como os AI Overviews e o Modo IA do Google, o ChatGPT e o Perplexity. Na maior parte, <strong>GEO ainda é SEO</strong>. A página precisa estar indexada para entrar na disputa, e o que faz ela ser escolhida e citada é qualidade, estrutura fácil de extrair, autoridade e presença em fontes de terceiros.</p>
 
-<p><strong>Resposta detalhada:</strong> este guia separa o que tem evidência do que é folclore. Cada número aqui veio de fonte primária (paper, documentação oficial de plataforma) ou de estudo de mercado de grande amostra, e está <strong>datado</strong>, porque o campo muda mês a mês. Onde a evidência é fraca, contestada ou ausente, eu sinalizo. É um guia longo de propósito, pra ser referência. Se você quer o passo a passo de <em>como escrever</em> um post citável, o atalho está no <a href="/blog/manual-aeo-geo-escrever-post-citado-llm/">Manual de AEO/GEO</a>, que é o companheiro prático deste aqui.</p>
+<p>Este guia separa o que tem evidência do que é folclore. Cada número aqui veio de fonte primária (paper, documentação oficial de plataforma) ou de estudo de mercado de grande amostra, e está <strong>datado</strong>, porque o campo muda mês a mês. Onde a evidência é fraca, contestada ou ausente, eu sinalizo. É um guia longo de propósito, pra ser referência. Se você quer o passo a passo de <em>como escrever</em> um post citável, o atalho está no <a href="/blog/manual-aeo-geo-escrever-post-citado-llm/">Manual de AEO/GEO</a>, que é o companheiro prático deste aqui.</p>
 
 <nav class="toc" aria-label="Sumário">
 <p class="toc__title">Neste guia</p>
@@ -465,21 +955,23 @@ Disallow: /</code></pre>
 
 <p>GEO é real no sentido de que motores generativos agora intermediam a descoberta, e isso muda como o clique acontece. Mas a maior parte do que funciona pra ser citado é o que sempre funcionou pra ranquear bem, mais um punhado de ajustes de estrutura e cobertura de tema apoiados por evidência. A diferença entre fazer GEO com método e cair no hype está em três hábitos: <strong>separar elegibilidade de seleção, datar todo número (porque o campo muda mês a mês), e exigir evidência antes de gastar esforço.</strong> Se você fizer só isso, já está à frente da maioria dos guias de GEO que existem por aí.</p>
 
-<p><em>Última revisão: 2 de junho de 2026. As estatísticas de mercado citadas são datadas porque o comportamento dos motores muda rápido; trate-as como direção e tendência, não como constantes.</em></p>`,
-    seo_title: 'GEO (Generative Engine Optimization): guia baseado em evidências',
+<p>Se a dúvida é onde GEO e SEO se separam no dia a dia, escrevi um texto só sobre isso, <a href="/blog/seo-e-geo-diferencas-na-pratica/">SEO e GEO, o que muda na prática</a>. E se você quer aplicar este guia no seu site, eu faço esse trabalho como consultoria, do diagnóstico ao código. Veja como funciona em <a href="/geo-seo-para-ia/">GEO e SEO para IA</a>.</p>
+
+<p><em>Abertura revista em 25 de outubro de 2026. As estatísticas de mercado foram levantadas até junho de 2026 e estão datadas porque o comportamento dos motores muda rápido. Trate os números como direção e tendência, não como constantes.</em></p>`,
+    seo_title: 'O que é GEO (Generative Engine Optimization), guia 2026',
     seo_description:
-      'Mega guia de GEO sem hype: o que os papers (KDD 2024, AutoGEO, GEO-16) e os dados (Ahrefs, Semrush, Pew, SparkToro) provam sobre ser citado por ChatGPT e Google AI Overviews. Mecanismos, números datados e playbook por nível de evidência.',
+      'O que é GEO e como ser citado por ChatGPT e AI Overviews. O que os estudos provam, o que é mito e um playbook por nível de evidência, com números datados.',
     keywords: [
+      'o que é GEO',
       'GEO',
       'Generative Engine Optimization',
-      'AEO',
+      'GEO SEO',
+      'SEO para IA',
       'AI Overviews',
       'ChatGPT search',
-      'otimização para IA',
+      'AEO',
       'citação por LLM',
-      'SEO para IA',
       'query fan-out',
-      'GEO baseado em evidências',
     ],
   },
   'guia-sitemap-dinamico-em-escala': {
@@ -876,13 +1368,16 @@ $xml-&gt;endDocument();</code></pre>
     ],
   },
   'guia-data-layer-bem-modelado': {
-    title: 'Guia de data layer bem modelado',
+    title: 'Data layer (dataLayer) bem modelado, o guia para GTM e GA4',
     excerpt:
-      'Data layer é contrato, não sobra. Sem schema versionado, nomenclatura estável e separação clara entre evento e variável, o report nunca fecha. Princípios, estrutura de referência e os anti-padrões que mais derrubam projeto.',
+      'Data layer é o objeto dataLayer que liga o site ao Google Tag Manager. Sem schema versionado, nomes estáveis e evento separado de variável, o relatório nunca fecha. Princípios, estrutura de referência e os anti-padrões que mais derrubam projeto.',
     tag: 'Martech',
     published_at: '2026-04-20',
+    updated_at: '2026-10-25',
     read_time_min: 11,
-    body: `<p>Em todo projeto de tracking que entro pra auditar, o problema raiz é o mesmo. O data layer foi tratado como "coisa que o GTM lê", e não como contrato de dados entre engenharia, marketing, produto e BI. O resultado é previsível, tag que dispara em 70% das vezes, KPI que oscila sem mudança de comportamento, relatório em HubSpot que não fecha com GA4 e time de ads que aponta pra "migração de consent" cada vez que o funil muda.</p>
+    body: `<p>Data layer é a camada de dados do site. No código, é um array JavaScript chamado <code>window.dataLayer</code>, onde a página registra eventos e informações, como uma compra ou o tipo de usuário. O Google Tag Manager (GTM) lê esse array e envia os dados para o GA4, o Google Ads e outras ferramentas, então ele funciona como um contrato entre engenharia, marketing e BI.</p>
+
+<p>Em todo projeto de tracking que entro pra auditar, o problema raiz é o mesmo. O data layer foi tratado como "coisa que o GTM lê", e não como contrato de dados entre engenharia, marketing, produto e BI. O resultado é previsível, tag que dispara em 70% das vezes, KPI que oscila sem mudança de comportamento, relatório em HubSpot que não fecha com GA4 e time de ads que aponta pra "migração de consent" cada vez que o funil muda.</p>
 
 <p>Data layer bem feito é a fundação que não aparece. Quando está certo, ninguém fala dele. Quando está errado, é o primeiro suspeito em toda investigação.</p>
 
@@ -1011,16 +1506,21 @@ window.dataLayer.push({
 
 <p>Se você passou nos 7, o data layer virou fundação. Se falhou em algum, é aí que o relatório vai parar de fechar seis meses depois. Data layer bem modelado é paciência antes do código, e é o que separa projeto de martech sério de fila de tickets.</p>
 
-<p><em>Projetos relacionados: <a href="/projetos/fix-pixel-x-google-ads-shopify/">Fix de colisão de pixel Twitter/X vs Google Ads em Shopify</a> e <a href="/projetos/utm-persistence-arquitetura-martech-3-bus/">UTM persistence e arquitetura martech em 3 BUs</a></em>.</p>`,
-    seo_title: 'Guia de data layer bem modelado pra GTM',
+<p><em>Projetos relacionados: <a href="/projetos/fix-pixel-x-google-ads-shopify/">Fix de colisão de pixel Twitter/X vs Google Ads em Shopify</a> e <a href="/projetos/utm-persistence-arquitetura-martech-3-bus/">UTM persistence e arquitetura martech em 3 BUs</a></em>.</p>
+
+<p>Se o seu data layer precisa ser desenhado do zero ou consertado, eu faço a modelagem, a implementação no GTM e a validação automática. Veja como funciona em <a href="/automacao-com-ia/">automação com IA e martech</a>.</p>`,
+    seo_title: 'Data layer (dataLayer), como modelar para GTM e GA4',
     seo_description:
-      'Data layer como contrato versionado, não sobra. Schema, nomenclatura estável, evento vs variável, validação em QA e os 5 anti-padrões mais comuns.',
+      'Data layer é o objeto dataLayer que liga o site ao GTM. Como modelar com schema versionado, nomes estáveis, evento separado de variável e validação em QA.',
     keywords: [
-      'data layer GTM',
+      'data layer',
+      'datalayer',
+      'dataLayer GTM',
+      'o que é data layer',
+      'data layer GA4',
       'data layer schema versionado',
       'nomenclatura data layer',
       'validação GTM QA',
-      'GA4 data layer',
     ],
   },
 
@@ -1158,13 +1658,16 @@ window.dataLayer.push({
   },
 
   'guia-programmatic-seo-wordpress': {
-    title: 'Guia de programmatic SEO em WordPress',
+    title: 'Programmatic SEO em WordPress, o guia de SEO programático sem thin content',
     excerpt:
-      'Programmatic SEO em WordPress feito com disciplina, não planilha exportada pro formulário do plugin. Arquitetura em 4 camadas, importer PHP idempotente e os erros que transformam escala em thin content.',
+      'Programmatic SEO, ou SEO programático, cria páginas em escala a partir de uma base de dados. Em WordPress, feito com disciplina e não com planilha jogada num plugin. Arquitetura em 4 camadas, importer PHP idempotente e os erros que viram thin content.',
     tag: 'SEO Técnico',
     published_at: '2026-04-20',
+    updated_at: '2026-10-25',
     read_time_min: 12,
-    body: `<p>Programmatic SEO, quando funciona, é uma das alavancas de crescimento mais eficientes que existem. Você gera dezenas ou centenas de páginas a partir de uma fonte estruturada (planilha, banco, API), cada uma atacando uma cauda longa específica, e o tráfego orgânico escala não-linearmente depois que o Google indexa.</p>
+    body: `<p>Programmatic SEO (em português, SEO programático) é criar muitas páginas a partir de uma base estruturada, como planilha, banco de dados ou API, usando um mesmo modelo de página. Cada página responde a uma busca de cauda longa, ou seja, uma busca mais específica e com menos volume. Funciona quando cada página traz dado útil e próprio, e vira thin content (página rasa, sem valor próprio) quando só troca uma palavra no título.</p>
+
+<p>Programmatic SEO, quando funciona, é uma das alavancas de crescimento mais eficientes que existem. Você gera dezenas ou centenas de páginas a partir de uma fonte estruturada (planilha, banco, API), cada uma atacando uma cauda longa específica, e o tráfego orgânico escala não-linearmente depois que o Google indexa.</p>
 
 <p>Quando não funciona, é um desastre em câmera lenta. O Google detecta thin content, rebaixa o domínio inteiro, e 3 meses depois você está tentando entender por que o blog principal também caiu.</p>
 
@@ -1284,11 +1787,15 @@ update_post_meta( \$id, '_source_hash', \$hash );
 
 <p>Programmatic SEO em WordPress não é simples mas é sistemático. Com as 4 camadas certas, a planilha vira página útil, o Google confia, e o gráfico de keywords orgânicas cresce em curva não-linear. Sem elas, vira o pesadelo de thin content que todo mundo já viu.</p>
 
-<p><em>Projetos relacionados: <a href="/projetos/arquitetura-conteudo-scaffold-php-import/">Arquitetura de conteúdo e scaffold PHP para import em escala</a> e <a href="/projetos/linkagem-semantica-embeddings-sanar/">Linkagem semântica por embeddings em 5 propriedades Sanar</a></em>.</p>`,
-    seo_title: 'Programmatic SEO em WordPress',
+<p><em>Projetos relacionados: <a href="/projetos/arquitetura-conteudo-scaffold-php-import/">Arquitetura de conteúdo e scaffold PHP para import em escala</a> e <a href="/projetos/linkagem-semantica-embeddings-sanar/">Linkagem semântica por embeddings em 5 propriedades Sanar</a></em>.</p>
+
+<p>Antes de gerar páginas em escala, vale auditar se o site aguenta. Eu desenho a arquitetura, escrevo o importer e acompanho a indexação por coorte como parte do serviço de <a href="/seo-tecnico/">SEO técnico</a>.</p>`,
+    seo_title: 'Programmatic SEO em WordPress, guia de SEO programático',
     seo_description:
-      'Arquitetura em 4 camadas pra programmatic SEO que escala, planilha-fonte, importer PHP idempotente, CPT com schema e internal linking que fecha o loop.',
+      'Programmatic SEO, ou SEO programático, gera páginas em escala a partir de dados. Arquitetura em 4 camadas no WordPress e os erros que viram thin content.',
     keywords: [
+      'programmatic SEO',
+      'SEO programático',
       'programmatic SEO WordPress',
       'importer PHP wp-cli',
       'thin content escala',
@@ -1650,13 +2157,16 @@ update_post_meta( \$id, '_source_hash', \$hash );
 
   'internal-linking-semantico-sem-plugin-pgvector': {
     title:
-      'Internal linking semântico sem plugin, da taxonomia manual ao pgvector escolhendo por volume',
+      'Link interno em escala, linkagem interna semântica sem plugin, da taxonomia ao pgvector',
     excerpt:
-      'Plugin de "related posts" resolve até certo ponto. Depois dele, existe um degrau de taxonomia manual, um de co-ocorrência, e um de embeddings. Escolher bem depende do volume de conteúdo que você tem.',
+      'Link interno liga páginas do mesmo site e ajuda o Google a achar e entender cada uma. Plugin de "related posts" resolve até certo ponto. Depois dele vêm taxonomia manual, co-ocorrência e embeddings, e a escolha depende do volume de conteúdo.',
     tag: 'SEO Técnico',
     published_at: '2026-04-15',
+    updated_at: '2026-10-25',
     read_time_min: 8,
-    body: `<p>A pergunta que todo time de conteúdo faz em algum momento é "como a gente melhora internal linking em escala". A resposta padrão é instalar um plugin de "related posts" e seguir o dia. Funciona até certo ponto, e o ponto é bem mais cedo do que as pessoas imaginam.</p>
+    body: `<p>Link interno é um link de uma página para outra do mesmo site. O Google usa links para encontrar páginas novas e para entender a relevância de cada uma (<a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable?hl=pt-br">documentação do Google</a>). Linkagem interna é o sistema que decide quais links entram em cada página, e o melhor jeito de fazer isso depende de quantos conteúdos você tem.</p>
+
+<p>A pergunta que todo time de conteúdo faz em algum momento é "como a gente melhora internal linking em escala". A resposta padrão é instalar um plugin de "related posts" e seguir o dia. Funciona até certo ponto, e o ponto é bem mais cedo do que as pessoas imaginam.</p>
 
 <p>Existem quatro degraus de qualidade em linkagem interna. Cada degrau tem um custo de implementação e um volume mínimo de conteúdo a partir do qual ele começa a valer a pena.</p>
 
@@ -1701,11 +2211,16 @@ update_post_meta( \$id, '_source_hash', \$hash );
 
 <p>No engine que rodo pro Sanar, o resultado final mistura: 1 CID, 1 Exame, 1 Ferramenta, 1 Curso. Quatro vizinhos, cada um de uma propriedade diferente. Isso é o que faz o usuário sair da leitura com quatro páginas vistas em vez de uma.</p>
 
-<p><em>Projeto relacionado: <a href="/projetos/linkagem-semantica-embeddings-sanar/">Linkagem semântica por embeddings em 5 propriedades Sanar</a></em>.</p>`,
-    seo_title: 'Internal linking semântico sem plugin',
+<p><em>Projeto relacionado: <a href="/projetos/linkagem-semantica-embeddings-sanar/">Linkagem semântica por embeddings em 5 propriedades Sanar</a></em>.</p>
+
+<p>Linkagem interna é uma das etapas que eu reviso em toda <a href="/blog/auditoria-seo-tecnico-checklist/">auditoria de SEO técnico</a>. Se você quer ajuda para desenhar ou automatizar a do seu site, veja como funciona o serviço de <a href="/seo-tecnico/">SEO técnico</a>.</p>`,
+    seo_title: 'Link interno e linkagem interna semântica sem plugin',
     seo_description:
-      'Quatro degraus de linkagem interna, do plugin de related ao pgvector. Framework de decisão por volume e o que ninguém fala sobre embeddings.',
+      'Link interno é o link entre páginas do mesmo site. Quatro degraus de linkagem interna, do plugin de related ao pgvector, e como escolher pelo volume de posts.',
     keywords: [
+      'link interno',
+      'linkagem interna',
+      'links internos SEO',
       'internal linking semântico',
       'pgvector related posts',
       'embeddings SEO',
@@ -1850,13 +2365,16 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
   },
 
   'core-web-vitals-wordpress-sem-plugin-cache': {
-    title: 'Core Web Vitals verdes em WordPress sem plugin de cache',
+    title: 'Core Web Vitals no WordPress, como deixar verde sem plugin de cache',
     excerpt:
-      'Plugin de cache é analgésico. Corta a dor por um tempo, mas o problema estrutural continua lá. O que de fato move LCP, INP e CLS em WordPress quando você para de terceirizar a decisão.',
+      'Core Web Vitals são as métricas LCP, INP e CLS do Google. Plugin de cache é analgésico, corta a dor por um tempo e deixa o problema estrutural lá. O que de fato move as três métricas em WordPress.',
     tag: 'Front-end',
     published_at: '2026-03-28',
+    updated_at: '2026-10-25',
     read_time_min: 9,
-    body: `<p>A pergunta mais comum que recebo de donos de site WordPress é "qual plugin de cache você recomenda". A resposta honesta decepciona, que é "nenhum, até a gente entender por que seu site está lento".</p>
+    body: `<p>Core Web Vitals são três métricas do Google que medem a experiência real de quem abre a página. LCP mede quanto tempo o maior elemento visível leva para carregar, INP mede quanto a página demora para responder a um clique ou toque, e CLS mede o quanto o layout pula. O bom é LCP até 2,5 segundos, INP até 200 milissegundos e CLS até 0,1, medidos no 75º percentil das visitas (<a href="https://web.dev/articles/vitals?hl=pt-br">web.dev</a>).</p>
+
+<p>A pergunta mais comum que recebo de donos de site WordPress é "qual plugin de cache você recomenda". A resposta honesta decepciona, que é "nenhum, até a gente entender por que seu site está lento".</p>
 
 <p>Plugin de cache mascara sintoma. Se o seu LCP é 4 segundos sem cache e 1,8 segundo com cache, o site continua estruturalmente pesado, só que escondido atrás de uma camada de HTML estático. Na primeira visita de um usuário novo (cache miss), os 4 segundos voltam. No Google CrUX, essas visitas pesam.</p>
 
@@ -1900,11 +2418,15 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
 
 <p>A razão pela qual isso não é senso comum é simples, que é a indústria de plugins de cache ganha vendendo o atalho. O atalho funciona até a primeira falha de cache, e aí o problema volta, só que mais difícil de debugar porque agora tem uma camada a mais no caminho.</p>
 
-<p>Performance em WordPress não exige framework novo nem stack exótica. Exige disciplina com o que o core do WP já oferece e auditoria do que o tema e os plugins estão empilhando no caminho. O resto é cache camuflando sintoma.</p>`,
-    seo_title: 'Core Web Vitals verdes em WordPress',
+<p>Performance em WordPress não exige framework novo nem stack exótica. Exige disciplina com o que o core do WP já oferece e auditoria do que o tema e os plugins estão empilhando no caminho. O resto é cache camuflando sintoma.</p>
+
+<p>Se o seu WordPress continua lento depois disso, eu entro no tema e nos plugins e faço as correções no código. Veja como funciona em <a href="/desenvolvedor-wordpress/">desenvolvedor WordPress</a>.</p>`,
+    seo_title: 'Core Web Vitals no WordPress, verde sem plugin de cache',
     seo_description:
-      'Cinco intervenções em ordem de ROI pra LCP, INP e CLS verdes em WordPress sem plugin de cache, com budget de imagem, critical CSS e JS deferido.',
+      'Core Web Vitals são o LCP, o INP e o CLS do Google. Cinco ajustes em ordem de retorno para deixar o WordPress verde sem depender de plugin de cache.',
     keywords: [
+      'Core Web Vitals',
+      'o que é Core Web Vitals',
       'Core Web Vitals WordPress',
       'LCP sem plugin de cache',
       'performance WordPress',
@@ -2294,15 +2816,16 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
     ],
   },
   'tech-seo-google-news-top-stories': {
-    title: 'Google News e Top Stories, o que de fato decide aparecer',
+    title: 'Google Discover, Google News e Top Stories, o que de fato decide aparecer',
     excerpt:
-      'Candidatura ao Google News acabou em 2019, AMP deixou de ser obrigatório em 2021, e Top Stories nem usa o índice do Google News. As 12 coisas que decidem indexação rápida e citação em carrossel, com news-sitemap dinâmico, schema completo e hook de IndexNow no publish.',
+      'Google Discover, Google News e Top Stories são três produtos diferentes. Discover não exige tag especial, mas pede imagem grande e título honesto. Google News e Top Stories pedem news-sitemap dinâmico, schema completo e indexação rápida no publish.',
     tag: 'SEO Técnico',
     published_at: '2026-05-08',
-    read_time_min: 14,
-    body: `<p><strong>Resposta curta:</strong> Google News e Top Stories são dois produtos distintos. Top Stories é onde está 90% do tráfego de notícia, usa o índice principal do Google e não exige aprovação em lugar nenhum. Pra entrar, o que decide é news-sitemap dinâmico das últimas 48h, schema <code>NewsArticle</code> com <code>datePublished</code>/<code>dateModified</code> em ISO 8601 com timezone, autoria com <code>sameAs</code> apontando pra perfil real, SSR do schema, link da home pra URL nova, três aspect ratios de imagem, e hook automático de IndexNow + URL Inspection API no publish.</p>
+    updated_at: '2026-10-25',
+    read_time_min: 16,
+    body: `<p>Google Discover é o feed de recomendações do app do Google e do Chrome no celular. Ele mostra conteúdo sem a pessoa buscar, e qualquer página indexada que siga as políticas de conteúdo pode aparecer, sem tag especial (<a href="https://developers.google.com/search/docs/appearance/google-discover?hl=pt-br">documentação do Google</a>). Google News e Top Stories são outros produtos, e para eles o que decide é news-sitemap das últimas 48 horas, schema <code>NewsArticle</code> renderizado no servidor, autoria real e indexação rápida no momento da publicação.</p>
 
-<p><strong>Resposta detalhada:</strong> a maior parte do que se lê em PT-BR sobre Google News é de 2019 a 2022, fala de candidatura (acabou) e AMP (deixou de ser obrigatório em junho/2021). O que realmente move ponteiro hoje é (1) entender que Top Stories usa o índice normal e Google News usa um índice próprio, (2) news-sitemap separado com regra dura de 48h, (3) <code>NewsArticle</code> renderizado server-side, não client-side, (4) consistência entre header HTTP <code>Last-Modified</code> e <code>dateModified</code> do JSON-LD (quando divergem, Google ignora), (5) imagem em 16:9, 4:3 e 1:1 porque cada superfície escolhe diferente, (6) crawl budget priorizado pra URLs frescas via <code>robots.txt</code> agressivo nos arquivos antigos, (7) janela de relevância em horas, então hook de IndexNow + URL Inspection API no <code>publish_post</code> é não-negociável.</p>
+<p>A maior parte do que se lê em PT-BR sobre Google News é de 2019 a 2022, fala de candidatura (acabou) e AMP (deixou de ser obrigatório em junho/2021). O que realmente move ponteiro hoje é (1) entender que Top Stories usa o índice normal e Google News usa um índice próprio, (2) news-sitemap separado com regra dura de 48h, (3) <code>NewsArticle</code> renderizado server-side, não client-side, (4) consistência entre header HTTP <code>Last-Modified</code> e <code>dateModified</code> do JSON-LD (quando divergem, Google ignora), (5) imagem em 16:9, 4:3 e 1:1 porque cada superfície escolhe diferente, (6) crawl budget priorizado pra URLs frescas via <code>robots.txt</code> agressivo nos arquivos antigos, (7) janela de relevância em horas, então hook de IndexNow + URL Inspection API no <code>publish_post</code> é não-negociável.</p>
 
 <h2>A confusão que custa caro, Google News ≠ Top Stories ≠ Discover</h2>
 
@@ -2315,6 +2838,30 @@ update_post_meta( \$id, '_source_hash', \$hash );</code></pre>
 <p><strong>Discover</strong> é o feed mobile no app do Google e na home do Chrome Android. Não é busca, é recomendação. Otimização separada (imagem grande de alta qualidade pesa mais, intent não importa). Discover entrega volume de tráfego de marca como nenhum outro canal, mas é instável.</p>
 
 <p>Implicação prática: se o seu blog é de marca (não veículo), <strong>foque Top Stories e Discover</strong>. Google News dedicado é pra portal puro-sangue.</p>
+
+<h2>Google Discover, o que a documentação do Google pede</h2>
+
+<p>Das três superfícies, o Discover é a de otimização mais simples, porque não depende de palavra-chave. A pessoa não digita nada. O Google escolhe o que mostrar pelo interesse dela.</p>
+
+<p>A <a href="https://developers.google.com/search/docs/appearance/google-discover?hl=pt-br">página oficial sobre o Discover</a> resume as regras em poucos pontos.</p>
+
+<ul>
+  <li><strong>Não existe cadastro.</strong> A página entra automaticamente quando está indexada e segue as políticas de conteúdo do Discover. Não precisa de tag especial nem de dado estruturado.</li>
+  <li><strong>Estar qualificado não garante exibição.</strong> A documentação diz isso com todas as letras.</li>
+  <li><strong>Imagem grande pesa muito.</strong> Use imagem com pelo menos 1.200 px de largura e libere a prévia grande com <code>max-image-preview:large</code>.</li>
+  <li><strong>A imagem precisa representar a página.</strong> Indique qual é pelo schema.org ou pela tag <code>og:image</code>. Logo do site não serve.</li>
+  <li><strong>Título honesto.</strong> O título deve capturar a essência do conteúdo. Isca de clique e sensacionalismo vão contra as regras.</li>
+  <li><strong>O tráfego oscila.</strong> O próprio Google diz que o Discover é menos previsível que a busca e deve ser tratado como complemento.</li>
+</ul>
+
+<p>No HTML, a parte técnica cabe em duas linhas no <code>&lt;head&gt;</code>.</p>
+
+<pre><code class="language-html">&lt;meta name="robots" content="max-image-preview:large"&gt;
+&lt;meta property="og:image" content="https://exemplo.com.br/img/materia-1200x675.jpg"&gt;</code></pre>
+
+<p>Para medir, o Search Console tem um relatório próprio chamado Desempenho no Discover. Ele mostra impressões, cliques e CTR dos últimos 16 meses, quando o site passa de um volume mínimo de impressões.</p>
+
+<p>Na prática, eu trato o Discover como bônus de um conteúdo bom e bem ilustrado, não como meta de pauta. Quem escreve pensando só no Discover acaba no título sensacionalista, e é justamente isso que as regras punem.</p>
 
 <h2>O que mudou desde 2019, e os guides desatualizados não contam</h2>
 
@@ -2677,20 +3224,22 @@ Sitemap: https://exemplo.com.br/news-sitemap.xml</code></pre>
 
 <hr/>
 
-<p><em>Pra fechar a trilha técnica, o <a href="/blog/guia-sitemap-dinamico-em-escala/">guia de sitemap dinâmico em escala</a> resolve o sitemap principal (separado do news-sitemap), e o <a href="/blog/guia-core-web-vitals-wordpress-sem-plugin-cache/">guia de Core Web Vitals em WordPress</a> cobre a base de TTFB e renderização que o Top Stories assume como ponto de partida.</em></p>`,
-    seo_title: 'Google News e Top Stories, tech SEO em 2026',
+<p><em>Pra fechar a trilha técnica, o <a href="/blog/guia-sitemap-dinamico-em-escala/">guia de sitemap dinâmico em escala</a> resolve o sitemap principal (separado do news-sitemap), e o <a href="/blog/core-web-vitals-wordpress-sem-plugin-cache/">guia de Core Web Vitals em WordPress</a> cobre a base de TTFB e renderização que o Top Stories assume como ponto de partida.</em></p>
+
+<p>Se você publica notícia ou conteúdo de marca e quer aparecer no Discover, no Google News e no Top Stories, eu implemento o news-sitemap, o schema e os hooks de publicação. Veja como funciona o serviço de <a href="/seo-tecnico/">SEO técnico</a>.</p>`,
+    seo_title: 'Google Discover e Google News, como aparecer em 2026',
     seo_description:
-      'Como aparecer no Google News e Top Stories sem ser veículo. News-sitemap dinâmico, NewsArticle schema, hook de IndexNow, contra-intuitivos que ninguém escreve em PT-BR.',
+      'Google Discover, Google News e Top Stories são produtos diferentes. O que decide aparecer em cada um, com imagem grande, news-sitemap, NewsArticle e IndexNow.',
     keywords: [
+      'Google Discover',
+      'Google Discover SEO',
+      'Google News',
       'Google News SEO',
       'Top Stories SEO',
-      'tech SEO notícias',
       'news sitemap',
       'NewsArticle schema',
-      'Publisher Center 2026',
+      'max-image-preview',
       'IndexNow WordPress',
-      'URL Inspection API',
-      'Discover SEO',
       'YMYL news',
     ],
   },

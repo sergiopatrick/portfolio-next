@@ -1,37 +1,34 @@
 import Link from 'next/link';
 import { allCasesSortedByFeature } from '@/content/cases';
-import { CardCase } from '@/components/ui/CardCase';
+import { CasesCarousel, type CarouselCase } from '@/components/home/CasesCarousel';
 
 export function SelectedWork() {
-  const featured = allCasesSortedByFeature().slice(0, 6);
+  const items: CarouselCase[] = allCasesSortedByFeature().map(({ slug, data }) => ({
+    slug,
+    title: data.title,
+    sector: data.sector,
+    role: data.role,
+    metric: data.s5_results[0]?.value ?? '',
+    metricLabel: data.s5_results[0]?.label ?? '',
+  }));
+
   return (
-    <section className="section section--divider" id="selected-work">
+    <section className="section section--divider cases-3d" id="projetos">
       <div className="container">
         <div className="selected-work__header">
           <div>
-            <p className="section__kicker">Projetos selecionados</p>
-            <h2 className="section__title">
-              Código real. Impacto mensurável. Projetos com snippets.
-            </h2>
+            <p className="section__kicker">Cases</p>
+            <h2 className="section__title">Projetos com número, código e contexto.</h2>
           </div>
           <Link href="/projetos/" className="btn btn--link">
-            Ver todos os projetos{' '}
+            Ver todos os projetos
             <span className="btn__arrow" aria-hidden="true">
               →
             </span>
           </Link>
         </div>
-
-        {featured.length > 0 ? (
-          <div className="selected-work__grid">
-            {featured.map(({ slug, data }) => (
-              <CardCase key={slug} slug={slug} data={data} as="h3" />
-            ))}
-          </div>
-        ) : (
-          <p className="text-muted">Nenhum projeto publicado ainda.</p>
-        )}
       </div>
+      <CasesCarousel items={items} />
     </section>
   );
 }

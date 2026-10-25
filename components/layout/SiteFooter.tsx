@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { siteOptions } from '@/content/site';
+import { services, serviceSlugs } from '@/content/services';
 import { whatsappUrl, whatsappDisplay } from '@/lib/whatsapp';
 import { SvgIcon } from '@/components/ui/SvgIcon';
 
@@ -17,8 +18,7 @@ export function SiteFooter() {
               <span className="site-logo__dot">.</span>
             </Link>
             <p className="site-footer__tag">
-              Front-end developer com profundidade em SEO técnico, performance web e
-              automação com LLM.
+              Consultor de SEO técnico e GEO que também escreve o código.
             </p>
           </div>
 
@@ -40,6 +40,17 @@ export function SiteFooter() {
               <li>
                 <Link href="/contato/">Contato</Link>
               </li>
+            </ul>
+          </div>
+
+          <div className="site-footer__col">
+            <h3>Serviços</h3>
+            <ul>
+              {serviceSlugs().map((slug) => (
+                <li key={slug}>
+                  <Link href={`/${slug}/`}>{services[slug].short_title}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 

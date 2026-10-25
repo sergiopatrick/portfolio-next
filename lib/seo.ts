@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { siteOptions, services } from '@/content/site';
+import { siteOptions } from '@/content/site';
+import { services } from '@/content/services';
 import { cases, allCasesSortedByFeature } from '@/content/cases';
 import { posts, allPostsSortedByDate } from '@/content/posts';
 import { whatsappE164 } from '@/lib/whatsapp';
@@ -11,7 +12,12 @@ import {
   absoluteUrl,
 } from '@/lib/site';
 
-const OG_DEFAULT = '/images/og-default.jpg';
+const OG_DEFAULT = '/og-default.png';
+
+// Cases have no per-item date. These are the real publish and last-edit days
+// of the case set, never the build time.
+export const CASES_PUBLISHED = '2026-04-20';
+export const CASES_UPDATED = '2026-10-25';
 
 type BuildArgs = {
   // Pass a string to get ", Sérgio Patrick" appended via the layout template.
@@ -73,14 +79,11 @@ export function websiteSchema(): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': absoluteUrl('/#website'),
     url: absoluteUrl('/'),
     name: SITE_NAME,
     inLanguage: SITE_LANGUAGE,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE_URL}/?s={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
+    publisher: { '@id': absoluteUrl('/#person') },
   };
 }
 
@@ -93,23 +96,43 @@ export function personSchema(): object {
     '@id': absoluteUrl('/#person'),
     name: 'Sérgio Patrick',
     alternateName: 'Patrick',
-    jobTitle: 'Tech and SEO Specialist',
-    worksFor: { '@type': 'Organization', name: 'Gupy' },
+    jobTitle: 'Consultor de SEO técnico e GEO',
+    description:
+      'Consultor independente de SEO técnico e GEO que também desenvolve em WordPress, Next.js e Shopify.',
+    hasOccupation: [
+      {
+        '@type': 'Occupation',
+        name: 'Consultor de SEO',
+        occupationLocation: { '@type': 'Country', name: 'Brasil' },
+        skills: 'SEO técnico, GEO, auditoria de SEO, dados estruturados, Core Web Vitals',
+      },
+      {
+        '@type': 'Occupation',
+        name: 'Desenvolvedor web',
+        occupationLocation: { '@type': 'Country', name: 'Brasil' },
+        skills: 'WordPress, plugins PHP, Next.js, JavaScript, performance web',
+      },
+    ],
     url: absoluteUrl('/'),
+    image: absoluteUrl('/og-default.png'),
     email: `mailto:${siteOptions.email}`,
     telephone: tel,
     sameAs: [
       siteOptions.linkedin,
       siteOptions.github,
-      wa ? `https://wa.me/${wa}` : '',
+      'https://github.com/sergiopatrick/trilha-seo-dados-ia',
     ].filter(Boolean),
     knowsAbout: [
-      'Front-end Development',
-      'Technical SEO',
-      'WordPress Development',
+      'SEO técnico',
+      'Generative Engine Optimization (GEO)',
+      'Answer Engine Optimization (AEO)',
+      'Auditoria de SEO',
+      'Dados estruturados',
       'Core Web Vitals',
+      'Desenvolvimento WordPress',
+      'Front-end',
+      'Automação com IA',
       'Martech',
-      'Automation with LLM',
     ],
     address: {
       '@type': 'PostalAddress',
@@ -127,17 +150,10 @@ export function professionalServiceSchema(): object {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     '@id': absoluteUrl('/#service'),
-    name: 'Sérgio Patrick, Front-end, SEO técnico e automação com LLM',
+    name: 'Sérgio Patrick, consultoria de SEO técnico e GEO',
     url: absoluteUrl('/'),
     areaServed: { '@type': 'Country', name: 'Brasil' },
-    serviceType: [
-      'Front-end development',
-      'WordPress custom themes and plugins',
-      'Technical SEO',
-      'AEO (AI Engine Optimization)',
-      'Martech architecture',
-      'LLM automation',
-    ],
+    serviceType: Object.values(services).map((svc) => svc.short_title),
     provider: { '@id': absoluteUrl('/#person') },
     address: {
       '@type': 'PostalAddress',
@@ -206,11 +222,11 @@ export function articleSchema(slug: string): object {
     '@type': 'Article',
     headline: c.title,
     description: c.excerpt,
-    datePublished: new Date().toISOString(),
-    dateModified: new Date().toISOString(),
+    datePublished: CASES_PUBLISHED,
+    dateModified: CASES_UPDATED,
     inLanguage: SITE_LANGUAGE,
     wordCount,
-    author: { '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/') },
+    author: { '@id': absoluteUrl('/#person'), '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/sobre/') },
     mainEntityOfPage: { '@type': 'WebPage', '@id': permalink },
     image: [],
     publisher: { '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/') },
@@ -234,7 +250,7 @@ export function collectionPageSchema(): object {
     url: absoluteUrl('/projetos/'),
     name: 'Projetos',
     description:
-      'Projetos de front-end, SEO técnico e automação com LLM.',
+      'Cases de SEO técnico, GEO, desenvolvimento WordPress e automação com IA.',
   };
 }
 
@@ -258,11 +274,11 @@ export function serviceSchema(slug: string): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': absoluteUrl(`/servicos/${slug}/#service`),
+    '@id': absoluteUrl(`/${slug}/#service`),
     name: s.title,
     description: s.excerpt,
-    url: absoluteUrl(`/servicos/${slug}/`),
-    serviceType: s.short_title,
+    url: absoluteUrl(`/${slug}/`),
+    serviceType: s.focus_keyword,
     provider: { '@id': absoluteUrl('/#person') },
     areaServed: { '@type': 'Country', name: 'Brasil' },
     hasOfferCatalog: {
@@ -292,7 +308,7 @@ export function servicesHubItemList(): object {
   const items = Object.entries(services).map(([slug, s], i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    url: absoluteUrl(`/servicos/${slug}/`),
+    url: absoluteUrl(`/${slug}/`),
     name: s.title,
   }));
   return {
@@ -316,10 +332,10 @@ export function blogPostSchema(slug: string): object {
     headline: p.title,
     description: p.excerpt,
     datePublished: p.published_at,
-    dateModified: p.published_at,
+    dateModified: p.updated_at || p.published_at,
     inLanguage: SITE_LANGUAGE,
     wordCount,
-    author: { '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/') },
+    author: { '@id': absoluteUrl('/#person'), '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/sobre/') },
     mainEntityOfPage: { '@type': 'WebPage', '@id': permalink },
     publisher: { '@type': 'Person', name: 'Sérgio Patrick', url: absoluteUrl('/') },
     articleSection: p.tag,

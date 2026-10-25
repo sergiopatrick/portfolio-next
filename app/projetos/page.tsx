@@ -10,9 +10,9 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Projetos com código real e métricas',
+  title: 'Cases de SEO técnico, GEO e desenvolvimento',
   description:
-    'Projetos de front-end, SEO técnico e automação com LLM. Código real, snippets, métricas atribuíveis e links pros artefatos em produção.',
+    'Cases de SEO técnico, GEO, desenvolvimento WordPress e automação com IA. Código real e números como 1.113 posts no SanarMed e 100% da atribuição recuperada.',
   path: '/projetos/',
 });
 

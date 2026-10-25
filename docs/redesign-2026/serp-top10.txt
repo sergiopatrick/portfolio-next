@@ -1,0 +1,109 @@
+## consultoria seo ai=true
+1|https://neilpatel.com/br/blog/consultoria-seo/|54|3,4M|64,0K
+2|https://agenciakaizen.com.br/solucoes/consultoria-seo|22|9,9K|662
+3|https://goatdigital.com.br/goat-performance/gestao-seo/consultoria-seo/|19|1,4K|683
+4|https://consultorseobr.com.br/|9|2,9K|106
+5|https://michelferreira.com.br/|18|2,1K|148
+6|https://www.conversion.com.br/blog/consultoria-seo|53|26,8K|21,2K
+7|https://sinalizeweb.com.br/|16|2,6K|257
+8|https://webestrategica.com.br/consultoria-de-seo/|29|6,1K|907
+9|https://consultoraseo.com.br/|8|2,2K|6
+10|https://www.oxigenweb.com.br/artigos/consultoria-de-seo-oxigenweb/|33|282,0K|5,1K
+## consultor seo ai=false
+1|https://consultorseobr.com.br/|9|2,9K|106
+2|https://andersonmeloseo.com.br/|8|273,7K|135
+3|https://consultorseowenderson.com.br/|8|44|58
+4|https://consultorandersonmelo.com.br/consultor-seo-o-que-e/|8|2,9K|31
+5|https://mktfacil.com.br/dicas-de-marketing-digital/consultor-seo/|8|422|71
+6|https://michelferreira.com.br/|18|2,1K|148
+7|https://www.artguth.com/agencia-de-marketing-digital/marketing-de-busca/consultor-seo/|15|2,4K|29
+8|https://duo.studio/servicos/consultoria-de-seo/|26|9,6K|1,6K
+9|https://www.facebook.com/consultorseo.biz/|100|34,7B|102,8M
+## especialista em seo ai=true
+1|https://querobolsa.com.br/carreiras-e-profissoes/especialista-em-seo|75|2,0M|4,4M
+2|https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=pt-br|100|47,5B|187,2M
+3|https://especialistaemseo.ia.br/|39|2,3M|95
+4|https://br.linkedin.com/jobs/especialista-em-seo-vagas|100|11,2B|12,3M
+5|https://ebaconline.com.br/blog/especialista-em-seo-o-que-faz|51|2,2M|142,6K
+6|https://br.indeed.com/q-especialista-em-seo-vagas.html|100|105,5M|3,2M
+7|https://www.agenciatipo.com.br/especialista-em-seo|23|9,0K|428
+8|https://flaviomuniz.com.br/especialista-em-seo/|19|2,4K|92
+9|https://www.glassdoor.com.br/Vaga/sao-paulo-especialista-em-seo-vagas|64|2,3M|2,1M
+10|https://flowup.agency/especialistas-em-seo/|17|610,4K|182
+## seo técnico ai=true
+1|https://www.conversion.com.br/blog/seo-tecnico|53|26,8K|21,2K
+2|https://seoliddi.tech/curso-de-seo-tecnico/|19|2,7K|76
+3|https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=pt-br|100|47,5B|187,2M
+4|https://mailchimp.com/pt-br/resources/technical-seo/|76|57,8M|307,6K
+5|https://www.widgrid.com.br/blog/seo-tecnico|22|895|717
+6|https://midiasim.com.br/seo-tecnico-o-que-e-por-que-e-importante-e-como-aplicar/|23|4,0K|137
+7|https://sinalizeweb.com.br/seo-tecnico/|16|2,6K|257
+8|https://www.freshlab.com.br/blog/seo-tecnico-estrategia-digital/|23|8,6K|2,5K
+9|https://www.ciawebsites.com.br/solucoes/seo-tecnico/|26|10,5K|1,6K
+10|https://www.conversion.com.br/academy/curso/seo-tecnico|53|26,8K|21,2K
+## auditoria seo ai=true
+1|https://br.hedgehogdigital.co.uk/blog/como-realizar-auditoria-tecnica-seo/|31|4,5K|802
+2|https://pt.semrush.com/siteaudit/|88|34,5M|601,0K
+3|https://www.seoptimer.com/pt/|56|1,7M|4,2K
+4|https://aioseo.com/pt-br/seo-analyzer/|49|391,6K|1,5K
+5|https://www.conversion.com.br/blog/auditoria-seo|53|26,8K|21,2K
+6|https://aotopo.com/servicos/auditoria-de-seo/|9|102,5K|48
+7|https://localo.com/pt-br/blog/auditoria-completa-seo-local|43|620,8K|18,3K
+8|https://www.dataprisma.com.br/conteudos/auditoria-seo/|20|31,6K|25
+9|https://liveseo.com.br/videos-de-seo/auditoria-tecnica-de-seo/|30|10,1K|2,0K
+10|https://www.youtube.com/watch?v=RXscEpLb7sw|100|27,1B|312,0M
+## o que é geo ai=false
+1|https://contaazul.com/blog/geo-generative-engine-optimization/|52|262,9K|417,0K
+2|https://www.alura.com.br/artigos/geo-generative-engine-optimization|60|3,3M|600,5K
+3|https://www.econverse.com.br/blog/geo-generative-engine-optimization|25|182,4K|457
+4|https://www.rdstation.com/blog/marketing/geo/|56|506,0K|432,6K
+5|https://www.youtube.com/watch?v=pCoYKpBIUx0|100|27,1B|312,0M
+6|https://www.conversion.com.br/blog/generative-engine-opitmization|53|26,8K|21,2K
+7|https://www.locaweb.com.br/blog/temas/marketing-e-seo/generative-engine-optimization/|55|1,3M|380,7K
+8|https://www.crpmango.com.br/blog/o-que-e-geo|26|6,9K|1,2K
+9|https://www.instagram.com/reel/DO6x4JLEUnT/|100|28,9B|310,4M
+10|https://flowup.agency/seo-vs-geo/|17|610,4K|182
+## seo e geo ai=true
+1|https://mundodomarketing.com.br/do-seo-ao-geo-e-aeo-como-a-busca-mudou-e-o-que-isso-significa-para-o-marketing|40|57,5K|14,8K
+2|https://digital.sebraers.com.br/blog/marketing-e-vendas/do-seo-ao-geo-como-se-adaptar-aos-novos-mecanismos-de-busca/|37|34,0K|46,7K
+3|https://www.conversion.com.br/blog/seo-vs-geo|53|26,8K|21,2K
+4|https://gmzmoke.com.br/blog/geo/|16|975|138
+5|https://flowup.agency/seo-vs-geo/|17|610,4K|182
+6|https://www.prosperidadeconteudos.com/seo-geo-aeo-o-que-significam/|26|3,1K|2,1K
+7|https://pontodesign.com.br/seo-vs-geo-ranking-para-relevancia/|39|5,8K|10,8K
+8|https://www.olivas.digital/blog/marketing-digital/seo-geo-estrategias-posicionamento-site/|23|5,3K|115
+9|https://www.bloomin.com.br/blog/inteligencia-artificial/geo-vs-seo-quais-sao-suas-diferencas/|26|206,0K|759
+10|https://www.informatechtarget.com/blog/geo-vs-seo-a-marketers-guide-to-dual-optimization/|48|143,2M|1,1K
+## seo para ia ai=true
+1|https://developers.google.com/search/docs/fundamentals/ai-optimization-guide?hl=pt-br|100|47,5B|187,2M
+2|https://br.hubspot.com/blog/marketing/seo-inteligencia-artificial|79|87,9M|188,9K
+3|https://pt.semrush.com/blog/best-ai-seo-tools/|88|34,5M|601,0K
+4|https://www.ekyte.com/guide/pt-br/blog/seo-para-ia-o-que-muda-e-como-ranquear-com-inteligencia-artificial/|36|60,1K|18,7K
+5|https://qualitysmi.com.br/blog/seo-na-era-da-ia-guia-completo|28|8,8K|855
+6|https://www.edialog.com.br/seo-para-ia-generativa/|31|3,6K|4,9K
+7|https://www.organicadigital.com/blog/seo-em-tempos-de-ia/|38|50,6K|20,4K
+8|https://www.alura.com.br/artigos/ia-para-seo|60|3,3M|600,5K
+9|https://especialistaemseo.ia.br/|39|2,3M|95
+10|https://www.prosperidadeconteudos.com/seo-para-ia-como-ser-citado-nas-buscas-com-inteligencia-artificial/|26|3,1K|2,1K
+## llms.txt ai=true
+1|https://llmstxt.org/|41|133,5K|215
+2|https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt|67|11,0M|55,4K
+3|https://www.conversion.com.br/blog/o-que-e-llms-txt|53|26,8K|21,2K
+4|https://pt.semrush.com/blog/llms-txt/|88|34,5M|601,0K
+5|https://zeo.org/resources/blog/what-is-llms-txt-file-and-what-does-it-do|42|20,9K|240
+6|https://www.youtube.com/watch?v=goc1f9zPJgM|100|27,1B|312,0M
+7|https://ahrefs.com/blog/what-is-llms-txt/|72|8,3M|32,4K
+8|https://www.seohappyhour.com/blog/llms-txt/|26|9,1K|4,3K
+9|https://support.wix.com/en/article/understanding-your-sites-llmstxt-file|81|87,7M|7,1K
+10|https://www.youtube.com/watch?v=r1ZhHme4LjI|100|27,1B|312,0M
+## seo para médicos ai=true
+1|https://www.mantecorpsaude.com.br/artigos/institucional/seo-para-medicos|37|7,0K|114,3K
+2|https://plyn.com.br/seo-para-medicos-como-atrair-pacientes-no-google-chatgpt-e-outras-ias/|19|730,8K|35
+3|https://iclinic.com.br/blog/seo-para-clinicas/|57|407,7K|1,2M
+4|https://seoparamedico.com.br/|7|6|11
+5|https://wemarketingmedico.com.br/seo-para-medicos/|19|629,6K|1,0K
+6|https://www.inspiraliposmedicina.com/blog/estrategias-seo-medicina|33|165,5K|6,4K
+7|https://educamaismyralis.com.br/seo-para-medicos-o-que-o-google-realmente-valoriza-em-sites-e-blogs-de-saude|9|600|153
+8|https://altumagency.com.br/seo-para-medicos|6|849|1
+9|https://marcelifanger.com.br/seo-local-medicos/|11|736|1
+10|https://www.youtube.com/watch?v=CKY-1v-joSg|100|27,1B|312,0M

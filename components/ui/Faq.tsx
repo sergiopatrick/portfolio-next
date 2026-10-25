@@ -6,6 +6,8 @@ type Props = {
   title?: string;
 };
 
+// FAQ markup lives in JSON-LD (faqPageSchema) on each page. No microdata here,
+// so the page never ships two FAQPage entities.
 export function FaqSection({ faqs, kicker = 'FAQ', title = 'Perguntas frequentes' }: Props) {
   if (!faqs.length) return null;
   return (
@@ -14,25 +16,19 @@ export function FaqSection({ faqs, kicker = 'FAQ', title = 'Perguntas frequentes
         <p className="section__kicker">{kicker}</p>
         <h2 className="about-block__title">{title}</h2>
 
-        <div className="faq" itemScope itemType="https://schema.org/FAQPage">
+        <div className="faq">
           {faqs.map((f, i) => (
             <details
               key={i}
               className="faq__item"
-              itemScope
-              itemProp="mainEntity"
-              itemType="https://schema.org/Question"
             >
-              <summary className="faq__q" itemProp="name">
+              <summary className="faq__q">
                 {f.q}
               </summary>
               <div
                 className="faq__a"
-                itemScope
-                itemProp="acceptedAnswer"
-                itemType="https://schema.org/Answer"
               >
-                <p itemProp="text">{f.a}</p>
+                <p>{f.a}</p>
               </div>
             </details>
           ))}

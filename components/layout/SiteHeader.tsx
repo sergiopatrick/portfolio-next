@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { SvgIcon } from '@/components/ui/SvgIcon';
 
 const NAV_ITEMS = [
-  { label: 'Projetos', href: '/projetos/' },
+  { label: 'Consultoria SEO', href: '/consultoria-seo/' },
   { label: 'Serviços', href: '/servicos/' },
+  { label: 'Projetos', href: '/projetos/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'Sobre', href: '/sobre/' },
-  { label: 'Contato', href: '/contato/' },
 ];
 
 export function SiteHeader() {
@@ -25,10 +25,16 @@ export function SiteHeader() {
                 <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
+            <li className="site-nav__cta">
+              <Link href="/contato/">Fale comigo</Link>
+            </li>
           </ul>
         </nav>
 
         <div className="header-tools">
+          <Link href="/contato/" className="header-cta">
+            Fale comigo
+          </Link>
           <button
             type="button"
             className="theme-toggle"

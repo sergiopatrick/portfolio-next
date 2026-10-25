@@ -5,9 +5,9 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { buildMetadata, aboutPageSchema } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Sobre, 9 anos em front-end e SEO técnico',
+  title: 'Sobre o consultor de SEO técnico e GEO',
   description:
-    "Front-end developer com 9 anos em empresas globais, VTEX, L'Oreal, Unilever, Inter, Cora, Gupy. Base em Salvador, PT-BR nativo e inglês fluente.",
+    "Sérgio Patrick, consultor de SEO técnico e GEO que também programa. SEO Lead no QConcursos e na VTEX, Unilever, L'Oreal, Inter e Cora. Base em Salvador.",
   path: '/sobre/',
 });
 
@@ -20,11 +20,12 @@ export default function AboutPage() {
         <div className="container">
           <p className="section__kicker">Sobre</p>
           <h1 className="page-hero__title">
-            Front-end com SEO técnico e LLM no sangue.
+            Consultor de SEO técnico e GEO, com o pé no código.
           </h1>
           <p className="page-hero__sub">
-            Base em Salvador, Bahia. 9 anos no jogo, hoje na Gupy. Português nativo,
-            inglês full professional.
+            Nove anos de SEO em empresas como QConcursos, VTEX, Inter, Unilever e
+            Cora. Hoje sou consultor independente, com base em Salvador, e atendo o
+            Brasil inteiro em português e inglês.
           </p>
         </div>
       </section>
@@ -34,14 +35,20 @@ export default function AboutPage() {
           <h2 className="about-block__title">Como eu trabalho</h2>
           <div className="prose">
             <p>
-              Código limpo, tipagem forte onde possível (PHP 8, TypeScript quando faz
-              sentido), vanilla antes de framework, performance como default e não
-              afterthought.
+              Comecei no front-end e fui para o SEO. Por isso eu não paro na
+              recomendação. Quando o problema é técnico, eu abro o código, corrijo e
+              meço o efeito no Search Console.
             </p>
             <p>
-              Cada entrega vira sistema reutilizável, PRD, mega prompt, template,
-              componente, e não um artefato solto. Isso é o que diferencia um
-              projeto que escala de um projeto que morre na próxima sprint.
+              Cada entrega vira algo que o time reaproveita, como um checklist, um
+              plugin, um template ou um processo documentado. Assim o ganho continua
+              depois que o projeto acaba.
+            </p>
+            <p>
+              Hoje cuido do SEO e da visibilidade em IA de marcas como Insider Store,
+              Sanar, Hapvida NotreDame e Fluency. Veja como funciona a{' '}
+              <Link href="/consultoria-seo/">consultoria SEO</Link> e o trabalho de{' '}
+              <Link href="/desenvolvedor-wordpress/">desenvolvimento WordPress</Link>.
             </p>
           </div>
         </div>
